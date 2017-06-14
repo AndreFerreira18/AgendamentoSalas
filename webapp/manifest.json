@@ -2,7 +2,7 @@
 	"_version": "1.1.0",
 	"sap.app": {
 		"_version": "1.1.0",
-		"id": "AgendamentoSalas",
+		"id": "SI-AgendamentoSalas",
 		"type": "application",
 		"i18n": "i18n/i18n.properties",
 		"applicationVersion": {
@@ -42,8 +42,8 @@
 	"sap.ui5": {
 		"_version": "1.1.0",
 		"rootView": {
-			"viewName": "AgendamentoSalas.view.EcraReservas",
-			"type": "HTML"
+			"viewName": "SI-AgendamentoSalas.view.View1",
+			"type": "XML"
 		},
 		"dependencies": {
 			"minUI5Version": "1.30.0",
@@ -61,7 +61,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "AgendamentoSalas.i18n.i18n"
+					"bundleName": "SI-AgendamentoSalas.i18n.i18n"
 				}
 			}
 		},

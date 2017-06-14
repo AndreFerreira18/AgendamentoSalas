@@ -10,7 +10,7 @@
     {
       "templateId": "ui5template.basicSAPUI5ApplicationProject",
       "templateVersion": "1.40.12",
-      "dateTimeStamp": "Tue, 13 Jun 2017 14:45:44 GMT"
+      "dateTimeStamp": "Wed, 14 Jun 2017 14:04:42 GMT"
     }
   ],
   "translation": {
@@ -23,7 +23,7 @@
   "basevalidator": {
     "services": {
       "xml": "fioriXmlAnalysis",
-      "js": "jsValidator"
+      "js": "fioriJsValidator"
     }
   },
   "codeCheckingTriggers": {
