@@ -22,6 +22,54 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
+                <form class="form-inline well" >
+                <div class="form-group">
+                <label for="sel1">Tipo de reunião: </label>
+                <select class="form-control" id="sel1">
+                <option>Formação</option>
+                <option>Externa</option>
+                <option selected="selected">Interna</option>
+                </select>
+                </div>
+                </form>
+                <!-- DATA e HORA -->
+                <form class="form-inline well" >
+                <div class="form-group">
+                <form>
+                <label for ="date1"> Data e Hora de Início: </label>
+                <input type="datetime-local" name="bdaytime">
+                </form>
+                </div>
+                </form>
+                <form class="form-inline well" >
+                <div class="form-group">
+                <form>
+                <label for ="date2"> Data e Hora de Fim: </label>
+                <input type="datetime-local" name="bdaytime">
+                </form>
+                </div>
+                </form>
+                <!--Nº Participantes-->
+                <form class="form-inline well" >
+                <div class="form-group">
+                <form>
+                <label for ="date1"> Nº de Participantes: </label>
+                <input type="number" name="points" min="0" max="50" step="1" value="30">
+                </form>
+                </div>
+                </form>
+                <!--Recursos-->
+                <label for ="rec"> Recursos Disponíveis: </label> <br>
+                <br>
+                <button type="button" class="btn btn-default" style="height:50px;width:50px">
+                <span class="glyphicon glyphicon-blackboard "></span>
+                </button>
+                <button type="button" class="btn btn-default" style="height:50px;width:50px">
+                <span class="glyphicon glyphicon-facetime-video "></span>
+                </button>
+                <button type="button" class="btn btn-default" style="height:50px;width:50px">
+                <span class="glyphicon glyphicon-blackboard "></span>
+                </button>
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <!-- **main ********************************************************************************************** -->
