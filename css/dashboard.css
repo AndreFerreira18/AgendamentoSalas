@@ -2,7 +2,9 @@
  * Base structure
  */
 
+
 /* Move down content because we have a fixed navbar that is 50px tall */
+
 body {
   padding-top: 50px;
 }
@@ -17,22 +19,28 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+
 /*
  * Top navigation
  * Hide default border to remove 1px line.
  */
+
 .navbar-fixed-top {
   border: 0;
 }
+
 
 /*
  * Sidebar
  */
 
+
 /* Hide for mobile, show later */
+
 .sidebar {
   display: none;
 }
+
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
@@ -43,25 +51,29 @@ body {
     display: block;
     padding: 20px;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
 }
 
+
 /* Sidebar navigation */
+
 .nav-sidebar {
-  margin-right: -21px; /* 20px padding + 1px border */
+  margin-right: -21px;
+  /* 20px padding + 1px border */
   margin-bottom: 20px;
   margin-left: -20px;
 }
-.nav-sidebar > li > a {
+
+.nav-sidebar>li>a {
   padding-right: 20px;
   padding-left: 20px;
 }
-.nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
-.nav-sidebar > .active > a:focus {
+
+.nav-sidebar>.active>a, .nav-sidebar>.active>a:hover, .nav-sidebar>.active>a:focus {
   color: #fff;
   background-color: #428bca;
 }
@@ -71,16 +83,28 @@ body {
  * Main content
  */
 
- .main {
-   margin-bottom: 40px;
- }
- @media (min-width: 768px) {
-   .main {
-     padding-right: 40px;
-     padding-left: 40px;
-     padding-bottom: 60px;
-   }
- }
+.main {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 60px;
+  }
+}
+
+
+/*
+  * footer
+  */
+
+.footer {
+  bottom: 0;
+  min-width: 82%;
+  min-height: 10% background-color: #f5f5f5;
+}
 
 
 /*
@@ -91,38 +115,42 @@ body {
   margin-bottom: 30px;
   text-align: center;
 }
+
 .placeholders h4 {
   margin-bottom: 0;
 }
+
 .placeholder {
   margin-bottom: 20px;
 }
+
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
 }
+
+
+/*
+ * floor Selector
+ */
+
 .rectangle {
-	width: 100%;
-	height: 30px;
-	background: grey;
+  width: 100%;
+  height: 30px;
+  background: grey;
 }
-.triangle-container{
-  width:100%;
-  height:50px;
+
+.triangle-container {
+  width: 100%;
+  height: 50px;
   background-color: transparent;
 }
-.triangle{
-  width:100%;
-  height:100%;
-  background-image: linear-gradient(to bottom right, transparent 50%, grey 50%),
-    linear-gradient(to bottom left, transparent 50%, grey 50%);
+
+.triangle {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom right, transparent 50%, grey 50%), linear-gradient(to bottom left, transparent 50%, grey 50%);
   background-size: 50.2% 100%;
   background-repeat: no-repeat;
   background-position: bottom left, bottom right;
-}
-.footer {
-  bottom: 0;
-  min-width: 82%;
-  min-height: 10%
-  background-color: #f5f5f5;
 }
