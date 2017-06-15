@@ -9,6 +9,7 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
   <link href="css/dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
   <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
   <script src="js/ie-emulation-modes-warning.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,58 +25,71 @@
     <div class="row">
       <div class="col-sm-3 col-md-2 sidebar">
         <form class="form-inline well">
-          <div class="form-group">
-            <label for="sel1">Tipo de reunião: </label>
-            <select class="form-control" id="sel1">
+          <!--TIPO DE REUNIÃO -->
+          <div class="form-sidebarm">
+            
+              <label for="sel1">
+                <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
+                </label>
+              <select class="form-control" id="sel1">
                 <option>Formação</option>
                 <option>Externa</option>
                 <option selected="selected">Interna</option>
                 </select>
 
-            <label for="date1"> Data e Hora de Início: </label>
-            <input type="datetime-local" name="bdaytime">
           </div>
-        </form>
-        <!-- DATA e HORA -->
-        <form class="form-inline well">
-          <div class="form-group">
-            <form>
+          <!-- DATA e HORA -->
 
-            </form>
+          <div class="form-sidebarm">
+              <label for="rec">
+                    Seleção de Data e Horas (Inicio e Fim):
+                 </label>
+              <input type="text" class="form-control" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" />
+            </div>
+
+          <!--Nº Participantes-->
+          <div class="form-sidebarm">
+
+              <span class="input-group-addon">
+                  <b>
+                  <span class="glyphicon glyphicon-user"> </span> &nbsp; Número de Participantes:
+              </b>
+              </span>
+              <input type="number" id="nParti" class="form-control" value="0">
+
           </div>
-        </form>
-        <form class="form-inline well">
-          <div class="form-group">
-            <form>
-              <label for="date2"> Data e Hora de Fim: </label>
-              <input type="datetime-local" name="bdaytime">
-            </form>
-          </div>
-        </form>
-        <!--Nº Participantes-->
-        <form class="form-inline well">
-          <div class="form-group">
-            <form>
-              <label for="date1"> Nº de Participantes: </label>
-              <input type="number" name="points" min="0" max="50" step="1" value="30">
-            </form>
-          </div>
-        </form>
-        <!--Recursos-->
-        <label for="rec"> Recursos Disponíveis: </label> <br>
-        <br>
-        <button type="button" class="btn btn-default" style="height:50px;width:50px">
+
+          <!--Recursos-->
+          <div class="form-sidebarm">
+            <label for="rec">
+                <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
+                </label>
+            <br><br>
+
+            <button type="button" class="btn btn-default" style="height:75px;width:75px">
                 <span class="glyphicon glyphicon-blackboard "></span>
-                </button>
-        <button type="button" class="btn btn-default" style="height:50px;width:50px">
-                <span class="glyphicon glyphicon-facetime-video "></span>
-                </button>
-        <button type="button" class="btn btn-default" style="height:50px;width:50px">
-                <span class="glyphicon glyphicon-blackboard "></span>
-                </button>
+                </button> &nbsp; &nbsp;
+
+            <button type="button" class="btn btn-default" style="height:75px;width:75px">
+                    <span class="glyphicon glyphicon-facetime-video " ></span>
+                    </button> &nbsp; &nbsp;
+
+            <button type="button" class="btn btn-default" style="height:75px;width:75px">
+                    <span class="glyphicon glyphicon-ice-lolly"> </span>
+                    </button>
+          </div>
+
+          <!--Botão Atualizar-->
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+
+          </div>
+        </form>
       </div>
+
+      <!-- **main ********************************************************************************************** -->
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <!-- **main ********************************************************************************************** -->
+
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-4">
@@ -227,6 +241,18 @@
   <script src="js/holder.min.js"></script>
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <script src="js/ie10-viewport-bug-workaround.js"></script>
+  <script type="text/javascript" src="js/moment.min.js"></script>
+
+  <script type="text/javascript" src="js/daterangepicker.js"></script>
+  <script type="text/javascript">
+    $('input[name="daterange"]').daterangepicker({
+      "timePicker": true,
+      "startDate": "06/09/2017",
+      "endDate": "06/15/2017"
+    }, function(start, end, label) {
+      console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+    });
+  </script>
 </body>
 
 </html>
