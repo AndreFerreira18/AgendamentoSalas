@@ -101,31 +101,28 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
-
-/*
- * Sticky footer Style
- */
-
+.rectangle {
+	width: 100%;
+	height: 30px;
+	background: grey;
+}
+.triangle-container{
+  width:100%;
+  height:50px;
+  background-color: transparent;
+}
+.triangle{
+  width:100%;
+  height:100%;
+  background-image: linear-gradient(to bottom right, transparent 50%, grey 50%),
+    linear-gradient(to bottom left, transparent 50%, grey 50%);
+  background-size: 50.2% 100%;
+  background-repeat: no-repeat;
+  background-position: bottom left, bottom right;
+}
 .footer {
   bottom: 0;
   min-width: 82%;
   min-height: 10%
   background-color: #f5f5f5;
-}
-
-/*
- * Building
- */
-
-.triangle-up {
-	width: 100%;
-	height: 30px;
-	border-left: 200px solid transparent;
-	border-right: 200px solid transparent;
-	border-bottom: 10px solid grey;
-}
-.rectangle {
-	width: 100%;
-	height: 30px;
-	background: grey;
 }
