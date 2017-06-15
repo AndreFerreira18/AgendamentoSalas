@@ -72,18 +72,15 @@ body {
  */
 
 .main {
-  padding: 20px;
+  margin-bottom: 40px;
 }
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;
     padding-left: 40px;
+    padding-bottom: 60px;
   }
 }
-.main .page-header {
-  margin-top: 0;
-}
-
 
 /*
  * Placeholder dashboard ideas
@@ -102,4 +99,18 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+
+/*
+ * Sticky footer Style
+ */
+ /* Sticky footer styles
+-------------------------------------------------- */
+
+.footer {
+  bottom: 0;
+  min-width: 82%;
+  min-height: 10%
+  background-color: #f5f5f5;
 }
