@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard Template for Bootstrap</title>
+    <title>SiaS</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
     <script src="js/ie-emulation-modes-warning.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -18,88 +17,67 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
 <body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class="container-fluid">
         <div class="row">
-            <button type="button" class="sidebar-toggle collapsed" data-toggle="collapse" data-target="#sidebar" aria-expanded="false" aria-controls="sidebar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <div class="col-sm-3 col-md-2 sidebar">
-                <div class="sidebar">
-                    <div id="sidebar" class="sidebar-collapse">
-                        <form class="form-inline well">
-                        <!--TIPO DE REUNIÃO -->
-                        <div class="form-sidebarm">
-                            <label for="sel1">
-                                <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
-                            </label>
-                            <select class="form-control" id="sel1">
-                                <option>Formação</option>
-                                <option>Externa</option>
-                                <option selected="selected">Interna</option>
-                            </select>
-                        </div>
-                        <!-- DATA e HORA -->
-                        <div class="form-sidebarm">
-                            <label for="rec">
-                                Seleção de Data e Horas (Inicio e Fim):
-                            </label>
-                            <input type="text" class="form-control" name="daterange" value="01/01/2015 1:30 PM - 01/01/2015 2:00 PM" />
-                        </div>
-                        <!--Nº Participantes-->
-                        <div class="form-sidebarm">
-                            <span class="input-group-addon">
-                                <b>
-                                    <span class="glyphicon glyphicon-user"> </span> &nbsp; Número de Participantes:
-                                </b>
-                            </span>
-                            <input type="number" id="nParti" class="form-control" value="0">
-                        </div>
-                        <!--Recursos-->
-                        <div class="form-sidebarm">
-                            <label for="rec">
-                                <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
-                            </label>
-                            <br><br>
-                            <button type="button" class="btn btn-default" style="height:75px;width:75px">
-                                <span class="glyphicon glyphicon-blackboard "></span>
-                            </button> &nbsp; &nbsp;
-                            <button type="button" class="btn btn-default" style="height:75px;width:75px">
-                                <span class="glyphicon glyphicon-facetime-video " ></span>
-                            </button> &nbsp; &nbsp;
-                            <button type="button" class="btn btn-default" style="height:75px;width:75px">
-                                <span class="glyphicon glyphicon-ice-lolly"> </span>
-                            </button>
-                        </div>
-                        <!--Botão Atualizar-->
-                        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                            <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
-                        </div>
+            <nav class="navbar navbar-default" role="navigation">
+            	<div class="container">
+        			<a id="menu-toggle" href="#" class="navbar-toggle">
+    					<span class="sr-only">Toggle navigation</span>
+    			        <span class="icon-bar"></span>
+    			        <span class="icon-bar"></span>
+    			        <span class="icon-bar"></span>
+        			</a>
+            		<div id="sidebar-wrapper" class="sidebar-toggle">
+                        <form class="form-group">
+
+
+<div class="input-group">
+    <label>
+        <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
+    </label>
+    <select class="form-control">
+        <option>Formação</option>
+        <option>Externa</option>
+        <option selected="selected">Interna</option>
+    </select>
+</div>
+<div class="input-group">
+    <label>
+        Seleção de Data e Horas (Inicio e Fim):
+    </label>
+    <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" />
+</div>
+<div class="input-group">
+    <span class="input-group-addon">
+        <b><span class="glyphicon glyphicon-user"></span> &nbsp; Numero de Participantes:</b>
+    </span>
+    <input type="number" class="form-control" value="0">
+</div>
+
+<div class="input-group">
+    <label>
+        <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
+    </label>
+    <br><br>
+    <button type="button" class="btn btn-default icon-recurso">
+        <span class="glyphicon glyphicon-blackboard "></span>
+    </button> &nbsp; &nbsp;
+    <button type="button" class="btn btn-default icon-recurso">
+        <span class="glyphicon glyphicon-facetime-video"></span>
+    </button> &nbsp; &nbsp;
+    <button type="button" class="btn btn-default icon-recurso">
+        <span class="glyphicon glyphicon-ice-lolly"> </span>
+    </button>
+</div>
+<div class="input-group">
+    <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+</div>
+
                     </form>
-                    </div>
-                </div>
-            </div>
-            <!-- **main ********************************************************************************************** -->
+            		</div>
+              	</div>
+            </nav>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -109,12 +87,12 @@
                                 <div class="triangle"></div>
                             </div>
                             <div style="padding-left:10%;padding-right:10%;">
-                                <a href="#" class="list-group-item ">...</a>
-                                <a href="#" class="list-group-item ">Link</a>
-                                <a href="#" class="list-group-item ">Link</a>
-                                <a href="#" class="list-group-item active">Link</a>
-                                <a href="#" class="list-group-item ">Link</a>
-                                <a href="#" class="list-group-item ">Link</a>
+                                <a href="2" class="list-group-item ">...</a>
+                                <a href="#6" class="list-group-item ">6</a>
+                                <a href="#5" class="list-group-item ">5</a>
+                                <a href="#4" class="list-group-item active">4</a>
+                                <a href="#3" class="list-group-item ">3</a>
+                                <a href="#2" class="list-group-item ">2</a>
                                 <a href="#" class="list-group-item ">...</a>
                             </div>
                             <div class="rectangle"></div>
@@ -204,7 +182,7 @@
     </div>
     <footer class="footer">
 
-        <div class="col-sm-offset-3 col-md-offset-2 col-sm-9 col-md-10">
+        <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
         <!--<div class="float">-->
 
             <div class="table-responsive">
@@ -250,21 +228,12 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="js/moment.min.js"></script>
-
     <script type="text/javascript" src="js/daterangepicker.js"></script>
-    <script type="text/javascript">
-        $('input[name="daterange"]').daterangepicker({
-            "timePicker": true,
-            "startDate": "06/09/2017",
-            "endDate": "06/15/2017"
-        }, function(start, end, label) {
-            console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
-        });
-    </script>
+    <script src="js/client.js"></script>
 </body>
 </html>
