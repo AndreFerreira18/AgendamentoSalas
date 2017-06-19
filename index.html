@@ -19,7 +19,7 @@
     </head>
     <body>
         <!-- ---------------------------PRIMEIRA PAGINA DE AGENDAMENTO----------------------------------------------------------------->
-        <div id="myModal" class="modal fade" role="dialog">
+        <div id="modal_header" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -32,13 +32,12 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <form>
-
+                        <form class="form-group">
                             <div class="form-group">
                                 <label>
                                     <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                                 </label>
-                                <select class="form-control" id="data_modal_1">
+                                <select class="form-control" id="data_mod_tipo_reuniao">
                                     <option>Formação</option>
                                     <option>Externa</option>
                                     <option selected="selected">Interna</option>
@@ -49,7 +48,7 @@
                                 <label>
                                     Seleção de Data e Horas (Inicio e Fim):
                                 </label>
-                                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_modal_2"/>
+                                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_mod_calendar"/>
                             </div>
                             <div class="input-group">
                                 <span class="input-group-addon">
@@ -57,14 +56,14 @@
                                     <span class="glyphicon glyphicon-user"></span>  Numero de Participantes:
                                     </b>
                                 </span>
-                                <input type="number" class="form-control" value="0" id="data_modal_3">
+                                <input type="number" class="form-control" value="0" id="data_mod_nparticipantes">
                             </div>
 
                             <div class ="form-group">
                                 <label>
                                     <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
                                 </label>
-                                <select class="form-control" id="data_modal_4">
+                                <select class="form-control" id="data_mod_piso_pref">
                                     <option> RC </option>
                                     <option> 1 </option>
                                     <option> 2 </option>
@@ -81,16 +80,16 @@
                                     <span class="glyphicon glyphicon-pushpin "></span> &nbsp; Recursos Disponíveis:
                                 </label>
                                 <br><br>
-                                <button type="button" class="btn btn-default icon_recurso_init" id="data_modal_5">
+                                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_flip">
                                     <span class="glyphicon glyphicon-blackboard glyph_init"></span>
                                 </button> &nbsp; &nbsp;
-                                <button type="button" class="btn btn-default icon_recurso_init" id="data_modal_6">
+                                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_proj">
                                     <span class="glyphicon glyphicon-facetime-video glyph_init"></span>
                                 </button> &nbsp; &nbsp;
-                                <button type="button" class="btn btn-default icon_recurso_init" id="data_modal_7">
+                                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_escritorio">
                                     <span class="glyphicon glyphicon-pencil glyph_init"></span>
                                 </button> &nbsp; &nbsp;
-                                <button type="button" class="btn btn-default icon_recurso_init" id="data_modal_8">
+                                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_micro">
                                     <span class="glyphicon glyphicon-ice-lolly glyph_init"> </span>
                                 </button>
 
@@ -98,7 +97,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type ="button" class="btn btn-success" data-dismiss="modal" role="button">Confirmar</button>
+                         <button type="button" id="btnSave" class="btn btn-primary">Save changes</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
@@ -114,13 +113,13 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <div id="sidebar-wrapper" class="sidebar-toggle">
-                            <form class="form-group">
-                                <div class="input-group">
+                        <div id="sidebar-wrapper"  class="sidebar-toggle">
+                            <form class="form-group" data-target="#modal_header">
+                                <div class="input-group" >
                                     <label>
                                         <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                                     </label>
-                                    <select class="form-control" value="data_modal_1">
+                                    <select class="form-control" >
                                         <option>Formação</option>
                                         <option>Externa</option>
                                         <option selected="selected">Interna</option>
@@ -264,7 +263,7 @@
                     <br>
 
                     <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#myModal">Reservar Sala</button>
-                    <div id="myModal1" class="modal fade" role="dialog">
+                    <div id="modal_confirmar" class="modal fade" role="dialog">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -345,8 +344,15 @@
         <script src="js/client.js"></script>
         <script type="text/javascript">
         $(window).on('load',function(){
-        $('#myModal').modal('show');
+        $('#modal_header').modal('show');
         });
         </script>
+        <script>
+        $(function() {
+          $('#btnSave').click(function() {
+        $('#modal_header').modal('hide');
+          });
+      });
+          </script>
     </body>
 </html>
