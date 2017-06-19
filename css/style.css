@@ -1,4 +1,6 @@
-
+.modal-title > h1 {
+  font-size: 20px;
+}
 /*Main content*/
 @media (min-width: 768px) {
   .main {
