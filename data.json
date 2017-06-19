@@ -1,5 +1,6 @@
 {
-  "pisos": {
+  "n_pisos":8,
+  "piso" : {
     "1": {
       "n_salas": 4,
       "salas": {
@@ -27,6 +28,42 @@
       }
     },
     "4": {
+      "n_salas": 4,
+      "salas": {
+        "3.1": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.2": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.3": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.4": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      }
+    },
+    "5": {
+      "n_salas": 4,
+      "salas": {
+        "3.1": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.2": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.3": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.4": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      }
+    },
+    "6": {
+      "n_salas": 4,
+      "salas": {
+        "3.1": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.2": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.3": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.4": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      }
+    },
+    "7": {
+      "n_salas": 4,
+      "salas": {
+        "3.1": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.2": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.3": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
+        "3.4": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      }
+    },
+    "8": {
       "n_salas": 3,
       "salas": {
         "4.1": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
