@@ -144,7 +144,7 @@ function createMatrix() {
   tr.appendChild(th1);
   for (var i = 0; i < nRooms; i++) {
     var th2 = document.createElement('th');
-    th2.innerHTML = "Sala " + roomsName[i];
+    th2.innerHTML = roomsName[i];
     tr.appendChild(th2);
   }
 
