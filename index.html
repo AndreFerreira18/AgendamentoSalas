@@ -1,71 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SiaS</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
-  <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
-  <script src="js/ie-emulation-modes-warning.js"></script>
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SiaS</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/daterangepicker.css" />
+        <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="js/ie-emulation-modes-warning.js"></script>
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-</head>
-
-<body>
-  <!-- ---------------------------PRIMEIRA PAGINA DE AGENDAMENTO----------------------------------------------------------------->
-  <div id="modal_header" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <div class="modal-title">
-            <h1> <b>
+    </head>
+    <body>
+        <!-- ---------------------------PRIMEIRA PAGINA DE AGENDAMENTO----------------------------------------------------------------->
+        <div id="modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class = "modal-title">
+                            <h1> <b>
                                 <span class="glyphicon glyphicon-ok"></span> &nbsp;
                                 Preencha os seguintes campos:
                             </b> </h1>
-          </div>
-        </div>
-        <div class="modal-body">
-          <form class="form-group">
-            <div class="form-group">
-              <label>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-group">
+                            <div class="form-group">
+                                <label>
                                     <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                                 </label>
-              <select class="form-control" id="data_mod_tipo_reuniao">
-                                    <option>Formação</option>
-                                    <option>Externa</option>
-                                    <option selected="selected">Interna</option>
+                                <select class="form-control" id="data_mod_tipo_reuniao">
+                                    <option value="Formação">Formação</option>
+                                    <option value="Externa">Externa</option>
+                                    <option value="Interna">Interna</option>
                                 </select>
             </div>
 
             <div class="form-group">
-              <label>
+                <label>
                                     Seleção de Data e Horas (Inicio e Fim):
                                 </label>
-              <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_mod_calendar" />
+                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_mod_calendar" />
             </div>
             <div class="input-group">
-              <span class="input-group-addon">
+                <span class="input-group-addon">
                                     <b>
                                     <span class="glyphicon glyphicon-user"></span> Numero de Participantes:
-              </b>
-              </span>
-              <input type="number" class="form-control" value="0" id="data_mod_nparticipantes">
+                </b>
+                </span>
+                <input type="number" class="form-control" value="0" id="data_mod_nparticipantes">
             </div>
 
             <div class="form-group">
-              <label>
+                <label>
                                     <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
                                 </label>
-              <select class="form-control" id="data_mod_piso_pref">
+                <select class="form-control" id="data_mod_piso_pref">
                                     <option> RC </option>
                                     <option> 1 </option>
                                     <option> 2 </option>
@@ -78,223 +76,242 @@
             </div>
 
             <div class="input-group">
-              <label>
+                <label>
                                     <span class="glyphicon glyphicon-pushpin "></span> &nbsp; Recursos Disponíveis:
                                 </label>
-              <br><br>
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_flip">
+                <br><br>
+                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_flip">
                                     <span class="glyphicon glyphicon-blackboard glyph_init"></span>
                                 </button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_proj">
+                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_proj">
                                     <span class="glyphicon glyphicon-facetime-video glyph_init"></span>
                                 </button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_escritorio">
+                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_escritorio">
                                     <span class="glyphicon glyphicon-pencil glyph_init"></span>
                                 </button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_micro">
+                <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_micro">
                                     <span class="glyphicon glyphicon-ice-lolly glyph_init"> </span>
                                 </button>
 
             </div>
-          </form>
+        </form>
+
         </div>
         <div class="modal-footer">
-          <button type="button" id="btnSave" onclick="createMatrix()" class="btn btn-primary">Save changes</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            <button type="button" id="btnSave" class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Save changes </button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         </div>
-      </div>
     </div>
-  </div>
-  <div class="container-fluid">
-    <div class="row">
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <a id="menu-toggle" href="#" class="navbar-toggle">
+</div>
+</div>
+
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <a id="menu-toggle" href="#" class="navbar-toggle">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-          <div id="sidebar-wrapper" class="sidebar-toggle">
-            <form class="form-group" data-target="#modal_header">
-              <div class="input-group">
-                <label>
+                    <div id="sidebar-wrapper" class="sidebar-toggle">
+                        <form class="form-group" data-target="#modal_header">
+                            <div class="input-group">
+                                <label>
                                         <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                                     </label>
-                <select class="form-control">
-                                        <option>Formação</option>
-                                        <option>Externa</option>
-                                        <option selected="selected">Interna</option>
+                                <select class="form-control" id="data_sb_tipo_reuniao">
+                                        <option value="Formação"> Formação </option>
+                                        <option value="Externa">Externa</option>
+                                        <option value="Interna">Interna</option>
                                     </select>
-              </div>
-              <div class="input-group">
-                <label>
+                            </div>
+                            <div class="input-group">
+                                <label>
                                         Seleção de Data e Horas (Inicio e Fim):
                                     </label>
-                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" />
-              </div>
+                                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_sb_calendar" />
+                            </div>
 
-              <div class="input-group">
-                <span class="input-group-addon">
+                            <div class="input-group">
+                                <span class="input-group-addon">
                                         <b><span class="glyphicon glyphicon-user"></span> &nbsp; Numero de Participantes:</b>
-                </span>
-                <input type="number" class="form-control" value="0">
-              </div>
+                                </span>
+                                <input type="number" class="form-control" value="0" id="data_sb_nparticipantes">
+                            </div>
 
-              <div class="input-group">
-                <label>
+                            <div class="input-group">
+                                <label>
                                         <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
                                     </label>
-                <br><br>
-                <button type="button" class="btn btn-default icon-recurso">
+                                <br><br>
+                                <button type="button" class="btn btn-default icon-recurso">
                                         <span class="glyphicon glyphicon-blackboard "></span>
                                     </button> &nbsp; &nbsp;
-                <button type="button" class="btn btn-default icon-recurso">
+                                <button type="button" class="btn btn-default icon-recurso">
                                         <span class="glyphicon glyphicon-facetime-video"></span>
                                     </button> &nbsp; &nbsp;
-                <button type="button" class="btn btn-default icon-recurso">
+                                <button type="button" class="btn btn-default icon-recurso">
                                         <span class="glyphicon glyphicon-ice-lolly"> </span>
                                     </button>
-              </div>
+                            </div>
 
-              <div class="input-group">
-                <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </nav>
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-4">
-            <div class="list-group text-center">
-              <div class="triangle-container">
-                <div class="triangle"></div>
-              </div>
-              <div style="padding-left:10%;padding-right:10%;">
-
-                <a href="#" class="list-group-item " id="up"><b>UP</b></a>
-                <div id="selecionaPisos">
+                            <div class="input-group">
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <a href="#" class="list-group-item " id="down"><b>DOWN</b></a>
+            </nav>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div class="list-group text-center">
+                            <div class="triangle-container">
+                                <div class="triangle"></div>
+                            </div>
+                            <div style="padding-left:10%;padding-right:10%;">
 
-              </div>
-              <div class="rectangle"></div>
-            </div>
-          </div>
+                                <a href="#" class="list-group-item " id="up"><b>UP</b></a>
+                                <div id="selecionaPisos">
+                                </div>
+                                <a href="#" class="list-group-item " id="down"><b>DOWN</b></a>
 
-          <div class="col-md-1"></div>
-          <div class="col-md-6">
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead id="matrix_head">
+                            </div>
+                            <div class="rectangle"></div>
+                        </div>
+                    </div>
 
-                </thead>
-                <tbody id="matrix_body">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead id="matrix_head">
 
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <br>
+                                </thead>
+                                <tbody id="matrix_body">
 
-        <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#myModal">Reservar Sala</button>
-        <div id="modal_confirmar" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <div class="modal-title">
-                  <h1>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+                <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#myModal">Reservar Sala</button>
+                <div id="modal_confirmar" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <div class="modal-title">
+                                    <h1>
                                             <span class="glyphicon glyphicon-ok"></span> &nbsp;
                                             Pedido de agendamento realizado por:
                                         </h1>
+                                </div>
+                            </div>
+                            <div class="modal-body">
+                                <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span>
+                                <span class="glyphicon glyphicon-time"> Das 14h00 às 15h00 no dia 7 de Julho de 2017</span>
+                                <span class="glyphicon glyphicon-pushpin"> Localizado na sala 15, do piso 3 </span>
+                                <span class="glyphicon glyphicon-paperclip"> Com os seguintes recursos: Projetor, Microfone e Flipchart</span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              <div class="modal-body">
-                <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span>
-                <span class="glyphicon glyphicon-time"> Das 14h00 às 15h00 no dia 7 de Julho de 2017</span>
-                <span class="glyphicon glyphicon-pushpin"> Localizado na sala 15, do piso 3 </span>
-                <span class="glyphicon glyphicon-paperclip"> Com os seguintes recursos: Projetor, Microfone e Flipchart</span>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <footer class="footer">
-    <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
-            <th>Status</th>
-            <th>Tipo de Reunião</th>
-            <th>Sala</th>
-            <th>Hora de inicio</th>.
-            <th>Hora de fim</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Pendente</td>
-              <td>Formação</td>
-              <td>Sala 1</td>
-              <td>2017/08/15 09:00</td>
-              <td>2017/08/16 18:00</td>
-            </tr>
-            <tr>
-              <td>Aprovado</td>
-              <td>Interna</td>
-              <td>Sala 20</td>
-              <td>2017/08/15 14:00</td>
-              <td>2017/08/15 15:00</td>
-            </tr>
-            <tr>
-              <td>Rejeitado</td>
-              <td>Interna</td>
-              <td>Sala 19</td>
-              <td>2017/08/15 14:00</td>
-              <td>2017/08/15 15:00</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </footer>
+    <footer class="footer">
+        <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <th>Status</th>
+                        <th>Tipo de Reunião</th>
+                        <th>Sala</th>
+                        <th>Hora de inicio</th>.
+                        <th>Hora de fim</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pendente</td>
+                            <td>Formação</td>
+                            <td>Sala 1</td>
+                            <td>2017/08/15 09:00</td>
+                            <td>2017/08/16 18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Aprovado</td>
+                            <td>Interna</td>
+                            <td>Sala 20</td>
+                            <td>2017/08/15 14:00</td>
+                            <td>2017/08/15 15:00</td>
+                        </tr>
+                        <tr>
+                            <td>Rejeitado</td>
+                            <td>Interna</td>
+                            <td>Sala 19</td>
+                            <td>2017/08/15 14:00</td>
+                            <td>2017/08/15 15:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </footer>
 
-  <!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
 ================================================== -->
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="js/mockdata.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script>
-    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-  </script>
-  <script src="js/bootstrap.min.js"></script>
-  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <script src="js/ie10-viewport-bug-workaround.js"></script>
-  <script type="text/javascript" src="js/moment.min.js"></script>
-  <script type="text/javascript" src="js/daterangepicker.js"></script>
-  <script src="js/client.js"></script>
-  <script type="text/javascript">
-    $(window).on('load', function() {
-      $('#modal_header').modal('show');
-    });
-  </script>
-  <script>
-    $(function() {
-      $('#btnSave').click(function() {
-        $('#modal_header').modal('hide');
-      });
-    });
-  </script>
-</body>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+    </script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/daterangepicker.js"></script>
+    <script src="js/client.js"></script>
+    <script type="text/javascript">
+        $(window).on('load', function() {
+            $('#modal').modal('show');
+        });
+    </script>
+    <script>
+        function saveChanges() {
+
+            document.getElementById("data_sb_tipo_reuniao").selectedIndex =
+                document.getElementById("data_mod_tipo_reuniao").selectedIndex;
+            document.getElementById("data_sb_nparticipantes").value =
+                document.getElementById("data_mod_nparticipantes").value;
+            document.getElementById("data_sb_calendar").value =
+                document.getElementById("data_mod_calendar").value;
+
+            createMatrix();
+
+        }
+    </script>
+    <script>
+        var recursos = ["Projetor", "Microfone", "Material de Escritório", "Flipchart"];
+        var createButton = document.createElement("button");
+        createButton.innerHTML = recursos[i];
+        createButton.id = 'btn-' + i;
+        var t = document.createTextNode("Novo Recurso");
+        var element = document.getElementById("adicionaRecursos");
+        element.prepend(createButton);
+    </script>
+    </body>
 
 </html>
