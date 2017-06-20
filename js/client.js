@@ -123,27 +123,30 @@ document.getElementById("down").style.display = 'none';
 
 //matrix
 function createMatrix() {
-  //parse JSON
-  
-  var nRooms = 3;
-  var roomsName = ["1.1", "1.2", "1.3"];
-  var roomDisponibility = [
-    ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
-    ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"],
-    ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
-  ];
+  //future parse JSON
+
+  var selectedFloor = 2;
+  var nRooms = data.Piso[selectedFloor].nSalas;
+  var roomsName = [];
+  var roomDisponibility = [];
+
+  for (var i = 0; i < nRooms; i++) {
+    roomsName[i] = data.Piso[selectedFloor].Salas[i].NomeSala;
+    roomDisponibility[i] = data.Piso[selectedFloor].Salas[i].Disponibilidade;;
+  }
 
   //Matrix Head
   var mh = document.getElementById("matrix_head");
   var tr = document.createElement('tr');
   mh.appendChild(tr);
   var th1 = document.createElement('th');
+  th1.innerHTML = "Horas";
   tr.appendChild(th1);
   for (var i = 0; i < nRooms; i++) {
     var th2 = document.createElement('th');
-    th2.innerHTML = roomsName[i];
+    th2.innerHTML = "Sala " + roomsName[i];
     tr.appendChild(th2);
-    }
+  }
 
   //Matrix Body
   var mb = document.getElementById("matrix_body");
