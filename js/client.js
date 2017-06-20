@@ -37,7 +37,13 @@ document.getElementById("up").addEventListener("mouseover", mouseOver);
 document.getElementById("up").addEventListener("mouseout", mouseOut);
 document.getElementById("down").addEventListener("mouseover", mouseOver);
 document.getElementById("down").addEventListener("mouseout", mouseOut);
-var pisos = ["RC", "1", "2", "3", "4", "5", "6", "7", "8"];
+
+//var pisos [] = data.Piso;
+
+var pisos = ["RC"];
+for (var i = 1; i <= data.nPisos; i++) {
+  pisos[i] = i;
+}
 var i;
 var nAndaresVisiveis = 4;
 
