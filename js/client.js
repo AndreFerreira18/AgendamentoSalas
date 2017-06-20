@@ -38,13 +38,27 @@ document.getElementById("up").addEventListener("mouseout", mouseOut);
 document.getElementById("down").addEventListener("mouseover", mouseOver);
 document.getElementById("down").addEventListener("mouseout", mouseOut);
 
-//var pisos [] = data.Piso;
+// alterar para argumentos
 var pisos = [];
+var i;
+var nAndaresVisiveis = 4;
+var min = 0;
+var max = nAndaresVisiveis - 1;
 for (var i = 0; i <= data.nPisos; i++) { //ver isto
   pisos[i] = i;
 }
-var i;
-var nAndaresVisiveis = 4;
+
+if (nAndaresVisiveis > pisos.length - 1)
+  nAndaresVisiveis = pisos.length - 1;
+
+if (max - min == pisos.length - 1) {
+  document.getElementById("up").style.display = 'none';
+  document.getElementById("down").style.display = 'none';
+}
+writeOnScreen(min, max + 1);
+nAndaresVisiveis--;
+document.getElementById("down").style.display = 'none';
+
 
 function defineActive(e) {
   // remove the old active
@@ -106,9 +120,9 @@ function moveUp() {
   if (pisos.length - 1 == index + 1)
     hideTopElement(min, max);
   else
-    moveActive(min,max);
+    moveActive(min, max);
 
-  function moveActive(min,max) {
+  function moveActive(min, max) {
     var id = getActive('list-group-item');
     writeOnScreen(min, max);
     var element = document.getElementById(id);
@@ -120,7 +134,7 @@ function moveUp() {
 
   function hideTopElement(min, max) {
     document.getElementById("up").style.display = 'none';
-    moveActive(min-1,max);
+    moveActive(min - 1, max);
   }
 
 }
@@ -136,11 +150,11 @@ function moveDown() {
   if (index - 1 == 0)
     hideDownElement(min, max);
   else
-    moveActive(min,max);
+    moveActive(min, max);
 
 
 
-  function moveActive(min,max) {
+  function moveActive(min, max) {
     var id = getActive('list-group-item');
     writeOnScreen(min, max);
     var element = document.getElementById(id);
@@ -152,24 +166,9 @@ function moveDown() {
 
   function hideDownElement(min, max) {
     document.getElementById("down").style.display = 'none';
-    moveActive(min,max+1);
+    moveActive(min, max + 1);
   }
 }
-
-
-if (nAndaresVisiveis > pisos.length - 1)
-  nAndaresVisiveis = pisos.length - 1;
-
-var min = 0;
-var max = nAndaresVisiveis - 1;
-if (max - min == pisos.length - 1) {
-  document.getElementById("up").style.display = 'none';
-  document.getElementById("down").style.display = 'none';
-}
-writeOnScreen(min, max + 1);
-nAndaresVisiveis--;
-document.getElementById("down").style.display = 'none';
-
 
 //matrix
 function addMatrix(matrixHead, matrixBody) {
@@ -187,7 +186,7 @@ function addMatrix(matrixHead, matrixBody) {
 function createMatrixDay() { // selectedFloor){
   //future parse JSON
 
-  var selectedFloor = 2;//getActive("active");
+  var selectedFloor = 2; //getActive("active");
   var nRooms = data.Piso[selectedFloor].nSalas;
   var roomsName = [];
   var roomDisponibility = [];
