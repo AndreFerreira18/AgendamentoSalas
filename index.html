@@ -19,7 +19,7 @@
     </head>
     <body>
         <!-- ---------------------------PRIMEIRA PAGINA DE AGENDAMENTO----------------------------------------------------------------->
-        <div id="modal_header" class="modal fade" role="dialog">
+        <div id="modal" class="modal fade" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -38,9 +38,9 @@
                                     <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                                 </label>
                                 <select class="form-control" id="data_mod_tipo_reuniao">
-                                    <option>Formação</option>
-                                    <option>Externa</option>
-                                    <option selected="selected">Interna</option>
+                                    <option value="Formação">Formação</option>
+                                    <option value="Externa">Externa</option>
+                                    <option value="Interna">Interna</option>
                                 </select>
                             </div>
 
@@ -64,7 +64,7 @@
                                     <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
                                 </label>
                                 <select class="form-control" id="data_mod_piso_pref">
-                                    <option> RC </option>
+                                    <option> RC </option>4
                                     <option> 1 </option>
                                     <option> 2 </option>
                                     <option> 3 </option>
@@ -97,7 +97,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                         <button type="button" id="btnSave" class="btn btn-primary">Save changes</button>
+                         <button type="button" id="btnSave" class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Save changes </button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                     </div>
                 </div>
@@ -119,24 +119,24 @@
                                     <label>
                                         <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                                     </label>
-                                    <select class="form-control" >
-                                        <option>Formação</option>
-                                        <option>Externa</option>
-                                        <option selected="selected">Interna</option>
+                                    <select class="form-control" id="data_sb_tipo_reuniao" >
+                                        <option value="Formação"> Formação </option>
+                                        <option value="Externa">Externa</option>
+                                        <option value="Interna">Interna</option>
                                     </select>
                                 </div>
                                 <div class="input-group">
                                     <label>
                                         Seleção de Data e Horas (Inicio e Fim):
                                     </label>
-                                    <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" />
+                                    <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_sb_calendar"/>
                                 </div>
 
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <b><span class="glyphicon glyphicon-user"></span> &nbsp; Numero de Participantes:</b>
                                     </span>
-                                    <input type="number" class="form-control" value="0">
+                                    <input type="number" class="form-control" value="0" id="data_sb_nparticipantes">
                                 </div>
 
                                 <div class="input-group">
@@ -144,16 +144,9 @@
                                         <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
                                     </label>
                                     <br><br>
-                                    <button type="button" class="btn btn-default icon-recurso">
-                                        <span class="glyphicon glyphicon-blackboard "></span>
-                                    </button> &nbsp; &nbsp;
-                                    <button type="button" class="btn btn-default icon-recurso">
-                                        <span class="glyphicon glyphicon-facetime-video"></span>
-                                    </button> &nbsp; &nbsp;
-                                    <button type="button" class="btn btn-default icon-recurso">
-                                        <span class="glyphicon glyphicon-ice-lolly"> </span>
-                                    </button>
-                                </div>
+                                    <div id="adicionaRecursos">
+                                    </div>
+                                     </div>
 
                                 <div class="input-group">
                                     <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
@@ -162,10 +155,10 @@
                         </div>
                     </div>
                 </nav>
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="list-group text-center">
                                 <div class="triangle-container">
                                     <div class="triangle"></div>
@@ -344,15 +337,30 @@
         <script src="js/client.js"></script>
         <script type="text/javascript">
         $(window).on('load',function(){
-        $('#modal_header').modal('show');
+        $('#modal').modal('show');
         });
         </script>
         <script>
-        $(function() {
-          $('#btnSave').click(function() {
-        $('#modal_header').modal('hide');
-          });
-      });
-          </script>
+        function saveChanges(){
+
+                    document.getElementById("data_sb_tipo_reuniao").selectedIndex =
+                    document.getElementById("data_mod_tipo_reuniao").selectedIndex;
+                    document.getElementById("data_sb_nparticipantes").value =
+                    document.getElementById("data_mod_nparticipantes").value;
+                    document.getElementById("data_sb_calendar").value =
+                    document.getElementById("data_mod_calendar").value;
+
+                 }
+        </script>
+        <script>
+        var recursos = ["Projetor", "Microfone", "Material de Escritório", "Flipchart"];
+        var createButton = document.createElement ("button");
+        createButton.innerHTML = recursos[i];
+        createButton.id = 'btn-'+ i;
+        var t = document.createTextNode("Novo Recurso");
+        var element = document.getElementById("adicionaRecursos");
+        element.prepend(createButton);
+
+        </script>
     </body>
 </html>
