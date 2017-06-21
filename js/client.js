@@ -128,8 +128,7 @@ function writeOnScreen(min, max) {
     create.id = 'piso-' + (i);
     create.addEventListener("click", defineActiveEvent);
     var element = document.getElementById("selecionaPisos");
-    element.prepend(create);
-
+    element.insertBefore(create, element.firstChild); 
   }
 }
 
