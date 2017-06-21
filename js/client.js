@@ -45,12 +45,12 @@ document.getElementById("down").addEventListener("mouseout", mouseOut);
 
 
 // alterar para argumentos
+var viewMatrix;
 var pisos = [];
-var i;
 var nAndaresVisiveis = 4;
 var min = 0;
 var max = nAndaresVisiveis - 1;
-for (var i = 0; i <= data.nPisos; i++) { //ver isto
+for (var i = 0; i <= data.nPisos; i++) {                  //ver isto
   pisos[i] = i;
 }
 
@@ -67,34 +67,38 @@ document.getElementById("down").style.display = 'none';
 
 
 function defineActive(e) {
-  // remove the old active
   var elements = document.getElementsByClassName(e.target.classList[0]);
   for (var i = 0; i < elements.length; i++) {
     elements[i].classList.remove('active');
   }
-  //add the active to the element
   var element = document.getElementById(e.target.id);
   element.classList.add('active');
 }
 
+////////////////////////////////////////////////////////
+//Add the active classList to the element by e.target//
+///////////////////////////////////////////////////////
 function defineActiveEvent(e) {
-  // remove the old active
   var elements = document.getElementsByClassName(e.target.classList[0]);
   for (var i = 0; i < elements.length; i++) {
     if (elements[i].classList.contains('active'))
       elements[i].classList.remove('active');
   }
-  //add the active to the element
   var element = document.getElementById(e.target.id);
   element.classList.add('active');
 }
 
+/////////////////////////////////////////////////
+//Add the active classList to the element by ID//
+/////////////////////////////////////////////////
 function defineActiveById(activeId) {
-  //add the active to the element
   var element = document.getElementById(activeId);
   element.classList.add('active');
 }
 
+///////////////////////////////////////
+//Retuns the active classList element//
+///////////////////////////////////////
 function getActive(activeClass) {
   var id;
   var elements = document.getElementsByClassName(activeClass);
@@ -128,7 +132,7 @@ function writeOnScreen(min, max) {
     create.id = 'piso-' + (i);
     create.addEventListener("click", defineActiveEvent);
     var element = document.getElementById("selecionaPisos");
-    element.insertBefore(create, element.firstChild); 
+    element.insertBefore(create,  element.firstChild);
   }
 }
 
@@ -153,7 +157,7 @@ function moveUp() {
       element.classList.add("active");
     else
       document.getElementById('piso-' + min).classList.add("active");
-      refreshMatrix();
+    refreshMatrix();
   }
 
   function hideTopElement(min, max) {
@@ -185,7 +189,7 @@ function moveDown() {
       element.classList.add("active");
     else
       document.getElementById('piso-' + max).classList.add("active");
-      refreshMatrix();
+    refreshMatrix();
   }
 
   function hideDownElement(min, max) {
@@ -194,11 +198,19 @@ function moveDown() {
   }
 }
 
-//matrix
+//////////
+//matrix//
+//////////
 function refreshMatrix() {
   var matrix = document.getElementById("matrix");
   matrix.innerHTML = " ";
-  addMatrix('day');
+  if (viewMatrix = 'day') {
+    addMatrix('day');
+  } else if (viewMatrix = 'week') {
+    addMatrix('week');
+  } else {
+    console.console.log("Erro na escolha da vista da matriz");
+  }
 }
 
 function addMatrix(matrixType) {
@@ -209,11 +221,21 @@ function addMatrix(matrixType) {
   mb.id = "matrix_" + matrixType + "_body";
   matrix.appendChild(mh);
   matrix.appendChild(mb);
-  // add option day or week
-  createMatrixDay();
-}
+  ////////////////////////////
+  // add option day or week//
+  ///////////////////////////
+  if (matrixType = 'day') {
+    createMatrixDay();
+  } else if (matrixType = 'week') {
+    createMatrixWeek();
+  } else {
+    console.console.log("Erro na escolha da vista da matriz");
+  }
 
-//matrix Day
+}
+///////////////
+//matrix Day//
+//////////////
 function createMatrixDay() {
   //future parse JSON
   var idSelectedFloor = document.getElementById(getActive('list-group-item')).id;
@@ -226,8 +248,9 @@ function createMatrixDay() {
     roomsName[i] = data.Piso[selectedFloor[1]].Salas[i].NomeSala;
     roomDisponibility[i] = data.Piso[selectedFloor[1]].Salas[i].Disponibilidade;;
   }
-
-  //Matrix Head
+  ////////////////
+  //Matrix Head//
+  ///////////////
   var mh = document.getElementById("matrix_day_head");
   var tr = document.createElement('tr');
   mh.appendChild(tr);
@@ -239,8 +262,9 @@ function createMatrixDay() {
     th2.innerHTML = roomsName[i];
     tr.appendChild(th2);
   }
-
-  //Matrix Body
+  ////////////////
+  //Matrix Body//
+  ///////////////
   var mb = document.getElementById("matrix_day_body");
   for (var i = 0; i < 10; i++) {
     var tr = document.createElement('tr');
@@ -255,23 +279,80 @@ function createMatrixDay() {
     }
   }
 }
+/////////////////
+// matrix week//
+////////////////
+function createMatrixWeek() {
+    //future parse JSON
+    var idSelectedFloor = document.getElementById(getActive('list-group-item')).id;
+    var selectedFloor = idSelectedFloor.split("-");
+    //var idSelectedRoom = document.getElementById(getActive('list-group-item')).id;
+    var selectedRoom = " Sala 2.1";
+    var idDaterange = document.getElementById('data_sb_calendar');
+    //var IniciatlDate = ;
+    //var FinalDate = ;
+    var roomDisponibility = [];
 
-//saves data to the Side Bar
-function saveChanges() {
-
-  document.getElementById("data_sb_tipo_reuniao").selectedIndex =
-    document.getElementById("data_mod_tipo_reuniao").selectedIndex;
-  document.getElementById("data_sb_nparticipantes").value =
-    document.getElementById("data_mod_nparticipantes").value;
-  document.getElementById("data_sb_calendar").value =
-    document.getElementById("data_mod_calendar").value;
-
-  defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
-  addMatrix('day');
+    for (var i = 0; i < nRooms; i++) {
+      roomDisponibility[i] = data.Piso[selectedFloor[1]].Salas[i].Disponibilidade;      // ver isto conoante os dados mock
+    }
+    ////////////////
+    //Matrix Head//
+    ///////////////
+    var mh = document.getElementById("matrix_week_head");
+    var tr = document.createElement('tr');
+    mh.appendChild(tr);
+    var th = document.createElement('th');
+    th.innerHTML = selectedRoom;
+    var tr1 = document.createElement('tr');
+    mh.appendChild(tr1);
+    var th1 = document.createElement('th');
+    th1.innerHTML = "Horas";
+    tr.appendChild(th1);
+    for (var i = 0; i < nRooms; i++) {
+      var th2 = document.createElement('th');
+      th2.innerHTML = roomsName[i];
+      tr.appendChild(th2);
+    }
+    ////////////////
+    //Matrix Body//
+    ///////////////
+    var mb = document.getElementById("matrix_week_body");
+    for (var i = 0; i < 10; i++) {
+      var tr = document.createElement('tr');
+      mb.appendChild(tr);
+      var th = document.createElement('th');
+      tr.appendChild(th);
+      th.innerHTML = i + 9 + " H";
+      for (var j = 0; j < nRooms; j++) {
+        var td = document.createElement('td');
+        td.innerHTML = roomDisponibility[j][i];
+        tr.appendChild(td);
+      }
+    }
 
 }
 
-// Remove element by Id
+///////////////////////////////
+//saves data to the Side Bar//
+//////////////////////////////
+function saveChanges() {
+
+  document.getElementById("data_sb_tipo_reuniao").selectedIndex = document.getElementById("data_mod_tipo_reuniao").selectedIndex;
+  document.getElementById("data_sb_nparticipantes").value = document.getElementById("data_mod_nparticipantes").value;
+  document.getElementById("data_sb_calendar").value = document.getElementById("data_mod_calendar").value;
+
+  defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
+  if (document.getElementById("data_sb_tipo_reuniao").selectedIndex.value == 'Formação')
+    viewMatrix = 'day';
+  else
+    viewMatrix = 'day';
+  addMatrix(viewMatrix);
+
+}
+//////////////////////////
+// Remove element by Id//
+/////////////////////////
 function removeElement(elementId) {
   if (document.getElementById(elementId)) {
     var element = document.getElementById(elementId);
