@@ -1,43 +1,32 @@
-.modal-title > h1 {
-  font-size: 20px;
-}
-/*Main content*/
+/*
+ooo        ooooo       .o.       ooooo ooooo      ooo
+`88.       .888'      .888.      `888' `888b.     `8'
+ 888b     d'888      .8"888.      888   8 `88b.    8
+ 8 Y88. .P  888     .8' `888.     888   8   `88b.  8
+ 8  `888'   888    .88ooo8888.    888   8     `88b.8
+ 8    Y     888   .8'     `888.   888   8       `888
+o8o        o888o o88o     o8888o o888o o8o        `8
+*/
+
 @media (min-width: 768px) {
-  .main {
-    padding-right: 40px;
-    padding-left: 40px;
-    padding-bottom: 60px;
-  }
-}
-/* footer */
-.footer {
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-  background-color: #f5f5f5;
-}
-/*floor Selector*/
-.rectangle {
-  width: 100%;
-  height: 30px;
-  background: grey;
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+        padding-bottom: 60px;
+    }
 }
 
-.triangle-container {
-  width: 100%;
-  height: 50px;
-  background-color: transparent;
-}
 
-.triangle {
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom right, transparent 50%, grey 50%), linear-gradient(to bottom left, transparent 50%, grey 50%);
-  background-size: 50.2% 100%;
-  background-repeat: no-repeat;
-  background-position: bottom left, bottom right;
-}
-/* Sidebar */
+/*
+.oooooo..o ooooo oooooooooo.   oooooooooooo oooooooooo.        .o.       ooooooooo.
+d8P'    `Y8 `888' `888'   `Y8b  `888'     `8 `888'   `Y8b      .888.      `888   `Y88.
+Y88bo.       888   888      888  888          888     888     .8"888.      888   .d88'
+`"Y8888o.   888   888      888  888oooo8     888oooo888'    .8' `888.     888ooo88P'
+    `"Y88b  888   888      888  888    "     888    `88b   .88ooo8888.    888`88b.
+oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  `88b.
+8""88888P'  o888o o888bood8P'   o888ooooood8 o888bood8P'  o88o     o8888o o888o  o888o
+*/
+
 #sidebar-wrapper {
     left: -300px;
     width: 300px;
@@ -46,6 +35,7 @@
     height: 100%;
     z-index: 1;
 }
+
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -54,49 +44,139 @@
     width: 350px;
     list-style: none;
 }
+
 #sidebar-wrapper.sidebar-toggle {
     transition: all 0.3s ease-out;
     margin-left: -300px;
 }
-@media (min-width: 768px){
-    #sidebar-wrapper.sidebar-toggle{
+
+@media (min-width: 768px) {
+    #sidebar-wrapper.sidebar-toggle {
         transition: 0s;
         left: 300px;
     }
 }
+
+
 /*hamburger navbar */
+
 .navbar-default {
     background-color: #ffffff;
     border-color: #ffffff;
 }
+
 .navbar {
     margin-bottom: -5px;
 }
-/* form*/
-.icon-recurso1{
-    height:75px;
-    width:75px;
+
+
+/*
+ooooooooo.   ooooo  .oooooo..o   .oooooo.    .oooooo..o
+`888   `Y88. `888' d8P'    `Y8  d8P'  `Y8b  d8P'    `Y8
+ 888   .d88'  888  Y88bo.      888      888 Y88bo.
+ 888ooo88P'   888   `"Y8888o.  888      888  `"Y8888o.
+ 888          888       `"Y88b 888      888      `"Y88b
+ 888          888  oo     .d8P `88b    d88' oo     .d8P
+o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
+*/
+
+.rectangle {
+    width: 100%;
+    height: 30px;
+    background: grey;
 }
 
-.glyph_sb{
+.triangle-container {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+}
+
+.triangle {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient( to bottom right, transparent 50%, grey 50%), linear-gradient(to bottom left, transparent 50%, grey 50%);
+    background-size: 50.2% 100%;
+    background-repeat: no-repeat;
+    background-position: bottom left, bottom right;
+}
+
+.SeletorPisos {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+
+/*
+ooo        ooooo   .oooooo.   oooooooooo.         .o.       ooooo
+`88.       .888'  d8P'  `Y8b  `888'   `Y8b       .888.      `888'
+ 888b     d'888  888      888  888      888     .8"888.      888
+ 8 Y88. .P  888  888      888  888      888    .8' `888.     888
+ 8  `888'   888  888      888  888      888   .88ooo8888.    888
+ 8    Y     888  `88b    d88'  888     d88'  .8'     `888.   888       o
+o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
+*/
+
+.modal-title>h1 {
+    font-size: 20px;
+}
+
+
+/*
+oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
+`888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
+ 888         888      888 888      888      888       888          888   .d88'
+ 888oooo8    888      888 888      888      888       888oooo8     888ooo88P'
+ 888    "    888      888 888      888      888       888    "     888`88b.
+ 888         `88b    d88' `88b    d88'      888       888       o  888  `88b.
+o888o         `Y8bood8P'   `Y8bood8P'      o888o     o888ooooood8 o888o  o888o
+*/
+
+.footer {
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: #f5f5f5;
+}
+
+
+/*
+oooooooooooo   .oooooo.   ooooooooo.   ooo        ooooo
+`888'     `8  d8P'  `Y8b  `888   `Y88. `88.       .888'
+ 888         888      888  888   .d88'  888b     d'888
+ 888oooo8    888      888  888ooo88P'   8 Y88. .P  888
+ 888    "    888      888  888`88b.     8  `888'   888
+ 888         `88b    d88'  888  `88b.   8    Y     888
+o888o         `Y8bood8P'  o888o  o888o o8o        o888o
+*/
+
+.icon-recurso1 {
+    height: 75px;
+    width: 75px;
+}
+
+.glyph_sb {
     font-size: 50px;
     text-align: center;
-    top:2px;
+    top: 2px;
 }
-.input-group{
+
+.input-group {
     padding: 10px;
 }
-.input-group-addon{
+
+.input-group-addon {
     word-wrap: break-word;
 }
-.icon_recurso_init{
-    height:100px;
-    width:100px;
+
+.icon_recurso_init {
+    height: 100px;
+    width: 100px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.glyph_init{
+.glyph_init {
     font-size: 50px;
     text-align: center;
 }
