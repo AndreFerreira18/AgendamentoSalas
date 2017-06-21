@@ -1,8 +1,11 @@
 
 // Show Modal
-$(window).on('load', function() {
-  $('#modal').modal('show');
-});
+$(window).ready(
+  function(){
+      $('#modal').modal('show');
+  }
+);
+
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({

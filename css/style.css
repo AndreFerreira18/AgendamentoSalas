@@ -100,3 +100,28 @@
     font-size: 50px;
     text-align: center;
 }
+
+.recurso{
+    height:60px;
+    width:60px;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    }
+
+
+.btn-success {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.btn-success: hover span {
+  padding-right: 25px;
+}
+
+.btn-success: hover span:after {
+  opacity: 1;
+  right: 0;
+}
