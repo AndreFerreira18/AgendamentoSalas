@@ -66,14 +66,15 @@
                                     <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
                                 </label>
               <select class="form-control" id="data_mod_piso_pref">
-                                    <option> RC </option>
-                                    <option> 1 </option>
-                                    <option> 2 </option>
-                                    <option> 3 </option>
-                                    <option> 4 </option>
-                                    <option> 5 </option>
-                                    <option> 6 </option>
-                                    <option> 7 </option>
+                                    <option value="0"> RC </option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>
+                                    <option value="8"> 8 </option>
                                 </select>
             </div>
 
@@ -180,7 +181,7 @@
               </div>
               <div style="padding-left:10%;padding-right:10%;">
                 <a href="#" class="list-group-item " id="up"><b>UP</b></a>
-                <div id="selecionaPisos">
+                <div id="selecionaPisos" onclick="refreshMatrix()">
                   <!-- Builds floor Selector-->
                 </div>
                 <a href="#" class="list-group-item " id="down"><b>DOWN</b></a>
@@ -191,7 +192,7 @@
           <div class="col-md-1"></div>
           <div class="col-md-6">
             <div class="table-responsive">
-              <table class="table table-striped" id="matrix">
+              <table class="table table-striped matrix" id="matrix">
                 <!-- Builds costum Matrix-->
               </table>
             </div>

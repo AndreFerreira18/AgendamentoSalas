@@ -1,4 +1,3 @@
-
 // Show Modal
 $(window).on('load', function() {
   $('#modal').modal('show');
@@ -44,6 +43,7 @@ document.getElementById("up").addEventListener("mouseout", mouseOut);
 document.getElementById("down").addEventListener("mouseover", mouseOver);
 document.getElementById("down").addEventListener("mouseout", mouseOut);
 
+
 // alterar para argumentos
 var pisos = [];
 var i;
@@ -74,6 +74,24 @@ function defineActive(e) {
   }
   //add the active to the element
   var element = document.getElementById(e.target.id);
+  element.classList.add('active');
+}
+
+function defineActiveEvent(e) {
+  // remove the old active
+  var elements = document.getElementsByClassName(e.target.classList[0]);
+  for (var i = 0; i < elements.length; i++) {
+    if (elements[i].classList.contains('active'))
+      elements[i].classList.remove('active');
+  }
+  //add the active to the element
+  var element = document.getElementById(e.target.id);
+  element.classList.add('active');
+}
+
+function defineActiveById(activeId) {
+  //add the active to the element
+  var element = document.getElementById(activeId);
   element.classList.add('active');
 }
 
@@ -108,7 +126,7 @@ function writeOnScreen(min, max) {
     create.innerHTML = pisos[i];
     create.classList.add('list-group-item');
     create.id = 'piso-' + (i);
-    create.addEventListener("click", defineActive);
+    create.addEventListener("click", defineActiveEvent);
     var element = document.getElementById("selecionaPisos");
     element.prepend(create);
 
@@ -159,7 +177,6 @@ function moveDown() {
     moveActive(min, max);
 
 
-
   function moveActive(min, max) {
     var id = getActive('list-group-item');
     writeOnScreen(min, max);
@@ -177,29 +194,36 @@ function moveDown() {
 }
 
 //matrix
-function addMatrix(matrixHead, matrixBody) {
+function refreshMatrix() {
+  var matrix = document.getElementById("matrix");
+  matrix.innerHTML = " ";
+  addMatrix('day');
+}
+
+function addMatrix(matrixType) {
   var matrix = document.getElementById("matrix");
   var mh = document.createElement('thead');
-  mh.id = matrixHead;
+  mh.id = "matrix_" + matrixType + "_head";
   var mb = document.createElement('tbody');
-  mb.id = matrixBody;
+  mb.id = "matrix_" + matrixType + "_body";
   matrix.appendChild(mh);
   matrix.appendChild(mb);
+  // add option day or week
   createMatrixDay();
 }
 
 //matrix Day
-function createMatrixDay() { // selectedFloor){
+function createMatrixDay() {
   //future parse JSON
-
-  var selectedFloor = 2; //getActive("active");
-  var nRooms = data.Piso[selectedFloor].nSalas;
+  var idSelectedFloor = document.getElementById(getActive('list-group-item')).id;
+  var selectedFloor = idSelectedFloor.split("-");
+  var nRooms = data.Piso[selectedFloor[1]].nSalas;
   var roomsName = [];
   var roomDisponibility = [];
 
   for (var i = 0; i < nRooms; i++) {
-    roomsName[i] = data.Piso[selectedFloor].Salas[i].NomeSala;
-    roomDisponibility[i] = data.Piso[selectedFloor].Salas[i].Disponibilidade;;
+    roomsName[i] = data.Piso[selectedFloor[1]].Salas[i].NomeSala;
+    roomDisponibility[i] = data.Piso[selectedFloor[1]].Salas[i].Disponibilidade;;
   }
 
   //Matrix Head
@@ -241,6 +265,7 @@ function saveChanges() {
   document.getElementById("data_sb_calendar").value =
     document.getElementById("data_mod_calendar").value;
 
+  defineActiveById("piso-" + document.getElementById("data_mod_nparticipantes").value);
   addMatrix('matrix_day_head', 'matrix_day_body');
 
 }
@@ -249,6 +274,6 @@ function saveChanges() {
 function removeElement(elementId) {
   if (document.getElementById(elementId)) {
     var element = document.getElementById(elementId);
-    body.parentNode.removeChild(element);
+    element.parentNode.removeChild(element);
   }
 }

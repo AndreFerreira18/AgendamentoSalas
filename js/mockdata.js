@@ -1,6 +1,50 @@
 var data = {
-  "nPisos": 8,
+  "nPisos": 9,
   "Piso": {
+    "0": {
+      "nSalas": 4,
+      "Salas": [{
+          "NomeSala": "Sala 1.1",
+          "Recursos": {
+            "Projetor": "Sim",
+            "Material de Escritorio": "Sim",
+            "Flipchart": "Sim",
+            "Microfone": "Sim"
+          },
+          "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+        },
+        {
+          "NomeSala": "Sala 1.2",
+          "Recursos": {
+            "Projetor": "Sim",
+            "Material de Escritorio": "Sim",
+            "Flipchart": "Sim",
+            "Microfone": "Sim"
+          },
+          "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+        },
+        {
+          "NomeSala": "Sala 1.3",
+          "Recursos": {
+            "Projetor": "Sim",
+            "Material de Escritorio": "Sim",
+            "Flipchart": "Sim",
+            "Microfone": "Sim"
+          },
+          "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+        },
+        {
+          "NomeSala": "Sala 1.4",
+          "Recursos": {
+            "Projetor": "Sim",
+            "Material de Escritorio": "Sim",
+            "Flipchart": "Sim",
+            "Microfone": "Sim"
+          },
+          "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+        }
+      ]
+    },
     "1": {
       "nSalas": 4,
       "Salas": [{
