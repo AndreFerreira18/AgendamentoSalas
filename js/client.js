@@ -154,6 +154,7 @@ function moveUp() {
       element.classList.add("active");
     else
       document.getElementById('piso-' + min).classList.add("active");
+      refreshMatrix();
   }
 
   function hideTopElement(min, max) {
@@ -185,6 +186,7 @@ function moveDown() {
       element.classList.add("active");
     else
       document.getElementById('piso-' + max).classList.add("active");
+      refreshMatrix();
   }
 
   function hideDownElement(min, max) {
@@ -265,8 +267,8 @@ function saveChanges() {
   document.getElementById("data_sb_calendar").value =
     document.getElementById("data_mod_calendar").value;
 
-  defineActiveById("piso-" + document.getElementById("data_mod_nparticipantes").value);
-  addMatrix('matrix_day_head', 'matrix_day_body');
+  defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
+  addMatrix('day');
 
 }
 
