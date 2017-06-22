@@ -20,7 +20,7 @@
 </head>
 
 <body>
-<!--
+    <!--
     ooo        ooooo   .oooooo.   oooooooooo.         .o.       ooooo
     `88.       .888'  d8P'  `Y8b  `888'   `Y8b       .888.      `888'
      888b     d'888  888      888  888      888     .8"888.      888
@@ -140,13 +140,13 @@
             </div>
         </div>
     </div>
-<!--
+    <!--
     MODAL    8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
 
     <div class="container-fluid">
         <div class="row">
-<!--
+            <!--
     .oooooo..o ooooo oooooooooo.   oooooooooooo oooooooooo.        .o.       ooooooooo.
     d8P'    `Y8 `888' `888'   `Y8b  `888'     `8 `888'   `Y8b      .888.      `888   `Y88.
     Y88bo.       888   888      888  888          888     888     .8"888.      888   .d88'
@@ -155,6 +155,7 @@
     oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  `88b.
     8""88888P'  o888o o888bood8P'   o888ooooood8 o888bood8P'  o88o     o8888o o888o  o888o
 -->
+
             <nav class="navbar navbar-default" role="navigation">
                 <div class="container">
                     <a id="menu-toggle" href="#" class="navbar-toggle">
@@ -213,12 +214,12 @@
                     </div>
                 </div>
             </nav>
-<!--
+        </div>
+        <!--
     SIDEBAR   8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <div class="row">
-                    <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-12 main">
+            <div class="row">
 <!--
     ooooooooo.   ooooo  .oooooo..o   .oooooo.    .oooooo..o
     `888   `Y88. `888' d8P'    `Y8  d8P'  `Y8b  d8P'    `Y8
@@ -228,26 +229,26 @@
      888          888  oo     .d8P `88b    d88' oo     .d8P
     o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
 -->
-                    <div class="col-md-4">
-                        <div class="list-group text-center">
-                            <div class="triangle-container">
-                                <div class="triangle"></div>
-                            </div>
-                            <div class="SeletorPisos">
-                                <a href="#" class="list-group-item " id="up"><b>UP</b></a>
-                                <div id="selecionaPisos" onclick="refreshMatrix()">
-                                    <!-- Builds floor Selector-->
-                                </div>
-                                <a href="#" class="list-group-item " id="down"><b>DOWN</b></a>
-                            </div>
-                            <div class="rectangle"></div>
+                <div class="col-md-2">
+                    <div class="list-group text-center">
+                        <div class="triangle-container">
+                            <div class="triangle"></div>
                         </div>
+                        <div class="SeletorPisos">
+                            <a href="#" class="list-group-item " id="up"><b>UP</b></a>
+                            <div id="selecionaPisos" onclick="refreshMatrix()">
+                                <!-- Builds floor Selector-->
+                            </div>
+                            <a href="#" class="list-group-item " id="down"><b>DOWN</b></a>
+                        </div>
+                        <div class="rectangle"></div>
                     </div>
-                    <div class="col-md-1"></div>
-<!--
+                </div>
+                <div class="col-md-1"></div>
+                <!--
     PISOS     8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
-<!--
+                <!--
     ooo        ooooo       .o.       ooooooooooooo ooooooooo.   ooooo  oooooooooooo
     `88.       .888'      .888.      8'   888   `8 `888   `Y88. `888' d'""""""d888'
      888b     d'888      .8"888.          888       888   .d88'  888        .888P
@@ -256,24 +257,25 @@
      8    Y     888   .8'     `888.       888       888  `88b.   888    d888'    .P
     o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o .8888888888P
 -->
-                    <div class="col-md-6">
-                        <div class="table-responsive">
-                            <table class="table table-striped matrix" id="matrix">
-                                <!-- Builds costum Matrix-->
-                            </table>
-                        </div>
+                <div class="col-md-9">
+                    <div class="table-responsive">
+                        <table class="table table-striped matrix" id="matrix">
+                            <!-- Builds costum Matrix-->
+                        </table>
                     </div>
                 </div>
-
-                <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar">Reservar Sala</button>
-
-            </div>
-        </div>
-    </div>
 <!--
     MATRIZ     8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
-<!--
+            </div>
+        </div>
+    </div>
+    <div class="row">
+            <button type="button" class="btn btn-lg btn-success pull-right btn_confirm" data-toggle="modal" data-target="#modal_confirmar">Reservar Sala</button>
+    </div>
+
+    <!--
+
     oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
     `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
      888         888      888 888      888      888       888          888   .d88'
@@ -284,7 +286,7 @@
 
 -->
     <footer class="footer">
-        <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
+        <div class="col-sm-12 col-md-12">
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -321,7 +323,7 @@
             </div>
         </div>
     </footer>
-<!--
+    <!--
     FOOTER    8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
     <!-- Bootstrap core JavaScript
@@ -332,7 +334,6 @@
         window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
     </script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="js/moment.min.js"></script>
     <script type="text/javascript" src="js/daterangepicker.js"></script>
