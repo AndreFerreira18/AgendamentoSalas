@@ -1,11 +1,10 @@
 // Show Modal
 $(window).ready(
-  function(){
-      $('#modal').modal('show');
-      criarrecursos();
+  function() {
+    $('#modal').modal('show');
+    criarrecursos();
   }
 );
-
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
@@ -13,6 +12,7 @@ $('input[name="daterange"]').daterangepicker({
   "startDate": "06/09/2017",
   "endDate": "06/15/2017"
 });
+
 //Sidebar
 $(window).resize(function() {
   var path = $(this);
@@ -23,6 +23,7 @@ $(window).resize(function() {
     document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
   }
 });
+
 $(document).ready(function() {
   $('.dropdown').on('show.bs.dropdown', function(e) {
     $(this).find('.dropdown-menu').first().stop(true, true).slideDown(300);
@@ -41,36 +42,7 @@ $(document).ready(function() {
     }
   });
 });
-<<<<<<< HEAD
-=======
-//Seletor de pisos
-document.getElementById("up").addEventListener("mouseover", mouseOver);
-document.getElementById("up").addEventListener("mouseout", mouseOut);
-document.getElementById("down").addEventListener("mouseover", mouseOver);
-document.getElementById("down").addEventListener("mouseout", mouseOut);
 
-
-// alterar para argumentos
-var pisos = [];
-var i;
-var nAndaresVisiveis = 4;
-var min = 0;
-var max = nAndaresVisiveis - 1;
-for (var i = 0; i <= floors.Andares.length; i++) { //ver isto
-  pisos[i] = i;
-}
-
-if (nAndaresVisiveis > pisos.length - 1)
-  nAndaresVisiveis = pisos.length - 1;
-
-if (max - min == pisos.length - 1) {
-  document.getElementById("up").style.display = 'none';
-  document.getElementById("down").style.display = 'none';
-}
-writeOnScreen(min, max + 1);
-nAndaresVisiveis--;
-document.getElementById("down").style.display = 'none';
->>>>>>> 7c3141c15973fb3d2c02409a2794c77f4ffa689a
 
 function defineActive(e) {
   // remove the old active
@@ -136,9 +108,6 @@ function createMatrixDay() {
   var idSelectedFloor = getActive('list-group-item');
   var tempSelectedFloor = idSelectedFloor.split("-");
   var selectedFloor = parseInt(tempSelectedFloor[1]);
-  //var nRooms = Object.keys(shedualDay[selectedFloor]).length;
-//  var roomsName = [];
-  //var roomDisponibility = [];
 
 
   //Matrix Head
@@ -156,7 +125,7 @@ function createMatrixDay() {
 
   //Matrix Body
   var mb = document.getElementById("matrix_day_body");
-  for (var i = 0; i < shedualDay[selectedFloor][0].Disponibilidade.length ; i++) {
+  for (var i = 0; i < shedualDay[selectedFloor][0].Disponibilidade.length; i++) {
     var tr = document.createElement('tr');
     mb.appendChild(tr);
     var th = document.createElement('th');
@@ -172,24 +141,9 @@ function createMatrixDay() {
 
 //saves data to the Side Bar
 function saveChanges() {
-
-<<<<<<< HEAD
-clone();
+  clone();
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
-=======
-  //document.getElementById("data_sb_tipo_reuniao").selectedIndex =
-    //document.getElementById("data_mod_tipo_reuniao").selectedIndex;
-  //document.getElementById("data_sb_nparticipantes").value =
-  //  document.getElementById("data_mod_nparticipantes").value;
-  //document.getElementById("data_sb_calendar").value =
-  //  document.getElementById("data_mod_calendar").value;
-
-  //defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
->>>>>>> 7c3141c15973fb3d2c02409a2794c77f4ffa689a
   addMatrix('day');
-
-
-
 }
 
 // Remove element by Id
@@ -200,61 +154,55 @@ function removeElement(elementId) {
   }
 }
 
-
 // Criar Recursos
-function criarrecursos(){
+function criarrecursos() {
+  var recursos = initialData.Recursos;
+  var label_recursos = initialData.Recursos;
+  document.getElementById("store_btn_recursos").innerHTML = " ";
+  var i;
+  for (i = 0; i < recursos.length; i++) {
+    var button = document.createElement("button");
+    var label = document.createElement("label");
+    var iDiv = document.createElement('div');
+    var element = document.getElementById("store_btn_recursos");
 
-var recursos = initialData.Recursos;
-var label_recursos = initialData.Recursos;
-    document.getElementById("store_btn_recursos").innerHTML=" ";
-    var i;
-    for (i = 0; i < recursos.length; i++){
-        var button = document.createElement("button");
-        var label = document.createElement("label");
-        var iDiv = document.createElement('div');
-        var element = document.getElementById("store_btn_recursos");
+    button.type = 'button';
+    button.className = "btn btn-default recurso";
+    button.innerHTML = recursos[i];
+    button.id = 'btn' + (i);
+    button.onclick = function() {
+      this.classList.toggle("active");
+    }
+    label.type = 'label';
+    label.className = "label-recurso";
+    label.innerHTML = label_recursos[i];
 
-        button.type = 'button';
-        button.className = "btn btn-default recurso";
-        button.innerHTML = recursos[i];
-        button.id = 'btn' + (i);
-        button.onclick = function (){
-            this.classList.toggle("active");
-        }
-        label.type = 'label';
-        label.className = "label-recurso";
-        label.innerHTML = label_recursos[i];
+    iDiv.id = 'recurso' + i;
+    iDiv.className = 'divBotoes';
+    element.insertBefore(iDiv, element.firstChild);
 
-        iDiv.id = 'recurso' + i;
-        iDiv.className = 'divBotoes';
-        element.insertBefore(iDiv, element.firstChild);
-
-         element = document.getElementById(iDiv.id);
-         element.insertBefore(label, element.firstChild);
-         element.insertBefore(button, element.firstChild);
+    element = document.getElementById(iDiv.id);
+    element.insertBefore(label, element.firstChild);
+    element.insertBefore(button, element.firstChild);
   }
 }
 
-// function criarIcon (){
-//
-// }
 
-function criarLabel(){
-    var label_recursos = ["Flipchart", "Projetor", "Microfone"];
-    document.getElementById("adicionaLabel").innerHTML=" ";
-    for (var j = 0; j < label_recursos.length; j++){
+function criarLabel() {
+  var label_recursos = ["Flipchart", "Projetor", "Microfone"];
+  document.getElementById("adicionaLabel").innerHTML = " ";
+  for (var j = 0; j < label_recursos.length; j++) {
     var label = document.createElement("label");
     label.type = 'label';
     label.className = "label-recurso";
     label.innerHTML = label_recursos[j];
     var elementLabel = document.getElementById("adicionaLabel");
     elementLabel.insertBefore(label, elementLabel.firstChild);
-        }
+  }
 }
 
-function clone(){
-
-    var elements = document.getElementById("form_modal").firstElementChild;
-    var cln = elements.cloneNode(true);
-    document.getElementById("form_sb").appendChild(cln);
+function clone() {
+  var elements = document.getElementById("form_modal").firstElementChild;
+  var cln = elements.cloneNode(true);
+  document.getElementById("form_sb").appendChild(cln);
 }
