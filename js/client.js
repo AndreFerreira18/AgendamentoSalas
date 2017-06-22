@@ -222,10 +222,26 @@ function createMatrixWeek() {
 
 }
 
+// adds
+function addBtnRooms() {
+
+var element = document.getElementById("btn_rooms");
+for (var i = 0; i < rooms_1.salas.length; i++) {
+  var btn = document.createElement('button');
+  btn.innerHTML = rooms_1.salas[i];
+  btn.setAttribute("type","button");
+  btn.classList.add('btn');
+  btn.classList.add('btn-default');
+  btn.addEventListener("click", defineActiveEvent);
+  element.appendChild(btn);
+}
+}
+
 //saves data to the Side Bar
 function saveChanges() {
   clone();
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
+  addBtnRooms();
   addMatrix('week');
 }
 
