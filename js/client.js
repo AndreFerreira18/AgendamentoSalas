@@ -226,8 +226,8 @@ function createMatrixDay() {
   var roomDisponibility = [];
 
   for (var i = 0; i < nRooms; i++) {
-    roomsName[i] = data.Piso[selectedFloor[1]].Salas[i].NomeSala;
-    roomDisponibility[i] = data.Piso[selectedFloor[1]].Salas[i].Disponibilidade;;
+    roomsName[i] = shedualDay.selectedFloor[1].NomeSala;
+    roomDisponibility[i] = shedualDay.selectedFloor[1].Disponibilidade;;
   }
 
   //Matrix Head
