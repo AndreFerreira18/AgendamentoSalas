@@ -2,11 +2,8 @@
 $(window).ready(
   function(){
       $('#modal').modal('show');
+      criarrecursos();
   }
-);
-
-$(window).ready(
-  function(){criarrecursos();}
 );
 
 
@@ -134,7 +131,7 @@ function writeOnScreen(min, max) {
     create.id = 'piso-' + (i);
     create.addEventListener("click", defineActiveEvent);
     var element = document.getElementById("selecionaPisos");
-    element.insertBefore(create, element.firstChild); 
+    element.insertBefore(create, element.firstChild);
   }
 }
 
@@ -224,7 +221,7 @@ function createMatrixDay() {
   //future parse JSON
   var idSelectedFloor = document.getElementById(getActive('list-group-item')).id;
   var selectedFloor = idSelectedFloor.split("-");
-  var nRooms = data.Piso[selectedFloor[1]].nSalas;
+  var nRooms = shedualDay.length;
   var roomsName = [];
   var roomDisponibility = [];
 
@@ -287,11 +284,12 @@ function removeElement(elementId) {
   }
 }
 
-var recursos = ["1","2","3"];
-var label_recursos = ["Flipchart", "Projetor", "Microfone"];
+
 // Criar Recursos
 function criarrecursos(){
 
+var recursos = initialData.Recursos;
+var label_recursos = initialData.Recursos;
     document.getElementById("store_btn_recursos").innerHTML=" ";
     var i;
     for (i = 0; i < recursos.length; i++){
