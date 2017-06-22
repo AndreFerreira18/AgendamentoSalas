@@ -6,6 +6,10 @@ $(window).ready(
   }
 );
 
+$(window).ready(
+  function(){criarrecursos();}
+);
+
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
@@ -67,7 +71,6 @@ if (max - min == pisos.length - 1) {
 writeOnScreen(min, max + 1);
 nAndaresVisiveis--;
 document.getElementById("down").style.display = 'none';
-
 
 function defineActive(e) {
   // remove the old active
@@ -246,6 +249,8 @@ function saveChanges() {
 
   addMatrix('matrix_day_head', 'matrix_day_body');
 
+   clone();
+
 }
 
 // Remove element by Id
@@ -254,4 +259,62 @@ function removeElement(elementId) {
     var element = document.getElementById(elementId);
     body.parentNode.removeChild(element);
   }
+}
+
+var recursos = ["1","2","3"];
+var label_recursos = ["Flipchart", "Projetor", "Microfone"];
+// Criar Recursos
+function criarrecursos(){
+
+    document.getElementById("store_btn_recursos").innerHTML=" ";
+    var i;
+    for (i = 0; i < recursos.length; i++){
+        var button = document.createElement("button");
+        var label = document.createElement("label");
+        var iDiv = document.createElement('div');
+        var element = document.getElementById("store_btn_recursos");
+
+        button.type = 'button';
+        button.className = "btn btn-default recurso";
+        button.innerHTML = recursos[i];
+        button.id = 'btn' + (i);
+        button.onclick = function (){
+            this.classList.toggle("active");
+        }
+        label.type = 'label';
+        label.className = "label-recurso";
+        label.innerHTML = label_recursos[i];
+
+        iDiv.id = 'recurso' + i;
+        element.insertBefore(iDiv, element.firstChild);
+
+         element = document.getElementById(iDiv.id);
+         element.insertBefore(label, element.firstChild);
+         element.insertBefore(button, element.firstChild);
+  }
+}
+
+// function criarIcon (){
+//
+// }
+
+function criarLabel(){
+    var label_recursos = ["Flipchart", "Projetor", "Microfone"];
+    document.getElementById("adicionaLabel").innerHTML=" ";
+    for (var j = 0; j < label_recursos.length; j++){
+    var label = document.createElement("label");
+    label.type = 'label';
+    label.className = "label-recurso";
+    label.innerHTML = label_recursos[j];
+    var elementLabel = document.getElementById("adicionaLabel");
+    elementLabel.insertBefore(label, elementLabel.firstChild);
+        }
+}
+
+function clone(){
+    for (var i=0; i<recursos.length; i++){
+        var btn = document.getElementById("store_btn_recursos").children[i];
+        var cln = btn.cloneNode(true);
+        document.getElementById("store_btn_recursos_sb").appendChild(cln);
+    }
 }

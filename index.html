@@ -76,26 +76,17 @@
                                     <option> 7 </option>
                             </select>
             </div>
-
-            <div class="input-group">
-              <label>
-                                    <span class="glyphicon glyphicon-pushpin "></span> &nbsp; Recursos Disponíveis:
-                                </label>
-              <br><br>
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_flip">
-                                    <span class="glyphicon glyphicon-blackboard glyph_init"></span>
-                                </button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_proj">
-                                    <span class="glyphicon glyphicon-facetime-video glyph_init"></span>
-                                </button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_escritorio">
-                                    <span class="glyphicon glyphicon-pencil glyph_init"></span>
-                                </button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_micro">
-                                    <span class="glyphicon glyphicon-ice-lolly glyph_init"> </span>
-                                </button>
-
+            <div input-group>
+                <div id="store_btn_recursos">
+                </div>
             </div>
+
+
+        <!-- <div  id="adicionaRecursos">
+                </div>
+            </div>
+             <div id="adicionaLabel">
+            </div> -->
           </form>
 
         </div>
@@ -150,9 +141,11 @@
                         <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
                           </label>
                           <br><br>
-                          <div id="adicionaRecursos">
+                          <div input-group>
+                              <div id="store_btn_recursos_sb">
+                              </div>
                           </div>
-              </div>
+                      </div>
 
               <div class="input-group">
                 <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
@@ -190,7 +183,7 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar">Reservar Sala</button>
+        <button type="button" class="btn btn-lg btn-success btnReserva pull-right" data-toggle="modal" data-target="#modal_confirmar">Reservar Sala</button>
 
       </div>
     </div>
@@ -204,9 +197,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <div class="modal-title">
             <h1>
-                                      <span class="glyphicon glyphicon-ok"></span> &nbsp;
-                                      Pedido de agendamento realizado por:
-                                  </h1>
+            <span class="glyphicon glyphicon-ok"></span> &nbsp;
+                Pedido de agendamento realizado por:
+            </h1>
           </div>
         </div>
         <div class="modal-body">
@@ -255,7 +248,7 @@
               <td>Interna</td>
               <td>Sala 19</td>
               <td>2017/08/15 14:00</td>
-              <td><button class="recurso" id="btn0">1</button></td>
+              <td>2017/08/15 18:00</td>
             </tr>
           </tbody>
         </table>
@@ -278,29 +271,7 @@
   <script type="text/javascript" src="js/daterangepicker.js"></script>
   <script src="js/mockdata.js"></script>
   <script src="js/client.js"></script>
-  <script>
-  function criarrecursos(){
-      var recursos = ["1","2","3"];
-      document.getElementById("adicionaRecursos").innerHTML=" ";
-      var i;
-      for (i = 0; i < recursos.length; i++){
-      var button = document.createElement("button");
-      button.type = 'button';
-      button.className = "btn btn-default recurso";
-      button.innerHTML = recursos[i];
-      button.id = 'btn' + (i);
-      button.onclick = function (){
-      this.classList.toggle("active");
-  }
-      var element = document.getElementById("adicionaRecursos");
-      element.prepend(button);
-    }
-  }
-  $(window).ready(
-    function(){criarrecursos();}
-  );
 
-</script>
 </body>
 
 </html>
