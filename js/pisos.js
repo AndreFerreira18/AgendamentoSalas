@@ -11,7 +11,7 @@ var i;
 var nAndaresVisiveis = 4;
 var min = 0;
 var max = nAndaresVisiveis - 1;
-for (var i = 0; i <= data.nPisos; i++) { //ver isto
+for (var i = 0; i <= floors.Andares.length; i++) { //ver isto
   pisos[i] = i;
 }
 
