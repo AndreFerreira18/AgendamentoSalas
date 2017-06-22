@@ -44,9 +44,9 @@ $(document).ready(function() {
 });
 
 
-function defineActive(e) {
+function defineActiveBtnSalas(e) {
   // remove the old active
-  var elements = document.getElementsByClassName(e.target.classList[0]);
+  var elements = document.getElementsByClassName(e.target.classList[3]);
   for (var i = 0; i < elements.length; i++) {
     elements[i].classList.remove('active');
   }
@@ -230,9 +230,11 @@ for (var i = 0; i < rooms_1.salas.length; i++) {
   var btn = document.createElement('button');
   btn.innerHTML = rooms_1.salas[i];
   btn.setAttribute("type","button");
+  btn.id = "btn_rooms"+i;
   btn.classList.add('btn');
   btn.classList.add('btn-default');
-  btn.addEventListener("click", defineActiveEvent);
+  btn.classList.add('btn-rooms');
+  btn.addEventListener("click", defineActiveBtnSalas);
   element.appendChild(btn);
 }
 }
