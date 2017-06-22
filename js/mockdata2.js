@@ -28,7 +28,7 @@ var initialData = {
     "Microfone",
     "Laser"
   ],
-  "Tipos de Reunião":[
+  "Tipos de Reunião": [
     "Formação",
     "Externa",
     "interna"
