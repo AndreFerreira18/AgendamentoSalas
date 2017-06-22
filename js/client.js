@@ -141,7 +141,13 @@ function createMatrixDay() {
 
 //saves data to the Side Bar
 function saveChanges() {
+<<<<<<< HEAD
   clone();
+=======
+updownIniciar();
+clone();
+
+>>>>>>> HTML_DEV_PISOS
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
   addMatrix('day');
 }
@@ -201,8 +207,18 @@ function criarLabel() {
   }
 }
 
+<<<<<<< HEAD
 function clone() {
   var elements = document.getElementById("form_modal").firstElementChild;
   var cln = elements.cloneNode(true);
   document.getElementById("form_sb").appendChild(cln);
+=======
+function clone(){
+
+    var elements = document.getElementById("form_modal").firstElementChild;
+    var cln = elements.cloneNode(true);
+    document.getElementById("form_sb").appendChild(cln);
+
+    document.querySelector(".modal-body").remove();
+>>>>>>> HTML_DEV_PISOS
 }

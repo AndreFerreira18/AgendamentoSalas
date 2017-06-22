@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //Seletor de pisos
 document.getElementById("up").addEventListener("mouseover", mouseOver);
 document.getElementById("up").addEventListener("mouseout", mouseOut);
@@ -14,10 +15,26 @@ var max = nAndaresVisiveis - 1;
 for (var i = 0; i <= floors.Andares.length; i++) { //ver isto
   pisos[i] = i;
 }
+=======
+var timer = null;
+document.getElementById("btn_up").addEventListener("mouseover", function(){
+    timer = setInterval(updownMoveUp, 250);
+});
+document.getElementById("btn_up").addEventListener("mouseout", function(){
+    clearInterval(timer);
+});
+document.getElementById("btn_down").addEventListener("mouseover", function(){
+    timer = setInterval(updownMoveDown, 250);
+});
+document.getElementById("btn_down").addEventListener("mouseout", function(){
+    clearInterval(timer);
+});
+>>>>>>> HTML_DEV_PISOS
 
 if (nAndaresVisiveis > pisos.length - 1)
   nAndaresVisiveis = pisos.length - 1;
 
+<<<<<<< HEAD
 if (max - min == pisos.length - 1) {
   document.getElementById("up").style.display = 'none';
   document.getElementById("down").style.display = 'none';
@@ -25,6 +42,12 @@ if (max - min == pisos.length - 1) {
 writeOnScreen(min, max + 1);
 nAndaresVisiveis--;
 document.getElementById("down").style.display = 'none';
+=======
+var andar_nVisiveis = 4;
+var andar_visiveis = null;
+var min = 0;
+var maxa = 0;
+>>>>>>> HTML_DEV_PISOS
 
 function mouseOver(e) {
   if (e.target.id == "up")
@@ -33,6 +56,7 @@ function mouseOver(e) {
     moveDown();
 }
 
+<<<<<<< HEAD
 function mouseOut(e) {
   if (e.target.id == "up")
     document.getElementById("up").style.color = "black";
@@ -113,6 +137,66 @@ function moveDown() {
     document.getElementById("down").style.display = 'none';
     moveActive(min, max + 1);
   }
+=======
+function updownMoveUp() {
+    if(max < floors.Andares.length) {
+        max++;
+        min++;
+        escreverEcra();
+
+    }
+}
+
+function updownMoveDown() {
+    if(min > 0) {
+        min--;
+        max--;
+        escreverEcra();
+    }
+}
+
+function updownIniciar() {
+    var e = document.getElementById("data_mod_piso_pref");
+    var selected = parseInt(e.options[e.selectedIndex].value);
+
+    if(floors.Andares.length < andar_nVisiveis)
+        andar_nVisiveis = floors.Andares.length;
+
+    criaredificio();
+    document.getElementById('piso-' + (selected)).classList.add("Active");
+    min=selected;
+
+    while((min + andar_nVisiveis) > floors.Andares.length)
+        min--;
+    max = min + andar_nVisiveis;
+    escreverEcra();
+}
+
+function escreverEcra() {
+    andares = document.getElementById("selecionaPisos").childNodes;
+
+    for(i = 0; i < floors.Andares.length; i++) {
+        if(i>= min && i<max) document.getElementById('piso-' + (i)).style.display=''
+        else document.getElementById('piso-' + (i)).style.display='none';
+    }
+    if(min==0) document.getElementById("btn_down").style.display='none';
+    else document.getElementById("btn_down").style.display='';
+    if(max==floors.Andares.length) document.getElementById("btn_up").style.display='none';
+    else document.getElementById("btn_up").style.display='';
+}
+
+function criaredificio() {
+    for(i = 0; i < floors.Andares.length; i++) {
+        var create = document.createElement("p");
+        create.innerHTML = floors.Andares[i];
+        create.classList.add('list-group-item');
+        create.id = 'piso-' + (i);
+        create.style.display = "none";
+        //create.addEventListener("click", defineActiveEvent);
+        var element = document.getElementById("selecionaPisos");
+        element.insertBefore(create,  element.firstChild);
+    }
+>>>>>>> HTML_DEV_PISOS
 }
 
 
