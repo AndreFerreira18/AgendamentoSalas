@@ -30,11 +30,11 @@
     o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
 -->
     <!-- Madal inicial-->
-    <div id="modal" class="modal fade" role="dialog">
+    <div id="modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <div class="modal-title">
                         <h1><b>
                             <span class="glyphicon glyphicon-ok"></span> &nbsp;
@@ -67,7 +67,7 @@
                             <span class="input-group-addon">
                                 <b><span class="glyphicon glyphicon-user"></span> Numero de Participantes:</b>
                             </span>
-                            <input type="number" class="form-control" value="0" id="data_mod_nparticipantes">
+                            <input type="number" class="form-control" value="0" min = 0 id="data_mod_nparticipantes">
                         </div>
 
                         <div class="form-group">
@@ -96,8 +96,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnSave" class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Save changes </button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" id="btnSave" class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Guardar</button>
+                    <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
                 </div>
             </div>
         </div>
@@ -237,7 +237,6 @@
      888    "    888      888 888      888      888       888    "     888`88b.
      888         `88b    d88' `88b    d88'      888       888       o  888  `88b.
     o888o         `Y8bood8P'   `Y8bood8P'      o888o     o888ooooood8 o888o  o888o
-
 -->
     <footer class="footer">
         <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
@@ -247,7 +246,7 @@
                         <th>Status</th>
                         <th>Tipo de Reunião</th>
                         <th>Sala</th>
-                        <th>Hora de inicio</th>.
+                        <th>Hora de inicio</th>
                         <th>Hora de fim</th>
                     </thead>
                     <tbody>
@@ -280,6 +279,7 @@
 <!--
     FOOTER    8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
+
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

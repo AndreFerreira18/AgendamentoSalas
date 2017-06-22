@@ -41,6 +41,36 @@ $(document).ready(function() {
     }
   });
 });
+<<<<<<< HEAD
+=======
+//Seletor de pisos
+document.getElementById("up").addEventListener("mouseover", mouseOver);
+document.getElementById("up").addEventListener("mouseout", mouseOut);
+document.getElementById("down").addEventListener("mouseover", mouseOver);
+document.getElementById("down").addEventListener("mouseout", mouseOut);
+
+
+// alterar para argumentos
+var pisos = [];
+var i;
+var nAndaresVisiveis = 4;
+var min = 0;
+var max = nAndaresVisiveis - 1;
+for (var i = 0; i <= floors.Andares.length; i++) { //ver isto
+  pisos[i] = i;
+}
+
+if (nAndaresVisiveis > pisos.length - 1)
+  nAndaresVisiveis = pisos.length - 1;
+
+if (max - min == pisos.length - 1) {
+  document.getElementById("up").style.display = 'none';
+  document.getElementById("down").style.display = 'none';
+}
+writeOnScreen(min, max + 1);
+nAndaresVisiveis--;
+document.getElementById("down").style.display = 'none';
+>>>>>>> 7c3141c15973fb3d2c02409a2794c77f4ffa689a
 
 function defineActive(e) {
   // remove the old active
@@ -103,16 +133,13 @@ function addMatrix(matrixType) {
 //matrix Day
 function createMatrixDay() {
   //future parse JSON
-  var idSelectedFloor = document.getElementById(getActive('list-group-item')).id;
-  var selectedFloor = idSelectedFloor.split("-");
-  var nRooms = shedualDay.length;
-  var roomsName = [];
-  var roomDisponibility = [];
+  var idSelectedFloor = getActive('list-group-item');
+  var tempSelectedFloor = idSelectedFloor.split("-");
+  var selectedFloor = parseInt(tempSelectedFloor[1]);
+  //var nRooms = Object.keys(shedualDay[selectedFloor]).length;
+//  var roomsName = [];
+  //var roomDisponibility = [];
 
-  for (var i = 0; i < nRooms; i++) {
-    roomsName[i] = data.Piso[selectedFloor[1]].Salas[i].NomeSala;
-    roomDisponibility[i] = data.Piso[selectedFloor[1]].Salas[i].Disponibilidade;;
-  }
 
   //Matrix Head
   var mh = document.getElementById("matrix_day_head");
@@ -121,23 +148,23 @@ function createMatrixDay() {
   var th1 = document.createElement('th');
   th1.innerHTML = "Horas";
   tr.appendChild(th1);
-  for (var i = 0; i < nRooms; i++) {
+  for (var i = 0; i < shedualDay[selectedFloor].length; i++) {
     var th2 = document.createElement('th');
-    th2.innerHTML = roomsName[i];
+    th2.innerHTML = shedualDay[selectedFloor][i].NomeSala;
     tr.appendChild(th2);
   }
 
   //Matrix Body
   var mb = document.getElementById("matrix_day_body");
-  for (var i = 0; i < 10; i++) {
+  for (var i = 0; i < shedualDay[selectedFloor][0].Disponibilidade.length ; i++) {
     var tr = document.createElement('tr');
     mb.appendChild(tr);
     var th = document.createElement('th');
     tr.appendChild(th);
-    th.innerHTML = i + 9 + " H";
-    for (var j = 0; j < nRooms; j++) {
+    th.innerHTML = i + 8 + " H";
+    for (var j = 0; j < shedualDay[selectedFloor].length; j++) {
       var td = document.createElement('td');
-      td.innerHTML = roomDisponibility[j][i];
+      td.innerHTML = shedualDay[selectedFloor][j].Disponibilidade[i];
       tr.appendChild(td);
     }
   }
@@ -146,8 +173,19 @@ function createMatrixDay() {
 //saves data to the Side Bar
 function saveChanges() {
 
+<<<<<<< HEAD
 clone();
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
+=======
+  //document.getElementById("data_sb_tipo_reuniao").selectedIndex =
+    //document.getElementById("data_mod_tipo_reuniao").selectedIndex;
+  //document.getElementById("data_sb_nparticipantes").value =
+  //  document.getElementById("data_mod_nparticipantes").value;
+  //document.getElementById("data_sb_calendar").value =
+  //  document.getElementById("data_mod_calendar").value;
+
+  //defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
+>>>>>>> 7c3141c15973fb3d2c02409a2794c77f4ffa689a
   addMatrix('day');
 
 

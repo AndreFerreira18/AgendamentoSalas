@@ -10,6 +10,7 @@ var floors = {
     "7º Andar"
   ]
 };
+
 var initialData = {
   "Andares": [
     "Res Do chão",
