@@ -105,7 +105,25 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
     padding-left: 10%;
     padding-right: 10%;
 }
+.updown_up{
+    padding-top: 15px;
+}
+.updown_down{
+    padding-top: 7px;
+}
+.updown a{
+    color: black;
+    font-size: 14px;
+    font-weight: bold;
 
+}
+.updown a:hover, updown a:focus{
+    color: #337ab7;
+
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
 
 /*
 ooo        ooooo   .oooooo.   oooooooooo.         .o.       ooooo
