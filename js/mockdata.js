@@ -1,5 +1,5 @@
 var shedualDay = {
-  "Res Do chão": [{
+  "0": [{
       "NomeSala": "Sala 0.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -17,7 +17,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "1º Andar": [{
+  "1": [{
       "NomeSala": "Sala 1.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -34,7 +34,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "2º Andar": [{
+  "2": [{
       "NomeSala": "Sala 2.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -47,7 +47,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "3º Andar": [{
+  "3": [{
       "NomeSala": "Sala 3.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -64,7 +64,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "4º Andar": [{
+  "4": [{
       "NomeSala": "Sala 4.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -81,7 +81,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "5º Andar": [{
+  "5": [{
       "NomeSala": "Sala 5.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -98,7 +98,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "6º Andar": [{
+  "6": [{
       "NomeSala": "Sala 6.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -115,7 +115,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "7º Andar": [{
+  "7": [{
       "NomeSala": "Sala 7.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
@@ -132,7 +132,7 @@ var shedualDay = {
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
-  "8º Andar": [{
+  "8": [{
       "NomeSala": "Sala 8.1",
       "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
