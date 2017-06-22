@@ -1,21 +1,38 @@
 var floors = {
-  "Andares": [{
-    "nome": "Res Do chão"
-  }, {
-    "nome": "1º Andar"
-  }, {
-    "nome": "2º Andar"
-  }, {
-    "nome": "3º Andar"
-  }, {
-    "nome": "4º Andar"
-  }, {
-    "nome": "5º Andar"
-  }, {
-    "nome": "6º Andar"
-  }, {
-    "nome": "7º Andar"
-  }]
+  "Andares": [
+    "Res Do chão",
+    "1º Andar",
+    "2º Andar",
+    "3º Andar",
+    "4º Andar",
+    "5º Andar",
+    "6º Andar",
+    "7º Andar"
+  ]
+};
+var initialData = {
+  "Andares": [
+    "Res Do chão",
+    "1º Andar",
+    "2º Andar",
+    "3º Andar",
+    "4º Andar",
+    "5º Andar",
+    "6º Andar",
+    "7º Andar"
+  ],
+  "Recursos": [
+    "Projetor",
+    "Material de Escritorio",
+    "Flipchart",
+    "Microfone",
+    "Laser"
+  ],
+  "Tipos de Reunião":[
+    "Formação",
+    "Externa",
+    "interna"
+  ]
 };
 
 var resources = {
