@@ -85,25 +85,11 @@
                             </select>
                         </div>
 
-                        <div class="input-group">
-                            <label>
-                                <span class="glyphicon glyphicon-pushpin "></span> &nbsp; Recursos Disponíveis:
-                            </label>
-                            <br><br>
-                            <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_flip">
-                                <span class="glyphicon glyphicon-blackboard glyph_init"></span>
-                            </button> &nbsp; &nbsp;
-                            <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_proj">
-                                <span class="glyphicon glyphicon-facetime-video glyph_init"></span>
-                            </button> &nbsp; &nbsp;
-                            <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_escritorio">
-                                <span class="glyphicon glyphicon-pencil glyph_init"></span>
-                            </button> &nbsp; &nbsp;
-                            <button type="button" class="btn btn-default icon_recurso_init" id="data_mod_recurso_micro">
-                                <span class="glyphicon glyphicon-ice-lolly glyph_init"> </span>
-                            </button>
-
+                        <div input-group>
+                            <div id="store_btn_recursos">
+                            </div>
                         </div>
+
                     </form>
 
                 </div>
@@ -165,51 +151,11 @@
                     </a>
                     <div id="sidebar-wrapper" class="sidebar-toggle">
                         <form class="form-group" data-target="#modal_header">
-                            <div class="input-group">
-                                <label>
-                                    <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
-                                </label>
-                                <select class="form-control" id="data_sb_tipo_reuniao">
-                                    <option value="Formação"> Formação </option>
-                                    <option value="Externa">Externa</option>
-                                    <option value="Interna">Interna</option>
-                                </select>
-                            </div>
-                            <div class="input-group">
-                                <label>
-                                    Seleção de Data e Horas (Inicio e Fim):
-                                </label>
-                                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_sb_calendar" />
-                            </div>
 
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <b><span class="glyphicon glyphicon-user"></span> &nbsp; Numero de Participantes:</b>
-                                </span>
-                                <input type="number" class="form-control" value="0" id="data_sb_nparticipantes">
-                            </div>
-
-                            <div class="input-group">
-                                <label>
-                                    <span class="glyphicon glyphicon-pushpin"></span> &nbsp; Recursos Disponíveis:
-                                </label>
-                                <!--ALterar br's-->
-                                <br><br>
-                                <button type="button" class="btn btn-default icon-recurso">
-                                    <span class="glyphicon glyphicon-blackboard "></span>
-                                </button> &nbsp; &nbsp;
-                                <button type="button" class="btn btn-default icon-recurso">
-                                    <span class="glyphicon glyphicon-facetime-video"></span>
-                                </button> &nbsp; &nbsp;
-                                <button type="button" class="btn btn-default icon-recurso">
-                                    <span class="glyphicon glyphicon-ice-lolly"> </span>
-                                </button>
-                            </div>
-
-                            <div class="input-group">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
-                            </div>
                         </form>
+                        <div class="input-group">
+                            <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -339,16 +285,6 @@
     <script src="js/mockdata.js"></script>
     <script src="js/client.js"></script>
 
-
-    <script>
-        var recursos = ["Projetor", "Microfone", "Material de Escritório", "Flipchart"];
-        var createButton = document.createElement("button");
-        createButton.innerHTML = recursos[i];
-        createButton.id = 'btn-' + i;
-        var t = document.createTextNode("Novo Recurso");
-        var element = document.getElementById("adicionaRecursos");
-        //element.prepend(createButton);
-    </script>
 </body>
 
 </html>
