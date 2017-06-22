@@ -146,17 +146,11 @@ function createMatrixDay() {
 //saves data to the Side Bar
 function saveChanges() {
 
-  document.getElementById("data_sb_tipo_reuniao").selectedIndex =
-    document.getElementById("data_mod_tipo_reuniao").selectedIndex;
-  document.getElementById("data_sb_nparticipantes").value =
-    document.getElementById("data_mod_nparticipantes").value;
-  document.getElementById("data_sb_calendar").value =
-    document.getElementById("data_mod_calendar").value;
-
+clone();
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
   addMatrix('day');
 
-   clone();
+
 
 }
 
@@ -194,6 +188,7 @@ var label_recursos = initialData.Recursos;
         label.innerHTML = label_recursos[i];
 
         iDiv.id = 'recurso' + i;
+        iDiv.className = 'divBotoes';
         element.insertBefore(iDiv, element.firstChild);
 
          element = document.getElementById(iDiv.id);
@@ -220,9 +215,8 @@ function criarLabel(){
 }
 
 function clone(){
-    for (var i=0; i<recursos.length; i++){
-        var btn = document.getElementById("store_btn_recursos").children[i];
-        var cln = btn.cloneNode(true);
-        document.getElementById("store_btn_recursos_sb").appendChild(cln);
-    }
+
+    var elements = document.getElementById("form_modal").firstElementChild;
+    var cln = elements.cloneNode(true);
+    document.getElementById("form_sb").appendChild(cln);
 }
