@@ -86,8 +86,16 @@ function getActive(activeClass) {
 //matrix
 function refreshMatrix() {
   var matrix = document.getElementById("matrix");
+  var id_child = matrix.firstElementChild.id;
+  var child = id_child.split("_");
   matrix.innerHTML = " ";
-  addMatrix('day');
+  addMatrix(child[1]);
+  if (child[1] == "day")
+    createMatrixDay();
+  else if (child[1] == "week")
+    createMatrixWeek();
+  else
+    console.log("Escolha de matriz errada");
 }
 
 function addMatrix(matrixType) {
@@ -98,8 +106,6 @@ function addMatrix(matrixType) {
   mb.id = "matrix_" + matrixType + "_body";
   matrix.appendChild(mh);
   matrix.appendChild(mb);
-  // add option day or week
-  createMatrixDay();
 }
 
 //matrix Day
@@ -115,7 +121,7 @@ function createMatrixDay() {
   var tr = document.createElement('tr');
   mh.appendChild(tr);
   var th1 = document.createElement('th');
-  th1.innerHTML = "Horas";
+  //th1.innerHTML = "Horas";
   tr.appendChild(th1);
   for (var i = 0; i < shedualDay[selectedFloor].length; i++) {
     var th2 = document.createElement('th');
@@ -139,11 +145,88 @@ function createMatrixDay() {
   }
 }
 
+function createMatrixWeek() {
+  //future parse JSON
+  ////////////////////////////////////////////
+  //scheduleWeek_1-Sala__11
+  // assumindo que sabemos qual é a semana
+  var id_sala = "11";
+  var id_week = "1";
+  var scheduleWeek;
+  switch (id_sala) {
+    case "11":
+      if (id_week == "1")
+        scheduleWeek = scheduleWeek_1_sala_11;
+      else if (id_week == "2")
+        scheduleWeek = scheduleWeek_2_sala_11;
+      else if (id_week == "3")
+        scheduleWeek = scheduleWeek_3_sala_11;
+      break;
+    case "12":
+      if (id_week == "1")
+        scheduleWeek = scheduleWeek_1_sala_12;
+      else if (id_week == "2")
+        scheduleWeek = scheduleWeek_2_sala_12;
+      else if (id_week == "3")
+        scheduleWeek = scheduleWeek_3_sala_12;
+      break;
+    case "13":
+      if (id_week == "1")
+        scheduleWeek = scheduleWeek_1_sala_13;
+      else if (id_week == "2")
+        scheduleWeek = scheduleWeek_2_sala_13;
+      else if (id_week == "3")
+        scheduleWeek = scheduleWeek_3_sala_13;
+      break;
+    case "14":
+      if (id_week == "1")
+        scheduleWeek = scheduleWeek_1_sala_14;
+      else if (id_week == "2")
+        scheduleWeek = scheduleWeek_2_sala_14;
+      else if (id_week == "3")
+        scheduleWeek = scheduleWeek_3_sala_14;
+      break;
+    default:
+    console.log("não tenho mockdata dessa sala para matriz semana");
+  }
+
+  //var scheduleWeek = scheduleWeek_1_Sala_11;
+
+  //Matrix Head
+  var mh = document.getElementById("matrix_week_head");
+  var tr = document.createElement('tr');
+  mh.appendChild(tr);
+  var th1 = document.createElement('th');
+  //th1.innerHTML = "Horas";
+  tr.appendChild(th1);
+  for (var i = 0; i < scheduleWeek.dates.length; i++) {
+    var th2 = document.createElement('th');
+    th2.innerHTML = scheduleWeek.dates[i];
+    tr.appendChild(th2);
+  }
+
+  //Matrix Body
+  var mb = document.getElementById("matrix_week_head");
+  for (var i = 0; i < scheduleWeek[0].length; i++) {
+    var tr = document.createElement('tr');
+    mb.appendChild(tr);
+    var th = document.createElement('th');
+    tr.appendChild(th);
+    th.innerHTML = i + 8 + " H";
+    for (var j = 0; j < scheduleWeek.dates.length; j++) {
+      var td = document.createElement('td');
+      td.innerHTML = scheduleWeek[j][i];
+      tr.appendChild(td);
+    }
+  }
+
+}
+
 //saves data to the Side Bar
 function saveChanges() {
   clone();
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
-  addMatrix('day');
+  addMatrix('week');
 }
 
 // Remove element by Id
