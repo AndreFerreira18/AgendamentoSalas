@@ -134,8 +134,11 @@ function removeElement(elementId) {
 
 //saves data to the Side Bar
 function saveChanges() {
-  var startDay = 1;
-  var endDay = 1;
+  var datahora = divideDateAndTime();
+  var startDay = datahora[0];
+  var endDay = datahora[1];
+  var startHour = datahora[2];
+  var endHour  = datahora[3];
 
   updownIniciar();
   if (startDay === endDay) {
@@ -274,7 +277,7 @@ function clone() {
 function divideDateAndTime() {
   var acedeDataHora = document.getElementById("data_mod_calendar").value;
   var arrayDataHora = acedeDataHora.split(" ");
-  var datahora;
+  var datahora = [];
   datahora[0] = arrayDataHora[0]; // Data de Inicio
   datahora[1] = arrayDataHora[4]; // Data de fim
   datahora[2] = arrayDataHora[1]; // Hora de inicio
