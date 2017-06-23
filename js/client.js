@@ -1,10 +1,10 @@
 // Show Modal
 $(window).ready(
-  function(){
-      $('#modal').modal('show');
-      tReuniao();
-      pisoPref();
-      criarrecursos();
+  function() {
+    $('#modal').modal('show');
+    tReuniao();
+    pisoPref();
+    criarrecursos();
   }
 );
 
@@ -110,28 +110,19 @@ function removeElement(elementId) {
 
 //saves data to the Side Bar
 function saveChanges() {
+  var startDay = 1;
+  var endDay = 1;                       
+
   updownIniciar();
-  addBtnRooms();
-  defineActiveById('btn_rooms-1');
-  addMatrix('day');           ////////// Arterar a Matriz visivel     "week" ou "day"
+  if (startDay === endDay) {
+    addMatrix('day');
+  } else {
+    addBtnRooms();
+    defineActiveById('btn_rooms-1');
+    addMatrix('week');
+  }
   refreshMatrix();
   clone();
-}
-
-// Adiciona Botões Salas
-function addBtnRooms() {
-  var element = document.getElementById("btn_rooms");
-  for (var i = 1; i <= rooms_1.salas.length; i++) {
-    var btn = document.createElement('button');
-    btn.innerHTML = rooms_1.salas[i - 1];
-    btn.setAttribute("type", "button");
-    btn.id = "btn_rooms-" + i;
-    btn.classList.add('btn-rooms');
-    btn.classList.add('btn');
-    btn.classList.add('btn-default');
-    btn.addEventListener("click", defineActiveEvent);
-    element.appendChild(btn);
-  }
 }
 
 // Criar Recursos
@@ -207,51 +198,52 @@ function criarrecursos() {
 }
 
 
-function clone(){
-    var tmp_reuniao = document.getElementById("data_mod_tipo_reuniao").value;
-    var elements = document.getElementById("form_modal").firstElementChild;
-    var cln = elements.cloneNode(true);
-    document.getElementById("form_sb").appendChild(cln);
+function clone() {
+  var tmp_reuniao = document.getElementById("data_mod_tipo_reuniao").value;
+  var elements = document.getElementById("form_modal").firstElementChild;
+  var cln = elements.cloneNode(true);
+  document.getElementById("form_sb").appendChild(cln);
 
-    document.getElementsByClassName('piso_pref')[1].style.display ="none";
+  document.getElementsByClassName('piso_pref')[1].style.display = "none";
 
-    document.querySelector(".modal-body").remove();
-    $('input[name="daterange"]').daterangepicker({
-      "timePicker": true,
-      "locale": {
-          format: 'MM/DD/YYYY h:mm A'
-      }
-    });
-    document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
-
-
-    for(var i = 0; i<initialData.Recursos.length; i++){
-        var id_button = document.getElementById("btn_rc-" + i);
-        id_button.onclick = function(){
-            this.classList.toggle("active");
-        }
+  document.querySelector(".modal-body").remove();
+  $('input[name="daterange"]').daterangepicker({
+    "timePicker": true,
+    "locale": {
+      format: 'MM/DD/YYYY h:mm A'
     }
-}
-function tReuniao(){
-var x = initialData.Tipos_de_Reuniao;
-document.getElementById("data_mod_tipo_reuniao").innerHTML=" ";
-for (var i= 0; i <x.length; i++) {
-var opt = document.createElement("option");
-opt.innerHTML = x[i];
-opt.value = i;
-var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
-tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
+  });
+  document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
+
+
+  for (var i = 0; i < initialData.Recursos.length; i++) {
+    var id_button = document.getElementById("btn_rc-" + i);
+    id_button.onclick = function() {
+      this.classList.toggle("active");
     }
+  }
 }
 
-function pisoPref(){
-var x = initialData.Andares;
-document.getElementById("data_mod_piso_pref").innerHTML=" ";
-for (var i= 0; i <x.length; i++) {
-var opt = document.createElement("option");
-opt.innerHTML = x[i];
-opt.value = i;
-var piso_pref = document.getElementById("data_mod_piso_pref");
-piso_pref.insertBefore(opt, piso_pref.firstChild);
-    }
+function tReuniao() {
+  var x = initialData.Tipos_de_Reuniao;
+  document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
+  for (var i = 0; i < x.length; i++) {
+    var opt = document.createElement("option");
+    opt.innerHTML = x[i];
+    opt.value = i;
+    var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
+    tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
+  }
+}
+
+function pisoPref() {
+  var x = initialData.Andares;
+  document.getElementById("data_mod_piso_pref").innerHTML = " ";
+  for (var i = 0; i < x.length; i++) {
+    var opt = document.createElement("option");
+    opt.innerHTML = x[i];
+    opt.value = i;
+    var piso_pref = document.getElementById("data_mod_piso_pref");
+    piso_pref.insertBefore(opt, piso_pref.firstChild);
+  }
 }

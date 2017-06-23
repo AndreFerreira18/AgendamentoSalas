@@ -17,11 +17,15 @@ function refreshMatrix() {
   addMatrix(child[1]);
   if (child[1] == "day")
     createMatrixDay();
-  else if (child[1] == "week")
+  else if (child[1] == "week") {
+    var activeBtn = getActive("btn-rooms");
+    refreshButtons();
+    defineActiveById(activeBtn);
     createMatrixWeek();
-  else
+  } else
     console.log("Escolha de matriz errada");
 }
+
 
 //matrix Day
 function createMatrixDay() {
@@ -66,7 +70,7 @@ function createMatrixWeek() {
   ////////////////////////////////////////////
   //Alterar quando recebermos JSON
   var id_andar = getActive('list-group-item');
-  var temp_id_sala = getActive('rooms').split("-");
+  var temp_id_sala = getActive('btn-rooms').split("-");
   var id_sala = "1" + temp_id_sala[1];
   var id_week = "1";
   var scheduleWeek;
@@ -135,5 +139,63 @@ function createMatrixWeek() {
       td.innerHTML = scheduleWeek[j][i];
       tr.appendChild(td);
     }
+  }
+}
+
+function refreshButtons() {
+  var divButton = document.getElementById("btn_rooms");
+  var id_child = divButton.firstElementChild.id;
+  var child = id_child.split("_");
+  divButton.innerHTML = " ";
+  addBtnRooms();
+}
+
+// Adiciona Botões Salas
+function addBtnRooms() {
+  ////////////////////////////////////////////
+  //Alterar quando recebermos JSON
+  var idAndar = getActive('list-group-item');
+  var rooms;
+  switch (idAndar) {
+    case "piso-0":
+      rooms = rooms_0;
+      break;
+    case "piso-1":
+      var rooms = rooms_1;
+      break;
+    case "piso-2":
+      var rooms = rooms_2;
+      break;
+    case "piso-3":
+      var rooms = rooms_3;
+      break;
+    case "piso-4":
+      var rooms = rooms_4;
+      break;
+    case "piso-5":
+      var rooms = rooms_5;
+      break;
+    case "piso-6":
+      var rooms = rooms_6;
+      break;
+    case "piso-7":
+      var rooms = rooms_7;
+      break;
+    default:
+  }
+  //Alterar quando recebermos JSON
+  ////////////////////////////////////////////
+
+  var element = document.getElementById("btn_rooms");
+  for (var i = 1; i <= rooms.salas.length; i++) {
+    var btn = document.createElement('button');
+    btn.innerHTML = rooms.salas[i - 1];
+    btn.setAttribute("type", "button");
+    btn.id = "btn_rooms-" + i;
+    btn.classList.add('btn-rooms');
+    btn.classList.add('btn');
+    btn.classList.add('btn-default');
+    btn.addEventListener("click", defineActiveEvent);
+    element.appendChild(btn);
   }
 }

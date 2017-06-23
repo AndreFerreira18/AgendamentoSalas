@@ -8,61 +8,61 @@ document.getElementById("btn_up").addEventListener("click", updownMoveUp);
 document.getElementById("btn_down").addEventListener("click", updownMoveDown);
 
 function updownMoveUp() {
-    if(max < floors.Andares.length) {
-        max++;
-        min++;
-        escreverEcra();
+  if (max < floors.Andares.length) {
+    max++;
+    min++;
+    escreverEcra();
 
-    }
+  }
 }
 
 function updownMoveDown() {
-    if(min > 0) {
-        min--;
-        max--;
-        escreverEcra();
-    }
+  if (min > 0) {
+    min--;
+    max--;
+    escreverEcra();
+  }
 }
 
 function updownIniciar() {
-    var e = document.getElementById("data_mod_piso_pref");
-    selected = parseInt(e.options[e.selectedIndex].value);
+  var e = document.getElementById("data_mod_piso_pref");
+  selected = parseInt(e.options[e.selectedIndex].value);
 
-    if(floors.Andares.length < andar_nVisiveis)
-        andar_nVisiveis = floors.Andares.length;
+  if (floors.Andares.length < andar_nVisiveis)
+    andar_nVisiveis = floors.Andares.length;
 
-    criaredificio();
-    document.getElementById('piso-' + (selected)).classList.add("active");
-    min = selected;
+  criaredificio();
+  document.getElementById('piso-' + (selected)).classList.add("active");
+  min = selected;
 
-    while((min + andar_nVisiveis) > floors.Andares.length)
-        min--;
-    max = min + andar_nVisiveis;
-    escreverEcra();
+  while ((min + andar_nVisiveis) > floors.Andares.length)
+    min--;
+  max = min + andar_nVisiveis;
+  escreverEcra();
 }
 
 function escreverEcra() {
-    andares = document.getElementById("selecionaPisos").childNodes;
+  andares = document.getElementById("selecionaPisos").childNodes;
 
-    for(i = 0; i < floors.Andares.length; i++) {
-        if(i >= min && i < max) document.getElementById('piso-' + (i)).style.display = ''
-        else document.getElementById('piso-' + (i)).style.display = 'none';
-    }
-    if(min == 0) document.getElementById("btn_down").style.display = 'none';
-    else document.getElementById("btn_down").style.display = '';
-    if(max == floors.Andares.length) document.getElementById("btn_up").style.display = 'none';
-    else document.getElementById("btn_up").style.display = '';
+  for (i = 0; i < floors.Andares.length; i++) {
+    if (i >= min && i < max) document.getElementById('piso-' + (i)).style.display = ''
+    else document.getElementById('piso-' + (i)).style.display = 'none';
+  }
+  if (min == 0) document.getElementById("btn_down").style.display = 'none';
+  else document.getElementById("btn_down").style.display = '';
+  if (max == floors.Andares.length) document.getElementById("btn_up").style.display = 'none';
+  else document.getElementById("btn_up").style.display = '';
 }
 
 function criaredificio() {
-    for(i = 0; i < floors.Andares.length; i++) {
-        var create = document.createElement("p");
-        create.innerHTML = floors.Andares[i];
-        create.classList.add('list-group-item');
-        create.id = 'piso-' + (i);
-        create.style.display = "none";
-        create.addEventListener("click", defineActiveEvent);
-        var element = document.getElementById("selecionaPisos");
-        element.insertBefore(create,  element.firstChild);
-    }
+  for (i = 0; i < floors.Andares.length; i++) {
+    var create = document.createElement("p");
+    create.innerHTML = floors.Andares[i];
+    create.classList.add('list-group-item');
+    create.id = 'piso-' + (i);
+    create.style.display = "none";
+    create.addEventListener("click", defineActiveEvent);
+    var element = document.getElementById("selecionaPisos");
+    element.insertBefore(create,  element.firstChild);
+  }
 }
