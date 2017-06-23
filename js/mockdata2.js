@@ -11,6 +11,15 @@ var floors = {
   ]
 };
 
+var rooms_1 = {
+  "salas" :[
+    "Sala 1.1",
+    "Sala 1.2",
+    "Sala 1.3",
+    "Sala 1.4"
+  ]
+}
+
 var initialData = {
   "Andares": [
     "Res Do chão",
