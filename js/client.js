@@ -6,12 +6,15 @@ $(window).ready(
   }
 );
 
-
 //Date picker
 $('input[name="daterange"]').daterangepicker({
   "timePicker": true,
   "startDate": "06/09/2017",
-  "endDate": "06/15/2017"
+  "endDate": "06/15/2017",
+  "locale": {
+      format: 'MM/DD/YYYY h:mm A'
+  }
+
 });
 //Sidebar
 $(window).resize(function() {
@@ -263,6 +266,7 @@ function createMatrixDay() {
 function saveChanges() {
 
 clone();
+
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
   addMatrix('day');
 
@@ -284,6 +288,14 @@ function criarrecursos(){
 
 var recursos = initialData.Recursos;
 var label_recursos = initialData.Recursos;
+var glyph_recursos =  [
+      "glyphicon glyphicon-facetime-video",
+      "glyphicon glyphicon-pencil",
+      "glyphicon glyphicon-blackboard",
+      "glyphicon glyphicon-ice-lolly",
+      "glyphicon glyphicon-screenshot",
+      "glyphicon glyphicon-paperclip"
+  ];
     document.getElementById("store_btn_recursos").innerHTML=" ";
     var i;
     for (i = 0; i < recursos.length; i++){
@@ -291,11 +303,11 @@ var label_recursos = initialData.Recursos;
         var label = document.createElement("label");
         var iDiv = document.createElement('div');
         var element = document.getElementById("store_btn_recursos");
+        var spn = document.createElement('span');
 
         button.type = 'button';
         button.className = "btn btn-default recurso";
-        button.innerHTML = recursos[i];
-        button.id = 'btn' + (i);
+        button.id = 'btn_rc-'+i;
         button.onclick = function (){
             this.classList.toggle("active");
         }
@@ -305,6 +317,37 @@ var label_recursos = initialData.Recursos;
 
         iDiv.id = 'recurso' + i;
         iDiv.className = 'divBotoes';
+
+        spn.className = 'glyph ';
+
+        switch(i){
+            case 0:
+                spn.className += glyph_recursos[0];
+                break;
+
+            case 1:
+                spn.className += glyph_recursos[1];
+                break;
+
+            case 2:
+                spn.className += glyph_recursos[2];
+                break;
+
+            case 3:
+                spn.className += glyph_recursos[3];
+                break;
+
+            case 4:
+                spn.className += glyph_recursos[4];
+                break;
+
+            others:
+                spn.className += glyph_recursos[5];
+                break;
+            }
+
+        button.appendChild(spn);
+
         element.insertBefore(iDiv, element.firstChild);
 
          element = document.getElementById(iDiv.id);
@@ -333,6 +376,20 @@ function criarLabel(){
 function clone(){
 
     var elements = document.getElementById("form_modal").firstElementChild;
-    var cln = elements.cloneNode(true);
+var cln = elements.cloneNode(true);
     document.getElementById("form_sb").appendChild(cln);
+
+    document.getElementsByClassName('piso_pref')[1].style.display ="none";
+
+    document.querySelector(".modal-body").remove();
+    $('input[name="daterange"]').daterangepicker({
+      "timePicker": true,
+      "locale": {
+          format: 'MM/DD/YYYY h:mm A'
+      }
+    });
+}
+
+function criarGlyph(button){
+
 }
