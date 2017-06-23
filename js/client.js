@@ -5,6 +5,7 @@ $(window).ready(
       tReuniao();
       pisoPref();
       criarrecursos();
+      divideDateAndTime();
   }
 );
 
@@ -113,7 +114,7 @@ function getActive(activeClass) {
     if (elements[i].classList.contains('active'))
       id = elements[i].id;
   }
-  return id
+  return id;
 }
 
 // Remove element by Id
@@ -271,4 +272,32 @@ opt.value = i;
 var piso_pref = document.getElementById("data_mod_piso_pref");
 piso_pref.insertBefore(opt, piso_pref.firstChild);
     }
+}
+
+// function preencheModalConfirm(){
+//
+//     var datestart_info = document.getElementById("x").value;
+//     var timestart_info = document.getElementById("z").value;
+//     var dateEnd_info = document.getElementById("a").value;
+//     var timeEnd_info = document.getElementById("y").value;
+//
+//     document.getElementById("datetime_info").innerHTML= '"Das " +  timestart_info " até às " + timeEnd_info + " no dia " + datestart_info';
+//
+//     var room_info = document.getElementById("m").value;
+//     var piso_info = document.getElementById("selected").value;
+//
+//     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
+//
+//     // var recurso_info =
+// }
+
+function divideDateAndTime(){
+    var acedeDataHora = document.getElementById("data_mod_calendar").value;
+    var arrayDataHora = acedeDataHora.split(" ");
+    var datahora;
+    datahora[0] = arrayDataHora[0]; // Data de Inicio
+    datahora[1] = arrayDataHora[4]; // Data de fim
+    datahora[2] = arrayDataHora[1]; // Hora de inicio
+    datahora[3] = arrayDataHora[5]; //Hora de fim
+    return datahora; 
 }

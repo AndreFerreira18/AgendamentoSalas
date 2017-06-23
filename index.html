@@ -52,7 +52,7 @@
 
               <div class="form-group">
                 <label>Seleção de Data e Horas (Inicio e Fim):</label>
-                <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_mod_calendar" />
+                <input type="text" class="form-control" name="daterange" value="01/01/2015 12:00AM 01/01/2015 12:00AM" id="data_mod_calendar" />
               </div>
               <!-- <div class="input-group">
                 <span class="input-group-addon">
@@ -103,13 +103,13 @@
           </div>
         </div>
         <div class="modal-body">
-          <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span>
-          <span class="glyphicon glyphicon-time"> Das 14h00 às 15h00 no dia 7 de Julho de 2017</span>
-          <span class="glyphicon glyphicon-pushpin"> Localizado na sala 15, do piso 3 </span>
-          <span class="glyphicon glyphicon-paperclip"> Com os seguintes recursos: Projetor, Microfone e Flipchart</span>
+             <p id="user_info"> <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span> </p>
+             <p id="datetime_info"> <span class="glyphicon glyphicon-time"></span> </p>
+             <p id ="sala_info"> <span class="glyphicon glyphicon-pushpin"> </span> </p>
+             <p id="recursos_info"><span class="glyphicon glyphicon-paperclip"></span></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
+          <button type="button" class="btn btn-success pull-left" data-dismiss="modal" >Confirmar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         </div>
       </div>
@@ -213,7 +213,7 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar">Reservar Sala</button>
+        <button type="button" class="btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="preencheModalConfirm()">Reservar Sala</button>
 
       </div>
     </div>
