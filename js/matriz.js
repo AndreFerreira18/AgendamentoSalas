@@ -1,3 +1,24 @@
+function alteraMatrix() {
+  var matrizAtiva = document.getElementById("matrix");
+  var matriz = document.getElementById("matrix");
+  var idFilho = matriz.firstElementChild.id;
+  var filho = idFilho.split("_");
+  matrizAtiva.innerHTML = " ";
+  if (filho[1] == "day") {
+    addMatrix("week");
+    addBtnRooms();
+    var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
+    defineActiveById(idPrimeiroElemento);
+    createMatrixWeek();
+  } else if (filho[1] == "week") {
+    removeBtnSalas();
+    addMatrix("day");
+    createMatrixDay();
+  } else
+    console.log("Escolha de matriz errada");
+}
+
+
 //matrix
 function addMatrix(matrixType) {
   var matrix = document.getElementById("matrix");
@@ -140,6 +161,10 @@ function createMatrixWeek() {
       tr.appendChild(td);
     }
   }
+}
+function removeBtnSalas() {
+  var divBotoes = document.getElementById("btn_rooms");
+  divBotoes.innerHTML = "";
 }
 
 function refreshButtons() {

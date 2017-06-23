@@ -85,7 +85,7 @@ var rooms_7 = {
 
 var initialData = {
   "Andares": [
-    "Res Do chão",
+    "Res Do Chão",
     "1º Andar",
     "2º Andar",
     "3º Andar",
