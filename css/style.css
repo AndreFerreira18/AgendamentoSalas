@@ -212,14 +212,17 @@ o888o         `Y8bood8P'  o888o  o888o o8o        o888o
     display: flex;
     margin-top: 5px;
     text-align: center;
-    vertical-align: middle;
+}
+
+#recurso1 .label-recurso {
+    width: 60px;
+    text-align: center;
+    margin: 5px 0 0 7px;
 }
 
 .divBotoes{
     display: inline-block;
-
     text-align: center;
-    vertical-align: middle;
 }
 
 .glyph{
