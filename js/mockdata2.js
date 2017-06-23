@@ -38,12 +38,13 @@ var initialData = {
     "Microfone",
     "Laser"
   ],
+  
   "Tipos de Reunião": [
     "Formação",
     "Externa",
     "interna"
   ]
-};
+  };
 
 var resources = {
   "Res Do chão": [{

@@ -13,10 +13,7 @@
   <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
   <script src="js/ie-emulation-modes-warning.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+  <!--[if lt IE 9]>-->
 </head>
 
 <body>
@@ -37,9 +34,7 @@
           <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
           <div class="modal-title">
             <h1><b>
-                            <span class="glyphicon glyphicon-ok"></span> &nbsp;
-                            Preencha os seguintes campos:
-                        </b></h1>
+                            <span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b></h1>
           </div>
         </div>
         <div class="modal-body">
@@ -58,50 +53,53 @@
               </div>
 
               <div class="form-group">
-                <label>
-                                Seleção de Data e Horas (Inicio e Fim):
-                            </label>
+                <label>Seleção de Data e Horas (Inicio e Fim):</label>
                 <input type="text" class="form-control" name="daterange" value="01/01/2015 - 01/01/2015" id="data_mod_calendar" />
               </div>
+              <!-- <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="text" class="form-control" name="daterange" id="data_mod_calendar" placeholder="Select"/>
+                </span>
+              </div> -->
               <div class="input-group">
                 <span class="input-group-addon">
-                                <b><span class="glyphicon glyphicon-user"></span> Numero de Participantes:</b>
+                  <b><span class="glyphicon glyphicon-user"></span> Numero de Participantes:</b>
                 </span>
                 <input type="number" class="form-control" value="0" min="0" id="data_mod_nparticipantes">
               </div>
 
               <div class="form-group">
-                <label>
-                                <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
-                            </label>
-                <select class="form-control" id="data_mod_piso_pref">
-                                <option value="0"> RC </option>
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>
-                                <option value="4"> 4 </option>
-                                <option value="5"> 5 </option>
-                                <option value="6"> 6 </option>
-                                <option value="7"> 7 </option>
-                                <option value="8"> 8 </option>
-                            </select>
-              </div>
-
-              <div input-group>
-                <div id="store_btn_recursos">
+                <div class="piso_pref">
+                    <label>
+                        <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
+                    </label>
+                    <select class="form-control"  id="data_mod_piso_pref">
+                        <option value="0"> RC </option>
+                        <option value="1"> 1 </option>
+                        <option value="2"> 2 </option>
+                        <option value="3"> 3 </option>
+                        <option value="4"> 4 </option>
+                        <option value="5"> 5 </option>
+                        <option value="6"> 6 </option>
+                        <option value="7"> 7 </option>
+                        <option value="8"> 8 </option>
+                    </select>
+                  </div>
                 </div>
+
+              <div class="input-group">
+                <div id="store_btn_recursos"></div>
               </div>
             </div>
           </form>
-
         </div>
         <div class="modal-footer">
           <button type="button" id="btnSave" class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Guardar</button>
           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
         </div>
       </div>
-    </div>
-  </div>
+        </div>
+      </div>
   <!-- Madal para reservar Salas-->
   <div id="modal_confirmar" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -143,25 +141,24 @@
     oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  `88b.
     8""88888P'  o888o o888bood8P'   o888ooooood8 o888bood8P'  o88o     o8888o o888o  o888o
 -->
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <a id="menu-toggle" href="#" class="navbar-toggle">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-          <div id="sidebar-wrapper" class="sidebar-toggle">
-            <form class="form-group" data-target="#modal_header" id="form_sb">
-              <div id="sb_div">
-              </div>
-            </form>
-            <div class="input-group">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
-            </div>
-          </div>
-        </div>
-      </nav>
+            <nav class="navbar navbar-default" role="navigation">
+              <div class="container">
+                  <a id="menu-toggle" href="#" class="navbar-toggle">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </a>
+                  <div id="sidebar-wrapper" class="sidebar-toggle">
+                      <form class="form-group" data-target="#modal_header" id="form_sb">
+
+                      </form>
+                      <div class="btn_aplicar">
+                          <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+                      </div>
+                  </div>
+                </div>
+              </nav>
       <!--
     SIDEBAR   8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
