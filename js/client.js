@@ -1,8 +1,9 @@
 // Show Modal
 $(window).ready(
-  function() {
-    $('#modal').modal('show');
-    criarrecursos();
+  function(){
+      $('#modal').modal('show');
+      tReuniao();
+      criarrecursos();
   }
 );
 
@@ -196,32 +197,38 @@ function criarrecursos() {
 }
 
 
-function criarLabel() {
-  var label_recursos = ["Flipchart", "Projetor", "Microfone"];
-  document.getElementById("adicionaLabel").innerHTML = " ";
-  for (var j = 0; j < label_recursos.length; j++) {
-    var label = document.createElement("label");
-    label.type = 'label';
-    label.className = "label-recurso";
-    label.innerHTML = label_recursos[j];
-    var elementLabel = document.getElementById("adicionaLabel");
-    elementLabel.insertBefore(label, elementLabel.firstChild);
-  }
-}
+function clone(){
+    var tmp_reuniao = document.getElementById("data_mod_tipo_reuniao").value;
+    var elements = document.getElementById("form_modal").firstElementChild;
+    var cln = elements.cloneNode(true);
+    document.getElementById("form_sb").appendChild(cln);
 
-function clone() {
+    document.getElementsByClassName('piso_pref')[1].style.display ="none";
 
-  var elements = document.getElementById("form_modal").firstElementChild;
-  var cln = elements.cloneNode(true);
-  document.getElementById("form_sb").appendChild(cln);
+    document.querySelector(".modal-body").remove();
+    $('input[name="daterange"]').daterangepicker({
+      "timePicker": true,
+      "locale": {
+          format: 'MM/DD/YYYY h:mm A'
+      }
+    });
+    document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
 
-  document.getElementsByClassName('piso_pref')[1].style.display = "none";
 
-  document.querySelector(".modal-body").remove();
-  $('input[name="daterange"]').daterangepicker({
-    "timePicker": true,
-    "locale": {
-      format: 'MM/DD/YYYY h:mm A'
+    for(var i = 0; i<initialData.Recursos.length; i++){
+        var id_button = document.getElementById("btn_rc-" + i);
+        id_button.onclick = function(){
+            this.classList.toggle("active");
+        }
     }
-  });
+}
+function tReuniao(){
+var x = initialData.Tipos_de_Reuniao;
+document.getElementById("data_mod_tipo_reuniao").innerHTML=" ";
+for (var i= 0; i <x.length; i++) {
+var opt = document.createElement("option");
+opt.innerHTML = x[i];
+var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
+tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
+    }
 }

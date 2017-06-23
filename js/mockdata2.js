@@ -33,16 +33,16 @@ var initialData = {
   ],
   "Recursos": [
     "Projetor",
-    "Material de Escritorio",
+    "Material de Escritório",
     "Flipchart",
     "Microfone",
     "Laser"
   ],
-  
-  "Tipos de Reunião": [
+
+  "Tipos_de_Reuniao": [
     "Formação",
     "Externa",
-    "interna"
+    "Interna"
   ]
   };
 
