@@ -144,7 +144,6 @@ function saveChanges() {
 updownIniciar();
 clone();
 
-  defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
   addMatrix('day');
 }
 

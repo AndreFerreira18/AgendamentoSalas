@@ -16,8 +16,8 @@ document.getElementById("btn_down").addEventListener("mouseout", function(){
 var andar_nVisiveis = 4;
 var andar_visiveis = null;
 var min = 0;
-var maxa = 0;
-
+var max = 0;
+var selected = 0;
 
 function updownMoveUp() {
     if(max < floors.Andares.length) {
@@ -38,13 +38,13 @@ function updownMoveDown() {
 
 function updownIniciar() {
     var e = document.getElementById("data_mod_piso_pref");
-    var selected = parseInt(e.options[e.selectedIndex].value);
+    selected = parseInt(e.options[e.selectedIndex].value);
 
     if(floors.Andares.length < andar_nVisiveis)
         andar_nVisiveis = floors.Andares.length;
 
     criaredificio();
-    document.getElementById('piso-' + (selected)).classList.add("Active");
+    document.getElementById('piso-' + (selected)).classList.add("active");
     min=selected;
 
     while((min + andar_nVisiveis) > floors.Andares.length)
@@ -73,7 +73,7 @@ function criaredificio() {
         create.classList.add('list-group-item');
         create.id = 'piso-' + (i);
         create.style.display = "none";
-        //create.addEventListener("click", defineActiveEvent);
+        create.addEventListener("click", defineActiveEvent);
         var element = document.getElementById("selecionaPisos");
         element.insertBefore(create,  element.firstChild);
     }

@@ -67,7 +67,7 @@
                 <span class="input-group-addon">
                                 <b><span class="glyphicon glyphicon-user"></span> Numero de Participantes:</b>
                 </span>
-                <input type="number" class="form-control" value="0" min=0 id="data_mod_nparticipantes">
+                <input type="number" class="form-control" value="0" min="0" id="data_mod_nparticipantes">
               </div>
 
               <div class="form-group">
@@ -177,22 +177,29 @@
      888          888  oo     .d8P `88b    d88' oo     .d8P
     o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
 -->
-          <div class="col-md-4">
-            <div class="list-group text-center">
-              <div class="triangle-container">
-                <div class="triangle"></div>
-              </div>
-              <div class="SeletorPisos">
-                <a href="#" class="list-group-item " id="up"><b>UP</b></a>
-                <div id="selecionaPisos" onclick="refreshMatrix()">
-                  <!-- Builds floor Selector-->
+<div class="col-md-4">
+    <div class="list-group text-center updown">
+        <div class="triangle-container">
+            <div class="triangle">
+                <div class="updown_up">
+                    <a id="btn_up" class="btn_up">UP</a>
                 </div>
-                <a href="#" class="list-group-item " id="down"><b>DOWN</b></a>
-              </div>
-              <div class="rectangle"></div>
             </div>
-          </div>
-          <div class="col-md-1"></div>
+        </div>
+        <div class="SeletorPisos">
+            <div id="selecionaPisos" onclick="refreshMatrix()">
+                <!-- Builds floor Selector-->
+            </div>
+        </div>
+        <div class="rectangle">
+            <div class="updown_down">
+                <a id="btn_down" class="btn_down">DOWN</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-1"></div>
           <!--
     PISOS     8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
