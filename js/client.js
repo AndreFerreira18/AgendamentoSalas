@@ -229,6 +229,7 @@ document.getElementById("data_mod_tipo_reuniao").innerHTML=" ";
 for (var i= 0; i <x.length; i++) {
 var opt = document.createElement("option");
 opt.innerHTML = x[i];
+opt.value = i;
 var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
 tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
     }
@@ -240,6 +241,7 @@ document.getElementById("data_mod_piso_pref").innerHTML=" ";
 for (var i= 0; i <x.length; i++) {
 var opt = document.createElement("option");
 opt.innerHTML = x[i];
+opt.value = i;
 var piso_pref = document.getElementById("data_mod_piso_pref");
 piso_pref.insertBefore(opt, piso_pref.firstChild);
     }
