@@ -1,23 +1,11 @@
-var timer = null;
-document.getElementById("btn_up").addEventListener("mouseover", function() {
-    timer = setInterval(updownMoveUp, 250);
-});
-document.getElementById("btn_up").addEventListener("mouseout", function() {
-    clearInterval(timer);
-});
-document.getElementById("btn_down").addEventListener("mouseover", function() {
-    timer = setInterval(updownMoveDown, 250);
-});
-document.getElementById("btn_down").addEventListener("mouseout", function() {
-    clearInterval(timer);
-});
-
-
 var andar_nVisiveis = 4;
 var andar_visiveis = null;
 var min = 0;
 var max = 0;
 var selected = 0;
+
+document.getElementById("btn_up").addEventListener("click", updownMoveUp);
+document.getElementById("btn_down").addEventListener("click", updownMoveDown);
 
 function updownMoveUp() {
     if(max < floors.Andares.length) {
