@@ -58,6 +58,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
 }
 
 
+
 /*hamburger navbar */
 
 .navbar-default {
@@ -67,6 +68,13 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
 
 .navbar {
     margin-bottom: -5px;
+}
+
+#menu-toggle {
+  margin-top: 25px;
+  margin-right: 7px;
+  margin-bottom: 0;
+  z-index: 10;
 }
 
 
@@ -95,10 +103,10 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
 .triangle {
     width: 100%;
     height: 100%;
-    background-image: linear-gradient( to bottom right, transparent 50%, grey 50%), linear-gradient(to bottom left, transparent 50%, grey 50%);
-    background-size: 50.2% 100%;
+    background-image: url('../img/triangle.png');
     background-repeat: no-repeat;
-    background-position: bottom left, bottom right;
+    background-size: 100% 100%;
+    background-position-y: 3px;
 }
 
 .SeletorPisos {
@@ -124,6 +132,16 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
     text-decoration: none;
     cursor: pointer;
 }
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item.active {
+  z-index: 0;
+}
+
+
 
 /*
 ooo        ooooo   .oooooo.   oooooooooo.         .o.       ooooo
