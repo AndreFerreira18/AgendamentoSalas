@@ -63,14 +63,16 @@ function defineActiveBtnSalas(e) {
 
 function defineActiveEvent(e) {
   // remove the old active
-  var elements = document.getElementsByClassName(e.target.classList[0]);
+  //var elementId = document.getElementById(e.target.id || e.target.parentNode.id);
+  var element = e.target.id ? e.target : e.target.parentNode;
+  var elements = document.getElementsByClassName(element.classList[0]);
   for (var i = 0; i < elements.length; i++) {
     if (elements[i].classList.contains('active'))
       elements[i].classList.remove('active');
   }
   //add the active to the element
-  var element = document.getElementById(e.target.id);
-  element.classList.add('active');
+  var changeElement = document.getElementById(element.id);
+  changeElement.classList.add('active');
 }
 
 function defineActiveById(activeId) {
@@ -149,16 +151,15 @@ function criarrecursos() {
     button.type = 'button';
     button.className = "btn btn-default recurso";
     button.id = 'btn_rc-' + i;
-    button.onclick = function() {
-      this.classList.toggle("active");
-    }
+    button.addEventListener("click", defineActiveEvent);
+    button.setAttribute("z-index", "1");
     label.type = 'label';
     label.className = "label-recurso";
     label.innerHTML = label_recursos[i];
 
     iDiv.id = 'recurso' + i;
     iDiv.className = 'divBotoes';
-
+    spn.setAttribute("z-index", "-1");
     spn.className = 'glyph ';
 
     switch (i) {
