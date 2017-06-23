@@ -1,14 +1,14 @@
 var timer = null;
-document.getElementById("btn_up").addEventListener("mouseover", function(){
+document.getElementById("btn_up").addEventListener("mouseover", function() {
     timer = setInterval(updownMoveUp, 250);
 });
-document.getElementById("btn_up").addEventListener("mouseout", function(){
+document.getElementById("btn_up").addEventListener("mouseout", function() {
     clearInterval(timer);
 });
-document.getElementById("btn_down").addEventListener("mouseover", function(){
+document.getElementById("btn_down").addEventListener("mouseover", function() {
     timer = setInterval(updownMoveDown, 250);
 });
-document.getElementById("btn_down").addEventListener("mouseout", function(){
+document.getElementById("btn_down").addEventListener("mouseout", function() {
     clearInterval(timer);
 });
 
@@ -45,7 +45,7 @@ function updownIniciar() {
 
     criaredificio();
     document.getElementById('piso-' + (selected)).classList.add("active");
-    min=selected;
+    min = selected;
 
     while((min + andar_nVisiveis) > floors.Andares.length)
         min--;
@@ -57,13 +57,13 @@ function escreverEcra() {
     andares = document.getElementById("selecionaPisos").childNodes;
 
     for(i = 0; i < floors.Andares.length; i++) {
-        if(i>= min && i<max) document.getElementById('piso-' + (i)).style.display=''
-        else document.getElementById('piso-' + (i)).style.display='none';
+        if(i >= min && i < max) document.getElementById('piso-' + (i)).style.display = ''
+        else document.getElementById('piso-' + (i)).style.display = 'none';
     }
-    if(min==0) document.getElementById("btn_down").style.display='none';
-    else document.getElementById("btn_down").style.display='';
-    if(max==floors.Andares.length) document.getElementById("btn_up").style.display='none';
-    else document.getElementById("btn_up").style.display='';
+    if(min == 0) document.getElementById("btn_down").style.display = 'none';
+    else document.getElementById("btn_down").style.display = '';
+    if(max == floors.Andares.length) document.getElementById("btn_up").style.display = 'none';
+    else document.getElementById("btn_up").style.display = '';
 }
 
 function criaredificio() {
