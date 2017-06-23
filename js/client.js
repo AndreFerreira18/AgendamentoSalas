@@ -243,11 +243,12 @@ for (var i = 1; i <= rooms_1.salas.length; i++) {
 
 //saves data to the Side Bar
 function saveChanges() {
-  clone();
+  updownIniciar();
   addBtnRooms();
   defineActiveById('btn_rooms-1');
   addMatrix('week');
   refreshMatrix();
+  clone();
 }
 
 // Remove element by Id
