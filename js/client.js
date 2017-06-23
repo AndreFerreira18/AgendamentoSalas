@@ -256,7 +256,7 @@ function tReuniao() {
   for (var i = 0; i < x.length; i++) {
     var opt = document.createElement("option");
     opt.innerHTML = x[i];
-    opt.value = i;
+    opt.value = x[i];
     var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
     tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
   }
@@ -289,7 +289,8 @@ function pisoPref() {
 //     var piso_info = document.getElementById("selected").value;
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
-//
+    var participantes = document.getElementById("data_mod_nparticipantes").value;
+    document.getElementById("nparticipantes").innerHTML = '<span class="glyphicon glyphicon-flag"> </span>' 'Com ' + participantes + ' participantes previstos';
 //     // var recurso_info =
 }
 
