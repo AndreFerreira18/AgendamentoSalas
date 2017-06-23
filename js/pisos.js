@@ -31,15 +31,9 @@ function updownIniciar() {
   if (floors.Andares.length < andar_nVisiveis)
     andar_nVisiveis = floors.Andares.length;
 
-<<<<<<< HEAD
     criarEdificio();
     document.getElementById('piso-' + (selected)).classList.add("active");
     min = selected;
-=======
-  criaredificio();
-  document.getElementById('piso-' + (selected)).classList.add("active");
-  min = selected;
->>>>>>> HTML_DEV_MATRIX_WEEK
 
   while ((min + andar_nVisiveis) > floors.Andares.length)
     min--;
@@ -60,7 +54,6 @@ function escreverEcra() {
   else document.getElementById("btn_up").style.display = '';
 }
 
-<<<<<<< HEAD
 function criarEdificio() {
     for(i = 0; i < floors.Andares.length; i++) {
         var create = document.createElement("div");
@@ -72,17 +65,4 @@ function criarEdificio() {
         var element = document.getElementById("selecionaPisos");
         element.insertBefore(create,  element.firstChild);
     }
-=======
-function criaredificio() {
-  for (i = 0; i < floors.Andares.length; i++) {
-    var create = document.createElement("p");
-    create.innerHTML = floors.Andares[i];
-    create.classList.add('list-group-item');
-    create.id = 'piso-' + (i);
-    create.style.display = "none";
-    create.addEventListener("click", defineActiveEvent);
-    var element = document.getElementById("selecionaPisos");
-    element.insertBefore(create,  element.firstChild);
-  }
->>>>>>> HTML_DEV_MATRIX_WEEK
 }

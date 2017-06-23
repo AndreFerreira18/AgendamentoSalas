@@ -1,19 +1,10 @@
 // Show Modal
 $(window).ready(
-<<<<<<< HEAD
-  function(){
-      $('#modal').modal('show');
-      tReuniao();
-      pisoPref();
-      criarrecursos();
-      divideDateAndTime();
-=======
   function() {
     $('#modal').modal('show');
     tReuniao();
     pisoPref();
     criarrecursos();
->>>>>>> HTML_DEV_MATRIX_WEEK
   }
 );
 
@@ -68,8 +59,9 @@ $(document).ready(function() {
     }
   });
 
-  
+
 });
+
 
 function toggleSideBar(event){
   var elem = document.getElementById("sidebar-wrapper");
@@ -145,7 +137,7 @@ function removeElement(elementId) {
 //saves data to the Side Bar
 function saveChanges() {
   var startDay = 1;
-  var endDay = 1;                       
+  var endDay = 1;
 
   updownIniciar();
   if (startDay === endDay) {
@@ -307,5 +299,5 @@ function divideDateAndTime(){
     datahora[1] = arrayDataHora[4]; // Data de fim
     datahora[2] = arrayDataHora[1]; // Hora de inicio
     datahora[3] = arrayDataHora[5]; //Hora de fim
-    return datahora; 
+    return datahora;
 }
