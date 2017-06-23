@@ -274,8 +274,10 @@ function pisoPref() {
   }
 }
 
-// function preencheModalConfirm(){
-//
+ function preencheModalConfirm(){
+
+    var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
+    document.getElementById("reuniao").innerHTML = 'Reuniao' + reuniao_info;
 //     var datestart_info = document.getElementById("x").value;
 //     var timestart_info = document.getElementById("z").value;
 //     var dateEnd_info = document.getElementById("a").value;
@@ -289,7 +291,7 @@ function pisoPref() {
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
 //
 //     // var recurso_info =
-// }
+}
 
 function divideDateAndTime(){
     var acedeDataHora = document.getElementById("data_mod_calendar").value;
