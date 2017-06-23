@@ -138,6 +138,7 @@ function createMatrixDay() {
     var tr = document.createElement('tr');
     mb.appendChild(tr);
     var th = document.createElement('th');
+    th.setAttribute("scope","row");
     tr.appendChild(th);
     th.innerHTML = i + 8 + " H";
     for (var j = 0; j < shedualDay[selectedFloor].length; j++) {
@@ -213,6 +214,7 @@ function createMatrixWeek() {
     var tr = document.createElement('tr');
     mb.appendChild(tr);
     var th = document.createElement('th');
+    th.setAttribute("scope","row");
     tr.appendChild(th);
     th.innerHTML = i + 8 + " H";
     for (var j = 0; j < scheduleWeek.dates.length; j++) {
@@ -246,7 +248,7 @@ function saveChanges() {
   updownIniciar();
   addBtnRooms();
   defineActiveById('btn_rooms-1');
-  addMatrix('week');
+  addMatrix('week');                    ////////// Arterar a Matriz visivel     "week" ou "day"
   refreshMatrix();
   clone();
 }
