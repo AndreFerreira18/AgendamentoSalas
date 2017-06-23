@@ -53,14 +53,16 @@ $(document).ready(function() {
   });
 
   $('.container').click(function(e) {
-    if(isSideBarOpen){
+    if(isSideBarOpen && window.innerWidth >= 768){
       e.preventDefault();
       toggleSideBar(e);
     }
   });
-
-
 });
+
+function atualizaMatriz(){
+
+}
 
 
 function toggleSideBar(event){
