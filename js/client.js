@@ -63,13 +63,21 @@ function defineActiveBtnSalas(e) {
 
 function defineActiveEvent(e) {
   // remove the old active
-  //var elementId = document.getElementById(e.target.id || e.target.parentNode.id);
   var element = e.target.id ? e.target : e.target.parentNode;
   var elements = document.getElementsByClassName(element.classList[0]);
   for (var i = 0; i < elements.length; i++) {
     if (elements[i].classList.contains('active'))
       elements[i].classList.remove('active');
   }
+  //add the active to the element
+  var changeElement = document.getElementById(element.id);
+  changeElement.classList.add('active');
+}
+
+function defineMultiActiveEvent(e) {
+  // remove the old active
+  var element = e.target.id ? e.target : e.target.parentNode;
+  var elements = document.getElementsByClassName(element.classList[0]);
   //add the active to the element
   var changeElement = document.getElementById(element.id);
   changeElement.classList.add('active');
@@ -118,10 +126,10 @@ function addBtnRooms() {
     btn.innerHTML = rooms_1.salas[i - 1];
     btn.setAttribute("type", "button");
     btn.id = "btn_rooms-" + i;
+    btn.classList.add('btn-rooms');
     btn.classList.add('btn');
     btn.classList.add('btn-default');
-    btn.classList.add('rooms');
-    btn.addEventListener("click", defineActiveBtnSalas);
+    btn.addEventListener("click", defineActiveEvent);
     element.appendChild(btn);
   }
 }
@@ -149,9 +157,9 @@ function criarrecursos() {
     var spn = document.createElement('span');
 
     button.type = 'button';
-    button.className = "btn btn-default recurso";
+    button.className = "btn-recurso btn btn-default ";
     button.id = 'btn_rc-' + i;
-    button.addEventListener("click", defineActiveEvent);
+    button.addEventListener("click", defineMultiActiveEvent);
     button.setAttribute("z-index", "1");
     label.type = 'label';
     label.className = "label-recurso";
