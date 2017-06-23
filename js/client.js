@@ -46,7 +46,7 @@ $(document).ready(function() {
 
 function defineActiveBtnSalas(e) {
   // remove the old active
-  var elements = document.getElementsByClassName(e.target.classList[3]);
+  var elements = document.getElementsByClassName(e.target.classList[2]);
   for (var i = 0; i < elements.length; i++) {
     elements[i].classList.remove('active');
   }
@@ -84,6 +84,17 @@ function getActive(activeClass) {
 }
 
 //matrix
+function addMatrix(matrixType) {
+  var matrix = document.getElementById("matrix");
+  var mh = document.createElement('thead');
+  mh.id = "matrix_" + matrixType + "_head";
+  var mb = document.createElement('tbody');
+  mb.id = "matrix_" + matrixType + "_body";
+  matrix.appendChild(mh);
+  matrix.appendChild(mb);
+}
+
+
 function refreshMatrix() {
   var matrix = document.getElementById("matrix");
   var id_child = matrix.firstElementChild.id;
@@ -98,22 +109,15 @@ function refreshMatrix() {
     console.log("Escolha de matriz errada");
 }
 
-function addMatrix(matrixType) {
-  var matrix = document.getElementById("matrix");
-  var mh = document.createElement('thead');
-  mh.id = "matrix_" + matrixType + "_head";
-  var mb = document.createElement('tbody');
-  mb.id = "matrix_" + matrixType + "_body";
-  matrix.appendChild(mh);
-  matrix.appendChild(mb);
-}
-
 //matrix Day
 function createMatrixDay() {
-  //future parse JSON
+  ////////////////////////////////////////////
+  //Alterar quando recebermos JSON
   var idSelectedFloor = getActive('list-group-item');
   var tempSelectedFloor = idSelectedFloor.split("-");
   var selectedFloor = parseInt(tempSelectedFloor[1]);
+  //Alterar quando recebermos JSON
+  ////////////////////////////////////////////
 
 
   //Matrix Head
@@ -121,7 +125,6 @@ function createMatrixDay() {
   var tr = document.createElement('tr');
   mh.appendChild(tr);
   var th1 = document.createElement('th');
-  //th1.innerHTML = "Horas";
   tr.appendChild(th1);
   for (var i = 0; i < shedualDay[selectedFloor].length; i++) {
     var th2 = document.createElement('th');
@@ -146,11 +149,11 @@ function createMatrixDay() {
 }
 
 function createMatrixWeek() {
-  //future parse JSON
   ////////////////////////////////////////////
-  //scheduleWeek_1-Sala__11
-  // assumindo que sabemos qual é a semana
-  var id_sala = "11";
+  //Alterar quando recebermos JSON
+  var id_andar = getActive('list-group-item');
+  var temp_id_sala = getActive('rooms').split("-");
+  var id_sala = "1"+ temp_id_sala[1];
   var id_week = "1";
   var scheduleWeek;
   switch (id_sala) {
@@ -189,15 +192,14 @@ function createMatrixWeek() {
     default:
     console.log("não tenho mockdata dessa sala para matriz semana");
   }
-
-  //var scheduleWeek = scheduleWeek_1_Sala_11;
+  //Alterar quando recebermos JSON
+  ////////////////////////////////////////////
 
   //Matrix Head
   var mh = document.getElementById("matrix_week_head");
   var tr = document.createElement('tr');
   mh.appendChild(tr);
   var th1 = document.createElement('th');
-  //th1.innerHTML = "Horas";
   tr.appendChild(th1);
   for (var i = 0; i < scheduleWeek.dates.length; i++) {
     var th2 = document.createElement('th');
@@ -226,14 +228,14 @@ function createMatrixWeek() {
 function addBtnRooms() {
 
 var element = document.getElementById("btn_rooms");
-for (var i = 0; i < rooms_1.salas.length; i++) {
+for (var i = 1; i <= rooms_1.salas.length; i++) {
   var btn = document.createElement('button');
-  btn.innerHTML = rooms_1.salas[i];
+  btn.innerHTML = rooms_1.salas[i-1];
   btn.setAttribute("type","button");
-  btn.id = "btn_rooms"+i;
+  btn.id = "btn_rooms-"+i;
   btn.classList.add('btn');
   btn.classList.add('btn-default');
-  btn.classList.add('btn-rooms');
+  btn.classList.add('rooms');
   btn.addEventListener("click", defineActiveBtnSalas);
   element.appendChild(btn);
 }
@@ -244,7 +246,9 @@ function saveChanges() {
   clone();
   defineActiveById("piso-" + document.getElementById("data_mod_piso_pref").value);
   addBtnRooms();
+  defineActiveById('btn_rooms-1');
   addMatrix('week');
+  refreshMatrix();
 }
 
 // Remove element by Id
