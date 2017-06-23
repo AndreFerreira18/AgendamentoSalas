@@ -45,7 +45,7 @@
                 <label>
                                 <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
                             </label>
-                            <select class="form-control" id="data_mod_tipo_reuniao">
+                <select class="form-control" id="data_mod_tipo_reuniao">
 
                             </select>
               </div>
@@ -68,13 +68,13 @@
 
               <div class="form-group">
                 <div class="piso_pref">
-                    <label>
+                  <label>
                         <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
                     </label>
-                    <select class="form-control"  id="data_mod_piso_pref">
+                  <select class="form-control" id="data_mod_piso_pref">
                     </select>
-                  </div>
                 </div>
+              </div>
 
               <div class="input-group">
                 <div id="store_btn_recursos"></div>
@@ -87,8 +87,8 @@
           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
         </div>
       </div>
-        </div>
-      </div>
+    </div>
+  </div>
   <!-- Madal para reservar Salas-->
   <div id="modal_confirmar" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -103,13 +103,13 @@
           </div>
         </div>
         <div class="modal-body">
-             <p id="user_info"> <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span> </p>
-             <p id="datetime_info"> <span class="glyphicon glyphicon-time"></span> </p>
-             <p id ="sala_info"> <span class="glyphicon glyphicon-pushpin"> </span> </p>
-             <p id="recursos_info"><span class="glyphicon glyphicon-paperclip"></span></p>
+          <p id="user_info"> <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span> </p>
+          <p id="datetime_info"> <span class="glyphicon glyphicon-time"></span> </p>
+          <p id="sala_info"> <span class="glyphicon glyphicon-pushpin"> </span> </p>
+          <p id="recursos_info"><span class="glyphicon glyphicon-paperclip"></span></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success pull-left" data-dismiss="modal" >Confirmar</button>
+          <button type="button" class="btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
         </div>
       </div>
@@ -130,24 +130,24 @@
     oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  `88b.
     8""88888P'  o888o o888bood8P'   o888ooooood8 o888bood8P'  o88o     o8888o o888o  o888o
 -->
-            <nav class="navbar navbar-default" role="navigation">
-              <div class="container">
-                  <a id="menu-toggle" href="#" class="navbar-toggle">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <a id="menu-toggle" href="#" class="navbar-toggle">
                       <span class="sr-only">Toggle navigation</span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </a>
-                  <div id="sidebar-wrapper" class="sidebar-toggle">
-                      <form class="form-group" data-target="#modal_header" id="form_sb">
+          <div id="sidebar-wrapper" class="sidebar-toggle">
+            <form class="form-group" data-target="#modal_header" id="form_sb">
 
-                      </form>
-                      <div class="btn_aplicar">
-                          <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
-                      </div>
-                  </div>
-                </div>
-              </nav>
+            </form>
+            <div class="btn_aplicar">
+              <button type="button" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+            </div>
+          </div>
+        </div>
+      </nav>
       <!--
     SIDEBAR   8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
@@ -163,35 +163,35 @@
      888          888  oo     .d8P `88b    d88' oo     .d8P
     o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
 -->
-<div class="col-md-4">
-    <div class="list-group text-center updown">
-        <div class="triangle-container">
-            <div class="triangle">
-                <div class="updown_up">
+          <div class="col-md-4">
+            <div class="list-group text-center updown">
+              <div class="triangle-container">
+                <div class="triangle">
+                  <div class="updown_up">
                     <a id="btn_up" class="btn_up">UP</a>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="SeletorPisos">
-            <div id="selecionaPisos" onclick="refreshMatrix()">
-                <!-- Builds floor Selector-->
-            </div>
-        </div>
-        <div class="rectangle">
-            <div class="updown_down">
-                <a id="btn_down" class="btn_down">DOWN</a>
-            </div>
+              </div>
+              <div class="SeletorPisos">
+                <div id="selecionaPisos" onclick="refreshMatrix()">
+                  <!-- Builds floor Selector-->
+                </div>
+              </div>
+              <div class="rectangle">
+                <div class="updown_down">
+                  <a id="btn_down" class="btn_down">DOWN</a>
+                </div>
 
-        </div>
-        <!--
+              </div>
+              <!--
           Selector Sala     8888888 8888888 8888888 8888888 8888888 8888888 8888888
         -->
-        <div class="row" id="btn_rooms" onclick="refreshMatrix()">
+              <div class="row" id="btn_rooms" onclick="refreshMatrix()">
 
-        </div>
-    </div>
-</div>
-<div class="col-md-1"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
           <!--
     PISOS     8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->

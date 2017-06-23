@@ -142,8 +142,7 @@ function createMatrixWeek() {
   }
 }
 
-function refreshButtons() {
-  var divButton = document.getElementById("btn_rooms");
+function refreshButtons() {  var divButton = document.getElementById("btn_rooms");
   var id_child = divButton.firstElementChild.id;
   var child = id_child.split("_");
   divButton.innerHTML = " ";
