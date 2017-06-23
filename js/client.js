@@ -277,7 +277,7 @@ function pisoPref() {
  function preencheModalConfirm(){
 
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    document.getElementById("reuniao").innerHTML = 'Reuniao' + reuniao_info;
+    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
 //     var datestart_info = document.getElementById("x").value;
 //     var timestart_info = document.getElementById("z").value;
 //     var dateEnd_info = document.getElementById("a").value;

@@ -31,9 +31,9 @@ function updownIniciar() {
   if (floors.Andares.length < andar_nVisiveis)
     andar_nVisiveis = floors.Andares.length;
 
-    criarEdificio();
-    document.getElementById('piso-' + (selected)).classList.add("active");
-    min = selected;
+  criarEdificio();
+  document.getElementById('piso-' + (selected)).classList.add("active");
+  min = selected;
 
   while ((min + andar_nVisiveis) > floors.Andares.length)
     min--;
@@ -55,14 +55,14 @@ function escreverEcra() {
 }
 
 function criarEdificio() {
-    for(i = 0; i < floors.Andares.length; i++) {
-        var create = document.createElement("div");
-        create.innerHTML = floors.Andares[i];
-        create.classList.add('list-group-item');
-        create.id = 'piso-' + (i);
-        create.style.display = "none";
-        create.addEventListener("click", defineActiveEvent);
-        var element = document.getElementById("selecionaPisos");
-        element.insertBefore(create,  element.firstChild);
-    }
+  for (i = 0; i < floors.Andares.length; i++) {
+    var create = document.createElement("div");
+    create.innerHTML = floors.Andares[i];
+    create.classList.add('list-group-item');
+    create.id = 'piso-' + (i);
+    create.style.display = "none";
+    create.addEventListener("click", defineActiveEvent);
+    var element = document.getElementById("selecionaPisos");
+    element.insertBefore(create,  element.firstChild);
+  }
 }

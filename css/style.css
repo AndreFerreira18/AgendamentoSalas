@@ -47,7 +47,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
 #sidebar-wrapper.sidebar-toggle {
     transition: all 0.3s ease-out;
     margin-left: -300px;
-    z-index: 20;
+    z-index: 5;
 }
 
 @media (min-width: 768px) {
@@ -71,27 +71,16 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
       padding: 0;
     }
 
+    .col-md-4 {
+      margin-left: -5%;
+    }
 
     .col-md-6{
       padding: 0;
-      margin-left: 1%;
+      margin-left: 7%;
       width: 55%;
     }
 }
-
-
-
-@media (min-width: 1280px) {
-
-  .col-md-6 {
-    margin-left: 7%;
-  }
-
-  .col-md-4 {
-    margin-left: -5%;
-  }
-}
-
 
 
 /*hamburger navbar */
