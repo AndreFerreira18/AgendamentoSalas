@@ -31,7 +31,7 @@ function updownIniciar() {
     if(floors.Andares.length < andar_nVisiveis)
         andar_nVisiveis = floors.Andares.length;
 
-    criaredificio();
+    criarEdificio();
     document.getElementById('piso-' + (selected)).classList.add("active");
     min = selected;
 
@@ -54,9 +54,9 @@ function escreverEcra() {
     else document.getElementById("btn_up").style.display = '';
 }
 
-function criaredificio() {
+function criarEdificio() {
     for(i = 0; i < floors.Andares.length; i++) {
-        var create = document.createElement("p");
+        var create = document.createElement("div");
         create.innerHTML = floors.Andares[i];
         create.classList.add('list-group-item');
         create.id = 'piso-' + (i);

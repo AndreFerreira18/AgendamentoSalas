@@ -29,6 +29,7 @@ $(window).resize(function() {
     document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
   }
 });
+var isSideBarOpen = false;
 
 $(document).ready(function() {
   $('.dropdown').on('show.bs.dropdown', function(e) {
@@ -37,17 +38,41 @@ $(document).ready(function() {
   $('.dropdown').on('hide.bs.dropdown', function(e) {
     $(this).find('.dropdown-menu').first().stop(true, true).slideUp(300);
   });
+
+  //toggle side bar (for desktop and mobile layouts)
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
-    var elem = document.getElementById("sidebar-wrapper");
-    left = window.getComputedStyle(elem, null).getPropertyValue("left");
-    if (left == "300px") {
-      document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
-    } else if (left == "-300px") {
-      document.getElementsByClassName("sidebar-toggle")[0].style.left = "300px";
+    toggleSideBar();
+  });
+
+  $('.main').click(function(e) {
+    if(isSideBarOpen){
+      e.preventDefault();
+      toggleSideBar(e);
     }
   });
+
+  $('.container').click(function(e) {
+    if(isSideBarOpen){
+      e.preventDefault();
+      toggleSideBar(e);
+    }
+  });
+
+  
 });
+
+function toggleSideBar(event){
+  var elem = document.getElementById("sidebar-wrapper");
+  left = window.getComputedStyle(elem, null).getPropertyValue("left");
+  if (left == "300px") {
+    isSideBarOpen = false;
+    document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
+  } else if (left == "-300px") {
+    isSideBarOpen = true;
+    document.getElementsByClassName("sidebar-toggle")[0].style.left = "300px";
+  }
+}
 
 
 function defineActiveBtnSalas(e) {

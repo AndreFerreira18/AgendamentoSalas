@@ -10,8 +10,7 @@ o8o        o888o o88o     o8888o o888o o8o        `8
 
 @media (min-width: 768px) {
     .main {
-        padding-right: 40px;
-        padding-left: 40px;
+        padding-left: 30px;
         padding-bottom: 60px;
     }
 }
@@ -48,6 +47,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
 #sidebar-wrapper.sidebar-toggle {
     transition: all 0.3s ease-out;
     margin-left: -300px;
+    z-index: 20;
 }
 
 @media (min-width: 768px) {
@@ -55,6 +55,41 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
         transition: 0s;
         left: 300px;
     }
+
+    .col-sm-offset-3 {
+      margin-left: 300px;
+    }
+
+    .col-sm-9 {
+      width: calc(100% - 320px);
+    }
+
+}
+
+@media (min-width: 992px){
+    .main {
+      padding: 0;
+    }
+
+
+    .col-md-6{
+      padding: 0;
+      margin-left: 1%;
+      width: 55%;
+    }
+}
+
+
+
+@media (min-width: 1280px) {
+
+  .col-md-6 {
+    margin-left: 7%;
+  }
+
+  .col-md-4 {
+    margin-left: -5%;
+  }
 }
 
 
@@ -200,10 +235,18 @@ o888o         `Y8bood8P'   `Y8bood8P'      o888o     o888ooooood8 o888o  o888o
 */
 
 .footer {
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    background-color: #f5f5f5;
+  bottom: 0;
+  margin-top: 15px;
+  min-width: 100%;
+  min-height: 100%;
+  background-color: #FFFFFF;
+  padding: 0;
+}
+
+@media (min-width: 768px){
+  .footer > div:first-child {
+    margin: 0 0 0 312px;
+  }
 }
 
 
