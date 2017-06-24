@@ -219,6 +219,7 @@ function addBtnRooms() {
     btn.id = "btn_rooms-" + i;
     btn.classList.add('btn-rooms');
     btn.classList.add('btn');
+    btn.classList.add('btn-lg');
     btn.classList.add('btn-default');
     btn.addEventListener("click", defineActiveEvent);
     element.appendChild(btn);

@@ -83,7 +83,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" id="btnSave" class="btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Guardar</button>
+          <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Guardar</button>
           <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
         </div>
       </div>
@@ -109,8 +109,8 @@
           <p id="recursos_info"><span class="glyphicon glyphicon-paperclip"></span></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+          <button type="button" class="btn-confirmar-modal btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
+          <button type="button" class="btn-fechar-modal btn btn-default" data-dismiss="modal">Fechar</button>
         </div>
       </div>
     </div>
@@ -141,13 +141,13 @@
           <div id="sidebar-wrapper" class="sidebar-toggle">
             <form class="form-group" data-target="#modal_header" id="form_sb">
 
-                      </form>
-                      <div class="btn_aplicar">
-                          <button type="button" onclick="atualizaMatriz()" class="btn btn-primary btn-lg btn-block">Aplicar filtros</button>
-                      </div>
-                  </div>
-                </div>
-              </nav>
+            </form>
+            <div class="btn_aplicar">
+              <button type="button" onclick="atualizaMatriz()" class="btn-filtos btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+            </div>
+          </div>
+        </div>
+      </nav>
       <!--
     SIDEBAR   8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
@@ -189,6 +189,7 @@
               <div class="row" id="btn_rooms" onclick="refreshMatrix()">
 
               </div>
+
             </div>
           </div>
           <div class="col-md-1"></div>
@@ -210,10 +211,11 @@
                 <!-- Builds costum Matrix-->
               </table>
             </div>
+            <button type="button" class="btn-change-matrix btn btn-lg pull-left" onclick="alteraMatrix()">Alterar Vista</button>
+            <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="preencheModalConfirm()">Reservar Sala</button>
           </div>
         </div>
-        <button type="button" class="btn-change-matrix btn btn-lg" onclick="alteraMatrix()">Alterar Vista</button>
-        <button type="button" class="btn-success btn btn-lg pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="preencheModalConfirm()">Reservar Sala</button>
+
 
       </div>
     </div>
