@@ -26,46 +26,6 @@ function refreshMatrix() {
     console.log("Escolha de matriz errada");
 }
 
-
-//matrix Day
-function createMatrixDay() {
-  ////////////////////////////////////////////
-  //Alterar quando recebermos JSON
-  var idSelectedFloor = getActive('list-group-item');
-  var tempSelectedFloor = idSelectedFloor.split("-");
-  var selectedFloor = parseInt(tempSelectedFloor[1]);
-  //Alterar quando recebermos JSON
-  ////////////////////////////////////////////
-
-  //Matrix Head
-  var mh = document.getElementById("matrix_day_head");
-  var tr = document.createElement('tr');
-  mh.appendChild(tr);
-  var th1 = document.createElement('th');
-  tr.appendChild(th1);
-  for (var i = 0; i < shedualDay[selectedFloor].length; i++) {
-    var th2 = document.createElement('th');
-    th2.innerHTML = shedualDay[selectedFloor][i].NomeSala;
-    tr.appendChild(th2);
-  }
-
-  //Matrix Body
-  var mb = document.getElementById("matrix_day_body");
-  for (var i = 0; i < shedualDay[selectedFloor][0].Disponibilidade.length; i++) {
-    var tr = document.createElement('tr');
-    mb.appendChild(tr);
-    var th = document.createElement('th');
-    th.setAttribute("scope", "row");
-    tr.appendChild(th);
-    th.innerHTML = i + 8 + " H";
-    for (var j = 0; j < shedualDay[selectedFloor].length; j++) {
-      var td = document.createElement('td');
-      td.innerHTML = shedualDay[selectedFloor][j].Disponibilidade[i];
-      tr.appendChild(td);
-    }
-  }
-}
-
 function createMatrixWeek() {
   ////////////////////////////////////////////
   //Alterar quando recebermos JSON
@@ -199,3 +159,118 @@ function addBtnRooms() {
     element.appendChild(btn);
   }
 }
+
+
+
+
+
+
+
+
+
+selected_hours = [];
+//matrix Day
+function createMatrixDay() {
+    ////////////////////////////////////////////
+    //Alterar quando recebermos JSON
+    var idSelectedFloor = getActive('list-group-item');
+    var tempSelectedFloor = idSelectedFloor.split("-");
+    var selectedFloor = parseInt(tempSelectedFloor[1]);
+    //Alterar quando recebermos JSON
+    ////////////////////////////////////////////
+
+    //Matrix Head
+    var mh = document.getElementById("matrix_day_head");
+    var tr = document.createElement('tr');
+    mh.appendChild(tr);
+    var th1 = document.createElement('th');
+    th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
+    tr.appendChild(th1);
+    for(var i = 0; i < shedualDay[selectedFloor].length; i++) {
+        var th2 = document.createElement('th');
+        th2.innerHTML = shedualDay[selectedFloor][i].NomeSala;
+        tr.appendChild(th2);
+    }
+
+    //Matrix Body
+    var mb = document.getElementById("matrix_day_body");
+    for(var i = 0; i < shedualDay[selectedFloor][0].Disponibilidade.length; i++) {
+        var tr = document.createElement('tr');
+        mb.appendChild(tr);
+        var th = document.createElement('th');
+        th.setAttribute("scope", "row");
+        tr.appendChild(th);
+        th.innerHTML = i + 8 + " H";
+        for(var j = 0; j < shedualDay[selectedFloor].length; j++) {
+            var td = document.createElement('td');
+
+            var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
+            if(disponibilidade == 'Disponivel')
+                td.classList.add("disponivel");
+            else if(disponibilidade == 'Indisponivel')
+                td.classList.add("indisponivel");
+            else
+                td.classList.add("indefinido");
+            td.innerHTML = disponibilidade;
+            td.id = 'td-'+j+'-'+i;
+            td.addEventListener("click", selecionarGrupoMatriz);
+            tr.appendChild(td);
+        }
+    }
+}
+function selecionarGrupoMatriz(e){
+    var newElemet = e.target;
+
+        if(newElemet.classList.contains('active')){
+        for(var i=0; i<selected_hours.length; i++){
+            if(selected_hours[i] === newElemet.id){
+                selected_hours.splice(i,1);
+                defineMultiActiveEvent(e);
+                break;
+            }
+        }
+    }else{
+        if (selected_hours.length==0) {
+            defineMultiActiveEvent(e);
+            selected_hours.push(e.target.id);
+        }else{
+            var newElemetSplit =  newElemet.id.split('-');
+            var otherElement = selected_hours[0];
+            var otherElementSplit =  otherElement.split('-');
+            if(newElemetSplit[1] === otherElementSplit[1]){
+                defineMultiActiveEvent(e);
+                selected_hours.push(e.target.id);
+            }else{
+                alert('Por favor seleciona na mesma sala');
+            }
+        }
+    }
+}
+//
+// $(function () {
+//   var isMouseDown = false,
+//     isHighlighted;
+//   $("#our_table td")
+//     .mousedown(function () {
+//       isMouseDown = true;
+//       $(this).toggleClass("highlighted");
+//       isHighlighted = $(this).hasClass("highlighted");
+//       return false; // prevent text selection
+//     })
+//     .mouseover(function () {
+//       if (isMouseDown) {
+//         $(this).toggleClass("highlighted", isHighlighted);
+//       }
+//     })
+//     .bind("selectstart", function () {
+//       return false;
+//     })
+//
+//   $(document)
+//     .mouseup(function () {
+//       isMouseDown = false;
+//     });
+// });
+//
+//
+// create.addEventListener("click", defineActiveEvent);
