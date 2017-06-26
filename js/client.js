@@ -5,16 +5,19 @@ $(window).ready(
     tReuniao();
     pisoPref();
     criarrecursos();
+    divideDateAndTime();
   }
 );
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
   "timePicker": true,
+  "timePicker24Hour": true,
+  "timePickerIncrement": 30,
   "startDate": "06/09/2017",
   "endDate": "06/15/2017",
   "locale": {
-    format: 'MM/DD/YYYY h:mm A'
+    format: 'MM/DD/YYYY h:mm '
   }
 
 });
@@ -235,8 +238,10 @@ function clone() {
   document.querySelector(".modal-body").remove();
   $('input[name="daterange"]').daterangepicker({
     "timePicker": true,
+    "timePicker24Hour": true,
+    "timePickerIncrement": 30,
     "locale": {
-      format: 'MM/DD/YYYY h:mm A'
+      format: 'MM/DD/YYYY h:mm '
     }
   });
   document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -290,17 +295,20 @@ function pisoPref() {
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
     var participantes = document.getElementById("data_mod_nparticipantes").value;
-    document.getElementById("nparticipantes").innerHTML = '<span class="glyphicon glyphicon-flag"> </span>' 'Com ' + participantes + ' participantes previstos';
+    document.getElementById("nparticipantes").innerHTML = document.getElementById("nparticipantes").innerHTML + 'Com ' + participantes + ' participantes previstos';
 //     // var recurso_info =
 }
 
 function divideDateAndTime(){
     var acedeDataHora = document.getElementById("data_mod_calendar").value;
     var arrayDataHora = acedeDataHora.split(" ");
-    var datahora;
+    console.log("arrayDataHora");
+    var datahora=[];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
     datahora[1] = arrayDataHora[4]; // Data de fim
     datahora[2] = arrayDataHora[1]; // Hora de inicio
     datahora[3] = arrayDataHora[5]; //Hora de fim
+
     return datahora;
+
 }
