@@ -230,6 +230,9 @@ function createMatrixDay() {
                 td.classList.add("indisponivel");
             else
                 td.classList.add("indefinido");
+
+            //if(i===5) td.classList.add("indefinido");
+
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
             td.addEventListener("click", selecionarGrupoMatriz);
@@ -272,10 +275,10 @@ function selecionarGrupoMatriz(e) {
                             selected_hours.push(e.target.id);
                             break;
                         }
-                        if(i===selected_hours.length-1) alert('Por favor seleciona horas consecutivas');
+                        if(i===selected_hours.length-1) snackBar(1);
                     }
                 } else {
-                    alert('Por favor seleciona na mesma sala');
+                    snackBar(0);
                 }
             }
         }
