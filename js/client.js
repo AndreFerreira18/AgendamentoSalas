@@ -11,8 +11,8 @@ $(window).ready(
 //Date picker
 $('input[name="daterange"]').daterangepicker({
     "timePicker": true,
-    "startDate": "06/09/2017",
-    "endDate": "06/09/2017",
+    "startDate": "07/03/2017",
+    "endDate": "07/04/2017",
     "locale": {
         format: 'MM/DD/YYYY h:mm A'
     }
@@ -173,12 +173,12 @@ function removeElement(elementId) {
 
 //saves data to the Side Bar
 function saveChanges() {
-    var datahora = divideDateAndTime();
+    var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
-    var week = 0;
+
 
     updownIniciar();
     if(startDay === endDay) {
@@ -188,7 +188,7 @@ function saveChanges() {
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
-    refreshMatrix(week);
+    refreshMatrix();
     clone();
 }
 
@@ -314,8 +314,8 @@ function clone() {
     }
 }
 
-function divideDateAndTime() {
-    var acedeDataHora = document.getElementById("data_mod_calendar").value;
+function divideDateAndTime(idData) {
+    var acedeDataHora = document.getElementById(idData).value;
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
