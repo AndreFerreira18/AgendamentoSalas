@@ -138,7 +138,10 @@ function defineMultiActiveEvent(e) {
 function defineActiveById(activeId) {
     //add the active to the element
     var element = document.getElementById(activeId);
-    element.classList.add('active');
+    if(element.classList.contains('active'))
+        element.classList.remove('active');
+    else
+        element.classList.add('active');
 }
 
 function getActive(activeClass) {
@@ -166,6 +169,7 @@ function saveChanges() {
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
+    var week = 0;
 
     updownIniciar();
     if(startDay === endDay) {
@@ -175,7 +179,7 @@ function saveChanges() {
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
-    refreshMatrix();
+    refreshMatrix(week);
     clone();
 }
 
@@ -328,3 +332,14 @@ function divideDateAndTime() {
 //
 //     // var recurso_info =
 // }
+
+function snackBar(n) {
+    var snack;
+    if(n===0) snack = document.getElementById("snackBarDias")
+    else if(n===1) snack = document.getElementById("snackBarHoras")
+    snack.classList.toggle("show");
+    setTimeout(function(){
+            snack.classList.toggle("show");
+        },
+    5000);
+}

@@ -9,7 +9,7 @@ function alteraMatrix() {
         addBtnRooms();
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
-        createMatrixWeek();
+        createMatrixWeek(1);
     } else if(filho[1] == "week") {
         removeBtnSalas();
         addMatrix("day");
@@ -30,7 +30,7 @@ function addMatrix(matrixType) {
     matrix.appendChild(mb);
 }
 
-function refreshMatrix() {
+function refreshMatrix(id_semana) {
     var matrix = document.getElementById("matrix");
     var id_child = matrix.firstElementChild.id;
     var child = id_child.split("_");
@@ -42,50 +42,51 @@ function refreshMatrix() {
         var activeBtn = getActive("btn-rooms");
         refreshButtons();
         defineActiveById(activeBtn);
-        createMatrixWeek();
+        createMatrixWeek(id_semana);
+
     } else
         console.log("Escolha de matriz errada");
 }
 
-function createMatrixWeek() {
+function createMatrixWeek(id_semana) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var id_andar = getActive('list-group-item');
     var temp_id_sala = getActive('btn-rooms').split("-");
     var id_sala = "1" + temp_id_sala[1];
-    var id_week = "1";
+
     var scheduleWeek;
     switch(id_sala) {
         case "11":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_11;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_11;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_11;
             break;
         case "12":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_12;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_12;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_12;
             break;
         case "13":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_13;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_13;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_13;
             break;
         case "14":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_14;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_14;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_14;
             break;
         default:
@@ -95,7 +96,29 @@ function createMatrixWeek() {
     ////////////////////////////////////////////
 
     //Matrix Head
+    // titulo
     var mh = document.getElementById("matrix_week_head");
+    var trH = document.createElement('tr');
+    var spanL = document.createElement('span');
+    var thC = document.createElement('th');
+    var spanR = document.createElement('span');
+    var colspan = scheduleWeek.dates.length+1;
+
+    mh.appendChild(trH);
+
+    thC.setAttribute("style","text-align:center;");
+    thC.setAttribute("colspan",colspan);
+    thC.innerHTML = "Vista da Semana";
+    // Adiciona Setas
+    spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
+    spanL.addEventListener("click", function(){refreshMatrix(id_semana-1);});
+    thC.appendChild(spanL);
+    spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
+    spanR.addEventListener("click", function(){refreshMatrix(id_semana+1);});
+    thC.appendChild(spanR);
+    trH.appendChild(thC);
+
+    // Horas
     var tr = document.createElement('tr');
     mh.appendChild(tr);
     var th1 = document.createElement('th');
@@ -107,7 +130,7 @@ function createMatrixWeek() {
     }
 
     //Matrix Body
-    var mb = document.getElementById("matrix_week_head");
+    var mb = document.getElementById("matrix_week_body");
     for(var i = 0; i < scheduleWeek[0].length; i++) {
         var tr = document.createElement('tr');
         mb.appendChild(tr);
@@ -230,6 +253,9 @@ function createMatrixDay() {
                 td.classList.add("indisponivel");
             else
                 td.classList.add("indefinido");
+
+            //if(i===5) td.classList.add("indefinido");
+
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
             td.addEventListener("click", selecionarGrupoMatriz);
@@ -240,13 +266,17 @@ function createMatrixDay() {
 
 function selecionarGrupoMatriz(e) {
     var newElemet = e.target;
+    var newElemetSplit = newElemet.id.split('-');
     if(newElemet.classList.contains('disponivel')){
-        if(newElemet.classList.contains('active')) {
+        if(newElemet.classList.contains('active')){
             for(var i = 0; i < selected_hours.length; i++) {
-                if(selected_hours[i] === newElemet.id) {
+                var otherElement = selected_hours[i];
+                var otherElementSplit = otherElement.split('-');
+
+                if(parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
                     selected_hours.splice(i, 1);
-                    defineMultiActiveEvent(e);
-                    break;
+                    defineActiveById(otherElement);
+                    i--;
                 }
             }
         } else {
@@ -254,7 +284,6 @@ function selecionarGrupoMatriz(e) {
                 defineMultiActiveEvent(e);
                 selected_hours.push(e.target.id);
             } else {
-                var newElemetSplit = newElemet.id.split('-');
                 var otherElement = selected_hours[0];
                 var otherElementSplit = otherElement.split('-');
                 if(newElemetSplit[1] === otherElementSplit[1]) {
@@ -269,9 +298,10 @@ function selecionarGrupoMatriz(e) {
                             selected_hours.push(e.target.id);
                             break;
                         }
+                        if(i===selected_hours.length-1) snackBar(1);
                     }
                 } else {
-                    alert('Por favor seleciona na mesma sala');
+                    snackBar(0);
                 }
             }
         }
