@@ -4,7 +4,7 @@ $(window).ready(
     $('#modal').modal('show');
     tReuniao();
     pisoPref();
-    criarrecursos();
+    criarRecursos();
     divideDateAndTime();
 
   }
@@ -322,7 +322,7 @@ function clone() {
 }
 
 function divideDateAndTime(idData) {
-    var acedeDataHora = document.getElementById(idData).value;
+    var acedeDataHora = document.getElementById("data_mod_calendar").value;
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
@@ -334,21 +334,64 @@ function divideDateAndTime(idData) {
 
 function preencheModalConfirm(){
 
+    //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
     document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
-    var horaData_info = document.getElementById("data_mod_calendar").value;
-    var array_horaData = horaData_info.split(" ");
 
-    console.log(array_horaData);
- //     var datestart_info = selected_hours[0];
-//     console.log(datestart_info);
-//     var timestart_info = document.getElementById("datahora[1]").value;
-//     var dateEnd_info = document.getElementById("datahora[4]").value;
-//     var timeEnd_info = document.getElementById("datahora[5]").value;
-//     var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
-//     document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
-// //
-//     var room_info = document.getElementById("m").value;
+    // var horaData_info = document.getElementById("data_mod_calendar").value;
+    // var array_horaData = horaData_info.split(" ");
+    // var dataInicio = array_horaData[0];
+    // var horaInicio = array_horaData[1];
+    // var dataFim = array_horaData[3];
+    // var horafim = array_horaData[4];
+    //
+    // var str_horas= 'Das ' +  horaInicio + ' até às ' + horafim + ' no dia ' + dataInicio;
+    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas);
+
+    //Devolve Andar e Sala Escolhidos
+    var piso_info = getActive('list-group-item');
+    //Seleciona no mockdata2 qual o conjunto de salas consoante piso
+    switch(piso_info) {
+        case "piso-0":
+            var rooms = rooms_0.salas;
+            break;
+        case "piso-1":
+            var rooms = rooms_1.salas;
+            break;
+        case "piso-2":
+            var rooms = rooms_2.salas;
+            break;
+        case "piso-3":
+            var rooms = rooms_3.salas;
+            break;
+        case "piso-4":
+            var rooms = rooms_4.salas;
+            break;
+        case "piso-5":
+            var rooms = rooms_5.salas;
+            break;
+        case "piso-6":
+            var rooms = rooms_6.salas;
+            break;
+        case "piso-7":
+            var rooms = rooms_7.salas;
+            break;
+        default:
+    }
+    //ve sala selecionada
+    for (var i = 0; i<selected_hours.length; i++){
+    var array_room = selected_hours[i];
+    var aux_room_info = array_room.split("-");
+    var selected_room = aux_room_info[1];
+    }
+    //devolve nome da sala selecionada
+        for (var j = 0; j<rooms.length; j++){
+        if (j == selected_room){
+        var room_info = rooms[j];
+        }
+    }
+    var str_sala = 'Localizado na ' + room_info + ' situada no ' + piso_info;
+    document.getElementById("sala_info").insertAdjacentHTML( 'beforeend', str_sala );
 //     var piso_info = document.getElementById("selected").value;
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
@@ -356,15 +399,7 @@ function preencheModalConfirm(){
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
     document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
 //     // var recurso_info =
-// }
-<<<<<<< HEAD
-}
-function snackBar(n) {
-    var snack;
-    if(n===0) snack = document.getElementById("snackBarDias");
-    else if(n===1) snack = document.getElementById("snackBarHoras");
-    snack.classList.toggle("show");
-=======
+ }
 
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
@@ -375,7 +410,6 @@ function snackBar(msg) {
     snack.appendChild(p);
 
     snack.className = "show";
->>>>>>> HTML_DEV
     setTimeout(function(){
             snack.className = snack.className.replace("show", "");
         },
