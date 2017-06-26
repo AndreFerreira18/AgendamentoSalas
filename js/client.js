@@ -342,13 +342,17 @@ function divideDateAndTime(idData) {
 //     // var recurso_info =
 // }
 
-function snackBar(n) {
-    var snack;
-    if(n===0) snack = document.getElementById("snackBarDias")
-    else if(n===1) snack = document.getElementById("snackBarHoras")
-    snack.classList.toggle("show");
+function snackBar(msg) {
+    var snack = document.getElementById("snackBar")
+    snack.innerHTML = '';
+
+    var p = document.createElement("p");
+    p.innerHTML = msg;
+    snack.appendChild(p);
+
+    snack.className = "show";
     setTimeout(function(){
-            snack.classList.toggle("show");
+            snack.className = snack.className.replace("show", "");
         },
-    5000);
+    3000);
 }
