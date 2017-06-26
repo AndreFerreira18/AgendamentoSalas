@@ -317,23 +317,24 @@ function createMatrixDay() {
 function selecionarGrupoMatrizSemana(e) {
   var newElemet = e.target;
   var newElemetSplit = newElemet.id.split('-');
-  if (newElemet.classList.contains('disponivel')) {
-    if (newElemet.classList.contains('active')) {
-      // desatuva
-      for (var i = 0; i < selected_hours.length; i++) {
-        var otherElement = selected_hours[i];
-        var otherElementSplit = otherElement.split('-');
-        if (parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
-          selected_hours.splice(i, 1);
-          defineMultiActiveEvent(e);
-        }
+  var activeElements = getMultiActive('disponivel');
+  var vizinho = false;
+  try {
+    if (!newElemet.classList.contains('active') && newElemet.classList.contains('disponivel') && activeElements.length) {
+      for (var i = 0; i < activeElements.length; i++) {
+        var activeElementsSplit = activeElements[i].split('-');
+        if (activeElementsSplit[1] != newElemetSplit[1])
+          throw "Pretende selecionar um outro dia?";
+        if (parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) + 1 || parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) - 1)
+          vizinho = true;
       }
-    } else {
-      //ativa
-
-      selected_hours.push(e.target.id);
-      defineMultiActiveEvent(e);
+      if (!vizinho)
+        throw "Pretende selecionar com uma separação de horas ?" ;
     }
+  } catch (err) {
+    snackBar(err);
+  } finally {
+    defineMultiActiveEvent(e);
   }
 }
 
