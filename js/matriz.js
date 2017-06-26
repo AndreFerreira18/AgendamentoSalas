@@ -242,17 +242,35 @@ function createMatrixDay() {
 function selecionarGrupoMatriz(e) {
     var newElemet = e.target;
     var newElemetSplit = newElemet.id.split('-');
-    if(newElemet.classList.contains('disponivel')){
-        if(newElemet.classList.contains('active')){
+    if(newElemet.classList.contains('disponivel')) {
+        if(newElemet.classList.contains('active')) {
+            var lower;
             for(var i = 0; i < selected_hours.length; i++) {
-                var otherElement = selected_hours[i];
-                var otherElementSplit = otherElement.split('-');
-
-                if(parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
-                    selected_hours.splice(i, 1);
-                    defineActiveById(otherElement);
-                    i--;
+                otherElement = selected_hours[i];
+                otherElementSplit = otherElement.split('-');
+                if(i === 0){
+                    lower = otherElement;
+                }else {
+                    var lowerSplit = lower.split('-');
+                    if(parseInt(otherElementSplit[2]) < parseInt(lowerSplit[2]))
+                        lower = otherElement;
                 }
+            }
+            var lowerSplit = lower.split('-');
+            if(parseInt(lowerSplit[2]) != parseInt(newElemetSplit[2])) {
+
+                for(var i = 0; i < selected_hours.length; i++) {
+                    var otherElement = selected_hours[i];
+                    var otherElementSplit = otherElement.split('-');
+                    if(parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
+                        selected_hours.splice(i, 1);
+                        defineActiveById(otherElement);
+                        i--;
+                    }
+                }
+            }else{
+                selected_hours.splice(i, 1);
+                defineActiveById(lower);
             }
         } else {
             if(selected_hours.length == 0) {
@@ -262,18 +280,18 @@ function selecionarGrupoMatriz(e) {
                 var otherElement = selected_hours[0];
                 var otherElementSplit = otherElement.split('-');
                 if(newElemetSplit[1] === otherElementSplit[1]) {
-                    for(var i=0; i<selected_hours.length; i++){
+                    for(var i = 0; i < selected_hours.length; i++) {
                         otherElement = selected_hours[i];
                         otherElementSplit = otherElement.split('-');
-                        var inferior = parseInt(otherElementSplit[2])+1;
-                        var superior = parseInt(otherElementSplit[2])-1;
+                        var inferior = parseInt(otherElementSplit[2]) + 1;
+                        var superior = parseInt(otherElementSplit[2]) - 1;
                         var atual = parseInt(newElemetSplit[2]);
-                        if(  inferior === atual  ||  superior ===  atual){
+                        if(inferior === atual || superior === atual) {
                             defineMultiActiveEvent(e);
                             selected_hours.push(e.target.id);
                             break;
                         }
-                        if(i===selected_hours.length-1) snackBar('Por favor seleciona horas consecutivas');
+                        if(i === selected_hours.length - 1) snackBar('Por favor seleciona horas consecutivas');
                     }
                 } else {
                     snackBar('Por favor seleciona na mesma sala');
