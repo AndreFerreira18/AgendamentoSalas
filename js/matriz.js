@@ -240,13 +240,17 @@ function createMatrixDay() {
 
 function selecionarGrupoMatriz(e) {
     var newElemet = e.target;
+    var newElemetSplit = newElemet.id.split('-');
     if(newElemet.classList.contains('disponivel')){
-        if(newElemet.classList.contains('active')) {
+        if(newElemet.classList.contains('active')){
             for(var i = 0; i < selected_hours.length; i++) {
-                if(selected_hours[i] === newElemet.id) {
+                var otherElement = selected_hours[i];
+                var otherElementSplit = otherElement.split('-');
+
+                if(parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
                     selected_hours.splice(i, 1);
-                    defineMultiActiveEvent(e);
-                    break;
+                    defineActiveById(otherElement);
+                    i--;
                 }
             }
         } else {
@@ -254,7 +258,6 @@ function selecionarGrupoMatriz(e) {
                 defineMultiActiveEvent(e);
                 selected_hours.push(e.target.id);
             } else {
-                var newElemetSplit = newElemet.id.split('-');
                 var otherElement = selected_hours[0];
                 var otherElementSplit = otherElement.split('-');
                 if(newElemetSplit[1] === otherElementSplit[1]) {

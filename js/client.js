@@ -118,7 +118,10 @@ function defineMultiActiveEvent(e) {
 function defineActiveById(activeId) {
     //add the active to the element
     var element = document.getElementById(activeId);
-    element.classList.add('active');
+    if(element.classList.contains('active'))
+        element.classList.remove('active');
+    else
+        element.classList.add('active');
 }
 
 function getActive(activeClass) {
