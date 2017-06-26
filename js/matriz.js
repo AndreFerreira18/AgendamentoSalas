@@ -95,7 +95,32 @@ function createMatrixWeek() {
     ////////////////////////////////////////////
 
     //Matrix Head
+    // titulo
     var mh = document.getElementById("matrix_week_head");
+    var trH = document.createElement('tr');
+    var tdL = document.createElement('td');
+    var spanL = document.createElement('span');
+    var tdC = document.createElement('td');
+    var tdR = document.createElement('td');
+    var spanR = document.createElement('span');
+    var colspan = scheduleWeek.dates.length-1;
+
+    mh.appendChild(trH);
+
+    //seta para a esquerda
+    spanL.className = ("glyph glyphicon glyphicon-arrow-left");
+    tdL.appendChild(spanL);
+    trH.appendChild(tdL);
+    tdC.innerHTML = "Vista da Semana";
+    tdC.setAttribute("colspan",colspan);
+    trH.appendChild(tdC);
+
+    //seta para a direita
+    spanR.className = ("glyph glyphicon glyphicon-arrow-right");
+    tdR.appendChild(spanR);
+    trH.appendChild(tdR);
+
+    // Horas
     var tr = document.createElement('tr');
     mh.appendChild(tr);
     var th1 = document.createElement('th');
@@ -107,7 +132,7 @@ function createMatrixWeek() {
     }
 
     //Matrix Body
-    var mb = document.getElementById("matrix_week_head");
+    var mb = document.getElementById("matrix_week_body");
     for(var i = 0; i < scheduleWeek[0].length; i++) {
         var tr = document.createElement('tr');
         mb.appendChild(tr);
