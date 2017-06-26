@@ -312,3 +312,14 @@ function divideDateAndTime() {
 //
 //     // var recurso_info =
 // }
+
+function snackBar(n) {
+    var snack;
+    if(n===0) snack = document.getElementById("snackBarDias")
+    else if(n===1) snack = document.getElementById("snackBarHoras")
+    snack.classList.toggle("show");
+    setTimeout(function(){
+            snack.classList.toggle("show");
+        },
+    5000);
+}
