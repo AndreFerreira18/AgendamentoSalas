@@ -106,18 +106,7 @@ function toggleSideBar(event) {
     }
 }
 
-function defineActiveBtnSalas(e) {
-    // remove the old active
-    var elements = document.getElementsByClassName(e.target.classList[2]);
-    for(var i = 0; i < elements.length; i++) {
-        elements[i].classList.remove('active');
-    }
-    //add the active to the element
-    var element = document.getElementById(e.target.id);
-    element.classList.add('active');
-}
-
-function defineActiveEvent(e) {
+function defineActiveEvent(e) {   // define single active
     // remove the old active
     var element = e.target.id ? e.target : e.target.parentNode;
     var elements = document.getElementsByClassName(element.classList[0]);
@@ -131,17 +120,12 @@ function defineActiveEvent(e) {
 }
 
 function defineMultiActiveEvent(e) {
-    // remove the old active
     var element = e.target.id ? e.target : e.target.parentNode;
-    var elements = document.getElementsByClassName(element.classList[0]);
-    //add the active to the element
     var changeElement = document.getElementById(element.id);
     if(changeElement.classList.contains('active'))
         changeElement.classList.remove('active');
     else
         changeElement.classList.add('active');
-
-
 }
 
 function defineActiveById(activeId) {
