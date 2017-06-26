@@ -1,4 +1,4 @@
-piso-3var floors = {
+var floors = {
   "Andares": [
     "Rés-do-Chão",
     "1º Andar",
