@@ -6,7 +6,7 @@ $(window).ready(
     pisoPref();
     criarrecursos();
     divideDateAndTime();
-    findHour();
+
   }
 );
 
@@ -15,10 +15,10 @@ $('input[name="daterange"]').daterangepicker({
   "timePicker": true,
   "timePicker24Hour": true,
   "timePickerIncrement": 30,
-  "startDate": "06/09/2017",
-  "endDate": "06/09/2017",
+  "startDate": "09/06/2017",
+  "endDate": "09/06/2017",
   "locale": {
-    format: 'MM/DD/YYYY h:mm '
+    format: 'DD/MM/YYYY h:mm'
   }
 
 });
@@ -279,7 +279,7 @@ function clone() {
       "timePicker24Hour": true,
       "timePickerIncrement": 30,
       "locale": {
-        format: 'MM/DD/YYYY h:mm '
+        format: 'DD/MM/YYYY h:mm'
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -304,28 +304,22 @@ function divideDateAndTime() {
     return datahora;
 }
 
-function findHour(){
-    for (var i = 0; i<selected_hours.length; i++){
-    var acede_dataHora_selecionada = selected_hours[i];
-    var dataHora_selecionada = acede_dataHora_selecionada.split("-");
-    console.log(dataHora_selecionada);
-    return dataHora_selecionada;
-}
-}
-
- function preencheModalConfirm(){
+function preencheModalConfirm(){
 
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
+    document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
+    var horaData_info = document.getElementById("data_mod_calendar").value;
+    var array_horaData = horaData_info.split(" ");
 
-    // var datestart_info = selected_hours[0];
-    // console.log(datestart_info);
-    // var timestart_info = document.getElementById("datahora[1]").value;
-    // var dateEnd_info = document.getElementById("datahora[4]").value;
-    // var timeEnd_info = document.getElementById("datahora[5]").value;
-    // var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
-    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
-//
+    console.log(array_horaData);
+ //     var datestart_info = selected_hours[0];
+//     console.log(datestart_info);
+//     var timestart_info = document.getElementById("datahora[1]").value;
+//     var dateEnd_info = document.getElementById("datahora[4]").value;
+//     var timeEnd_info = document.getElementById("datahora[5]").value;
+//     var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
+//     document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
+// //
 //     var room_info = document.getElementById("m").value;
 //     var piso_info = document.getElementById("selected").value;
 //
