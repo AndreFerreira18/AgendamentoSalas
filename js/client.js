@@ -183,6 +183,16 @@ function getActive(activeClass) {
     return id;
 }
 
+function getMultiActive(activeClass) {
+    var id = [];
+    var elements = document.getElementsByClassName(activeClass);
+    for(var i = 0; i < elements.length; i++) {
+        if(elements[i].classList.contains('active'))
+            id.push(elements[i].id);
+    }
+    return id;
+}
+
 // Remove element by Id
 function removeElement(elementId) {
     if(document.getElementById(elementId)) {
@@ -383,11 +393,9 @@ function findHour(){
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
     snack.innerHTML = '';
-
     var p = document.createElement("p");
     p.innerHTML = msg;
     snack.appendChild(p);
-
     snack.className = "show";
     setTimeout(function(){
             snack.className = snack.className.replace("show", "");
