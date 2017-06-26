@@ -64,6 +64,10 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
       width: calc(100% - 320px);
     }
 
+    .col-md-6 {
+      min-width: 102%;
+    }
+
 }
 
 @media (min-width: 992px){
@@ -79,6 +83,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
       padding: 0;
       margin-left: 7%;
       width: 55%;
+      min-width: unset;
     }
 }
 
@@ -111,7 +116,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
 }
 
 #modal_div > .input-group > span {
-    max-width: 210px;
+    max-width: 204px;
     font-size: 14px;
 }
 

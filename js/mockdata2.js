@@ -1,6 +1,6 @@
 var floors = {
   "Andares": [
-    "Res Do chão",
+    "Rés-do-Chão",
     "1º Andar",
     "2º Andar",
     "3º Andar",
@@ -85,7 +85,7 @@ var rooms_7 = {
 
 var initialData = {
   "Andares": [
-    "Res Do chão",
+    "Rés-do-Chão",
     "1º Andar",
     "2º Andar",
     "3º Andar",
@@ -110,7 +110,7 @@ var initialData = {
 };
 
 var resources = {
-  "Res Do chão": [{
+  "Rés-do-Chão": [{
       "NomeSala": "Sala 0.1",
       "Recursos": {
         "Projetor": "Sim",
