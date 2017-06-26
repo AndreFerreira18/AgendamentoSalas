@@ -283,19 +283,21 @@ function pisoPref() {
 
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
     document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
-//     var datestart_info = document.getElementById("x").value;
-//     var timestart_info = document.getElementById("z").value;
-//     var dateEnd_info = document.getElementById("a").value;
-//     var timeEnd_info = document.getElementById("y").value;
-//
-//     document.getElementById("datetime_info").innerHTML= '"Das " +  timestart_info " até às " + timeEnd_info + " no dia " + datestart_info';
+
+    var datestart_info = document.getElementById("datahora[0]").value;
+    var timestart_info = document.getElementById("datahora[1]").value;
+    var dateEnd_info = document.getElementById("datahora[4]").value;
+    var timeEnd_info = document.getElementById("datahora[5]").value;
+    var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
+    document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
 //
 //     var room_info = document.getElementById("m").value;
 //     var piso_info = document.getElementById("selected").value;
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
     var participantes = document.getElementById("data_mod_nparticipantes").value;
-    document.getElementById("nparticipantes").innerHTML = document.getElementById("nparticipantes").innerHTML + 'Com ' + participantes + ' participantes previstos';
+    var str_participantes = 'Com ' + participantes + ' participantes previstos';
+    document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
 //     // var recurso_info =
 }
 
