@@ -60,15 +60,6 @@ $(document).ready(function() {
     });
 });
 
-
-function changeStartDate() {
-
-}
-
-function changeEndDate() {
-
-}
-
 /**
 *This method reads the fields inserted on the sidebar and passed them to the matrix constructor.
 */
