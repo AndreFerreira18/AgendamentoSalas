@@ -4,18 +4,20 @@ $(window).ready(
         $('#modal').modal('show');
         tReuniao();
         pisoPref();
-        criarrecursos();
+        criarRecursos();
     }
 );
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
-    "timePicker": true,
-    "startDate": "06/09/2017",
-    "endDate": "06/09/2017",
-    "locale": {
-        format: 'MM/DD/YYYY h:mm A'
-    }
+  "timePicker": true,
+  "timePicker24Hour": true,
+  "timePickerIncrement": 30,
+  "startDate": "06/09/2017",
+  "endDate": "06/09/2017",
+  "locale": {
+    format: 'MM/DD/YYYY h:mm '
+  }
 
 });
 
@@ -60,8 +62,71 @@ $(document).ready(function() {
     });
 });
 
-function atualizaMatriz() {
+/**
+*This method reads the fields inserted on the sidebar and passed them to the matrix constructor.
+*/
+function applyFilters() {
+    var dateArray = divideDateAndTime('data_mod_calendar');
+    var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
+    if(participants < 0 || participants > 999){
 
+      return;
+    }
+    var myResources = _getResources('store_btn_recursos');
+    var floor = getActive('list-group-item');
+    var availableRooms = [];
+    var selectedFloor = this.resources[floor];
+    var length = selectedFloor.length;
+    //iterate to see what rooms are available for those filters
+    for(var i = 0; i < length; i++){
+      var currentRoom = selectedFloor[i].NomeSala;
+      if(areResourcesAvailable(participants, myResources, selectedFloor[i].Recursos))
+          availableRooms.push(selectedFloor[i].NomeSala)
+    }
+}
+/**
+*  This method receives an array with the selected resources and the availability of the room (in terms of resources) and
+*  confirms if the room has the given resources availables for the reservation
+*  @param {Number} participants - An Integer with the number of participants of the request
+*  @param {Array} selection - An Array of the selected resources
+*  @param {Array} availables - An Array with resources information for a given room
+*  @returns {Boolean} True if the room has available resources for the request | False if the room has not
+*/
+function areResourcesAvailable(participants, selection, availables){
+  var isAvailable = true;
+  if(participants > parseInt(availables.N_Pessoas))
+    isAvailable = false;
+   else{
+     for(var i = 0; i < selection.length; i++){
+       if(selection[i] !== 'Material de Escritório'){
+         if(availables[selection[i]] === false )
+            isAvailable = false;
+       }
+       else{
+         if(availables['Material_de_Escritorio'] === false)
+            isAvailable = false;
+       }
+     }
+     return isAvailable;
+   }
+}
+
+/**
+*  Private method that gets all resources that were selected by the user and returns them in an array
+*  @param {String} id - Receives the id of the buttons container
+*  @returns {Array} An array that contains the name of the resources selected by the user.
+*/
+function _getResources(id) {
+  var elements = document.getElementById(id);
+  var length = elements.children.length;
+  var elementsArray = [];
+  for(var i =0; i < length ; i++){
+    if(elements.children[i].children[0].classList.contains('active')){ //if that resource was selected
+      var id = parseInt(elements.children[i].id.split("-")[1]); //add to selected resources array
+      elementsArray.push(initialData.Recursos[id]);
+    }
+  }
+  return elementsArray;
 }
 
 
@@ -77,18 +142,7 @@ function toggleSideBar(event) {
     }
 }
 
-function defineActiveBtnSalas(e) {
-    // remove the old active
-    var elements = document.getElementsByClassName(e.target.classList[2]);
-    for(var i = 0; i < elements.length; i++) {
-        elements[i].classList.remove('active');
-    }
-    //add the active to the element
-    var element = document.getElementById(e.target.id);
-    element.classList.add('active');
-}
-
-function defineActiveEvent(e) {
+function defineActiveEvent(e) {   // define single active
     // remove the old active
     var element = e.target.id ? e.target : e.target.parentNode;
     var elements = document.getElementsByClassName(element.classList[0]);
@@ -102,17 +156,12 @@ function defineActiveEvent(e) {
 }
 
 function defineMultiActiveEvent(e) {
-    // remove the old active
     var element = e.target.id ? e.target : e.target.parentNode;
-    var elements = document.getElementsByClassName(element.classList[0]);
-    //add the active to the element
     var changeElement = document.getElementById(element.id);
     if(changeElement.classList.contains('active'))
         changeElement.classList.remove('active');
     else
         changeElement.classList.add('active');
-
-
 }
 
 function defineActiveById(activeId) {
@@ -134,6 +183,16 @@ function getActive(activeClass) {
     return id;
 }
 
+function getMultiActive(activeClass) {
+    var id = [];
+    var elements = document.getElementsByClassName(activeClass);
+    for(var i = 0; i < elements.length; i++) {
+        if(elements[i].classList.contains('active'))
+            id.push(elements[i].id);
+    }
+    return id;
+}
+
 // Remove element by Id
 function removeElement(elementId) {
     if(document.getElementById(elementId)) {
@@ -142,13 +201,15 @@ function removeElement(elementId) {
     }
 }
 
+
 //saves data to the Side Bar
 function saveChanges() {
-    var datahora = divideDateAndTime();
+    var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
+
 
     updownIniciar();
     if(startDay === endDay) {
@@ -163,7 +224,7 @@ function saveChanges() {
 }
 
 // Criar Recursos
-function criarrecursos() {
+function criarRecursos() {
 
     var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
@@ -193,7 +254,7 @@ function criarrecursos() {
         label.className = "label-recurso";
         label.innerHTML = label_recursos[i];
 
-        iDiv.id = 'recurso' + i;
+        iDiv.id = 'recurso-' + i;
         iDiv.className = 'divBotoes';
         spn.setAttribute("z-index", "-1");
         spn.className = 'glyph ';
@@ -219,7 +280,7 @@ function criarrecursos() {
                 spn.className += glyph_recursos[4];
                 break;
 
-                others:
+            default:
                     spn.className += glyph_recursos[5];
                 break;
         }
@@ -235,16 +296,16 @@ function criarrecursos() {
 }
 
 function tReuniao() {
-    var x = initialData.Tipos_de_Reuniao;
-    document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
-    for(var i = 0; i < x.length; i++) {
-        var opt = document.createElement("option");
-        opt.innerHTML = x[i];
-        opt.value = i;
-        var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
-        tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
-    }
-}
+  var x = initialData.Tipos_de_Reuniao;
+  document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
+  for (var i = 0; i < x.length; i++) {
+    var opt = document.createElement("option");
+    opt.innerHTML = x[i];
+    opt.value = x[i];
+    var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
+    tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
+  }
+  }
 
 function pisoPref() {
     var x = initialData.Andares;
@@ -268,9 +329,12 @@ function clone() {
 
     document.querySelector(".modal-body").remove();
     $('input[name="daterange"]').daterangepicker({
-        "timePicker": true,
-        "locale": {
-            format: 'MM/DD/YYYY h:mm A'
+      "timePicker": true,
+      "timePicker24Hour": true,
+      "timePickerIncrement": 30,
+      "locale": {
+        format: 'MM/DD/YYYY h:mm '
+
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -284,8 +348,8 @@ function clone() {
     }
 }
 
-function divideDateAndTime() {
-    var acedeDataHora = document.getElementById("data_mod_calendar").value;
+function divideDateAndTime(idData) {
+    var acedeDataHora = document.getElementById(idData).value;
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
@@ -295,31 +359,44 @@ function divideDateAndTime() {
     return datahora;
 }
 
-// function preencheModalConfirm(){
-//
-//     var datestart_info = document.getElementById("x").value;
-//     var timestart_info = document.getElementById("z").value;
-//     var dateEnd_info = document.getElementById("a").value;
-//     var timeEnd_info = document.getElementById("y").value;
-//
-//     document.getElementById("datetime_info").innerHTML= '"Das " +  timestart_info " até às " + timeEnd_info + " no dia " + datestart_info';
+function findHour(){
+    for (var i = 0; i<selected_hours.length; i++){
+    var acede_dataHora_selecionada = selected_hours[i];
+    var dataHora_selecionada = acede_dataHora_selecionada.split("-");
+    console.log(dataHora_selecionada);
+    return dataHora_selecionada;
+}
+}
+
+ function preencheModalConfirm(){
+
+    var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
+    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
+
+    // var datestart_info = selected_hours[0];
+    // console.log(datestart_info);
+    // var timestart_info = document.getElementById("datahora[1]").value;
+    // var dateEnd_info = document.getElementById("datahora[4]").value;
+    // var timeEnd_info = document.getElementById("datahora[5]").value;
+    // var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
+    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
 //
 //     var room_info = document.getElementById("m").value;
 //     var piso_info = document.getElementById("selected").value;
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
-//
+    var participantes = document.getElementById("data_mod_nparticipantes").value;
+    var str_participantes = 'Com ' + participantes + ' participantes previstos';
+    document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
 //     // var recurso_info =
-// }
+}
 
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
     snack.innerHTML = '';
-
     var p = document.createElement("p");
     p.innerHTML = msg;
     snack.appendChild(p);
-
     snack.className = "show";
     setTimeout(function(){
             snack.className = snack.className.replace("show", "");

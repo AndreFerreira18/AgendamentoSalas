@@ -1,3 +1,25 @@
+function getSemana(id_semana) {
+    // alterar para pedido de dados a db
+    var datahora = divideDateAndTime("data_mod_calendar");
+    var startDay = datahora[0];
+    var endDay = datahora[1];
+    var startHour = datahora[2];
+    var endHour = datahora[3];
+    var week = 0
+
+    if(startDay >= "03/07/2017" && startDay < "10/07/2017") {
+        week = 1;
+    } else if(startDay >= "10/07/2017" && startDay < "14/07/2017") {
+        week = 2;
+    } else if(startDay >= "17/07/2017" && startDay < "21/07/2017") {
+        week = 3;
+    } else if(startDay < "24/07/2017") {
+        week = 4;
+    }
+
+    return id_semana ? id_semana : week;
+}
+
 function alteraMatrix() {
     var matrizAtiva = document.getElementById("matrix");
     var matriz = document.getElementById("matrix");
@@ -18,7 +40,6 @@ function alteraMatrix() {
         snackBar("Escolha de matriz errada");
 }
 
-
 //matrix
 function addMatrix(matrixType) {
     var matrix = document.getElementById("matrix");
@@ -30,63 +51,75 @@ function addMatrix(matrixType) {
     matrix.appendChild(mb);
 }
 
-function refreshMatrix() {
+function refreshMatrix(nextSemana) {
     var matrix = document.getElementById("matrix");
     var id_child = matrix.firstElementChild.id;
     var child = id_child.split("_");
     matrix.innerHTML = " ";
     addMatrix(child[1]);
+    selected_hours = [];
     if(child[1] == "day")
         createMatrixDay();
     else if(child[1] == "week") {
         var activeBtn = getActive("btn-rooms");
         refreshButtons();
         defineActiveById(activeBtn);
-        createMatrixWeek();
+        createMatrixWeek(nextSemana);
+
     } else
         snackBar("Escolha de matriz errada");
 }
 
-function createMatrixWeek() {
+function createMatrixWeek(nextSemana) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var id_andar = getActive('list-group-item');
     var temp_id_sala = getActive('btn-rooms').split("-");
     var id_sala = "1" + temp_id_sala[1];
-    var id_week = "1";
+    var id_semana = getSemana(nextSemana);
+
+
     var scheduleWeek;
     switch(id_sala) {
         case "11":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_11;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_11;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_11;
+            else if(id_semana == "4")
+                scheduleWeek = scheduleWeek_4_sala_11;
             break;
         case "12":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_12;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_12;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_12;
+            else if(id_semana == "4")
+                scheduleWeek = scheduleWeek_4_sala_12;
             break;
         case "13":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_13;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_13;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_13;
+            else if(id_semana == "4")
+                scheduleWeek = scheduleWeek_4_sala_13;
             break;
         case "14":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_14;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_14;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_14;
+            else if(id_semana == "4")
+                scheduleWeek = scheduleWeek_4_sala_14;
             break;
         default:
             snackBar("não tenho mockdata dessa sala para matriz semana");
@@ -95,7 +128,35 @@ function createMatrixWeek() {
     ////////////////////////////////////////////
 
     //Matrix Head
+    // titulo
     var mh = document.getElementById("matrix_week_head");
+    var trH = document.createElement('tr');
+    var spanL = document.createElement('span');
+    var thC = document.createElement('th');
+    var spanR = document.createElement('span');
+    var colspan = scheduleWeek.dates.length + 1;
+
+    mh.appendChild(trH);
+
+    thC.setAttribute("style", "text-align:center;");
+    thC.setAttribute("colspan", colspan);
+    thC.innerHTML = "Vista da Semana";
+    // Adiciona Setas
+    spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
+    spanL.setAttribute("style", "cursor:pointer;");
+    spanL.addEventListener("click", function() {
+        refreshMatrix(id_semana - 1);
+    });
+    thC.appendChild(spanL);
+    spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
+    spanR.setAttribute("style", "cursor:pointer;");
+    spanR.addEventListener("click", function() {
+        refreshMatrix(id_semana + 1);
+    });
+    thC.appendChild(spanR);
+    trH.appendChild(thC);
+
+    // Horas
     var tr = document.createElement('tr');
     mh.appendChild(tr);
     var th1 = document.createElement('th');
@@ -107,7 +168,7 @@ function createMatrixWeek() {
     }
 
     //Matrix Body
-    var mb = document.getElementById("matrix_week_head");
+    var mb = document.getElementById("matrix_week_body");
     for(var i = 0; i < scheduleWeek[0].length; i++) {
         var tr = document.createElement('tr');
         mb.appendChild(tr);
@@ -117,11 +178,23 @@ function createMatrixWeek() {
         th.innerHTML = i + 8 + " H";
         for(var j = 0; j < scheduleWeek.dates.length; j++) {
             var td = document.createElement('td');
+            var disponibilidade = scheduleWeek[j][i];
+            if(disponibilidade == 'Disponível')
+                td.classList.add("disponivel");
+            else if(disponibilidade == 'Indisponível')
+                td.classList.add("indisponivel");
+            else
+                td.classList.add("indefinido");
+
             td.innerHTML = scheduleWeek[j][i];
+            td.id = 'td-' + j + '-' + i;
+            td.addEventListener("click", selecionarGrupoMatrizSemana);
             tr.appendChild(td);
         }
     }
 }
+
+
 
 function removeBtnSalas() {
     var divBotoes = document.getElementById("btn_rooms");
@@ -239,64 +312,26 @@ function createMatrixDay() {
     }
 }
 
-function selecionarGrupoMatriz(e) {
+
+function selecionarGrupoMatrizSemana(e) {
     var newElemet = e.target;
     var newElemetSplit = newElemet.id.split('-');
     if(newElemet.classList.contains('disponivel')) {
         if(newElemet.classList.contains('active')) {
-            var lower;
+            // desatuva
             for(var i = 0; i < selected_hours.length; i++) {
-                otherElement = selected_hours[i];
-                otherElementSplit = otherElement.split('-');
-                if(i === 0){
-                    lower = otherElement;
-                }else {
-                    var lowerSplit = lower.split('-');
-                    if(parseInt(otherElementSplit[2]) < parseInt(lowerSplit[2]))
-                        lower = otherElement;
+                var otherElement = selected_hours[i];
+                var otherElementSplit = otherElement.split('-');
+                if(parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
+                    selected_hours.splice(i, 1);
+                    defineMultiActiveEvent(e);
                 }
-            }
-            var lowerSplit = lower.split('-');
-            if(parseInt(lowerSplit[2]) != parseInt(newElemetSplit[2])) {
-
-                for(var i = 0; i < selected_hours.length; i++) {
-                    var otherElement = selected_hours[i];
-                    var otherElementSplit = otherElement.split('-');
-                    if(parseInt(otherElementSplit[2]) >= parseInt(newElemetSplit[2])) {
-                        selected_hours.splice(i, 1);
-                        defineActiveById(otherElement);
-                        i--;
-                    }
-                }
-            }else{
-                selected_hours.splice(i, 1);
-                defineActiveById(lower);
             }
         } else {
-            if(selected_hours.length == 0) {
-                defineMultiActiveEvent(e);
-                selected_hours.push(e.target.id);
-            } else {
-                var otherElement = selected_hours[0];
-                var otherElementSplit = otherElement.split('-');
-                if(newElemetSplit[1] === otherElementSplit[1]) {
-                    for(var i = 0; i < selected_hours.length; i++) {
-                        otherElement = selected_hours[i];
-                        otherElementSplit = otherElement.split('-');
-                        var inferior = parseInt(otherElementSplit[2]) + 1;
-                        var superior = parseInt(otherElementSplit[2]) - 1;
-                        var atual = parseInt(newElemetSplit[2]);
-                        if(inferior === atual || superior === atual) {
-                            defineMultiActiveEvent(e);
-                            selected_hours.push(e.target.id);
-                            break;
-                        }
-                        if(i === selected_hours.length - 1) snackBar('Por favor seleciona horas consecutivas');
-                    }
-                } else {
-                    snackBar('Por favor seleciona na mesma sala');
-                }
-            }
+            //ativa
+
+            selected_hours.push(e.target.id);
+            defineMultiActiveEvent(e);
         }
     }
 }
