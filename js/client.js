@@ -11,10 +11,10 @@ $(window).ready(
 //Date picker
 $('input[name="daterange"]').daterangepicker({
     "timePicker": true,
-    "startDate": "07/03/2017",
-    "endDate": "07/04/2017",
+    "startDate": "03/07/2017",
+    "endDate": "04/07/2017",
     "locale": {
-        format: 'MM/DD/YYYY h:mm A'
+        format: 'DD/MM/YYYY h:mm A'
     }
 
 });
@@ -59,6 +59,15 @@ $(document).ready(function() {
         }
     });
 });
+
+
+function changeStartDate() {
+
+}
+
+function changeEndDate() {
+
+}
 
 /**
 *This method reads the fields inserted on the sidebar and passed them to the matrix constructor.
@@ -300,7 +309,7 @@ function clone() {
     $('input[name="daterange"]').daterangepicker({
         "timePicker": true,
         "locale": {
-            format: 'MM/DD/YYYY h:mm A'
+            format: 'DD/MM/YYYY h:mm A'
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;

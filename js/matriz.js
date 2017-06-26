@@ -7,15 +7,15 @@ function getSemana(id_semana) {
     var endHour = datahora[3];
     var week = 0
 
-    if(startDay >= "07/03/2017" && startDay < "07/10/2017") {
-        week = 1;
-    } else if(startDay >= "07/10/2017" && startDay < "07/14/2017") {
-        week = 2;
-    } else if(startDay >= "07/17/2017" && startDay < "07/21/2017") {
-        week = 3;
-    } else if(startDay < "07/24/2017") {
-        week = 4;
-    }
+  if (startDay >= "03/07/2017" && startDay < "10/07/2017") {
+    week = 1;
+  } else if (startDay >= "10/07/2017" && startDay < "14/07/2017") {
+    week = 2;
+  } else if (startDay >= "17/07/2017" && startDay < "21/07/2017") {
+    week = 3;
+  } else if (startDay < "24/07/2017") {
+    week = 4;
+  }
 
 
 
@@ -145,13 +145,19 @@ function createMatrixWeek(nextSemana) {
     thC.innerHTML = "Vista da Semana";
     // Adiciona Setas
     spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
+    spanL.setAttribute("style","cursor:pointer;");
     spanL.addEventListener("click", function() {
-        refreshMatrix(id_semana - 1);
+      changeStartDate();
+      changeEndDate();
+      refreshMatrix(id_semana - 1);
     });
     thC.appendChild(spanL);
     spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
+    spanR.setAttribute("style","cursor:pointer;");
     spanR.addEventListener("click", function() {
-        refreshMatrix(id_semana + 1);
+      changeStartDate();
+      changeEndDate();
+      refreshMatrix(id_semana + 1);
     });
     thC.appendChild(spanR);
     trH.appendChild(thC);
