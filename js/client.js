@@ -4,7 +4,7 @@ $(window).ready(
         $('#modal').modal('show');
         tReuniao();
         pisoPref();
-        criarrecursos();
+        criarRecursos();
     }
 );
 
@@ -60,8 +60,28 @@ $(document).ready(function() {
     });
 });
 
-function atualizaMatriz() {
+/**
+*This method reads the fields inserted on the sidebar and passed them to the matrix constructor.
+*/
+function applyFilters() {
+    var dateArray = divideDateAndTime();
+    var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
+    var resources = _getResources('store_btn_recursos');
+    var floor = getActive('list-group-item');
+}
 
+/**
+* Private method that gets all resources that were selected by the user and returns them in an array
+*/
+function _getResources(id) {
+  var elements = document.getElementById(id);
+  var length = elements.children.length;
+  var elementsArray = [];
+  for(var i =0; i < length ; i++){
+    if(elements.children[i].children[0].classList.contains('active')) //if that resource was selected
+      elementsArray.push(parseInt(elements.children[i].id.split("-")[1])); //add to selected resources array
+  }
+  return elementsArray;
 }
 
 
@@ -160,7 +180,7 @@ function saveChanges() {
 }
 
 // Criar Recursos
-function criarrecursos() {
+function criarRecursos() {
 
     var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
@@ -190,7 +210,7 @@ function criarrecursos() {
         label.className = "label-recurso";
         label.innerHTML = label_recursos[i];
 
-        iDiv.id = 'recurso' + i;
+        iDiv.id = 'recurso-' + i;
         iDiv.className = 'divBotoes';
         spn.setAttribute("z-index", "-1");
         spn.className = 'glyph ';
@@ -216,7 +236,7 @@ function criarrecursos() {
                 spn.className += glyph_recursos[4];
                 break;
 
-                others:
+            default:
                     spn.className += glyph_recursos[5];
                 break;
         }
@@ -237,7 +257,7 @@ function tReuniao() {
     for(var i = 0; i < x.length; i++) {
         var opt = document.createElement("option");
         opt.innerHTML = x[i];
-        opt.value = x[i];
+        opt.value = i;
         var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
         tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
     }

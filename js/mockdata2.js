@@ -1,4 +1,4 @@
-var floors = {
+piso-3var floors = {
   "Andares": [
     "Rés-do-Chão",
     "1º Andar",
@@ -110,7 +110,7 @@ var initialData = {
 };
 
 var resources = {
-  "Rés-do-Chão": [{
+  "piso-0": [{
       "NomeSala": "Sala 0.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -155,7 +155,7 @@ var resources = {
       }
     }
   ],
-  "1º Andar": [{
+  "piso-1": [{
       "NomeSala": "Sala 1.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -200,7 +200,7 @@ var resources = {
       }
     }
   ],
-  "2º Andar": [{
+  "piso-2": [{
       "NomeSala": "Sala 2.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -245,7 +245,7 @@ var resources = {
       }
     }
   ],
-  "3º Andar": [{
+  "piso-3": [{
       "NomeSala": "Sala 3.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -290,7 +290,7 @@ var resources = {
       }
     }
   ],
-  "4º Andar": [{
+  "piso-4": [{
       "NomeSala": "Sala 4.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -335,7 +335,7 @@ var resources = {
       }
     }
   ],
-  "5º Andar": [{
+  "piso-5": [{
       "NomeSala": "Sala 5.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -380,7 +380,7 @@ var resources = {
       }
     }
   ],
-  "6º Andar": [{
+  "piso-6": [{
       "NomeSala": "Sala 6.1",
       "Recursos": {
         "Projetor": "Sim",
@@ -425,7 +425,7 @@ var resources = {
       }
     }
   ],
-  "7º Andar": [{
+  "piso-7": [{
       "NomeSala": "Sala 7.1",
       "Recursos": {
         "Projetor": "Sim",
