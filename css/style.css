@@ -439,7 +439,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 */
 #snackBar {
     visibility: hidden;
-    width: 30%;
+    width: auto;
     margin-left: auto;
     margin-right: 30px;
     background-color: #333;

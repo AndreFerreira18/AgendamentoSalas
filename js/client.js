@@ -68,8 +68,8 @@ $(document).ready(function() {
 function applyFilters() {
     var dateArray = divideDateAndTime('data_mod_calendar');
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
-    if(participants < 0 || participants > 999){
-
+    if(participants <= 0 || participants > 999){
+      snackBar("Por favor insira um número de participantes entre 1 e 999");
       return;
     }
     var myResources = _getResources('store_btn_recursos');
@@ -319,17 +319,11 @@ function clone() {
 
     document.querySelector(".modal-body").remove();
     $('input[name="daterange"]').daterangepicker({
-<<<<<<< HEAD
-        "timePicker": true,
-        "locale": {
-            format: 'DD/MM/YYYY h:mm A'
-=======
       "timePicker": true,
       "timePicker24Hour": true,
       "timePickerIncrement": 30,
       "locale": {
         format: 'MM/DD/YYYY h:mm '
->>>>>>> HTML_DEV_ANDRE
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -384,8 +378,7 @@ function findHour(){
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
     document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
 //     // var recurso_info =
-// }
-<<<<<<< HEAD
+}
 
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
@@ -396,14 +389,6 @@ function snackBar(msg) {
     snack.appendChild(p);
 
     snack.className = "show";
-=======
-}
-function snackBar(n) {
-    var snack;
-    if(n===0) snack = document.getElementById("snackBarDias");
-    else if(n===1) snack = document.getElementById("snackBarHoras");
-    snack.classList.toggle("show");
->>>>>>> HTML_DEV_ANDRE
     setTimeout(function(){
             snack.className = snack.className.replace("show", "");
         },

@@ -58,6 +58,7 @@ function refreshMatrix(nextSemana) {
   matrix.innerHTML = " ";
   addMatrix(child[1]);
   selected_hours = [];
+  var rooms = applyFilters();
   if (child[1] == "day")
     createMatrixDay();
   else if (child[1] == "week") {
