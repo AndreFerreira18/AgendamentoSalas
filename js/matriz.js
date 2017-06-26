@@ -15,7 +15,7 @@ function alteraMatrix() {
         addMatrix("day");
         createMatrixDay();
     } else
-        console.log("Escolha de matriz errada");
+        snackBar("Escolha de matriz errada");
 }
 
 
@@ -44,7 +44,7 @@ function refreshMatrix() {
         defineActiveById(activeBtn);
         createMatrixWeek();
     } else
-        console.log("Escolha de matriz errada");
+        snackBar("Escolha de matriz errada");
 }
 
 function createMatrixWeek() {
@@ -89,7 +89,7 @@ function createMatrixWeek() {
                 scheduleWeek = scheduleWeek_3_sala_14;
             break;
         default:
-            console.log("não tenho mockdata dessa sala para matriz semana");
+            snackBar("não tenho mockdata dessa sala para matriz semana");
     }
     //Alterar quando recebermos JSON
     ////////////////////////////////////////////
@@ -231,8 +231,6 @@ function createMatrixDay() {
             else
                 td.classList.add("indefinido");
 
-            //if(i===5) td.classList.add("indefinido");
-
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
             td.addEventListener("click", selecionarGrupoMatriz);
@@ -275,10 +273,10 @@ function selecionarGrupoMatriz(e) {
                             selected_hours.push(e.target.id);
                             break;
                         }
-                        if(i===selected_hours.length-1) snackBar(1);
+                        if(i===selected_hours.length-1) snackBar('Por favor seleciona horas consecutivas');
                     }
                 } else {
-                    snackBar(0);
+                    snackBar('Por favor seleciona na mesma sala');
                 }
             }
         }
