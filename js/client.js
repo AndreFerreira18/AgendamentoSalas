@@ -68,6 +68,15 @@ function applyFilters() {
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
     var resources = _getResources('store_btn_recursos');
     var floor = getActive('list-group-item');
+    var availableRooms = [];
+    var selectedFloor = this.resources[floor];
+    var length = selectedFloor.length;
+    //iterate to see what rooms are available for those filters
+    for(var i = 0; i < length; i++){
+      var currentRoom = selectedFloor[i].NomeSala;
+      if(areResourcesAvailable(resources, selectedFloor[i].Recursos) && participants <= selectedFloor[i].Recursos.N_Pessoas)
+          availableRooms.push(selectedFloor[i].NomeSala)
+    }
 }
 
 /**
