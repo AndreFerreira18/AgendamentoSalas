@@ -98,27 +98,22 @@ function createMatrixWeek() {
     // titulo
     var mh = document.getElementById("matrix_week_head");
     var trH = document.createElement('tr');
-    var tdL = document.createElement('td');
     var spanL = document.createElement('span');
-    var tdC = document.createElement('td');
-    var tdR = document.createElement('td');
+    var thC = document.createElement('th');
     var spanR = document.createElement('span');
-    var colspan = scheduleWeek.dates.length-1;
+    var colspan = scheduleWeek.dates.length+1;
 
     mh.appendChild(trH);
 
-    //seta para a esquerda
-    spanL.className = ("glyph glyphicon glyphicon-arrow-left");
-    tdL.appendChild(spanL);
-    trH.appendChild(tdL);
-    tdC.innerHTML = "Vista da Semana";
-    tdC.setAttribute("colspan",colspan);
-    trH.appendChild(tdC);
-
-    //seta para a direita
-    spanR.className = ("glyph glyphicon glyphicon-arrow-right");
-    tdR.appendChild(spanR);
-    trH.appendChild(tdR);
+    thC.setAttribute("style","text-align:center;");
+    thC.setAttribute("colspan",colspan);
+    thC.innerHTML = "Vista da Semana";
+    // Adiciona Setas
+    spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
+    thC.appendChild(spanL);
+    spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
+    thC.appendChild(spanR);
+    trH.appendChild(thC);
 
     // Horas
     var tr = document.createElement('tr');
