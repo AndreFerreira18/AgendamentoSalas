@@ -9,7 +9,7 @@ function alteraMatrix() {
         addBtnRooms();
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
-        createMatrixWeek();
+        createMatrixWeek(1);
     } else if(filho[1] == "week") {
         removeBtnSalas();
         addMatrix("day");
@@ -30,7 +30,7 @@ function addMatrix(matrixType) {
     matrix.appendChild(mb);
 }
 
-function refreshMatrix() {
+function refreshMatrix(id_semana) {
     var matrix = document.getElementById("matrix");
     var id_child = matrix.firstElementChild.id;
     var child = id_child.split("_");
@@ -42,50 +42,51 @@ function refreshMatrix() {
         var activeBtn = getActive("btn-rooms");
         refreshButtons();
         defineActiveById(activeBtn);
-        createMatrixWeek();
+        createMatrixWeek(id_semana);
+
     } else
         console.log("Escolha de matriz errada");
 }
 
-function createMatrixWeek() {
+function createMatrixWeek(id_semana) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var id_andar = getActive('list-group-item');
     var temp_id_sala = getActive('btn-rooms').split("-");
     var id_sala = "1" + temp_id_sala[1];
-    var id_week = "1";
+
     var scheduleWeek;
     switch(id_sala) {
         case "11":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_11;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_11;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_11;
             break;
         case "12":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_12;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_12;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_12;
             break;
         case "13":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_13;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_13;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_13;
             break;
         case "14":
-            if(id_week == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_14;
-            else if(id_week == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_14;
-            else if(id_week == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_14;
             break;
         default:
@@ -110,8 +111,10 @@ function createMatrixWeek() {
     thC.innerHTML = "Vista da Semana";
     // Adiciona Setas
     spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
+    spanL.addEventListener("click", function(){refreshMatrix(id_semana-1);});
     thC.appendChild(spanL);
     spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
+    spanR.addEventListener("click", function(){refreshMatrix(id_semana+1);});
     thC.appendChild(spanR);
     trH.appendChild(thC);
 

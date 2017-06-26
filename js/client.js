@@ -146,6 +146,7 @@ function saveChanges() {
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
+    var week = 0;
 
     updownIniciar();
     if(startDay === endDay) {
@@ -155,7 +156,7 @@ function saveChanges() {
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
-    refreshMatrix();
+    refreshMatrix(week);
     clone();
 }
 
