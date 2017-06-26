@@ -10,12 +10,14 @@ $(window).ready(
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
-    "timePicker": true,
-    "startDate": "03/07/2017",
-    "endDate": "04/07/2017",
-    "locale": {
-        format: 'DD/MM/YYYY h:mm A'
-    }
+  "timePicker": true,
+  "timePicker24Hour": true,
+  "timePickerIncrement": 30,
+  "startDate": "06/09/2017",
+  "endDate": "06/09/2017",
+  "locale": {
+    format: 'MM/DD/YYYY h:mm '
+  }
 
 });
 
@@ -64,9 +66,13 @@ $(document).ready(function() {
 *This method reads the fields inserted on the sidebar and passed them to the matrix constructor.
 */
 function applyFilters() {
-    var dateArray = divideDateAndTime();
+    var dateArray = divideDateAndTime('data_mod_calendar');
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
-    var resources = _getResources('store_btn_recursos');
+    if(participants < 0 || participants > 999){
+
+      return;
+    }
+    var myResources = _getResources('store_btn_recursos');
     var floor = getActive('list-group-item');
     var availableRooms = [];
     var selectedFloor = this.resources[floor];
@@ -74,21 +80,51 @@ function applyFilters() {
     //iterate to see what rooms are available for those filters
     for(var i = 0; i < length; i++){
       var currentRoom = selectedFloor[i].NomeSala;
-      if(areResourcesAvailable(resources, selectedFloor[i].Recursos) && participants <= selectedFloor[i].Recursos.N_Pessoas)
+      if(areResourcesAvailable(participants, myResources, selectedFloor[i].Recursos))
           availableRooms.push(selectedFloor[i].NomeSala)
     }
 }
+/**
+*  This method receives an array with the selected resources and the availability of the room (in terms of resources) and
+*  confirms if the room has the given resources availables for the reservation
+*  @param {Number} participants - An Integer with the number of participants of the request
+*  @param {Array} selection - An Array of the selected resources
+*  @param {Array} availables - An Array with resources information for a given room
+*  @returns {Boolean} True if the room has available resources for the request | False if the room has not
+*/
+function areResourcesAvailable(participants, selection, availables){
+  var isAvailable = true;
+  if(participants > parseInt(availables.N_Pessoas))
+    isAvailable = false;
+   else{
+     for(var i = 0; i < selection.length; i++){
+       if(selection[i] !== 'Material de Escritório'){
+         if(availables[selection[i]] === false )
+            isAvailable = false;
+       }
+       else{
+         if(availables['Material_de_Escritorio'] === false)
+            isAvailable = false;
+       }
+     }
+     return isAvailable;
+   }
+}
 
 /**
-* Private method that gets all resources that were selected by the user and returns them in an array
+*  Private method that gets all resources that were selected by the user and returns them in an array
+*  @param {String} id - Receives the id of the buttons container
+*  @returns {Array} An array that contains the name of the resources selected by the user.
 */
 function _getResources(id) {
   var elements = document.getElementById(id);
   var length = elements.children.length;
   var elementsArray = [];
   for(var i =0; i < length ; i++){
-    if(elements.children[i].children[0].classList.contains('active')) //if that resource was selected
-      elementsArray.push(parseInt(elements.children[i].id.split("-")[1])); //add to selected resources array
+    if(elements.children[i].children[0].classList.contains('active')){ //if that resource was selected
+      var id = parseInt(elements.children[i].id.split("-")[1]); //add to selected resources array
+      elementsArray.push(initialData.Recursos[id]);
+    }
   }
   return elementsArray;
 }
@@ -154,6 +190,7 @@ function removeElement(elementId) {
         element.parentNode.removeChild(element);
     }
 }
+
 
 //saves data to the Side Bar
 function saveChanges() {
@@ -249,16 +286,16 @@ function criarRecursos() {
 }
 
 function tReuniao() {
-    var x = initialData.Tipos_de_Reuniao;
-    document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
-    for(var i = 0; i < x.length; i++) {
-        var opt = document.createElement("option");
-        opt.innerHTML = x[i];
-        opt.value = i;
-        var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
-        tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
-    }
-}
+  var x = initialData.Tipos_de_Reuniao;
+  document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
+  for (var i = 0; i < x.length; i++) {
+    var opt = document.createElement("option");
+    opt.innerHTML = x[i];
+    opt.value = x[i];
+    var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
+    tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
+  }
+  }
 
 function pisoPref() {
     var x = initialData.Andares;
@@ -282,9 +319,17 @@ function clone() {
 
     document.querySelector(".modal-body").remove();
     $('input[name="daterange"]').daterangepicker({
+<<<<<<< HEAD
         "timePicker": true,
         "locale": {
             format: 'DD/MM/YYYY h:mm A'
+=======
+      "timePicker": true,
+      "timePicker24Hour": true,
+      "timePickerIncrement": 30,
+      "locale": {
+        format: 'MM/DD/YYYY h:mm '
+>>>>>>> HTML_DEV_ANDRE
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -309,22 +354,38 @@ function divideDateAndTime(idData) {
     return datahora;
 }
 
-// function preencheModalConfirm(){
-//
-//     var datestart_info = document.getElementById("x").value;
-//     var timestart_info = document.getElementById("z").value;
-//     var dateEnd_info = document.getElementById("a").value;
-//     var timeEnd_info = document.getElementById("y").value;
-//
-//     document.getElementById("datetime_info").innerHTML= '"Das " +  timestart_info " até às " + timeEnd_info + " no dia " + datestart_info';
+function findHour(){
+    for (var i = 0; i<selected_hours.length; i++){
+    var acede_dataHora_selecionada = selected_hours[i];
+    var dataHora_selecionada = acede_dataHora_selecionada.split("-");
+    console.log(dataHora_selecionada);
+    return dataHora_selecionada;
+}
+}
+
+ function preencheModalConfirm(){
+
+    var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
+    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
+
+    // var datestart_info = selected_hours[0];
+    // console.log(datestart_info);
+    // var timestart_info = document.getElementById("datahora[1]").value;
+    // var dateEnd_info = document.getElementById("datahora[4]").value;
+    // var timeEnd_info = document.getElementById("datahora[5]").value;
+    // var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
+    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
 //
 //     var room_info = document.getElementById("m").value;
 //     var piso_info = document.getElementById("selected").value;
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
-//
+    var participantes = document.getElementById("data_mod_nparticipantes").value;
+    var str_participantes = 'Com ' + participantes + ' participantes previstos';
+    document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
 //     // var recurso_info =
 // }
+<<<<<<< HEAD
 
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
@@ -335,6 +396,14 @@ function snackBar(msg) {
     snack.appendChild(p);
 
     snack.className = "show";
+=======
+}
+function snackBar(n) {
+    var snack;
+    if(n===0) snack = document.getElementById("snackBarDias");
+    else if(n===1) snack = document.getElementById("snackBarHoras");
+    snack.classList.toggle("show");
+>>>>>>> HTML_DEV_ANDRE
     setTimeout(function(){
             snack.className = snack.className.replace("show", "");
         },
