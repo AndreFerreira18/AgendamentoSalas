@@ -272,6 +272,7 @@ function selecionarGrupoMatriz(e) {
                             selected_hours.push(e.target.id);
                             break;
                         }
+                        if(i===selected_hours.length-1) alert('Por favor seleciona horas consecutivas');
                     }
                 } else {
                     alert('Por favor seleciona na mesma sala');
