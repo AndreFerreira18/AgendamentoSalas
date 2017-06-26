@@ -85,7 +85,11 @@ var rooms_7 = {
 
 var initialData = {
   "Andares": [
+<<<<<<< HEAD
     "Rés-do-Chão",
+=======
+    "Res Do Chão",
+>>>>>>> HTML_DEV
     "1º Andar",
     "2º Andar",
     "3º Andar",

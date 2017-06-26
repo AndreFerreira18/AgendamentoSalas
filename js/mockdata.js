@@ -1,55 +1,55 @@
 var shedualDay = {
   "0": [{
       "NomeSala": "Sala 0.1",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Indisponivel", "Indisponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 0.2",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Indisponivel", "Indisponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 0.3",
 
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 0.4",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
   "1": [{
       "NomeSala": "Sala 1.1",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 1.2",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 1.3",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 1.4",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
     }
   ],
   "2": [{
       "NomeSala": "Sala 2.1",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 2.2",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel", "Disponivel"]
     },
     {
       "NomeSala": "Sala 2.3",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel", "Disponivel"]
     }
   ],
   "3": [{
       "NomeSala": "Sala 3.1",
-      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
+      "Disponibilidade": ["Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Indisponivel"]
     },
     {
       "NomeSala": "Sala 3.2",
