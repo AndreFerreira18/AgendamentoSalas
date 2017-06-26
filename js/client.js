@@ -334,6 +334,7 @@ function divideDateAndTime(idData) {
 
 function preencheModalConfirm(){
 
+
     //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
     document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
@@ -390,14 +391,15 @@ function preencheModalConfirm(){
         var room_info = rooms[j];
         }
     }
+
     var str_sala = 'Localizado na ' + room_info + ' situada no ' + piso_info;
-    document.getElementById("sala_info").insertAdjacentHTML( 'beforeend', str_sala );
+    document.getElementById("sala_info").innerHTML = str_sala;
 //     var piso_info = document.getElementById("selected").value;
 //
 //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
     var participantes = document.getElementById("data_mod_nparticipantes").value;
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
-    document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
+    document.getElementById("nparticipantes").innerHTML = str_participantes;
 //     // var recurso_info =
  }
 
