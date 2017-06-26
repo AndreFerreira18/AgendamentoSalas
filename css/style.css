@@ -347,6 +347,11 @@ ooo        ooooo       .o.       ooooooooooooo ooooooooo.   ooooo ooooooo  ooooo
  8    Y     888   .8'     `888.       888       888  `88b.   888    d8'  `888b
 o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o o888o  o88888o
 */
+
+#btn_rooms {
+    margin-top: 15px;
+}
+
 table.matrix {
     text-align: center;
     border: 1px solid #fff;

@@ -237,7 +237,7 @@ function tReuniao() {
     for(var i = 0; i < x.length; i++) {
         var opt = document.createElement("option");
         opt.innerHTML = x[i];
-        opt.value = i;
+        opt.value = x[i];
         var tipo_reuniao = document.getElementById("data_mod_tipo_reuniao");
         tipo_reuniao.insertBefore(opt, tipo_reuniao.firstChild);
     }
