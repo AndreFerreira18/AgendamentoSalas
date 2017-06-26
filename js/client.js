@@ -12,14 +12,13 @@ $(window).ready(
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
-  "timePicker": true,
-  "timePicker24Hour": true,
-  "timePickerIncrement": 30,
-  "startDate": "09/06/2017",
-  "endDate": "09/06/2017",
-  "locale": {
-    format: 'DD/MM/YYYY h:mm'
-  }
+    "timePicker": true,
+    "timePicker24Hour" :true,
+    "startDate": "03/07/2017",
+    "endDate": "04/07/2017",
+    "locale": {
+        format: 'DD/MM/YYYY h:mm'
+    }
 
 });
 
@@ -64,8 +63,37 @@ $(document).ready(function() {
     });
 });
 
-function atualizaMatriz() {
+/**
+*This method reads the fields inserted on the sidebar and passed them to the matrix constructor.
+*/
+function applyFilters() {
+    var dateArray = divideDateAndTime();
+    var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
+    var resources = _getResources('store_btn_recursos');
+    var floor = getActive('list-group-item');
+    var availableRooms = [];
+    var selectedFloor = this.resources[floor];
+    var length = selectedFloor.length;
+    //iterate to see what rooms are available for those filters
+    for(var i = 0; i < length; i++){
+      var currentRoom = selectedFloor[i].NomeSala;
+      if(areResourcesAvailable(resources, selectedFloor[i].Recursos) && participants <= selectedFloor[i].Recursos.N_Pessoas)
+          availableRooms.push(selectedFloor[i].NomeSala)
+    }
+}
 
+/**
+* Private method that gets all resources that were selected by the user and returns them in an array
+*/
+function _getResources(id) {
+  var elements = document.getElementById(id);
+  var length = elements.children.length;
+  var elementsArray = [];
+  for(var i =0; i < length ; i++){
+    if(elements.children[i].children[0].classList.contains('active')) //if that resource was selected
+      elementsArray.push(parseInt(elements.children[i].id.split("-")[1])); //add to selected resources array
+  }
+  return elementsArray;
 }
 
 
@@ -150,12 +178,12 @@ function removeElement(elementId) {
 
 //saves data to the Side Bar
 function saveChanges() {
-    var datahora = divideDateAndTime();
+    var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
-    var week = 0;
+
 
     updownIniciar();
     if(startDay === endDay) {
@@ -165,12 +193,12 @@ function saveChanges() {
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
-    refreshMatrix(week);
+    refreshMatrix();
     clone();
 }
 
 // Criar Recursos
-function criarrecursos() {
+function criarRecursos() {
 
     var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
@@ -200,7 +228,7 @@ function criarrecursos() {
         label.className = "label-recurso";
         label.innerHTML = label_recursos[i];
 
-        iDiv.id = 'recurso' + i;
+        iDiv.id = 'recurso-' + i;
         iDiv.className = 'divBotoes';
         spn.setAttribute("z-index", "-1");
         spn.className = 'glyph ';
@@ -226,7 +254,7 @@ function criarrecursos() {
                 spn.className += glyph_recursos[4];
                 break;
 
-                others:
+            default:
                     spn.className += glyph_recursos[5];
                 break;
         }
@@ -293,8 +321,8 @@ function clone() {
     }
 }
 
-function divideDateAndTime() {
-    var acedeDataHora = document.getElementById("data_mod_calendar").value;
+function divideDateAndTime(idData) {
+    var acedeDataHora = document.getElementById(idData).value;
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
@@ -329,14 +357,27 @@ function preencheModalConfirm(){
     document.getElementById("nparticipantes").insertAdjacentHTML( 'beforeend', str_participantes );
 //     // var recurso_info =
 // }
+<<<<<<< HEAD
 }
 function snackBar(n) {
     var snack;
     if(n===0) snack = document.getElementById("snackBarDias");
     else if(n===1) snack = document.getElementById("snackBarHoras");
     snack.classList.toggle("show");
+=======
+
+function snackBar(msg) {
+    var snack = document.getElementById("snackBar")
+    snack.innerHTML = '';
+
+    var p = document.createElement("p");
+    p.innerHTML = msg;
+    snack.appendChild(p);
+
+    snack.className = "show";
+>>>>>>> HTML_DEV
     setTimeout(function(){
-            snack.classList.toggle("show");
+            snack.className = snack.className.replace("show", "");
         },
-    5000);
+    3000);
 }

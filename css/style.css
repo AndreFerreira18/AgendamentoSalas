@@ -64,6 +64,10 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
       width: calc(100% - 320px);
     }
 
+    .col-md-6 {
+      min-width: 102%;
+    }
+
 }
 
 @media (min-width: 992px){
@@ -79,6 +83,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
       padding: 0;
       margin-left: 7%;
       width: 55%;
+      min-width: unset;
     }
 }
 
@@ -111,7 +116,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
 }
 
 #modal_div > .input-group > span {
-    max-width: 210px;
+    max-width: 204px;
     font-size: 14px;
 }
 
@@ -314,11 +319,11 @@ o888o         `Y8bood8P'  o888o  o888o o8o        o888o
     text-align: center;
 }
 
-#recurso0 {
+#recurso-0 {
   margin-left: 5px;
 }
 
-#recurso1 .label-recurso {
+#recurso-1 .label-recurso {
     width: 60px;
     text-align: center;
     margin: 5px 0 0 7px;
@@ -343,6 +348,11 @@ ooo        ooooo       .o.       ooooooooooooo ooooooooo.   ooooo ooooooo  ooooo
  8    Y     888   .8'     `888.       888       888  `88b.   888    d8'  `888b
 o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o o888o  o88888o
 */
+
+#btn_rooms {
+    margin-top: 15px;
+}
+
 table.matrix {
     text-align: center;
     border: 1px solid #fff;
@@ -398,22 +408,23 @@ Y88bo.       8 `88b.    8      .8"888.     888           888  d8'     888     88
 oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88P  .8'     `888.   888  `88b.
 8""88888P'  o8o        `8  o88o     o8888o  `Y8bood8P'  o888o  o888o o888bood8P'  o88o     o8888o o888o  o888o
 */
-.snackbar {
+#snackBar {
     visibility: hidden;
-    min-width: 250px;
-    margin-left: -125px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: 30px;
     background-color: #333;
     color: #fff;
     text-align: center;
     border-radius: 2px;
     padding: 16px;
-    position: fixed;
-    z-index: 1;
-    left: 50%;
+    z-index: 10;
     bottom: 30px;
+    right: 0;
     font-size: 17px;
+    position: absolute;
 }
-.snackbar.show {
+#snackBar.show {
     visibility: visible;
     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
     animation: fadein 0.5s, fadeout 0.5s 2.5s;
