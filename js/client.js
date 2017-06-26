@@ -13,10 +13,10 @@ $('input[name="daterange"]').daterangepicker({
   "timePicker": true,
   "timePicker24Hour": true,
   "timePickerIncrement": 30,
-  "startDate": "06/09/2017",
-  "endDate": "06/09/2017",
+  "startDate": "03/07/2017",
+  "endDate": "04/07/2017",
   "locale": {
-    format: 'MM/DD/YYYY h:mm '
+    format: 'DD/MM/YYYY h:mm '
   }
 
 });
@@ -333,7 +333,7 @@ function clone() {
       "timePicker24Hour": true,
       "timePickerIncrement": 30,
       "locale": {
-        format: 'MM/DD/YYYY h:mm '
+        format: 'DD/MM/YYYY h:mm '
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
