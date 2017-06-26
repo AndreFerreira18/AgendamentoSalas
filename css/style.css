@@ -364,12 +364,14 @@ table.matrix td {
 .disponivel {
     color: #3c763d;
     font-weight: bold;
+    cursor:pointer;
     /*background-color: #dff0d8;*/
 }
 
 .indisponivel {
     color: #777;
     background-color: #eee;
+    cursor:not-allowed;
 }
 
 .indefinido {

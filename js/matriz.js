@@ -268,8 +268,6 @@ function selecionarGrupoMatriz(e) {
                             defineMultiActiveEvent(e);
                             selected_hours.push(e.target.id);
                             break;
-                        }else{
-                            alert('Por favor selecione horas consecutivas');
                         }
                     }
                 } else {
