@@ -333,3 +333,104 @@ o888o         `Y8bood8P'  o888o  o888o o8o        o888o
     font-size: 25px;
     text-align: center;
 }
+
+/*
+ooo        ooooo       .o.       ooooooooooooo ooooooooo.   ooooo ooooooo  ooooo
+`88.       .888'      .888.      8'   888   `8 `888   `Y88. `888'  `8888    d8'
+ 888b     d'888      .8"888.          888       888   .d88'  888     Y888..8P
+ 8 Y88. .P  888     .8' `888.         888       888ooo88P'   888      `8888'
+ 8  `888'   888    .88ooo8888.        888       888`88b.     888     .8PY888.
+ 8    Y     888   .8'     `888.       888       888  `88b.   888    d8'  `888b
+o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o o888o  o88888o
+*/
+table.matrix {
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+table.matrix td:hover {
+    color: #31708f;
+    background-color: #d9edf7;
+}
+
+table.matrix td.indisponivel:hover {
+    color: #777;
+    background-color: #eee;
+}
+
+table.matrix td {
+    border: 1px solid #e6e6e6;
+}
+
+.disponivel {
+    color: #3c763d;
+    font-weight: bold;
+    cursor:pointer;
+    /*background-color: #dff0d8;*/
+}
+
+.indisponivel {
+    color: #777;
+    background-color: #eee;
+    cursor:not-allowed;
+}
+
+.indefinido {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+}
+
+table.matrix .active {
+    background-color: #337ab7 !important;
+    color: #fff;
+}
+table.matrix .active:hover {
+    background-color: #337ab7 !important;
+    color: #000;
+}
+/*
+
+ .oooooo..o ooooo      ooo       .o.         .oooooo.   oooo    oooo oooooooooo.        .o.       ooooooooo.
+d8P'    `Y8 `888b.     `8'      .888.       d8P'  `Y8b  `888   .8P'  `888'   `Y8b      .888.      `888   `Y88.
+Y88bo.       8 `88b.    8      .8"888.     888           888  d8'     888     888     .8"888.      888   .d88'
+ `"Y8888o.   8   `88b.  8     .8' `888.    888           88888[       888oooo888'    .8' `888.     888ooo88P'
+     `"Y88b  8     `88b.8    .88ooo8888.   888           888`88b.     888    `88b   .88ooo8888.    888`88b.
+oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88P  .8'     `888.   888  `88b.
+8""88888P'  o8o        `8  o88o     o8888o  `Y8bood8P'  o888o  o888o o888bood8P'  o88o     o8888o o888o  o888o
+*/
+.snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+.snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
