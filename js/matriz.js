@@ -85,7 +85,7 @@ function refreshMatrix(nextSemana) {
     addMatrix(child[1]);
     var filters = applyFilters();
     if (child[1] == "day")
-        createMatrixDay();
+        createMatrixDay(filters);
     else if (child[1] == "week") {
         var activeBtn = getActive("btn-rooms");
         refreshButtons();
@@ -314,7 +314,7 @@ function addBtnRooms() {
  *
  * @returns {type}  description
  */
-function createMatrixDay() {
+function createMatrixDay(filters) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var idSelectedFloor = getActive('list-group-item');
@@ -348,6 +348,7 @@ function createMatrixDay() {
         for (var j = 0; j < shedualDay[selectedFloor].length; j++) {
             var td = document.createElement('td');
 
+
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
             if (disponibilidade == 'Disponivel')
                 td.classList.add("disponivel");
@@ -355,6 +356,13 @@ function createMatrixDay() {
                 td.classList.add("indisponivel");
             else
                 td.classList.add("indefinido");
+
+                for(var k=0; k< filters[rooms].length; k++){
+                    if(filters[rooms][k] === shedualDay[selectedFloor][j].NomeSala){
+                        td.className = 'indefinido';
+                    }
+                }
+
 
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
