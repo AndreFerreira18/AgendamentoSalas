@@ -302,18 +302,14 @@ function addBtnRooms(filters) {
         btn.classList.add('btn-rooms');
         btn.classList.add('btn');
         btn.classList.add('btn-lg');
-
-        for (var j = 0; i < filters.rooms.length; j++) {
-            if (rooms.salas[i] != filters.rooms[j])
-                btn.classList.add('btn-warning');
-            else
-                btn.classList.add('btn-default');
-
+        var btn_warning = true;
+        for (var j = 0; j < filters.rooms.length; j++) {
+            if (rooms.salas[i - 1] === filters.rooms[j]) btn_warning = false;
         }
-
-
-
-
+        if (btn_warning)
+            btn.classList.add('btn-warning');
+        else
+            btn.classList.add('btn-default');
         btn.addEventListener("click", defineActiveEvent);
         element.appendChild(btn);
     }
