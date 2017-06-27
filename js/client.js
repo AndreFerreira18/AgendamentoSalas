@@ -31,6 +31,7 @@ $(window).resize(function() {
         document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
     }
 });
+//variable to control side bar opening.
 var isSideBarOpen = false;
 
 $(document).ready(function() {
@@ -67,28 +68,34 @@ $(document).ready(function() {
  *  @returns {Object} an Object containing the available rooms for the inputed filters and the information if a longer time period was selected.
  */
 function applyFilters() {
+    //gets dates
     var dateArray = divideDateAndTime('data_mod_calendar');
+    //gets number of participants
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
     if (participants <= 0 || participants > 999) {
         snackBar("Por favor insira um número de participantes entre 1 e 999");
         return;
     }
+    //checks Radio Buttons for longer periods
     var preSelection = document.querySelector('input[name="period"]:checked') !== null ? document.querySelector('input[name="period"]:checked').id : "";
+    //gets selected resources
     var myResources = _getResources('store_btn_recursos');
+    //gets current floor selection
     var floor = getActive('list-group-item');
+    //returning object structure
     var availables = {
         rooms: [],
         selection: preSelection
     };
+
+    //iterate to see what rooms are available for those filters
     var selectedFloor = this.resources[floor];
     var length = selectedFloor.length;
-    //iterate to see what rooms are available for those filters
     for (var i = 0; i < length; i++) {
         var currentRoom = selectedFloor[i].NomeSala;
         if (areResourcesAvailable(participants, myResources, selectedFloor[i].Recursos))
             availables.rooms.push(selectedFloor[i].NomeSala)
     }
-
     return availables;
 }
 /**
@@ -101,14 +108,14 @@ function applyFilters() {
  */
 function areResourcesAvailable(participants, selection, availables) {
     var isAvailable = true;
-    if (participants > parseInt(availables.N_Pessoas))
+    if (participants > parseInt(availables.N_Pessoas)) //if the number of participants is greater than the maximum capability of the room
         isAvailable = false;
     else {
-        for (var i = 0; i < selection.length; i++) {
+        for (var i = 0; i < selection.length; i++) { //else chech if the selected resources are available
             if (selection[i] !== 'Material de Escritório') {
                 if (availables[selection[i]] === false)
                     isAvailable = false;
-            } else {
+            } else { //fix for 'Material_de_Escritorio' as it is the only string different in data side and in buttons side
                 if (availables['Material_de_Escritorio'] === false)
                     isAvailable = false;
             }
@@ -136,6 +143,11 @@ function _getResources(id) {
 }
 
 
+/**
+ * toggleSideBar - This method handles side Bar opening and closing
+ *
+ * @param  {type} event The event that was triggered 
+ */
 function toggleSideBar(event) {
     var elem = document.getElementById("sidebar-wrapper");
     left = window.getComputedStyle(elem, null).getPropertyValue("left");
