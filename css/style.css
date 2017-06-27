@@ -246,6 +246,52 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
 }
 
 
+.radioButton {
+  display: inline;
+  padding: 10px;
+}
+
+#day_period > label {
+    vertical-align: middle;
+}
+
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {
+    color: #333333;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    cursor: pointer;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:15px;
+    height:15px;
+    margin:0px 6px 0 0;
+    vertical-align: text-top;
+    cursor:pointer
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+     background-color: #d1d3d1;
+}
+
+input[type="radio"]:checked + label span{
+     background-color: #337ab7;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+
+
 
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
