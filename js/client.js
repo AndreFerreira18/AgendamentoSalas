@@ -470,7 +470,6 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
-    var selected_hours = getMultiActive('available');
 
     //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
@@ -478,6 +477,7 @@ function preencheModalConfirm() {
 
     //Devolve Andar e Sala Escolhidos
     var piso_info = getActive('list-group-item');
+
     //Seleciona no mockdata2 qual o conjunto de salas consoante piso
     switch(piso_info) {
         case "piso-0":
@@ -514,7 +514,9 @@ function preencheModalConfirm() {
             break;
         default:
     }
+
     //ve sala selecionada
+    var selected_hours = getMultiActive('available');
     for (var i = 0; i<selected_hours.length; i++){
     var array_room = selected_hours[i];
     var aux_room_info = array_room.split("-");
@@ -527,32 +529,33 @@ function preencheModalConfirm() {
         }
     }
 
+    //Adiciona Sala e Piso escolhido ao Modal de confirmaçao
     var aux_piso = piso_info.split("-");
     var str_sala = 'Localizado na ' + room_info + ' situada no Piso ' + aux_piso[1];
     document.getElementById("sala_info").innerHTML = str_sala;
 
+    //Adiciona Participantes ao modal de confirmaçao
     var participantes = document.getElementById("data_mod_nparticipantes").value;
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
     document.getElementById("nparticipantes").innerHTML = str_participantes;
 
+    //Adiciona recursos disponiveis na sala ao Modal de confirmaçao
     var resources_per_room_array = [];
     var resources_per_room = [];
     resources_per_room_array = aux_resources_per_room[selected_room].Recursos;
+    //Procura por recursos no mockdata2
     for (var resource in resources_per_room_array) {
       if (resources_per_room_array.hasOwnProperty(resource)) {
           var verifica_bool =  resources_per_room_array[resource];
+          //Verifica se recurso está a true
           if(verifica_bool === true){
               resources_per_room.push(" "+ resource);
           }
       }
     }
-
      var str_recursos = "Com os seguintes recursos: " + resources_per_room;
      document.getElementById("recursos_info").innerHTML = str_recursos;
-    // for (var k = 0; k<resources_per_room_array.length;k++){
-    //     resources_per_room = resources_per_room_array[k];
-    //     var resources_per_room_info = resources_per_room_array.resources_per_room;
-    // }
+
  }
 
 /**
