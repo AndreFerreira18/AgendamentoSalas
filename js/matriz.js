@@ -213,8 +213,11 @@ function createMatrixWeek(nextSemana) {
         for (var j = 0; j < scheduleWeek.dates.length; j++) {
             var td = document.createElement('td');
             var disponibilidade = scheduleWeek[j][i];
-            if (disponibilidade == 'Disponível')
+            if (disponibilidade == 'Disponível'){
                 td.classList.add("available");
+                td.addEventListener("click", selecionarGrupoMatrizWeek);
+            }
+
             else if (disponibilidade == 'Indisponível')
                 td.classList.add("notAvailable");
             else
@@ -222,7 +225,7 @@ function createMatrixWeek(nextSemana) {
 
             td.innerHTML = scheduleWeek[j][i];
             td.id = 'td-' + j + '-' + i;
-            td.addEventListener("click", selecionarGrupoMatrizWeek);
+
             tr.appendChild(td);
         }
     }
@@ -369,8 +372,10 @@ function createMatrixDay(filters) {
 
 
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
-            if (disponibilidade == 'Disponivel')
+            if (disponibilidade == 'Disponivel'){
                 td.classList.add("available");
+                td.addEventListener("click", selecionarGrupoMatrizDay);
+            }
             else if (disponibilidade == 'Indisponivel')
                 td.classList.add("notAvailable");
             else
@@ -386,7 +391,6 @@ function createMatrixDay(filters) {
 
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
-            td.addEventListener("click", selecionarGrupoMatrizDay);
             tr.appendChild(td);
         }
     }
