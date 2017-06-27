@@ -470,7 +470,7 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
-    var selected_hours = getMultiActive('disponivel');
+    var selected_hours = getMultiActive('available');
 
     //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
