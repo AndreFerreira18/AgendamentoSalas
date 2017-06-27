@@ -10,13 +10,13 @@ $(window).ready(
 
 //Date picker
 $('input[name="daterange"]').daterangepicker({
-    "timePicker": true,
-    "timePicker24Hour": true,
-    "timePickerIncrement": 30,
-    "startDate": "03/07/2017",
-    "endDate": "04/07/2017",
-    "locale": {
-        format: 'DD/MM/YYYY h:mm '
+    timePicker: true,
+    timePicker24Hour: true,
+    timePickerIncrement: 30,
+    startDate: "03/07/2017",
+    endDate: "04/07/2017",
+    locale: {
+        format: 'DD/MM/YYYY h:mm A'
     }
 
 });
@@ -274,10 +274,11 @@ function saveChanges() {
 
 
     updownIniciar();
+    var filters = applyFilters();
     if (startDay === endDay) {
         addMatrix('day');
     } else {
-        addBtnRooms();
+        addBtnRooms(filters);
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
@@ -413,11 +414,11 @@ function clone() {
 
     document.querySelector(".modal-body").remove();
     $('input[name="daterange"]').daterangepicker({
-      "timePicker": true,
-      "timePicker24Hour": true,
-      "timePickerIncrement": 30,
-      "locale": {
-        format: 'DD/MM/YYYY h:mm'
+        "timePicker": true,
+        "timePicker24Hour": true,
+        "timePickerIncrement": 30,
+        "locale": {
+            format: 'DD/MM/YYYY h:mm A'
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -444,8 +445,8 @@ function divideDateAndTime(idData) {
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
     datahora[1] = arrayDataHora[4]; // Data de fim
-    datahora[2] = arrayDataHora[1]; // Hora de inicio
-    datahora[3] = arrayDataHora[5]; //Hora de fim
+    datahora[2] = arrayDataHora[1] + ' ' + arrayDataHora[2]; // Hora de inicio
+    datahora[3] = arrayDataHora[5] + ' ' + arrayDataHora[6]; //Hora de fim
     return datahora;
 }
 
@@ -469,7 +470,7 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
-    var selected_hours = getMultiActive('disponivel'); 
+    var selected_hours = getMultiActive('disponivel');
 
     //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
@@ -571,4 +572,38 @@ function snackBar(msg) {
             snack.className = snack.className.replace("show", "");
         },
         3000);
+}
+
+
+/**
+ * updateDate - This method updates the DateRangePicker when radio buttons are pressed (Morning, Afternoon, Day)
+ *
+ * @param  {type} e The event object from the triggered event
+ */
+function updateDate(e) {
+    var id = e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
+    var startDate = '';
+    var endDate = '';
+    var initial = $('#data_mod_calendar').data('daterangepicker').startDate.format('DD-MM-YYYY');
+
+    switch (id) {
+        case 'cManha':
+            startDate = ' 08:00'
+            endDate = ' 13:00'
+            document.getElementById('manha').checked = true;
+            break;
+        case 'cTarde':
+            startDate = ' 14:00'
+            endDate = ' 20:00'
+            document.getElementById('tarde').checked = true;
+            break;
+        case 'cDia':
+            startDate = ' 08:00'
+            endDate = ' 20:00'
+            document.getElementById('dia').checked = true;
+            break;
+    }
+    $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + startDate);
+    $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + endDate);
+    e.preventDefault();
 }

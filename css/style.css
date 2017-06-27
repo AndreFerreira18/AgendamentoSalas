@@ -295,6 +295,13 @@ input[type="radio"]:checked + label span {
 }
 
 
+#form_modal > #modal_div > .form-group > #data_mod_calendar {
+  font-size: 14px;
+}
+
+#form_sb > #modal_div > .form-group > #data_mod_calendar {
+  font-size: 12px;
+}
 
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
@@ -450,7 +457,7 @@ table.matrix td {
     border: 1px solid #e6e6e6;
 }
 
-.disponivel {
+.avaiable {
     color: #3c763d;
     font-weight: bold;
     cursor:pointer;
@@ -458,14 +465,14 @@ table.matrix td {
     user-select: none;
 }
 
-.indisponivel {
+.notAvaiable {
     color: #777;
     background-color: #eee;
     cursor:not-allowed;
     user-select: none;
 }
 
-.indefinido {
+.nearMiss {
     color: #8a6d3b;
     background-color: #fcf8e3;
 }
@@ -502,7 +509,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
     bottom: 30px;
     right: 0;
     font-size: 17px;
-    position: absolute;
+    position: fixed;
 }
 #snackBar.show {
     visibility: visible;
