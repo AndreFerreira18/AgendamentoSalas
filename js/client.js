@@ -400,7 +400,8 @@ function preencheModalConfirm(){
     var participantes = document.getElementById("data_mod_nparticipantes").value;
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
     document.getElementById("nparticipantes").innerHTML = str_participantes;
-//     // var recurso_info =
+
+    
  }
 
 function snackBar(msg) {
