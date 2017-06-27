@@ -110,7 +110,7 @@ var initialData = {
 };
 
 var resources = {
-  "piso-0": [{
+  "piso-0": [ {
       "NomeSala": "Sala 0.1",
       "Recursos": {
         "Projetor": true,
@@ -155,7 +155,7 @@ var resources = {
       }
     }
   ],
-  "piso-1": [{
+  "piso-1": [ {
       "NomeSala": "Sala 1.1",
       "Recursos": {
         "Projetor": true,
@@ -200,7 +200,7 @@ var resources = {
       }
     }
   ],
-  "piso-2": [{
+  "piso-2": [ {
       "NomeSala": "Sala 2.1",
       "Recursos": {
         "Projetor": true,
@@ -245,7 +245,7 @@ var resources = {
       }
     }
   ],
-  "piso-3": [{
+  "piso-3": [ {
       "NomeSala": "Sala 3.1",
       "Recursos": {
         "Projetor": true,
@@ -290,7 +290,7 @@ var resources = {
       }
     }
   ],
-  "piso-4": [{
+  "piso-4": [ {
       "NomeSala": "Sala 4.1",
       "Recursos": {
         "Projetor": true,
@@ -335,7 +335,7 @@ var resources = {
       }
     }
   ],
-  "piso-5": [{
+  "piso-5": [ {
       "NomeSala": "Sala 5.1",
       "Recursos": {
         "Projetor": true,
@@ -380,7 +380,7 @@ var resources = {
       }
     }
   ],
-  "piso-6": [{
+  "piso-6": [ {
       "NomeSala": "Sala 6.1",
       "Recursos": {
         "Projetor": true,
@@ -425,7 +425,7 @@ var resources = {
       }
     }
   ],
-  "piso-7": [{
+  "piso-7": [ {
       "NomeSala": "Sala 7.1",
       "Recursos": {
         "Projetor": true,
