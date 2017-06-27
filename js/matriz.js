@@ -86,7 +86,7 @@ function refreshMatrix(nextSemana) {
     addMatrix(child[1]);
     var filters = applyFilters();
     if (child[1] == "day")
-        createMatrixDay();
+        createMatrixDay(filters);
     else if (child[1] == "week") {
         var activeBtn = getActive("btn-rooms");
         refreshButtons(filters);
@@ -322,7 +322,7 @@ function addBtnRooms(filters) {
  *
  * @returns {type}  description
  */
-function createMatrixDay() {
+function createMatrixDay(filters) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var idSelectedFloor = getActive('list-group-item');
@@ -356,13 +356,22 @@ function createMatrixDay() {
         for (var j = 0; j < shedualDay[selectedFloor].length; j++) {
             var td = document.createElement('td');
 
+
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
             if (disponibilidade == 'Disponivel')
-                td.classList.add("disponivel");
+                td.classList.add("avaiable");
             else if (disponibilidade == 'Indisponivel')
-                td.classList.add("indisponivel");
+                td.classList.add("notAvaiable");
             else
                 td.classList.add("indefinido");
+
+            var isNearMiss = true;
+            for(var k=0; k< filters.rooms.length; k++)
+                if(filters.rooms[k] === shedualDay[selectedFloor][j].NomeSala)
+                    isNearMiss = false;
+
+            if (isNearMiss)
+                td.className = 'nearMiss';
 
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
@@ -374,12 +383,12 @@ function createMatrixDay() {
 
 function selecionarGrupoMatrizDay(e) {
     try {
-        nearElemet(e);
+        nearElement(e);
         defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
             case 1:
-                snackBar("Uma reserva deverá conter uma Sala.");
+                snackBar("Uma reserva deverá conter apenas uma Sala.");
                 break;
             case 2:
                 snackBar("Uma reserva deverá conter um conjunto de horas continuas");
