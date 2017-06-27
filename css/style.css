@@ -482,6 +482,10 @@ table.matrix .active:hover {
     background-color: #337ab7 !important;
     color: #000;
 }
+.undefined{
+    color: red;
+    background-color: red;
+}
 /*
 
  .oooooo..o ooooo      ooo       .o.         .oooooo.   oooo    oooo oooooooooo.        .o.       ooooooooo.

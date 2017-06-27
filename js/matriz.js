@@ -214,11 +214,11 @@ function createMatrixWeek(nextSemana) {
             var td = document.createElement('td');
             var disponibilidade = scheduleWeek[j][i];
             if (disponibilidade == 'Disponível')
-                td.classList.add("disponivel");
+                td.classList.add("available");
             else if (disponibilidade == 'Indisponível')
-                td.classList.add("indisponivel");
+                td.classList.add("notAvailable");
             else
-                td.classList.add("indefinido");
+                td.classList.add("undefined");
 
             td.innerHTML = scheduleWeek[j][i];
             td.id = 'td-' + j + '-' + i;
@@ -374,7 +374,7 @@ function createMatrixDay(filters) {
             else if (disponibilidade == 'Indisponivel')
                 td.classList.add("notAvailable");
             else
-                td.classList.add("indefinido");
+                td.classList.add("undefined");
 
             var isNearMiss = true;
             for(var k=0; k< filters.rooms.length; k++)
@@ -481,9 +481,9 @@ function nearElement(e) {
     try {
         var newElemet = e.target;
         var newElemetSplit = newElemet.id.split('-');
-        var activeElements = getMultiActive('disponivel');
+        var activeElements = getMultiActive('available');
 
-        if (newElemet.classList.contains('disponivel') && activeElements.length) {
+        if (newElemet.classList.contains('available') && activeElements.length) {
             var neighborHour = false;
             var neighborDay = true;
             var activeFirstElement = activeElements[0].split('-');
