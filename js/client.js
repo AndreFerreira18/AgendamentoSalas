@@ -292,9 +292,9 @@ function saveChanges() {
  *
  * @returns {type}  description
  */
+ var recursos = initialData.Recursos;
 function createResources() {
 
-    var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
     var glyph_recursos = [
         "glyphicon glyphicon-facetime-video",
@@ -469,7 +469,7 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
-
+    var selected_hours = getMultiActive('disponivel');
     //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
     document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
@@ -490,27 +490,35 @@ function preencheModalConfirm() {
     switch(piso_info) {
         case "piso-0":
             var rooms = rooms_0.salas;
+            var aux_resources_per_room = resources["piso-0"];
             break;
         case "piso-1":
             var rooms = rooms_1.salas;
+            var aux_resources_per_room = resources["piso-1"];
             break;
         case "piso-2":
             var rooms = rooms_2.salas;
+            var aux_resources_per_room = resources["piso-2"];
             break;
         case "piso-3":
             var rooms = rooms_3.salas;
+            var aux_resources_per_room = resources["piso-3"];
             break;
         case "piso-4":
             var rooms = rooms_4.salas;
+            var aux_resources_per_room = resources["piso-4"];
             break;
         case "piso-5":
             var rooms = rooms_5.salas;
+            var aux_resources_per_room = resources["piso-5"];
             break;
         case "piso-6":
             var rooms = rooms_6.salas;
+            var aux_resources_per_room = resources["piso-6"];
             break;
         case "piso-7":
             var rooms = rooms_7.salas;
+            var aux_resources_per_room = resources["piso-7"];
             break;
         default:
     }
@@ -527,16 +535,32 @@ function preencheModalConfirm() {
         }
     }
 
-    var str_sala = 'Localizado na ' + room_info + ' situada no ' + piso_info;
+    var aux_piso = piso_info.split("-");
+    var str_sala = 'Localizado na ' + room_info + ' situada no Piso ' + aux_piso[1];
     document.getElementById("sala_info").innerHTML = str_sala;
-//     var piso_info = document.getElementById("selected").value;
-//
-//     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
+
     var participantes = document.getElementById("data_mod_nparticipantes").value;
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
     document.getElementById("nparticipantes").innerHTML = str_participantes;
 
+    var resources_per_room_array = [];
+    var resources_per_room = [];
+    resources_per_room_array = aux_resources_per_room[selected_room].Recursos;
+    for (var resource in resources_per_room_array) {
+      if (resources_per_room_array.hasOwnProperty(resource)) {
+          var verifica_bool =  resources_per_room_array[resource];
+          if(verifica_bool === true){
+              resources_per_room.push(" "+ resource);
+          }
+      }
+    }
 
+     var str_recursos = "Com os seguintes recursos: " + resources_per_room;
+     document.getElementById("recursos_info").innerHTML = str_recursos;
+    // for (var k = 0; k<resources_per_room_array.length;k++){
+    //     resources_per_room = resources_per_room_array[k];
+    //     var resources_per_room_info = resources_per_room_array.resources_per_room;
+    // }
  }
 
 /**
