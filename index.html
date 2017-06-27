@@ -60,17 +60,17 @@
                 </span>
               </div> -->
                             <div class="form_group" id="day_period">
-                                <div class="radioButton">
-                                    <input type="radio" id="manhã" name="period" />
+                                <div class="radioButton" id="cManha" onclick="updateDate(event)">
+                                    <input type="radio" id="manha" name="period" />
                                     <label for="manhã"><span></span>Manhã</label>
                                 </div>
 
-                                <div class="radioButton">
+                                <div class="radioButton" id="cTarde" onclick="updateDate(event)">
                                     <input type="radio" id="tarde" name="period" />
                                     <label for="tarde"><span></span>Tarde</label>
                                 </div>
 
-                                <div class="radioButton">
+                                <div class="radioButton" id="cDia" onclick="updateDate(event)">
                                     <input type="radio" id="dia" name="period" />
                                     <label for="dia"><span></span>Dia</label>
                                 </div>

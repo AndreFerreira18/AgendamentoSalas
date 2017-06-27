@@ -292,6 +292,13 @@ input[type="radio"]:checked + label span {
 }
 
 
+#form_modal > #modal_div > .form-group > #data_mod_calendar {
+  font-size: 14px;
+}
+
+#form_sb > #modal_div > .form-group > #data_mod_calendar {
+  font-size: 12px;
+}
 
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
@@ -499,7 +506,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
     bottom: 30px;
     right: 0;
     font-size: 17px;
-    position: absolute;
+    position: fixed;
 }
 #snackBar.show {
     visibility: visible;
