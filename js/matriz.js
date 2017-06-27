@@ -38,9 +38,10 @@ function changeMatrix() {
     var idFilho = matriz.firstElementChild.id;
     var filho = idFilho.split("_");
     matrizAtiva.innerHTML = " ";
+    var filters = applyFilters();
     if (filho[1] == "day") {
         addMatrix("week");
-        addBtnRooms();
+        addBtnRooms(filters);
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
         createMatrixWeek();
@@ -88,7 +89,7 @@ function refreshMatrix(nextSemana) {
         createMatrixDay();
     else if (child[1] == "week") {
         var activeBtn = getActive("btn-rooms");
-        refreshButtons();
+        refreshButtons(filters);
         defineActiveById(activeBtn);
         createMatrixWeek(nextSemana);
 
@@ -243,12 +244,12 @@ function removeRoomBtn() {
  *
  * @returns {type}  description
  */
-function refreshButtons() {
+function refreshButtons(filters) {
     var divButton = document.getElementById("btn_rooms");
     var id_child = divButton.firstElementChild.id;
     var child = id_child.split("_");
     divButton.innerHTML = " ";
-    addBtnRooms();
+    addBtnRooms(filters);
 }
 
 // Adiciona Botões Salas
@@ -257,7 +258,7 @@ function refreshButtons() {
  *
  * @returns {type}  description
  */
-function addBtnRooms() {
+function addBtnRooms(filters) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var idAndar = getActive('list-group-item');
@@ -301,7 +302,18 @@ function addBtnRooms() {
         btn.classList.add('btn-rooms');
         btn.classList.add('btn');
         btn.classList.add('btn-lg');
-        btn.classList.add('btn-default');
+
+        for (var j = 0; i < filters.rooms.length; j++) {
+            if (rooms.salas[i] != filters.rooms[j])
+                btn.classList.add('btn-warning');
+            else
+                btn.classList.add('btn-default');
+
+        }
+
+
+
+
         btn.addEventListener("click", defineActiveEvent);
         element.appendChild(btn);
     }
