@@ -370,9 +370,9 @@ function createMatrixDay(filters) {
 
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
             if (disponibilidade == 'Disponivel')
-                td.classList.add("avaiable");
+                td.classList.add("available");
             else if (disponibilidade == 'Indisponivel')
-                td.classList.add("notAvaiable");
+                td.classList.add("notAvailable");
             else
                 td.classList.add("indefinido");
 
