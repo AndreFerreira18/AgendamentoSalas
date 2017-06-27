@@ -365,11 +365,11 @@ function createMatrixDay(filters) {
             else
                 td.classList.add("indefinido");
 
-                for(var k=0; k< filters[rooms].length; k++){
-                    if(filters[rooms][k] === shedualDay[selectedFloor][j].NomeSala){
-                        td.className = 'indefinido';
-                    }
-                }
+            // for(var k=0; k< filters[rooms].length; k++){
+            //     if(filters[rooms][k] === shedualDay[selectedFloor][j].NomeSala){
+            //         td.className = 'indefinido';
+            //     }
+            // }
 
 
             td.innerHTML = disponibilidade;
@@ -382,12 +382,12 @@ function createMatrixDay(filters) {
 
 function selecionarGrupoMatrizDay(e) {
     try {
-        nearElemet(e);
+        nearElement(e);
         defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
             case 1:
-                snackBar("Uma reserva deverá conter uma Sala.");
+                snackBar("Uma reserva deverá conter apenas uma Sala.");
                 break;
             case 2:
                 snackBar("Uma reserva deverá conter um conjunto de horas continuas");
