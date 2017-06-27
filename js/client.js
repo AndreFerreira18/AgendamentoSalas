@@ -7,7 +7,10 @@ $(window).ready(
         createResources();
     }
 );
-
+// var date = new Date();
+// var today = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + '/' +
+//     ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) + '/' +
+//     (date.getFullYear());
 //Date picker
 $('input[name="daterange"]').daterangepicker({
     timePicker: true,
@@ -15,6 +18,7 @@ $('input[name="daterange"]').daterangepicker({
     timePickerIncrement: 30,
     startDate: "03/07/2017",
     endDate: "04/07/2017",
+    // minDate: today,
     locale: {
         format: 'DD/MM/YYYY h:mm A'
     }
@@ -74,7 +78,7 @@ function applyFilters() {
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
     if (participants <= 0 || participants > 999) {
         snackBar("Por favor insira um número de participantes entre 1 e 999");
-        return;
+        return false;
     }
     //checks Radio Buttons for longer periods
     var preSelection = document.querySelector('input[name="period"]:checked') !== null ? document.querySelector('input[name="period"]:checked').id : "";
@@ -413,10 +417,15 @@ function clone() {
     document.getElementsByClassName('piso_pref')[1].style.display = "none";
 
     document.querySelector(".modal-body").remove();
+    // var date = new Date();
+    // var today = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + '/' +
+    //     ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) + '/' +
+    //     (date.getFullYear());
     $('input[name="daterange"]').daterangepicker({
         "timePicker": true,
         "timePicker24Hour": true,
         "timePickerIncrement": 30,
+        // minDate: today,
         "locale": {
             format: 'DD/MM/YYYY h:mm A'
         }
@@ -515,7 +524,7 @@ function snackBar(msg) {
 /**
  * updateDate - This method updates the DateRangePicker when radio buttons are pressed (Morning, Afternoon, Day)
  *
- * @param  {type} e The event object from the triggered event 
+ * @param  {type} e The event object from the triggered event
  */
 function updateDate(e) {
     var id = e.target.id || e.target.parentNode.id || e.target.parentNode.parentNode.id;
