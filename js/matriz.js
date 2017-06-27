@@ -335,3 +335,37 @@ function selecionarGrupoMatrizSemana(e) {
         }
     }
 }
+
+function selecionarGrupoMatriz(e) {
+    var timeTableLenght = shedualDay[0][0].Disponibilidade.length;
+    var newElemet = e.target;
+    var newElemetSplit = newElemet.id.split('-');
+    var cicleElement;
+    var cicleElementid;
+    if(newElemet.classList.contains('disponivel')) {
+        if(newElemet.classList.contains('active')) {
+            var firstElm = false;
+            for(var i=0; i<timeTableLenght; i++){
+                cicleElementid = 'td-' + newElemetSplit[1] + '-' + i;
+                cicleElement = document.getElementById(cicleElementid);
+                cicleElement.classList.contains('active')){
+                    if(cicleElement === newElemet.id){
+                        firstElm = true;
+                        break;
+                    }
+                }
+            }
+            if(firstElm){
+                defineMultiActiveEvent(e);
+            }else{
+                for(var i=newElemetSplit[2]; i<timeTableLenght; i++){
+
+                }
+            }
+        } else {
+
+        }
+    } else {
+
+    }
+}

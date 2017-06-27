@@ -192,6 +192,7 @@ function getMultiActive(activeClass) {
     }
     return id;
 }
+function removeActiveElement
 
 // Remove element by Id
 function removeElement(elementId) {
