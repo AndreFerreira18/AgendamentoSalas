@@ -359,18 +359,19 @@ function createMatrixDay(filters) {
 
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
             if (disponibilidade == 'Disponivel')
-                td.classList.add("disponivel");
+                td.classList.add("avaiable");
             else if (disponibilidade == 'Indisponivel')
-                td.classList.add("indisponivel");
+                td.classList.add("notAvaiable");
             else
                 td.classList.add("indefinido");
 
-            // for(var k=0; k< filters[rooms].length; k++){
-            //     if(filters[rooms][k] === shedualDay[selectedFloor][j].NomeSala){
-            //         td.className = 'indefinido';
-            //     }
-            // }
+            var isNearMiss = true;
+            for(var k=0; k< filters.rooms.length; k++)
+                if(filters.rooms[k] === shedualDay[selectedFloor][j].NomeSala)
+                    isNearMiss = false;
 
+            if (isNearMiss)
+                td.className = 'nearMiss';
 
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
