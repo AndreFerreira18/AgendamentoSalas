@@ -366,7 +366,7 @@ function createMatrixDay() {
 
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
-            td.addEventListener("click", selecionarGrupoMatriz);
+            td.addEventListener("click", selecionarGrupoMatrizDay);
             tr.appendChild(td);
         }
     }
