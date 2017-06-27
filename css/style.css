@@ -111,14 +111,42 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
   padding: 20px 15px;
 }
 
-#modal_div > div:first-child > select {
+#form_sb > #modal_div > div:first-child > select {
     max-width: 70%;
 }
 
-#modal_div > .input-group > span {
-    max-width: 204px;
-    font-size: 14px;
+@media (min-width: 768px) {
+  #form_sb > #modal_div > div:first-child > select {
+      max-width: 100%;
+  }
 }
+
+
+#form_sb > #modal_div > .input-group > span {
+  max-width: 200px;
+}
+
+#modal_div > .input-group > span {
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+
+
+@media (min-width: 380px) {
+  #modal_div > .input-group > span {
+    max-width: 220px;
+  }
+
+  #participants_container {
+    max-width: 255px;
+  }
+}
+
+
 
 #form_sb {
   margin-bottom: 0;
@@ -221,6 +249,52 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
     display: inline;
 }
 
+.radioButton {
+  display: inline;
+  padding: 10px;
+}
+
+#day_period > label {
+    vertical-align: middle;
+}
+
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label {
+    color: #333333;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    cursor: pointer;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:15px;
+    height:15px;
+    margin:0px 6px 0 0;
+    vertical-align: text-top;
+    cursor:pointer
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+     background-color: #d1d3d1;
+}
+
+input[type="radio"]:checked + label span{
+     background-color: #337ab7;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+  -webkit-transition:background-color 0.4s linear;
+  -o-transition:background-color 0.4s linear;
+  -moz-transition:background-color 0.4s linear;
+  transition:background-color 0.4s linear;
+}
+
+
 
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
@@ -271,6 +345,7 @@ o888o         `Y8bood8P'  o888o  o888o o8o        o888o
 
 .input-group {
     padding: 5px 0 15px;
+    width: 100%;
 }
 
 .input-group-addon {
@@ -380,12 +455,14 @@ table.matrix td {
     font-weight: bold;
     cursor:pointer;
     /*background-color: #dff0d8;*/
+    user-select: none;
 }
 
 .indisponivel {
     color: #777;
     background-color: #eee;
     cursor:not-allowed;
+    user-select: none;
 }
 
 .indefinido {
@@ -413,7 +490,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 */
 #snackBar {
     visibility: hidden;
-    width: 30%;
+    width: auto;
     margin-left: auto;
     margin-right: 30px;
     background-color: #333;
