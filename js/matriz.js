@@ -213,16 +213,19 @@ function createMatrixWeek(nextSemana) {
         for (var j = 0; j < scheduleWeek.dates.length; j++) {
             var td = document.createElement('td');
             var disponibilidade = scheduleWeek[j][i];
-            if (disponibilidade == 'Disponível')
-                td.classList.add("disponivel");
+            if (disponibilidade == 'Disponível'){
+                td.classList.add("available");
+                td.addEventListener("click", selecionarGrupoMatrizWeek);
+            }
+
             else if (disponibilidade == 'Indisponível')
-                td.classList.add("indisponivel");
+                td.classList.add("notAvailable");
             else
-                td.classList.add("indefinido");
+                td.classList.add("undefined");
 
             td.innerHTML = scheduleWeek[j][i];
             td.id = 'td-' + j + '-' + i;
-            td.addEventListener("click", selecionarGrupoMatrizWeek);
+
             tr.appendChild(td);
         }
     }
@@ -369,12 +372,14 @@ function createMatrixDay(filters) {
 
 
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
-            if (disponibilidade == 'Disponivel')
+            if (disponibilidade == 'Disponivel'){
                 td.classList.add("available");
+                td.addEventListener("click", selecionarGrupoMatrizDay);
+            }
             else if (disponibilidade == 'Indisponivel')
                 td.classList.add("notAvailable");
             else
-                td.classList.add("indefinido");
+                td.classList.add("undefined");
 
             var isNearMiss = true;
             for(var k=0; k< filters.rooms.length; k++)
@@ -386,7 +391,6 @@ function createMatrixDay(filters) {
 
             td.innerHTML = disponibilidade;
             td.id = 'td-' + j + '-' + i;
-            td.addEventListener("click", selecionarGrupoMatrizDay);
             tr.appendChild(td);
         }
     }
@@ -481,9 +485,9 @@ function nearElement(e) {
     try {
         var newElemet = e.target;
         var newElemetSplit = newElemet.id.split('-');
-        var activeElements = getMultiActive('disponivel');
+        var activeElements = getMultiActive('available');
 
-        if (newElemet.classList.contains('disponivel') && activeElements.length) {
+        if (newElemet.classList.contains('available') && activeElements.length) {
             var neighborHour = false;
             var neighborDay = true;
             var activeFirstElement = activeElements[0].split('-');
