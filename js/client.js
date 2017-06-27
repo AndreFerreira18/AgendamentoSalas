@@ -2,9 +2,9 @@
 $(window).ready(
     function() {
         $('#modal').modal('show');
-        tReuniao();
-        pisoPref();
-        criarRecursos();
+        createTypesOfMeetings();
+        createPrefFloor();
+        createResources();
     }
 );
 
@@ -146,7 +146,7 @@ function _getResources(id) {
 /**
  * toggleSideBar - This method handles side Bar opening and closing
  *
- * @param  {type} event The event that was triggered 
+ * @param  {type} event The event that was triggered
  */
 function toggleSideBar(event) {
     var elem = document.getElementById("sidebar-wrapper");
@@ -160,6 +160,12 @@ function toggleSideBar(event) {
     }
 }
 
+/**
+ * defineActiveEvent - description
+ *
+ * @param  {type} e description
+ * @returns {type}   description
+ */
 function defineActiveEvent(e) { // define single active
     // remove the old active
     var element = e.target.id ? e.target : e.target.parentNode;
@@ -173,6 +179,12 @@ function defineActiveEvent(e) { // define single active
     changeElement.classList.add('active');
 }
 
+/**
+ * defineMultiActiveEvent - description
+ *
+ * @param  {type} e description
+ * @returns {type}   description
+ */
 function defineMultiActiveEvent(e) {
     var element = e.target.id ? e.target : e.target.parentNode;
     var changeElement = document.getElementById(element.id);
@@ -182,6 +194,12 @@ function defineMultiActiveEvent(e) {
         changeElement.classList.add('active');
 }
 
+/**
+ * defineActiveById - description
+ *
+ * @param  {type} activeId description
+ * @returns {type}          description
+ */
 function defineActiveById(activeId) {
     //add the active to the element
     var element = document.getElementById(activeId);
@@ -191,6 +209,12 @@ function defineActiveById(activeId) {
         element.classList.add('active');
 }
 
+/**
+ * getActive - description
+ *
+ * @param  {type} activeClass description
+ * @returns {type}             description
+ */
 function getActive(activeClass) {
     var id;
     var elements = document.getElementsByClassName(activeClass);
@@ -201,6 +225,12 @@ function getActive(activeClass) {
     return id;
 }
 
+/**
+ * getMultiActive - description
+ *
+ * @param  {type} activeClass description
+ * @returns {type}             description
+ */
 function getMultiActive(activeClass) {
     var id = [];
     var elements = document.getElementsByClassName(activeClass);
@@ -212,6 +242,13 @@ function getMultiActive(activeClass) {
 }
 
 // Remove element by Id
+//
+/**
+ * removeElement - description
+ *
+ * @param  {type} elementId description
+ * @returns {type}           description
+ */
 function removeElement(elementId) {
     if (document.getElementById(elementId)) {
         var element = document.getElementById(elementId);
@@ -220,7 +257,14 @@ function removeElement(elementId) {
 }
 
 
+
 //saves data to the Side Bar
+
+/**
+ * saveChanges - description
+ *
+ * @returns {type}  description
+ */
 function saveChanges() {
     var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
@@ -241,8 +285,14 @@ function saveChanges() {
     clone();
 }
 
-// Criar Recursos
-function criarRecursos() {
+
+
+/**
+ * createResources - description
+ *
+ * @returns {type}  description
+ */
+function createResources() {
 
     var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
@@ -314,7 +364,12 @@ function criarRecursos() {
 }
 
 
-function tReuniao() {
+/**
+ * createTypesOfMeetings - description
+ *
+ * @returns {type}  description
+ */
+function createTypesOfMeetings() {
     var x = initialData.Tipos_de_Reuniao;
     document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
     for (var i = 0; i < x.length; i++) {
@@ -326,7 +381,12 @@ function tReuniao() {
     }
 }
 
-function pisoPref() {
+/**
+ * createPrefFloor - description
+ *
+ * @returns {type}  description
+ */
+function createPrefFloor() {
     var x = initialData.Andares;
     document.getElementById("data_mod_piso_pref").innerHTML = " ";
     for (var i = 0; i < x.length; i++) {
@@ -338,6 +398,11 @@ function pisoPref() {
     }
 }
 
+/**
+ * clone - description
+ *
+ * @returns {type}  description
+ */
 function clone() {
     var tmp_reuniao = document.getElementById("data_mod_tipo_reuniao").value;
     var elements = document.getElementById("form_modal").firstElementChild;
@@ -367,6 +432,12 @@ function clone() {
 }
 
 
+/**
+ * divideDateAndTime - description
+ *
+ * @param  {type} idData description
+ * @returns {type}        description
+ */
 function divideDateAndTime(idData) {
     var acedeDataHora = document.getElementById(idData).value;
     var arrayDataHora = acedeDataHora.split(" ");
@@ -378,6 +449,11 @@ function divideDateAndTime(idData) {
     return datahora;
 }
 
+/**
+ * findHour - description
+ *
+ * @returns {type}  description
+ */
 function findHour() {
     for (var i = 0; i < selected_hours.length; i++) {
         var acede_dataHora_selecionada = selected_hours[i];
@@ -387,6 +463,11 @@ function findHour() {
     }
 }
 
+/**
+ * preencheModalConfirm - description
+ *
+ * @returns {type}  description
+ */
 function preencheModalConfirm() {
 
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
@@ -410,6 +491,12 @@ function preencheModalConfirm() {
     //     // var recurso_info =
 }
 
+/**
+ * snackBar - description
+ *
+ * @param  {type} msg description
+ * @returns {type}     description
+ */
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
     snack.innerHTML = '';

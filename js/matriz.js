@@ -1,4 +1,10 @@
-function getSemana(id_semana) {
+/**
+ * getWeek - description
+ *
+ * @param  {type} id_semana description
+ * @returns {type}           description
+ */
+function getWeek(id_semana) {
     // alterar para pedido de dados a db
     var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
@@ -20,7 +26,13 @@ function getSemana(id_semana) {
     return id_semana ? id_semana : week;
 }
 
-function alteraMatrix() {
+
+/**
+ * changeMatrix - description
+ *
+ * @returns {type}  description
+ */
+function changeMatrix() {
     var matrizAtiva = document.getElementById("matrix");
     var matriz = document.getElementById("matrix");
     var idFilho = matriz.firstElementChild.id;
@@ -33,14 +45,21 @@ function alteraMatrix() {
         defineActiveById(idPrimeiroElemento);
         createMatrixWeek();
     } else if (filho[1] == "week") {
-        removeBtnSalas();
+        removeRoomBtn();
         addMatrix("day");
         createMatrixDay();
     } else
         snackBar("Escolha de matriz errada");
 }
 
-//matrix
+
+/**
+ * addMatrix - description
+ *
+ * @param  {type} matrixType description
+ * @returns {type}            description
+ */
+
 function addMatrix(matrixType) {
     var matrix = document.getElementById("matrix");
     var mh = document.createElement('thead');
@@ -51,6 +70,13 @@ function addMatrix(matrixType) {
     matrix.appendChild(mb);
 }
 
+
+/**
+ * refreshMatrix - description
+ *
+ * @param  {type} nextSemana description
+ * @returns {type}            description
+ */
 function refreshMatrix(nextSemana) {
     var matrix = document.getElementById("matrix");
     var id_child = matrix.firstElementChild.id;
@@ -71,13 +97,20 @@ function refreshMatrix(nextSemana) {
         snackBar("Escolha de matriz errada");
 }
 
+
+/**
+ * createMatrixWeek - description
+ *
+ * @param  {type} nextSemana description
+ * @returns {type}            description
+ */
 function createMatrixWeek(nextSemana) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var id_andar = getActive('list-group-item');
     var temp_id_sala = getActive('btn-rooms').split("-");
     var id_sala = "1" + temp_id_sala[1];
-    var id_semana = getSemana(nextSemana);
+    var id_semana = getWeek(nextSemana);
 
 
     var scheduleWeek;
@@ -196,12 +229,21 @@ function createMatrixWeek(nextSemana) {
 }
 
 
-
-function removeBtnSalas() {
+/**
+ * removeRoomBtn - description
+ *
+ * @returns {type}  description
+ */
+function removeRoomBtn() {
     var divBotoes = document.getElementById("btn_rooms");
     divBotoes.innerHTML = "";
 }
 
+/**
+ * refreshButtons - description
+ *
+ * @returns {type}  description
+ */
 function refreshButtons() {
     var divButton = document.getElementById("btn_rooms");
     var id_child = divButton.firstElementChild.id;
@@ -211,6 +253,11 @@ function refreshButtons() {
 }
 
 // Adiciona Botões Salas
+/**
+ * addBtnRooms - description
+ *
+ * @returns {type}  description
+ */
 function addBtnRooms() {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
@@ -263,6 +310,12 @@ function addBtnRooms() {
 
 selected_hours = [];
 //matrix Day
+//
+/**
+ * createMatrixDay - description
+ *
+ * @returns {type}  description
+ */
 function createMatrixDay() {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
@@ -314,9 +367,15 @@ function createMatrixDay() {
 }
 
 
+/**
+ * selecionarGrupoMatrizSemana - description
+ *
+ * @param  {type} e description
+ * @returns {type}   description
+ */
 function selecionarGrupoMatrizSemana(e) {
     try {
-        nearElemet(e);
+        nearElement(e);
         defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
@@ -337,10 +396,24 @@ function selecionarGrupoMatrizSemana(e) {
 
 var id_last_salected;
 
+/**
+ * saveModalConfirm - description
+ *
+ * @param  {type} callback description
+ * @returns {type}          description
+ */
 function saveModalConfirm(callback) {
     callback(id_last_salected);
 }
 
+
+/**
+ * modalAcept - description
+ *
+ * @param  {type} e   description
+ * @param  {type} msg description
+ * @returns {type}     description
+ */
 function modalAcept(e, msg) {
     var modal_body = document.getElementById("modal_confirm_body");
     modal_body.innerHTML = msg;
@@ -349,7 +422,13 @@ function modalAcept(e, msg) {
     $('#modal_confirm').modal('show');
 }
 
-function nearElemet(e) {
+/**
+ * nearElement - description
+ *
+ * @param  {type} e description
+ * @returns {type}   description
+ */
+function nearElement(e) {
     try {
         var newElemet = e.target;
         var newElemetSplit = newElemet.id.split('-');
@@ -377,6 +456,12 @@ function nearElemet(e) {
 }
 
 
+/**
+ * selecionarGrupoMatriz - description
+ *
+ * @param  {type} e description
+ * @returns {type}   description
+ */
 function selecionarGrupoMatriz(e) {
     var newElemet = e.target;
     var newElemetSplit = newElemet.id.split('-');
