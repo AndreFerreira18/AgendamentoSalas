@@ -48,7 +48,7 @@ function changeMatrix() {
     } else if (filho[1] == "week") {
         removeRoomBtn();
         addMatrix("day");
-        createMatrixDay();
+        createMatrixDay(filters);
     } else
         snackBar("Escolha de matriz errada");
 }
@@ -334,6 +334,17 @@ function createMatrixDay(filters) {
     //Matrix Head
     var mh = document.getElementById("matrix_day_head");
     var tr = document.createElement('tr');
+    var trH = document.createElement('tr');
+    var thC = document.createElement('th');
+    var colspan = shedualDay[selectedFloor].length+1;
+
+    mh.appendChild(trH);
+    trH.appendChild(thC);
+
+    thC.setAttribute("style", "text-align:center;height: 43px;");
+    thC.setAttribute("colspan", colspan);
+    thC.innerHTML = "Vista por Dia";
+
     mh.appendChild(tr);
     var th1 = document.createElement('th');
     th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
