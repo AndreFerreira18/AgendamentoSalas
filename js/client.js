@@ -74,7 +74,7 @@ function applyFilters() {
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
     if (participants <= 0 || participants > 999) {
         snackBar("Por favor insira um número de participantes entre 1 e 999");
-        return;
+        return false;
     }
     //checks Radio Buttons for longer periods
     var preSelection = document.querySelector('input[name="period"]:checked') !== null ? document.querySelector('input[name="period"]:checked').id : "";
