@@ -274,10 +274,11 @@ function saveChanges() {
 
 
     updownIniciar();
+    var filters = applyFilters();
     if (startDay === endDay) {
         addMatrix('day');
     } else {
-        addBtnRooms();
+        addBtnRooms(filters);
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
