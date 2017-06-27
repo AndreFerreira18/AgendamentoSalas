@@ -57,7 +57,6 @@ function refreshMatrix(nextSemana) {
     var child = id_child.split("_");
     matrix.innerHTML = " ";
     addMatrix(child[1]);
-    selected_hours = [];
     var filters = applyFilters();
     if (child[1] == "day")
         createMatrixDay();
@@ -261,7 +260,6 @@ function addBtnRooms() {
     }
 }
 
-selected_hours = [];
 //matrix Day
 function createMatrixDay() {
     ////////////////////////////////////////////
@@ -313,6 +311,26 @@ function createMatrixDay() {
     }
 }
 
+function selecionarGrupoMatriz(e) {
+    try {
+        nearElemet(e);
+        defineMultiActiveEvent(e);
+    } catch (err) {
+        switch (err) {
+            case 1:
+                snackBar("Uma reserva deverá conter uma Sala.");
+                break;
+            case 2:
+                snackBar("Uma reserva deverá conter um conjunto de horas continuas");
+                break;
+            case 4:
+                snackBar("Uma reserva deverá conter um conjunto de horas continuas");
+                break;
+            default:
+                snackBar("Ups escolha errada na vista de dia");
+        }
+    }
+}
 
 function selecionarGrupoMatrizSemana(e) {
     try {
@@ -329,8 +347,11 @@ function selecionarGrupoMatrizSemana(e) {
             case 3:
                 modalAcept(e, "Pretende reservar em varios dias e em varias horas?");
                 break;
+            case 4:
+                defineMultiActiveEvent(e);
+                break;
             default:
-                snackBar("Ups escolha errada na matriz de Semana");
+                snackBar("Ups escolha errada na vista de Semana");
         }
     }
 }
@@ -354,70 +375,29 @@ function nearElemet(e) {
         var newElemet = e.target;
         var newElemetSplit = newElemet.id.split('-');
         var activeElements = getMultiActive('disponivel');
-        var vizinho_hora = false;
-        var vizinho_dia = true;
-        if (!newElemet.classList.contains('active') && newElemet.classList.contains('disponivel') && activeElements.length) {
+
+        if (newElemet.classList.contains('disponivel') && activeElements.length) {
+            var neighborHour = false;
+            var neighborDay = true;
+            var activeFirstElement = activeElements[0].split('-');
+            var activeLastElement = activeElements[activeElements.length - 1].split('-');
+            if (parseInt(newElemetSplit[2]) > parseInt(activeFirstElement[2]) && parseInt(newElemetSplit[2]) < parseInt(activeLastElement[2]) && newElemet.classList.contains('active'))
+                throw 4;
             for (var i = 0; i < activeElements.length; i++) {
                 var activeElementsSplit = activeElements[i].split('-');
-                if (activeElementsSplit[1] != newElemetSplit[1])
-                    vizinho_dia = false;
+                if (parseInt(activeElementsSplit[1]) != parseInt(newElemetSplit[1]))
+                    neighborDay = false;
                 if (parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) + 1 || parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) - 1)
-                    vizinho_hora = true;
+                    neighborHour = true;
             }
-            if (!vizinho_hora && !vizinho_dia)
+            if (!neighborHour && !neighborDay)
                 throw 3;
-            if (!vizinho_hora)
+            if (!neighborHour)
                 throw 2;
-            if (!vizinho_dia)
+            if (!neighborDay)
                 throw 1;
         }
     } catch (e) {
         throw e;
-    }
-}
-
-
-function selecionarGrupoMatriz(e) {
-    var newElemet = e.target;
-    var newElemetSplit = newElemet.id.split('-');
-    if (newElemet.classList.contains('disponivel')) {
-        if (newElemet.classList.contains('active')) {
-            for (var i = 0; i < selected_hours.length; i++) {
-                var otherElement = selected_hours[i];
-                var otherElementSplit = otherElement.split('-');
-
-                if (parseInt(otherElementSplit[2]) === parseInt(newElemetSplit[2])) {
-                    selected_hours.splice(i, 1);
-                    defineActiveById(otherElement);
-                    i--;
-                }
-            }
-        } else {
-            if (selected_hours.length == 0) {
-                defineMultiActiveEvent(e);
-                selected_hours.push(e.target.id);
-            } else {
-                var otherElement = selected_hours[0];
-                var otherElementSplit = otherElement.split('-');
-                if (newElemetSplit[1] === otherElementSplit[1]) {
-                    for (var i = 0; i < selected_hours.length; i++) {
-                        otherElement = selected_hours[i];
-                        otherElementSplit = otherElement.split('-');
-                        var inferior = parseInt(otherElementSplit[2]) + 1;
-                        var superior = parseInt(otherElementSplit[2]) - 1;
-                        var atual = parseInt(newElemetSplit[2]);
-                        if (inferior === atual || superior === atual) {
-                            defineMultiActiveEvent(e);
-                            selected_hours.push(e.target.id);
-                            break;
-                        }
-                        if (i === selected_hours.length - 1) snackBar('Por favor seleciona horas consecutivas');
-                    }
-                } else {
-                    snackBar('Por favor seleciona na mesma sala');
-                }
-            }
-
-        }
     }
 }
