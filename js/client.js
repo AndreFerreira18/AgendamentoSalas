@@ -469,20 +469,11 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
-    var selected_hours = getMultiActive('disponivel');
+    var selected_hours = getMultiActive('disponivel'); 
+
     //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
     document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
-
-    // var horaData_info = document.getElementById("data_mod_calendar").value;
-    // var array_horaData = horaData_info.split(" ");
-    // var dataInicio = array_horaData[0];
-    // var horaInicio = array_horaData[1];
-    // var dataFim = array_horaData[3];
-    // var horafim = array_horaData[4];
-    //
-    // var str_horas= 'Das ' +  horaInicio + ' até às ' + horafim + ' no dia ' + dataInicio;
-    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas);
 
     //Devolve Andar e Sala Escolhidos
     var piso_info = getActive('list-group-item');
