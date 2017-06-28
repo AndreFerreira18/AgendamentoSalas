@@ -479,9 +479,35 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
+    var element;
+    var glyphicon;
+    var modalBody = document.getElementById("modal_body_confirmar");
 
+    // meeting type
+    element = document.createElement("h3");
+    element.id = "meeting";
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
+    element.innerHTML = 'Reuniao ' + reuniao_info;
+    modalBody.appendChild(element);
+
+    //user information
+    element = document.createElement("p");
+    element.id = "user_info";
+
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-user";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", "João Sousa Silva, Departamento de Informática");
+    modalBody.appendChild(element);
+
+
+    // <h3 id="reuniao"> </h3>
+    // <p id="user_info"> <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span> </p>
+    // <p id="datetime_info"> <span class="glyphicon glyphicon-time"> </span> </p>
+    // <p id="sala_info"> <span class="glyphicon glyphicon-pushpin"> </span> </p>
+    // <p id="nparticipantes"></p>
+    // <p id="recursos_info"><span class="glyphicon glyphicon-paperclip"></span></p>
+
 
     // var datestart_info = selected_hours[0];
     // console.log(datestart_info);
@@ -495,10 +521,24 @@ function preencheModalConfirm() {
     //     var piso_info = document.getElementById("selected").value;
     //
     //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
-    var participantes = document.getElementById("data_mod_nparticipantes").value;
-    var str_participantes = 'Com ' + participantes + ' participantes previstos';
-    document.getElementById("nparticipantes").insertAdjacentHTML('beforeend', str_participantes);
-    //     // var recurso_info =
+
+    //Number of participants
+    var participants = document.getElementById("data_mod_nparticipantes").value;
+    var strParticipants = 'Com ' + participants + ' participantes previstos';
+    element = document.createElement("p");
+    //element.innerHTML = strParticipants;
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-flag";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", strParticipants);
+    modalBody.appendChild(element);
+
+    //  selected resorces
+    var activeFloor = getActive("list-group-item active");
+    var idActiveRoom = getActive("btn-rooms");
+    var strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+    //var roomResorces = resources.activeFloor
+
 }
 
 /**
