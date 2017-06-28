@@ -392,6 +392,40 @@ function createMatrixDay(filters) {
             tr.appendChild(td);
         }
     }
+    _populateSelectionForDay(filters.selection);
+}
+
+
+/**
+ * _populateSelection - description
+ *
+ * @param  {type} selection description
+ * @returns {type}           description
+ */
+function _populateSelectionForDay(selection) {
+    var fields = document.querySelectorAll('td');
+    var length = fields.length;
+    for (var i = 0; i < length; i++) {
+        var info = fields[i].id.split("-");
+        if (info[1] !== '0')
+            continue;
+        fields[i].classList.remove('active');
+        switch (selection) {
+            case 'manha':
+                if (parseInt(info[2]) + 8 <= 12 && fields[i].classList.contains('available'))
+                    fields[i].classList.add('active');
+                break;
+            case 'tarde':
+                if (parseInt(info[2]) + 8 >= 14 && fields[i].classList.contains('available'))
+                    fields[i].classList.add('active');
+                break;
+            case 'dia':
+                if (fields[i].classList.contains('available'))
+                    fields[i].classList.add('active');
+                break;
+
+        }
+    }
 }
 
 function selecionarGrupoMatrizDay(e) {
