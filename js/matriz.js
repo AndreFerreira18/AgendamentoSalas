@@ -439,10 +439,18 @@ function _populateSelectionForDay(selection) {
 function _bindDragableForDay() {
     var isMouseDown = false,
         isActive, columnID = '';
-
-
     $("#matrix td")
         .mousedown(function(e) {
+            var all = document.querySelectorAll('td.active');
+            var row = '0';
+            for (var i = 0; i < all.length; i++) {
+                if (all[i].id === '')
+                    continue;
+                else {
+                    row = all[i].id.split('-')[1];
+                }
+            }
+            //TODO evitar selecção na mesma sala a horas intercaladas
             if (columnID === '' || this.id.split('-')[1] === columnID) {
                 isMouseDown = true;
                 columnID = this.id.split('-')[1];
@@ -486,7 +494,7 @@ function _setLunchTime() {
 
 function selecionarGrupoMatrizDay(e) {
     try {
-        nearElement(e);
+        // nearElement(e);
         // defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
