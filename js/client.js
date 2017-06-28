@@ -232,7 +232,7 @@ function defineActiveById(activeId) {
  * @returns {type}             description
  */
 function getActive(activeClass) {
-    var id;
+    var id = false;
     var elements = document.getElementsByClassName(activeClass);
     for (var i = 0; i < elements.length; i++) {
         if (elements[i].classList.contains('active'))
@@ -309,7 +309,8 @@ function saveChanges() {
  *
  * @returns {type}  description
  */
- var recursos = initialData.Recursos;
+var recursos = initialData.Recursos;
+
 function createResources() {
 
     var label_recursos = initialData.Recursos;
@@ -491,93 +492,99 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
+    var element;
+    var glyphicon;
+    var modalBody = document.getElementById("modal_body_confirmar");
+    modalBody.innerHTML = "";
 
-    //Devolve Tipo de Reuniao Selecionada
+    // meeting type
+    element = document.createElement("h3");
+    element.id = "meeting";
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
+    element.innerHTML = 'Reuniao ' + reuniao_info;
+    modalBody.appendChild(element);
 
-    //Devolve Andar e Sala Escolhidos
-    var piso_info = getActive('list-group-item');
+    //user information
+    element = document.createElement("p");
+    element.id = "user_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-user";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
+    modalBody.appendChild(element);
 
-    //Seleciona no mockdata2 qual o conjunto de salas consoante piso
-    switch(piso_info) {
-        case "piso-0":
-            var rooms = rooms_0.salas;
-            var aux_resources_per_room = resources["piso-0"];
-            break;
-        case "piso-1":
-            var rooms = rooms_1.salas;
-            var aux_resources_per_room = resources["piso-1"];
-            break;
-        case "piso-2":
-            var rooms = rooms_2.salas;
-            var aux_resources_per_room = resources["piso-2"];
-            break;
-        case "piso-3":
-            var rooms = rooms_3.salas;
-            var aux_resources_per_room = resources["piso-3"];
-            break;
-        case "piso-4":
-            var rooms = rooms_4.salas;
-            var aux_resources_per_room = resources["piso-4"];
-            break;
-        case "piso-5":
-            var rooms = rooms_5.salas;
-            var aux_resources_per_room = resources["piso-5"];
-            break;
-        case "piso-6":
-            var rooms = rooms_6.salas;
-            var aux_resources_per_room = resources["piso-6"];
-            break;
-        case "piso-7":
-            var rooms = rooms_7.salas;
-            var aux_resources_per_room = resources["piso-7"];
-            break;
-        default:
-    }
+    //time information                                                                                         //confirmar para ter em conta os possiveis conjuntos de horas
+    var dateHour = divideDateAndTime("data_mod_calendar");
+    var startDate = dateHour[0];
+    var endDate = dateHour[1];
+    var tempStartHour = dateHour[2].split(" ");
+    var startHour = tempStartHour[1] == "PM" ? parseInt(tempStartHour[0]) + 12 + ":00" : tempStartHour[0];
+    var tempEndHour = dateHour[3].split(" ");
+    var endHour = tempEndHour[1] == "PM" ? parseInt(tempEndHour[0]) + 12 + ":00" : tempEndHour[0];
+    element = document.createElement("p");
+    element.id = "datetime_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-time";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", " Reserva de " + startDate + " às " + startHour + " até " + endDate + " às " + endHour);
+    modalBody.appendChild(element);
 
-    //ve sala selecionada
-    var selected_hours = getMultiActive('available');
-    for (var i = 0; i<selected_hours.length; i++){
-    var array_room = selected_hours[i];
-    var aux_room_info = array_room.split("-");
-    var selected_room = aux_room_info[1];
-    }
-    //devolve nome da sala selecionada
-        for (var j = 0; j<rooms.length; j++){
-        if (j == selected_room){
-        var room_info = rooms[j];
+    //room information
+    var idActiveFloor = getActive("list-group-item active");
+    var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
+    var idActiveRoom = getActive("btn-rooms") ? getActive("btn-rooms") : "other Rooms"; // rever isto salas da matriz dia
+    var strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+    var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
+    element = document.createElement("p");
+    element.id = "room_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-pushpin";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", strRoom);
+    modalBody.appendChild(element);
+
+    //Number of participants
+    var participants = document.getElementById("data_mod_nparticipantes").value;
+    var strParticipants = ' Com ' + participants + ' participantes previstos';
+    element = document.createElement("p");
+    //element.innerHTML = strParticipants;
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-flag";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", strParticipants);
+    modalBody.appendChild(element);
+
+    //  selected resorces
+    var roomResources;
+    var splitIdActiveRoom = idActiveRoom.split("-");
+    var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1])].Recursos
+    var strHasResources = [];
+    var strDoestResources = [];
+    for (var resource in tempResources) {
+        if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
+            if (tempResources[resource]) {
+                strHasResources.push(resource + " ");
+            } else {
+                var idActiveResources = getMultiActive("btn-recurso");
+                for (var i = 0; i < idActiveResources.length; i++) {
+                    if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
+                        strDoestResources.push(resource + " ");
+                }
+            }
         }
     }
 
-    //Adiciona Sala e Piso escolhido ao Modal de confirmaçao
-    var aux_piso = piso_info.split("-");
-    var str_sala = 'Localizado na ' + room_info + ' situada no Piso ' + aux_piso[1];
-    document.getElementById("sala_info").innerHTML = str_sala;
-
-    //Adiciona Participantes ao modal de confirmaçao
-    var participantes = document.getElementById("data_mod_nparticipantes").value;
-    var str_participantes = 'Com ' + participantes + ' participantes previstos';
-    document.getElementById("nparticipantes").innerHTML = str_participantes;
-
-    //Adiciona recursos disponiveis na sala ao Modal de confirmaçao
-    var resources_per_room_array = [];
-    var resources_per_room = [];
-    resources_per_room_array = aux_resources_per_room[selected_room].Recursos;
-    //Procura por recursos no mockdata2
-    for (var resource in resources_per_room_array) {
-      if (resources_per_room_array.hasOwnProperty(resource)) {
-          var verifica_bool =  resources_per_room_array[resource];
-          //Verifica se recurso está a true
-          if(verifica_bool === true){
-              resources_per_room.push(" "+ resource);
-          }
-      }
-    }
-     var str_recursos = "Com os seguintes recursos: " + resources_per_room;
-     document.getElementById("recursos_info").innerHTML = str_recursos;
-
- }
+    element = document.createElement("p");
+    element.id = "room_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-paperclip";
+    element.appendChild(glyphicon);
+    if (strDoestResources)
+        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
+    else
+        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
+    modalBody.appendChild(element);
+}
 
 /**
  * snackBar - description
