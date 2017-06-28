@@ -25,6 +25,14 @@ $('input[name="daterange"]').daterangepicker({
 
 });
 
+//if user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
+$('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
+    var radios = document.querySelectorAll('.radioButton')
+    for (var i = 0; i < radios.length; i++) {
+        radios[i].children[0].checked = false;
+    }
+});
+
 //Sidebar
 $(window).resize(function() {
     var path = $(this);

@@ -338,7 +338,7 @@ function createMatrixDay(filters) {
     var tr = document.createElement('tr');
     var trH = document.createElement('tr');
     var thC = document.createElement('th');
-    var colspan = shedualDay[selectedFloor].length + 1;
+    var colspan = scheduleDay[selectedFloor].length + 1;
 
     mh.appendChild(trH);
     trH.appendChild(thC);
@@ -351,26 +351,26 @@ function createMatrixDay(filters) {
     var th1 = document.createElement('th');
     th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
     tr.appendChild(th1);
-    for (var i = 0; i < shedualDay[selectedFloor].length; i++) {
+    for (var i = 0; i < scheduleDay[selectedFloor].length; i++) {
         var th2 = document.createElement('th');
-        th2.innerHTML = shedualDay[selectedFloor][i].NomeSala;
+        th2.innerHTML = scheduleDay[selectedFloor][i].NomeSala;
         tr.appendChild(th2);
     }
 
     //Matrix Body
     var mb = document.getElementById("matrix_day_body");
-    for (var i = 0; i < shedualDay[selectedFloor][0].Disponibilidade.length; i++) {
+    for (var i = 0; i < scheduleDay[selectedFloor][0].Disponibilidade.length; i++) {
         var tr = document.createElement('tr');
         mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
         th.innerHTML = i + 8 + " H";
-        for (var j = 0; j < shedualDay[selectedFloor].length; j++) {
+        for (var j = 0; j < scheduleDay[selectedFloor].length; j++) {
             var td = document.createElement('td');
 
 
-            var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
+            var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i];
             if (disponibilidade == 'Disponivel') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizDay);
@@ -381,7 +381,7 @@ function createMatrixDay(filters) {
 
             var isNearMiss = true;
             for (var k = 0; k < filters.rooms.length; k++)
-                if (filters.rooms[k] === shedualDay[selectedFloor][j].NomeSala)
+                if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
                     isNearMiss = false;
 
             if (isNearMiss)

@@ -1,4 +1,4 @@
-var shedualDay = {
+var scheduleDay = {
     "0": [{
             "NomeSala": "Sala 0.1",
             "Disponibilidade": ["Indisponivel", "Indisponivel", "Indisponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel", "Disponivel"]
