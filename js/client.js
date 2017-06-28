@@ -490,6 +490,7 @@ function preencheModalConfirm() {
     var element;
     var glyphicon;
     var modalBody = document.getElementById("modal_body_confirmar");
+    modalBody.innerHTML = "";
 
     // meeting type
     element = document.createElement("h3");
@@ -504,9 +505,8 @@ function preencheModalConfirm() {
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-user";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", "João Sousa Silva, Departamento de Informática");
+    element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
     modalBody.appendChild(element);
-
 
     //time information
     element = document.createElement("p");
@@ -514,25 +514,28 @@ function preencheModalConfirm() {
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-time";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", "dummy hour");
+    element.insertAdjacentHTML("beforeend", " dummy hour");
     modalBody.appendChild(element);
 
     //room information
-    var activeFloor = getActive("list-group-item active");
-    var idActiveRoom = getActive("btn-rooms");
+    var idActiveFloor = getActive("list-group-item active");
+    var splitIdActiveFloor = idActiveFloor.split("-");
+    var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
+
+    var idActiveRoom = getActive("btn-rooms") ? getActive("btn-rooms") : "other Rooms";
     var strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+    var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
     element = document.createElement("p");
     element.id = "room_info";
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-pushpin";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", "dummy room");
+    element.insertAdjacentHTML("beforeend", strRoom);
     modalBody.appendChild(element);
-
 
     //Number of participants
     var participants = document.getElementById("data_mod_nparticipantes").value;
-    var strParticipants = 'Com ' + participants + ' participantes previstos';
+    var strParticipants = ' Com ' + participants + ' participantes previstos';
     element = document.createElement("p");
     //element.innerHTML = strParticipants;
     glyphicon = document.createElement("span");
@@ -542,17 +545,14 @@ function preencheModalConfirm() {
     modalBody.appendChild(element);
 
     //  selected resorces
-
+    //var roomResorces = resources.activeFloor
     element = document.createElement("p");
     element.id = "room_info";
     glyphicon = document.createElement("span");
-    glyphicon.className = "glyphicon glyphicon-pushpin";
+    glyphicon.className = "glyphicon glyphicon-paperclip";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", "dummy resorces");
+    element.insertAdjacentHTML("beforeend", " dummy resorces");
     modalBody.appendChild(element);
-
-    //var roomResorces = resources.activeFloor
-
 }
 
 /**
