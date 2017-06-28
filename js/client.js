@@ -553,28 +553,31 @@ function preencheModalConfirm() {
     var roomResources;
     var splitIdActiveRoom = idActiveRoom.split("-");
     var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1])].Recursos
-    var strHasResources = "";
-    var strDoestResources = "";
+    var strHasResources = [];
+    var strDoestResources = [];
     for (var resource in tempResources) {
-
         if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
-
             if (tempResources[resource]) {
-                strHasResources = strHasResources.concat(resource + ", ");
-            } else if (resource === ? ? ? ? ? ? ? ? ? ? ? ? ? ? ) {
-                strDoestResources = strDoestResources.concat(resource + ", ");
+                strHasResources.push(resource + " ");
+            } else {
+                var idActiveResources = getMultiActive("btn-recurso");
+                for (var i = 0; i < idActiveResources.length; i++) {
+                    if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
+                        strDoestResources.push(resource + " ");
+                }
             }
-
         }
     }
-    //_getResources('store_btn_recursos');
 
     element = document.createElement("p");
     element.id = "room_info";
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-paperclip";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", " dummy resorces");
+    if (strDoestResources)
+        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
+    else
+        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
     modalBody.appendChild(element);
 }
 
