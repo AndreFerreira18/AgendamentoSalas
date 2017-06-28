@@ -203,29 +203,28 @@ function createMatrixWeek(nextSemana) {
 
     //Matrix Body
     var mb = document.getElementById("matrix_week_body");
-    for (var i = 0; i < scheduleWeek[0].length; i++) {
+    for (var i = 0; i < scheduleWeek.hour.length; i++) {
         var tr = document.createElement('tr');
         mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
-        th.innerHTML = i + 8 + " H";
+        th.innerHTML = scheduleWeek.hour[i];
         for (var j = 0; j < scheduleWeek.dates.length; j++) {
             var td = document.createElement('td');
             var disponibilidade = scheduleWeek[j][i];
-            if (disponibilidade == 'Disponível'){
+            if (disponibilidade === 'Disponível') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizWeek);
-            }
-
-            else if (disponibilidade == 'Indisponível')
+            } else if (disponibilidade === 'Indisponível') {
                 td.classList.add("notAvailable");
-            else
+                td.innerHTML = scheduleWeek[j][i];
+            } else {
                 td.classList.add("undefined");
-
-            td.innerHTML = scheduleWeek[j][i];
+                td.innerHTML = scheduleWeek[j][i];
+            }
+            //td.innerHTML = scheduleWeek[j][i];
             td.id = 'td-' + j + '-' + i;
-
             tr.appendChild(td);
         }
     }
@@ -339,7 +338,7 @@ function createMatrixDay(filters) {
     var tr = document.createElement('tr');
     var trH = document.createElement('tr');
     var thC = document.createElement('th');
-    var colspan = shedualDay[selectedFloor].length+1;
+    var colspan = shedualDay[selectedFloor].length + 1;
 
     mh.appendChild(trH);
     trH.appendChild(thC);
@@ -372,18 +371,17 @@ function createMatrixDay(filters) {
 
 
             var disponibilidade = shedualDay[selectedFloor][j].Disponibilidade[i];
-            if (disponibilidade == 'Disponivel'){
+            if (disponibilidade == 'Disponivel') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizDay);
-            }
-            else if (disponibilidade == 'Indisponivel')
+            } else if (disponibilidade == 'Indisponivel')
                 td.classList.add("notAvailable");
             else
                 td.classList.add("undefined");
 
             var isNearMiss = true;
-            for(var k=0; k< filters.rooms.length; k++)
-                if(filters.rooms[k] === shedualDay[selectedFloor][j].NomeSala)
+            for (var k = 0; k < filters.rooms.length; k++)
+                if (filters.rooms[k] === shedualDay[selectedFloor][j].NomeSala)
                     isNearMiss = false;
 
             if (isNearMiss)
@@ -424,26 +422,30 @@ function selecionarGrupoMatrizDay(e) {
  * @returns {type}   description
  */
 function selecionarGrupoMatrizWeek(e) {
+    var defineMulti = false;
     try {
         nearElement(e);
         defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
             case 1:
-                modalAcept(e, "Pretende reservar em outro dia?");
+                defineMulti = modalAcept(e, "Pretende reservar em outro dia?");
                 break;
             case 2:
-                modalAcept(e, "Pretende reservar em outra hora?");
+                defineMulti = modalAcept(e, "Pretende reservar em outra hora?");
                 break;
             case 3:
-                modalAcept(e, "Pretende reservar em varios dias e em varias horas?");
+                defineMulti = modalAcept(e, "Pretende reservar em varios dias e em varias horas?");
                 break;
             case 4:
-                defineMultiActiveEvent(e);
+                defineMulti = true;
                 break;
             default:
                 snackBar("Ups escolha errada na vista de Semana");
         }
+    } finally {
+        if (defineMulti)
+            defineMultiActiveEvent(e);
     }
 }
 
@@ -469,10 +471,14 @@ function saveModalConfirm(callback) {
  */
 function modalAcept(e, msg) {
     var modal_body = document.getElementById("modal_confirm_body");
-    modal_body.innerHTML = msg;
-    modal_body.setAttribute('style', 'text-align: center;');
-    id_last_salected = e.target.id;
-    $('#modal_confirm').modal('show');
+    if (modal_body.textContent.length <= 20) {
+        modal_body.innerHTML = msg;
+        modal_body.setAttribute('style', 'text-align: center;');
+        id_last_salected = e.target.id;
+        $('#modal_confirm').modal('show');
+        return false;
+    } else
+        return true;
 }
 
 /**
@@ -501,11 +507,11 @@ function nearElement(e) {
                 if (parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) + 1 || parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) - 1)
                     neighborHour = true;
             }
-            if (!neighborHour && !neighborDay)
+            if (!neighborHour && !neighborDay && !newElemet.classList.contains('active'))
                 throw 3;
-            if (!neighborHour)
+            if (!neighborHour && !newElemet.classList.contains('active'))
                 throw 2;
-            if (!neighborDay)
+            if (!neighborDay && !newElemet.classList.contains('active'))
                 throw 1;
         }
     } catch (e) {
