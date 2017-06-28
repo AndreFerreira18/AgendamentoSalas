@@ -457,7 +457,7 @@ table.matrix td {
     border: 1px solid #e6e6e6;
 }
 
-.avaiable {
+.available {
     color: #3c763d;
     font-weight: bold;
     cursor:pointer;
@@ -465,9 +465,9 @@ table.matrix td {
     user-select: none;
 }
 
-.notAvaiable {
+.notAvailable, .notAvailable:hover {
     color: #777;
-    background-color: #eee;
+    background-color: #eee !important;
     cursor:not-allowed;
     user-select: none;
 }
@@ -484,6 +484,10 @@ table.matrix .active {
 table.matrix .active:hover {
     background-color: #337ab7 !important;
     color: #000;
+}
+.undefined{
+    color: red;
+    background-color: red;
 }
 /*
 
