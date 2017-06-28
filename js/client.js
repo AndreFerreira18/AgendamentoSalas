@@ -305,9 +305,9 @@ function saveChanges() {
  *
  * @returns {type}  description
  */
+ var recursos = initialData.Recursos;
 function createResources() {
 
-    var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
     var glyph_recursos = [
         "glyphicon glyphicon-facetime-video",
@@ -457,7 +457,7 @@ function clone() {
  * @returns {type}        description
  */
 function divideDateAndTime(idData) {
-    var acedeDataHora = document.getElementById(idData).value;
+    var acedeDataHora = document.getElementById("data_mod_calendar").value;
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
@@ -488,26 +488,92 @@ function findHour() {
  */
 function preencheModalConfirm() {
 
+    //Devolve Tipo de Reuniao Selecionada
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
+    document.getElementById("reuniao").innerHTML = 'Reunião ' + reuniao_info;
 
-    // var datestart_info = selected_hours[0];
-    // console.log(datestart_info);
-    // var timestart_info = document.getElementById("datahora[1]").value;
-    // var dateEnd_info = document.getElementById("datahora[4]").value;
-    // var timeEnd_info = document.getElementById("datahora[5]").value;
-    // var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
-    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
-    //
-    //     var room_info = document.getElementById("m").value;
-    //     var piso_info = document.getElementById("selected").value;
-    //
-    //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
+    //Devolve Andar e Sala Escolhidos
+    var piso_info = getActive('list-group-item');
+
+    //Seleciona no mockdata2 qual o conjunto de salas consoante piso
+    switch(piso_info) {
+        case "piso-0":
+            var rooms = rooms_0.salas;
+            var aux_resources_per_room = resources["piso-0"];
+            break;
+        case "piso-1":
+            var rooms = rooms_1.salas;
+            var aux_resources_per_room = resources["piso-1"];
+            break;
+        case "piso-2":
+            var rooms = rooms_2.salas;
+            var aux_resources_per_room = resources["piso-2"];
+            break;
+        case "piso-3":
+            var rooms = rooms_3.salas;
+            var aux_resources_per_room = resources["piso-3"];
+            break;
+        case "piso-4":
+            var rooms = rooms_4.salas;
+            var aux_resources_per_room = resources["piso-4"];
+            break;
+        case "piso-5":
+            var rooms = rooms_5.salas;
+            var aux_resources_per_room = resources["piso-5"];
+            break;
+        case "piso-6":
+            var rooms = rooms_6.salas;
+            var aux_resources_per_room = resources["piso-6"];
+            break;
+        case "piso-7":
+            var rooms = rooms_7.salas;
+            var aux_resources_per_room = resources["piso-7"];
+            break;
+        default:
+    }
+
+    //ve sala selecionada
+    var selected_hours = getMultiActive('available');
+    for (var i = 0; i<selected_hours.length; i++){
+    var array_room = selected_hours[i];
+    var aux_room_info = array_room.split("-");
+    var selected_room = aux_room_info[1];
+    }
+    //devolve nome da sala selecionada
+        for (var j = 0; j<rooms.length; j++){
+        if (j == selected_room){
+        var room_info = rooms[j];
+        }
+    }
+
+    //Adiciona Sala e Piso escolhido ao Modal de confirmaçao
+    var aux_piso = piso_info.split("-");
+    var str_sala = 'Localizado na ' + room_info + ' situada no Piso ' + aux_piso[1];
+    document.getElementById("sala_info").innerHTML = str_sala;
+
+    //Adiciona Participantes ao modal de confirmaçao
     var participantes = document.getElementById("data_mod_nparticipantes").value;
     var str_participantes = 'Com ' + participantes + ' participantes previstos';
-    document.getElementById("nparticipantes").insertAdjacentHTML('beforeend', str_participantes);
-    //     // var recurso_info =
-}
+    document.getElementById("nparticipantes").innerHTML = str_participantes;
+
+    //Adiciona recursos disponiveis na sala ao Modal de confirmaçao
+    var resources_per_room_array = [];
+    var resources_per_room = [];
+    resources_per_room_array = aux_resources_per_room[selected_room].Recursos;
+    //Procura por recursos no mockdata2
+    for (var resource in resources_per_room_array) {
+      if (resources_per_room_array.hasOwnProperty(resource)) {
+          var verifica_bool =  resources_per_room_array[resource];
+          //Verifica se recurso está a true
+          if(verifica_bool === true){
+              resources_per_room.push(" "+ resource);
+          }
+      }
+    }
+     var str_recursos = "Com os seguintes recursos: " + resources_per_room;
+     document.getElementById("recursos_info").innerHTML = str_recursos;
+
+ }
 
 /**
  * snackBar - description
