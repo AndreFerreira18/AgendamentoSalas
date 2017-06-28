@@ -33,8 +33,12 @@
                 <div class="modal-header">
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <div class="modal-title">
-                        <h1><b>
-                            <span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b></h1>
+                        <h1>
+                          <b><p>Selecção Inicial</p></b>
+                        </h1>
+                        <h2>
+                          <b><span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b>
+                        </h2>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -162,7 +166,7 @@
 
                         </form>
                         <div class="btn_aplicar">
-                            <button type="button" onclick="refreshMatrix()" class="btn-filtos btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+                            <button type="button" onclick="refreshMatrix()" class="btn-filtos btn btn-primary btn-lg btn-block">Alterar Dados</button>
                         </div>
                     </div>
                 </div>
@@ -306,6 +310,7 @@
         </div>
     </div>
     <div id="snackBar"></div>
+    <span id="btn_close" class="glyphicon glyphicon-remove-sign" onclick="closeApp()" style="color:#cc0000"></span>
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -91,7 +91,7 @@ function refreshMatrix(nextSemana) {
         var activeBtn = getActive("btn-rooms");
         refreshButtons(filters);
         defineActiveById(activeBtn);
-        createMatrixWeek(nextSemana);
+        createMatrixWeek(filters, nextSemana);
 
     } else
         snackBar("Escolha de matriz errada");
@@ -104,7 +104,7 @@ function refreshMatrix(nextSemana) {
  * @param  {type} nextSemana description
  * @returns {type}            description
  */
-function createMatrixWeek(nextSemana) {
+function createMatrixWeek(filters, nextSemana) {
     ////////////////////////////////////////////
     //Alterar quando recebermos JSON
     var id_andar = getActive('list-group-item');
@@ -174,7 +174,7 @@ function createMatrixWeek(nextSemana) {
 
     thC.setAttribute("style", "text-align:center;");
     thC.setAttribute("colspan", colspan);
-    thC.innerHTML = "Vista da Semana";
+    thC.innerHTML = "Vista da Semana - " + document.getElementById(filters.floor).innerText + ' - ' + document.getElementById(getActive('btn-rooms')).innerText;
     // Adiciona Setas
     spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
     spanL.setAttribute("style", "cursor:pointer;");
@@ -345,11 +345,11 @@ function createMatrixDay(filters) {
 
     thC.setAttribute("style", "text-align:center;height: 43px;");
     thC.setAttribute("colspan", colspan);
-    thC.innerHTML = "Vista por Dia";
+    thC.innerHTML = "Vista por Dia - " + filters.date[0] + ' - ' + document.getElementById(filters.floor).innerText;
 
     mh.appendChild(tr);
     var th1 = document.createElement('th');
-    th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
+    // th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
     tr.appendChild(th1);
     for (var i = 0; i < scheduleDay[selectedFloor].length; i++) {
         var th2 = document.createElement('th');
@@ -359,25 +359,28 @@ function createMatrixDay(filters) {
 
     //Matrix Body
     var mb = document.getElementById("matrix_day_body");
-    for (var i = 0; i < scheduleDay[selectedFloor][0].Disponibilidade.length; i++) {
+    for (var i = 0; i < scheduleDay[selectedFloor][0].Horas.length; i++) {
         var tr = document.createElement('tr');
         mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
-        th.innerHTML = i + 8 + " H";
+        th.innerHTML = scheduleDay[selectedFloor][0].Horas[i];
         for (var j = 0; j < scheduleDay[selectedFloor].length; j++) {
             var td = document.createElement('td');
 
 
             var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i];
-            if (disponibilidade == 'Disponivel') {
+            if (disponibilidade == 'Disponível') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizDay);
-            } else if (disponibilidade == 'Indisponivel')
+            } else if (disponibilidade == 'Indisponível') {
                 td.classList.add("notAvailable");
-            else
+                td.innerHTML = disponibilidade;
+            } else {
                 td.classList.add("undefined");
+                td.innerHTML = disponibilidade;
+            }
 
             var isNearMiss = true;
             for (var k = 0; k < filters.rooms.length; k++)
@@ -387,12 +390,14 @@ function createMatrixDay(filters) {
             if (isNearMiss)
                 td.className = 'nearMiss';
 
-            td.innerHTML = disponibilidade;
+
             td.id = 'td-' + j + '-' + i;
             tr.appendChild(td);
         }
     }
     _populateSelectionForDay(filters.selection);
+    _bindDragableForDay();
+    _setLunchTime();
 }
 
 
@@ -412,11 +417,11 @@ function _populateSelectionForDay(selection) {
         fields[i].classList.remove('active');
         switch (selection) {
             case 'manha':
-                if (parseInt(info[2]) + 8 <= 12 && fields[i].classList.contains('available'))
+                if (parseInt(info[2]) + 8 <= 17 && fields[i].classList.contains('available'))
                     fields[i].classList.add('active');
                 break;
             case 'tarde':
-                if (parseInt(info[2]) + 8 >= 14 && fields[i].classList.contains('available'))
+                if (parseInt(info[2]) + 8 >= 20 && fields[i].classList.contains('available'))
                     fields[i].classList.add('active');
                 break;
             case 'dia':
@@ -428,10 +433,55 @@ function _populateSelectionForDay(selection) {
     }
 }
 
+function _bindDragableForDay() {
+    var isMouseDown = false,
+        isActive, columnID = '';
+
+
+    $("#matrix td")
+        .mousedown(function(e) {
+            if (columnID === '' || this.id.split('-')[1] === columnID) {
+                isMouseDown = true;
+                columnID = this.id.split('-')[1];
+                $(this).toggleClass("active");
+                isActive = $(this).hasClass("active");
+
+                // return false; // prevent text selection
+            } else if (this.id.split('-')[1] !== columnID) {
+                snackBar("Uma reserva deverá conter apenas uma Sala.");
+            }
+        })
+        .mouseover(function() {
+            if (isMouseDown && this.id.split('-')[1] === columnID) {
+                $(this).toggleClass("active", isActive);
+            }
+
+        });
+    $(document)
+        .mouseup(function() {
+            isMouseDown = false;
+            var activeElements = document.querySelectorAll('td.active');
+            if (activeElements.length === 1)
+                columnID = '';
+        });
+}
+
+
+function _setLunchTime() {
+    var fields = document.querySelectorAll('td');
+    var length = fields.length;
+    for (var i = 0; i < length; i++) {
+        var info = fields[i].id.split("-");
+        if (info[2] === '8' || info[2] === '9' || info[2] === '10' || info[2] === '11') {
+            fields[i].style.backgroundColor = 'red';
+        }
+    }
+}
+
 function selecionarGrupoMatrizDay(e) {
     try {
         nearElement(e);
-        defineMultiActiveEvent(e);
+        // defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
             case 1:

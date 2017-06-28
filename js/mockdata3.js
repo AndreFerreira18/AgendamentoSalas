@@ -53,7 +53,7 @@ var scheduleWeek_4_sala_11 = {
 /////////////
 var scheduleWeek_1_sala_12 = {
     "hour": ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"],
-    "dates": ["03/07/2017", "04/07/2017", "05/07/2017", "29/06/2017", "07/07/2017", "08/07/2017", "09/07/2017"],
+    "dates": ["03/07/2017", "04/07/2017", "05/07/2017", "06/07/2017", "07/07/2017", "08/07/2017", "09/07/2017"],
     "0": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
     "1": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
     "2": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
@@ -103,7 +103,7 @@ var scheduleWeek_4_sala_12 = {
 /////////////
 var scheduleWeek_1_sala_13 = {
     "hour": ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"],
-    "dates": ["03/07/2017", "04/07/2017", "05/07/2017", "29/06/2017", "07/07/2017", "08/07/2017", "09/07/2017"],
+    "dates": ["03/07/2017", "04/07/2017", "05/07/2017", "06/07/2017", "07/07/2017", "08/07/2017", "09/07/2017"],
     "0": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
     "1": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
     "2": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
@@ -153,7 +153,7 @@ var scheduleWeek_4_sala_13 = {
 /////////////
 var scheduleWeek_1_sala_14 = {
     "hour": ["8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"],
-    "dates": ["03/07/2017", "04/07/2017", "05/07/2017", "29/06/2017", "07/07/2017", "08/07/2017", "09/07/2017"],
+    "dates": ["03/07/2017", "04/07/2017", "05/07/2017", "06/07/2017", "07/07/2017", "08/07/2017", "09/07/2017"],
     "0": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
     "1": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],
     "2": ["Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível", "Disponível"],

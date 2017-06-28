@@ -238,8 +238,8 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
   background-color: #FFFFFF;
 }
 .modal-title>h1 {
-    font-size: 20px;
-}
+    text-align: center;
+  }
 
 .modal-footer {
   text-align: center;
@@ -455,6 +455,10 @@ table.matrix td {
     border: 1px solid #e6e6e6;
 }
 
+table.matrix th {
+  text-align: center;
+}
+
 .available {
     color: #3c763d;
     font-weight: bold;
@@ -533,4 +537,14 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 @keyframes fadeout {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
+}
+
+
+
+#btn_close {
+    position: fixed;
+    right: 26px;
+    top: 10px;
+    font-size: 35px;
+    cursor: pointer;
 }
