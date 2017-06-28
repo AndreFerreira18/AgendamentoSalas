@@ -2,9 +2,11 @@
 $(window).ready(
     function() {
         $('#modal').modal('show');
+        writeInJSon();
         createTypesOfMeetings();
         createPrefFloor();
         createResources();
+
     }
 );
 
@@ -609,4 +611,20 @@ function updateDate(e) {
     $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + startDate);
     $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + endDate);
     e.preventDefault();
+}
+
+function writeInJSon(){
+    var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+    // Put the object into storage
+    localStorage.setItem('testObject', JSON.stringify(testObject));
+    // Retrieve the object from storage
+
+
+}
+
+function readJson() {
+    var retrievedObject = localStorage.getItem('testObject');
+    
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
 }
