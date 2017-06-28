@@ -97,7 +97,11 @@ function applyFilters() {
     //returning object structure
     var availables = {
         rooms: [],
-        selection: preSelection
+        selection: preSelection,
+        date: dateArray,
+        participants: participants,
+        resources: myResources,
+        floor: floor
     };
 
     //iterate to see what rooms are available for those filters
@@ -626,4 +630,9 @@ function updateDate(e) {
     $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + startDate);
     $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + endDate);
     e.preventDefault();
+}
+
+
+function closeApp() {
+    location.reload();
 }
