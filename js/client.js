@@ -627,3 +627,7 @@ function updateDate(e) {
     $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + endDate);
     e.preventDefault();
 }
+function isEven(n) {
+  n = Number(n);
+  return n === 0 || !!(n && !(n%2));
+}
