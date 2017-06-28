@@ -82,6 +82,9 @@ function refreshMatrix(nextSemana) {
     var matrix = document.getElementById("matrix");
     var id_child = matrix.firstElementChild.id;
     var child = id_child.split("_");
+    if (window.innerWidth <= 768 && isSideBarOpen) {
+        toggleSideBar();
+    }
     matrix.innerHTML = " ";
     addMatrix(child[1]);
     var filters = applyFilters();
@@ -425,7 +428,7 @@ function _populateSelectionForDay(selection) {
                     fields[i].classList.add('active');
                 break;
             case 'dia':
-                if (fields[i].classList.contains('available'))
+                if (fields[i].classList.contains('available') && (info[2] !== '10' && info[2] !== '11'))
                     fields[i].classList.add('active');
                 break;
 
@@ -445,8 +448,7 @@ function _bindDragableForDay() {
                 columnID = this.id.split('-')[1];
                 $(this).toggleClass("active");
                 isActive = $(this).hasClass("active");
-
-                // return false; // prevent text selection
+                return false; // prevent text selection
             } else if (this.id.split('-')[1] !== columnID) {
                 snackBar("Uma reserva deverá conter apenas uma Sala.");
             }
@@ -467,12 +469,16 @@ function _bindDragableForDay() {
 }
 
 
+/**
+ * _setLunchTime - This method sets the Matrix from 13:00h to 14:00h for Lunch Time.
+ *
+ */
 function _setLunchTime() {
     var fields = document.querySelectorAll('td');
     var length = fields.length;
     for (var i = 0; i < length; i++) {
         var info = fields[i].id.split("-");
-        if (info[2] === '8' || info[2] === '9' || info[2] === '10' || info[2] === '11') {
+        if (info[2] === '10' || info[2] === '11') {
             fields[i].classList.add('lunch');
         }
     }

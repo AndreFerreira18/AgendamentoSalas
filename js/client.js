@@ -167,7 +167,7 @@ function _getResources(id) {
 function toggleSideBar(event) {
     var elem = document.getElementById("sidebar-wrapper");
     left = window.getComputedStyle(elem, null).getPropertyValue("left");
-    if (left == "300px") {
+    if (left == "300px" && isSideBarOpen) {
         isSideBarOpen = false;
         document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
     } else if (left == "-300px") {

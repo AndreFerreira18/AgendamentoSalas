@@ -206,6 +206,7 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
     color: black;
     font-size: 14px;
     font-weight: bold;
+    user-select: none;
 
 }
 .updown a:hover, updown a:focus{
