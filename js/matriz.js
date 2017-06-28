@@ -473,7 +473,7 @@ function _setLunchTime() {
     for (var i = 0; i < length; i++) {
         var info = fields[i].id.split("-");
         if (info[2] === '8' || info[2] === '9' || info[2] === '10' || info[2] === '11') {
-            fields[i].style.backgroundColor = 'red';
+            fields[i].classList.add('lunch');
         }
     }
 }
