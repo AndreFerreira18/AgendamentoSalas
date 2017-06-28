@@ -228,7 +228,7 @@ function defineActiveById(activeId) {
  * @returns {type}             description
  */
 function getActive(activeClass) {
-    var id;
+    var id = false;
     var elements = document.getElementsByClassName(activeClass);
     for (var i = 0; i < elements.length; i++) {
         if (elements[i].classList.contains('active'))
@@ -508,21 +508,26 @@ function preencheModalConfirm() {
     element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
     modalBody.appendChild(element);
 
-    //time information
+    //time information                                                                                         //confirmar para ter em conta os possiveis conjuntos de horas
+    var dateHour = divideDateAndTime("data_mod_calendar");
+    var startDate = dateHour[0];
+    var endDate = dateHour[1];
+    var tempStartHour = dateHour[2].split(" ");
+    var startHour = tempStartHour[1] == "PM" ? parseInt(tempStartHour[0]) + 12 + ":00" : tempStartHour[0];
+    var tempEndHour = dateHour[3].split(" ");
+    var endHour = tempEndHour[1] == "PM" ? parseInt(tempEndHour[0]) + 12 + ":00" : tempEndHour[0];
     element = document.createElement("p");
     element.id = "datetime_info";
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-time";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", " dummy hour");
+    element.insertAdjacentHTML("beforeend", " Reserva de " + startDate + " às " + startHour + " até " + endDate + " às " + endHour);
     modalBody.appendChild(element);
 
     //room information
     var idActiveFloor = getActive("list-group-item active");
-    var splitIdActiveFloor = idActiveFloor.split("-");
     var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
-
-    var idActiveRoom = getActive("btn-rooms") ? getActive("btn-rooms") : "other Rooms";
+    var idActiveRoom = getActive("btn-rooms") ? getActive("btn-rooms") : "other Rooms"; // rever isto salas da matriz dia
     var strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
     var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
     element = document.createElement("p");
@@ -545,7 +550,25 @@ function preencheModalConfirm() {
     modalBody.appendChild(element);
 
     //  selected resorces
-    //var roomResorces = resources.activeFloor
+    var roomResources;
+    var splitIdActiveRoom = idActiveRoom.split("-");
+    var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1])].Recursos
+    var strHasResources = "";
+    var strDoestResources = "";
+    for (var resource in tempResources) {
+
+        if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
+
+            if (tempResources[resource]) {
+                strHasResources = strHasResources.concat(resource + ", ");
+            } else if (resource === ? ? ? ? ? ? ? ? ? ? ? ? ? ? ) {
+                strDoestResources = strDoestResources.concat(resource + ", ");
+            }
+
+        }
+    }
+    //_getResources('store_btn_recursos');
+
     element = document.createElement("p");
     element.id = "room_info";
     glyphicon = document.createElement("span");
