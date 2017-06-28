@@ -445,11 +445,18 @@ table.matrix {
     user-select: none;
 }
 
-table.matrix td:hover {
+table.matrix tr:hover {
     color: #31708f;
     background-color: #d9edf7;
 }
 
+table.matrix tr:hover td {
+    background-color: #d9edf7;
+}
+table.matrix td:hover {
+    color: #31708f !important;
+    background-color: rgba(51, 122, 183, 0.49) !important;
+}
 table.matrix td.indisponivel:hover {
     color: #777;
     background-color: #eee;
@@ -474,7 +481,7 @@ table.matrix th {
 
 .notAvailable, .notAvailable:hover {
     color: #777;
-    background-color: #eee !important;
+    background-color: #eee;
     cursor:not-allowed;
     user-select: none;
 }
@@ -486,28 +493,35 @@ table.matrix th {
 
 table.matrix .active {
     background-color: #337ab7 !important;
-    border: 1px solid #337ab7 !important;
-    color: #fff;
+    color: #fff !important;
 }
 table.matrix .active:hover {
-    background-color: #337ab7 !important;
+    background-color: #337ab7;
     color: #000;
 }
 .undefined{
     color: red;
     background-color: red;
 }
-
+.mleft{
+    border-bottom: 1px solid #949494 !important;
+    border-left: 1px solid #949494 !important;
+    border-top: 1px solid #949494 !important;
+    background-color:#f9f9f9 ;
+}
+.mright{
+    border-bottom: 1px solid #949494 !important;
+    border-right: 1px solid #949494 !important;
+    border-top: 1px solid #949494 !important;
+}
 table.matrix .lunch {
     background-color: #e68a00;
     border-right: solid #e6e6e6 1px;
     border-left: solid #e6e6e6 1px;
     border-top: solid 1px #e68a00;
     border-bottom: solid 1px #e68a00;
-
 }
 /*
-
  .oooooo..o ooooo      ooo       .o.         .oooooo.   oooo    oooo oooooooooo.        .o.       ooooooooo.
 d8P'    `Y8 `888b.     `8'      .888.       d8P'  `Y8b  `888   .8P'  `888'   `Y8b      .888.      `888   `Y88.
 Y88bo.       8 `88b.    8      .8"888.     888           888  d8'     888     888     .8"888.      888   .d88'

@@ -168,7 +168,7 @@ function createMatrixWeek(filters, nextSemana) {
     var spanL = document.createElement('span');
     var thC = document.createElement('th');
     var spanR = document.createElement('span');
-    var colspan = scheduleWeek.dates.length + 1;
+    var colspan = scheduleWeek.dates.length*2 + 1;
 
     mh.appendChild(trH);
 
@@ -198,6 +198,7 @@ function createMatrixWeek(filters, nextSemana) {
     for (var i = 0; i < scheduleWeek.dates.length; i++) {
         var th2 = document.createElement('th');
         th2.innerHTML = scheduleWeek.dates[i];
+        th2.setAttribute('colspan', '2');
         tr.appendChild(th2);
     }
 
@@ -205,27 +206,50 @@ function createMatrixWeek(filters, nextSemana) {
     var mb = document.getElementById("matrix_week_body");
     for (var i = 0; i < scheduleWeek.hour.length; i++) {
         var tr = document.createElement('tr');
-        mb.appendChild(tr);
+        if(isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
         th.innerHTML = scheduleWeek.hour[i];
         for (var j = 0; j < scheduleWeek.dates.length; j++) {
             var td = document.createElement('td');
+            td.id = 'td-' + j + '-' + i;
             var disponibilidade = scheduleWeek[j][i];
             if (disponibilidade === 'Disponível') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizWeek);
+                //td.innerHTML =   td.id;
             } else if (disponibilidade === 'Indisponível') {
                 td.classList.add("notAvailable");
-                td.innerHTML = scheduleWeek[j][i];
+            //    td.innerHTML = scheduleWeek[j][i];
             } else {
                 td.classList.add("undefined");
-                td.innerHTML = scheduleWeek[j][i];
+            //    td.innerHTML = scheduleWeek[j][i];
             }
             //td.innerHTML = scheduleWeek[j][i];
-            td.id = 'td-' + j + '-' + i;
+
+            td.classList.add("mleft");
             tr.appendChild(td);
+
+
+
+            var td2 = document.createElement('td');
+            td2.id = 'td-' + j + '-' + (i+1);
+            var disponibilidade = scheduleWeek[j][i+1];
+            if (disponibilidade === 'Disponível') {
+                td2.classList.add("available");
+                td2.addEventListener("click", selecionarGrupoMatrizWeek);
+                //td2.innerHTML =   td2.id;
+            } else if (disponibilidade === 'Indisponível') {
+                td2.classList.add("notAvailable");
+            //    td.innerHTML = scheduleWeek[j][i];
+            } else {
+                td2.classList.add("undefined");
+            //    td.innerHTML = scheduleWeek[j][i];
+            }
+            //td.innerHTML = scheduleWeek[j][i];
+            td2.classList.add("mright");
+            tr.appendChild(td2);
         }
     }
 }
