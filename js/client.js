@@ -29,12 +29,18 @@ $('input[name="daterange"]').daterangepicker({
 });
 
 //if user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
-$('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
-    var radios = document.querySelectorAll('.radioButton')
-    for (var i = 0; i < radios.length; i++) {
-        radios[i].children[0].checked = false;
-    }
-});
+
+_bindApplyBtnEvent();
+
+function _bindApplyBtnEvent() {
+    $('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
+        var radios = document.querySelectorAll('.radioButton')
+        for (var i = 0; i < radios.length; i++) {
+            radios[i].children[0].checked = false;
+        }
+        columnID = '';
+    });
+}
 
 //Sidebar
 $(window).resize(function() {
@@ -467,6 +473,8 @@ function clone() {
             this.classList.toggle("active");
         }
     }
+    //bind event when Apply is clicked in DateRangePicker
+    _bindApplyBtnEvent();
 }
 
 /**
@@ -718,7 +726,36 @@ function isEven(n) {
     n = Number(n);
     return n === 0 || !!(n && !(n % 2));
 }
-function sideBarChangeData(){
+
+
+/**
+ * validateForm - This method valides data inserted in forms so that next actions can be done
+ *
+ * @param  {type} current Describes which form is currently being used. Can be «modal» or «sidebar»
+ */
+function validateForm(current) {
+    var isValid = true,
+        meeting = document.getElementById('data_mod_tipo_reuniao').value,
+        data = divideDateAndTime(),
+        participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
+    if (participants <= 0 || participants > 999) {
+        isValid = false;
+        document.getElementById('participants_error').innerHTML = "Insira um número de participantes entre 1 e 999."
+    } else {
+        document.getElementById('participants_error').innerHTML = '';
+    }
+
+    if (isValid) {
+        if (current === 'sidebar') {
+            sideBarChangeData();
+        } else if (current === 'modal') {
+            saveChanges();
+            $('#modal').modal('hide');
+        }
+    }
+}
+
+function sideBarChangeData() {
     var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
     var endDay = datahora[1];

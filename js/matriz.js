@@ -260,6 +260,7 @@ function createMatrixWeek(filters, nextSemana) {
     }
 
     _setLunchTime();
+    _setWeekendHighlight();
     _bindDraggableForWeek();
 }
 
@@ -372,7 +373,7 @@ function createMatrixDay(filters) {
     var tr = document.createElement('tr');
     var trH = document.createElement('tr');
     var thC = document.createElement('th');
-    var colspan = scheduleDay[selectedFloor].length*2 + 1;
+    var colspan = scheduleDay[selectedFloor].length * 2 + 1;
 
     mh.appendChild(trH);
     trH.appendChild(thC);
@@ -422,7 +423,7 @@ function createMatrixDay(filters) {
             td.id = 'td-' + j + '-' + i;
 
             var td2 = document.createElement('td');
-            var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i+1];
+            var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i + 1];
             if (disponibilidade == 'Disponível') {
                 td2.classList.add("available");
                 td2.addEventListener("click", selecionarGrupoMatrizDay);
@@ -435,9 +436,9 @@ function createMatrixDay(filters) {
             for (var k = 0; k < filters.rooms.length; k++)
                 if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
                     isNearMiss = false;
-            if(isNearMiss)
+            if (isNearMiss)
                 td2.className = 'nearMiss';
-            td2.id = 'td-' + j + '-' + (i+1);
+            td2.id = 'td-' + j + '-' + (i + 1);
             td2.classList.add("mright");
 
 
@@ -563,14 +564,11 @@ function _bindDraggableForWeek() {
         })
         .mouseover(function() {
             if (isMouseDown)
-                $(this).toggleClass("active");
+                $(this).toggleClass("active", isActive);
         });
     $(document)
         .mouseup(function() {
             isMouseDown = false;
-            // var activeElements = document.querySelectorAll('td.active');
-            // if (activeElements.length === 1 || activeElements.length === 0)
-            //     columnID = '';
         });
 }
 
@@ -587,6 +585,27 @@ function _setLunchTime() {
             fields[i].classList.add('lunch');
         }
     }
+}
+
+function _setWeekendHighlight() {
+    var fields = document.querySelectorAll('td');
+    var length = fields.length;
+    for (var i = 0; i < length; i++) {
+        var info = fields[i].id.split("-");
+        if (info[1] === '5' || info[1] === '6') {
+            if (isEven(parseInt(info[2])))
+                fields[i].classList.add('leftWeekend');
+            else
+                fields[i].classList.add('rightWeekend');
+        }
+    }
+    var head = document.getElementById('matrix_week_head');
+    var tr = head.children[1];
+    var length = tr.children.length;
+    var saturday = tr.children[length - 2];
+    saturday.classList.add('weekend');
+    var sunday = tr.children[length - 1];
+    sunday.classList.add('weekend');
 }
 
 function selecionarGrupoMatrizDay(e) {
