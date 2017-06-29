@@ -569,6 +569,11 @@ table.matrix .lunch {
     opacity: 0.2
 }
 
+table.matrix .lunch .active{
+    background-color: #337ab7 !important;
+    color: #fff;
+}
+
 .leftWeekend {
   background-color: #bfbfbf !important;
 }
