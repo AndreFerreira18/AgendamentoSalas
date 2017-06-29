@@ -577,7 +577,6 @@ function findHour() {
     if (activeMatrix === "matrix_day_body")
         hour.push(divideDateAndTime("data_mod_calendar"));
     else if (activeMatrix === "matrix_week_body") {
-
         var activeElements = orderMAtrixActive("matrix_week_body");
         var datesList = getDateList(activeElements);
         var tempArray = [
@@ -603,32 +602,16 @@ function findHour() {
                         }
                     }
             }
-
-            for (var i = 0; i < tempArray.length; i++) {
-                if (tempArray[i].length > 2) {
-                    tempArray.splice(1, tempArray.length - 2);
-                }
+        }
+        for (var k = 0; k < tempArray.length; k++) {
+            if (tempArray[k].length > 2) {
+                tempArray.splice(1, tempArray.length - 2);
             }
-
-
-
-            hour[0] = datesList[i];
-            // for (var j = 0; j < hour.length; j++) {
-            //     if (hour) {
-            //         if (hour[activeElementSplit[1]] = hour) {
-            //
-            //         }
-            //     } else {
-            //         hour[activeElementSplit[1]] = getHour(activeElement);
-            //     }
-            // }
-
-
         }
 
-        // teste de multi horas
-        // hour.push(divideDateAndTime("data_mod_calendar"));
-        // hour.push(divideDateAndTime("data_mod_calendar"));
+        //hour[0] = datesList[i];
+
+
     } else
         snackBar("Não tem matriz Construida");
     return hour;
