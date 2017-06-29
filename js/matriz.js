@@ -260,6 +260,7 @@ function createMatrixWeek(filters, nextSemana) {
     }
 
     _setLunchTime();
+    _bindDraggableForWeek();
 }
 
 
@@ -428,7 +429,7 @@ function createMatrixDay(filters) {
         }
     }
     _populateSelectionForDay(filters.selection);
-    _bindDragableForDay();
+    _bindDraggableForDay();
     _setLunchTime();
 }
 
@@ -469,16 +470,15 @@ function _populateSelectionForDay(selection) {
 
 
 /**
- * _bindDragableForDay - This method binds mouse events for dragable selection in Day Matrix
+ * _bindDraggableForDay - This method binds mouse events for draggable selection in Day Matrix
  *
  */
-function _bindDragableForDay() {
+function _bindDraggableForDay() {
     var isMouseDown = false,
         isActive;
     $("#matrix td")
         .mousedown(function(e) {
             var all = document.querySelectorAll('td.active'),
-                row = '0',
                 first = '',
                 last = '',
                 rowID;
@@ -522,11 +522,39 @@ function _bindDragableForDay() {
         .mouseup(function() {
             isMouseDown = false;
             var activeElements = document.querySelectorAll('td.active');
-            if (activeElements.length === 1 || activeElements.length === 0)
+            if (activeElements.length === 0)
                 columnID = '';
         });
 }
 
+
+/**
+ * _bindDraggableForDay - This method binds mouse events for draggable selection in Day Matrix
+ *
+ */
+function _bindDraggableForWeek() {
+    var isMouseDown = false,
+        isActive;
+    $("#matrix td")
+        .mousedown(function(e) {
+            isMouseDown = true;
+            columnID = this.id.split('-')[1];
+            $(this).toggleClass("active");
+            isActive = $(this).hasClass("active");
+            // return false; // prevent text selection
+        })
+        .mouseover(function() {
+            if (isMouseDown)
+                $(this).toggleClass("active");
+        });
+    $(document)
+        .mouseup(function() {
+            isMouseDown = false;
+            // var activeElements = document.querySelectorAll('td.active');
+            // if (activeElements.length === 1 || activeElements.length === 0)
+            //     columnID = '';
+        });
+}
 
 /**
  * _setLunchTime - This method sets the Matrix from 13:00h to 14:00h for Lunch Time.
@@ -573,8 +601,8 @@ function selecionarGrupoMatrizDay(e) {
 function selecionarGrupoMatrizWeek(e) {
     var defineMulti = false;
     try {
-        nearElement(e);
-        defineMultiActiveEvent(e);
+        // nearElement(e);
+        // defineMultiActiveEvent(e);
     } catch (err) {
         switch (err) {
             case 1:
