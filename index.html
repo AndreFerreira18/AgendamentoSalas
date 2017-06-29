@@ -52,12 +52,16 @@
                                 <select class="form-control" id="data_mod_tipo_reuniao">
 
                             </select>
+
                             </div>
+                            <p id="type_error" class="sb_error"></p>
 
                             <div class="form-group">
                                 <label>Seleção de Data e Horas (Inicio e Fim):</label>
                                 <input type="text" class="form-control" name="daterange" value="01/01/2015 12:00 01/01/2015 12:00" id="data_mod_calendar" />
+
                             </div>
+                            <p id="date_error" class="sb_error"></p>
                             <!-- <div class="input-group">
                 <span class="input-group-addon">
                   <input type="text" class="form-control" name="daterange" id="data_mod_calendar" placeholder="Select"/>
@@ -85,8 +89,9 @@
                   <b><span class="glyphicon glyphicon-user"></span> Nº de Participantes:</b>
                                 </span>
                                 <input type="number" class="form-control" value="1" min="1" max="999" id="data_mod_nparticipantes">
-                            </div>
 
+                            </div>
+                            <p id="participants_error" class="sb_error"></p>
                             <div class="form-group">
                                 <div class="piso_pref">
                                     <label>
@@ -104,7 +109,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Guardar</button>
+                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary" onclick="validateForm('modal')"> Guardar</button>
                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
                 </div>
             </div>
@@ -162,7 +167,9 @@
 
                         </form>
                         <div class="btn_aplicar">
-                            <button type="button" onclick="refreshMatrix()" class="btn-filtos btn btn-primary btn-lg btn-block">Alterar Dados</button>
+                            <button type="button" onclick="validateForm('sidebar')" class="btn-filtos btn btn-primary btn-lg btn-block">Alterar Dados</button>
+                        </div>
+                        <div id="logo">
                         </div>
                     </div>
                 </div>
@@ -264,7 +271,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="color: #e6e600; font-weight: bold">Pendente</td>
+                            <td style="color: #ffd24d; font-weight: bold">Pendente</td>
                             <td>Formação</td>
                             <td>Sala 1</td>
                             <td>2017/08/15 09:00</td>
