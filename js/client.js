@@ -257,6 +257,29 @@ function getMultiActive(activeClass) {
     return id;
 }
 
+function getActiveChild(id) {
+    var id = false;
+    var elements = document.getElementById(id).childNodes;
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].classList.contains('active'))
+            id = elements[i].id;
+    }
+    return id;
+}
+
+function getMultiActiveChilds(fatherId) {
+    var id = [];
+    var elements = document.getElementById(fatherId).childNodes;
+    for (var i = 0; i < elements.length; i++) {
+        var childElements = elements[i].childNodes;
+        for (var j = 0; j < childElements.length; j++) {
+            if (childElements[j].classList.contains('active'))
+                id.push(childElements[j].id);
+        }
+    }
+    return id;
+}
+
 // Remove element by Id
 //
 /**
@@ -532,8 +555,47 @@ function preencheModalConfirm() {
     //room information
     var idActiveFloor = getActive("list-group-item active");
     var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
-    var idActiveRoom = getActive("btn-rooms") ? getActive("btn-rooms") : "other Rooms"; // rever isto salas da matriz dia
-    var strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+    var idActiveRoom = getActive("btn-rooms");
+    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id); //document.getElementById("matrix").childNodes[1]);
+    var strActiveRoom;
+
+    switch (idActiveFloor) {
+        case "piso-0":
+            var rooms = rooms_0.salas;
+            break;
+        case "piso-1":
+            var rooms = rooms_1.salas;
+            break;
+        case "piso-2":
+            var rooms = rooms_2.salas;
+            break;
+        case "piso-3":
+            var rooms = rooms_3.salas;
+            break;
+        case "piso-4":
+            var rooms = rooms_4.salas;
+            break;
+        case "piso-5":
+            var rooms = rooms_5.salas;
+            break;
+        case "piso-6":
+            var rooms = rooms_6.salas;
+            break;
+        case "piso-7":
+            var rooms = rooms_7.salas;
+            break;
+        default:
+    }
+
+    if (idActiveRoom)
+        strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+    else {
+        var splitIdActiveTd = idActiveTd[0].split("-");
+        strActiveRoom = rooms[splitIdActiveTd[1]];
+    }
+
+
+
     var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
     element = document.createElement("p");
     element.id = "room_info";
@@ -556,19 +618,25 @@ function preencheModalConfirm() {
 
     //  selected resorces
     var roomResources;
-    var splitIdActiveRoom = idActiveRoom.split("-");
-    var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1])].Recursos
+    if (idActiveRoom) {
+        var splitIdActiveRoom = idActiveRoom.split("-");
+        var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
+    } else {
+        var splitIdActiveRoom = splitIdActiveTd[1];
+        var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
+    }
+
     var strHasResources = [];
     var strDoestResources = [];
     for (var resource in tempResources) {
         if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
             if (tempResources[resource]) {
-                strHasResources.push(resource + " ");
+                strHasResources.push(" " + resource);
             } else {
                 var idActiveResources = getMultiActive("btn-recurso");
                 for (var i = 0; i < idActiveResources.length; i++) {
                     if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
-                        strDoestResources.push(resource + " ");
+                        strDoestResources.push(" " + resource);
                 }
             }
         }
@@ -579,7 +647,7 @@ function preencheModalConfirm() {
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-paperclip";
     element.appendChild(glyphicon);
-    if (strDoestResources)
+    if (strDoestResources.length)
         element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
     else
         element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
