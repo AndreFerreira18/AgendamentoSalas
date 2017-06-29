@@ -663,18 +663,3 @@ function insertRow() {
         }
 
    }
-   
-
-    // var listReserv = document.getElementById("listReservations");
-
-
-
-
-//
-//         if (retrievedObject.hasOwnProperty(infoReservation)){
-//             var info = retrievedObject[infoReservation];
-//             trParent.insertBefore(info, trParent.firstChild);
-//         }
-//     }
-// }
-    // console.log('retrievedObject: ', JSON.parse(retrievedObject));
