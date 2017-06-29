@@ -480,6 +480,34 @@ function divideDateAndTime(idData) {
     return datahora;
 }
 
+
+function getHour(id) {
+    var hour = false;
+    hour = document.getElementById(id).parentNode.firstElementChild.innerHTML;
+    return hour;
+}
+
+function getDate(id) {
+    var date = false;
+    var splitId = id.split("-");
+    date = document.getElementById(id).parentNode.parentNode.parentNode.firstElementChild.children[1].children[parseInt(splitId[1]) + 1].innerHTML;
+    return date;
+}
+
+function getDateList(activeElements) {
+    var dateList = [];
+    var exists = false;
+    for (var i = 0; i < activeElements.length; i++) {
+        for (var j = 0; j <= dateList.length; j++) {
+            if (getDate(activeElements[i]) === dateList[j])
+                exists = true;
+        }
+        if (!exists)
+            dateList.push(getDate(activeElements[i]));
+    }
+    return dateList;
+}
+
 /**
  * findHour - description
  *
@@ -491,9 +519,28 @@ function findHour() {
     if (activeMatrix === "matrix_day_body")
         hour.push(divideDateAndTime("data_mod_calendar"));
     else if (activeMatrix === "matrix_week_body") {
+
+        var activeElements = getMultiActiveChilds("matrix_week_body");
+        var datesList = getDateList(activeElements);
+        for (var i = 0; i < activeElements.length; i++) {
+            hour[0] = datesList[i];
+            // var activeElement = activeElements[i];
+            // var activeElementSplit = activeElement.split("-");
+            // for (var j = 0; j < hour.length; j++) {
+            //     if (hour) {
+            //         if (hour[activeElementSplit[1]] = hour) {
+            //
+            //         }
+            //     } else {
+            //         hour[activeElementSplit[1]] = getHour(activeElement);
+            //     }
+            // }
+
+        }
+
         // teste de multi horas
-        hour.push(divideDateAndTime("data_mod_calendar"));
-        hour.push(divideDateAndTime("data_mod_calendar"));
+        // hour.push(divideDateAndTime("data_mod_calendar"));
+        // hour.push(divideDateAndTime("data_mod_calendar"));
     } else
         snackBar("Não tem matriz Construida");
     return hour;
@@ -529,9 +576,8 @@ function preencheModalConfirm() {
     //time information
     var dateHour = findHour();
     //dateHour.push(findHour());
-    var str = " Reserva de ";
+    var str = " Reserva para ";
     var startDate = [];
-    var endDate = [];
     var tempStartHour = [];
     var startHour = [];
     var tempEndHour = [];
@@ -539,12 +585,11 @@ function preencheModalConfirm() {
     var strHoras = [];
     for (var i = 0; i < dateHour.length; i++) {
         startDate[i] = dateHour[i][0];
-        endDate[i] = dateHour[i][1];
         tempStartHour[i] = dateHour[i][2].split(" ");
         startHour[i] = tempStartHour[i][1] == "PM" ? parseInt(tempStartHour[i][0]) + 12 + ":00" : tempStartHour[i][0];
         tempEndHour[i] = dateHour[i][3].split(" ");
         endHour[i] = tempEndHour[i][1] == "PM" ? parseInt(tempEndHour[i][0]) + 12 + ":00" : tempEndHour[i][0];
-        strHoras[i] = startDate[i] + " às " + startHour[i] + " até " + endDate[i] + " às " + endHour[i];
+        strHoras[i] = "dia " + startDate[i] + " das " + startHour[i] + " às " + endHour[i];
     }
 
     element = document.createElement("p");
