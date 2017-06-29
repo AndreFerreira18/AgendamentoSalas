@@ -1,3 +1,6 @@
+//Global vars
+var columnID = '';
+
 /**
  * getWeek - description
  *
@@ -417,6 +420,7 @@ function _populateSelectionForDay(selection) {
         var info = fields[i].id.split("-");
         if (info[1] !== '0')
             continue;
+        columnID = info[1];
         fields[i].classList.remove('active');
         switch (selection) {
             case 'manha':
@@ -436,29 +440,46 @@ function _populateSelectionForDay(selection) {
     }
 }
 
+
+
 function _bindDragableForDay() {
     var isMouseDown = false,
-        isActive, columnID = '';
+        isActive;
     $("#matrix td")
         .mousedown(function(e) {
-            var all = document.querySelectorAll('td.active');
-            var row = '0';
-            for (var i = 0; i < all.length; i++) {
-                if (all[i].id === '')
-                    continue;
-                else {
-                    row = all[i].id.split('-')[1];
+            var all = document.querySelectorAll('td.active'),
+                row = '0',
+                first = '',
+                last = '',
+                rowID;
+
+            if (all.length > 0) {
+                first = parseInt(all[0].id.split('-')[2]);
+                last = parseInt(all[all.length - 1].id.split('-')[2]);
+                rowID = parseInt(this.id.split('-')[2]);
+                if ((rowID !== (first - 1) && rowID !== (last + 1)) && (rowID !== first && rowID !== last)) {
+                    snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
+                } else {
+                    if (columnID === '' || this.id.split('-')[1] === columnID) {
+                        isMouseDown = true;
+                        columnID = this.id.split('-')[1];
+                        $(this).toggleClass("active");
+                        isActive = $(this).hasClass("active");
+                        return false; // prevent text selection
+                    } else if (this.id.split('-')[1] !== columnID) {
+                        snackBar("Uma reserva deverá conter apenas uma Sala.");
+                    }
                 }
-            }
-            //TODO evitar selecção na mesma sala a horas intercaladas
-            if (columnID === '' || this.id.split('-')[1] === columnID) {
-                isMouseDown = true;
-                columnID = this.id.split('-')[1];
-                $(this).toggleClass("active");
-                isActive = $(this).hasClass("active");
-                return false; // prevent text selection
-            } else if (this.id.split('-')[1] !== columnID) {
-                snackBar("Uma reserva deverá conter apenas uma Sala.");
+            } else {
+                if (columnID === '' || this.id.split('-')[1] === columnID) {
+                    isMouseDown = true;
+                    columnID = this.id.split('-')[1];
+                    $(this).toggleClass("active");
+                    isActive = $(this).hasClass("active");
+                    return false; // prevent text selection
+                } else if (this.id.split('-')[1] !== columnID) {
+                    snackBar("Uma reserva deverá conter apenas uma Sala.");
+                }
             }
         })
         .mouseover(function() {
@@ -471,7 +492,7 @@ function _bindDragableForDay() {
         .mouseup(function() {
             isMouseDown = false;
             var activeElements = document.querySelectorAll('td.active');
-            if (activeElements.length === 1)
+            if (activeElements.length === 1 || activeElements.length === 0)
                 columnID = '';
         });
 }

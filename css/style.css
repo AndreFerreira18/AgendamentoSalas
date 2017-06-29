@@ -484,7 +484,6 @@ table.matrix th {
 
 table.matrix .active {
     background-color: #337ab7 !important;
-    border: 1px solid #337ab7 !important;
     color: #fff;
 }
 table.matrix .active:hover {
