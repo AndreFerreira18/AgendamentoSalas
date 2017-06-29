@@ -258,6 +258,8 @@ function createMatrixWeek(filters, nextSemana) {
             tr.appendChild(td2);
         }
     }
+
+    _setLunchTime();
 }
 
 
@@ -466,6 +468,10 @@ function _populateSelectionForDay(selection) {
 
 
 
+/**
+ * _bindDragableForDay - This method binds mouse events for dragable selection in Day Matrix
+ *
+ */
 function _bindDragableForDay() {
     var isMouseDown = false,
         isActive;
