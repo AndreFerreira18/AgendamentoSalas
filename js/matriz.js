@@ -371,7 +371,7 @@ function createMatrixDay(filters) {
     var tr = document.createElement('tr');
     var trH = document.createElement('tr');
     var thC = document.createElement('th');
-    var colspan = scheduleDay[selectedFloor].length + 1;
+    var colspan = scheduleDay[selectedFloor].length*2 + 1;
 
     mh.appendChild(trH);
     trH.appendChild(thC);
@@ -387,6 +387,7 @@ function createMatrixDay(filters) {
     for (var i = 0; i < scheduleDay[selectedFloor].length; i++) {
         var th2 = document.createElement('th');
         th2.innerHTML = scheduleDay[selectedFloor][i].NomeSala;
+        th2.setAttribute('colspan', '2');
         tr.appendChild(th2);
     }
 
@@ -394,38 +395,54 @@ function createMatrixDay(filters) {
     var mb = document.getElementById("matrix_day_body");
     for (var i = 0; i < scheduleDay[selectedFloor][0].Horas.length; i++) {
         var tr = document.createElement('tr');
-        mb.appendChild(tr);
+        if (isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
         th.innerHTML = scheduleDay[selectedFloor][0].Horas[i];
         for (var j = 0; j < scheduleDay[selectedFloor].length; j++) {
             var td = document.createElement('td');
-
-
             var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i];
             if (disponibilidade == 'Disponível') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizDay);
-            } else if (disponibilidade == 'Indisponível') {
+            } else if (disponibilidade == 'Indisponível')
                 td.classList.add("notAvailable");
-                td.innerHTML = disponibilidade;
-            } else {
+            else
                 td.classList.add("undefined");
-                td.innerHTML = disponibilidade;
-            }
 
             var isNearMiss = true;
             for (var k = 0; k < filters.rooms.length; k++)
                 if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
                     isNearMiss = false;
-
             if (isNearMiss)
                 td.className = 'nearMiss';
-
-
+            td.classList.add("mleft");
             td.id = 'td-' + j + '-' + i;
+
+            var td2 = document.createElement('td');
+            var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i+1];
+            if (disponibilidade == 'Disponível') {
+                td2.classList.add("available");
+                td2.addEventListener("click", selecionarGrupoMatrizDay);
+            } else if (disponibilidade == 'Indisponível')
+                td2.classList.add("notAvailable");
+            else
+                td2.classList.add("undefined");
+
+            var isNearMiss = true;
+            for (var k = 0; k < filters.rooms.length; k++)
+                if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
+                    isNearMiss = false;
+            if(isNearMiss)
+                td2.className = 'nearMiss';
+            td2.id = 'td-' + j + '-' + (i+1);
+            td2.classList.add("mright");
+
+
+
             tr.appendChild(td);
+            tr.appendChild(td2);
         }
     }
     _populateSelectionForDay(filters.selection);
