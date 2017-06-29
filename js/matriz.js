@@ -545,14 +545,11 @@ function _bindDraggableForWeek() {
         })
         .mouseover(function() {
             if (isMouseDown)
-                $(this).toggleClass("active");
+                $(this).toggleClass("active", isActive);
         });
     $(document)
         .mouseup(function() {
             isMouseDown = false;
-            // var activeElements = document.querySelectorAll('td.active');
-            // if (activeElements.length === 1 || activeElements.length === 0)
-            //     columnID = '';
         });
 }
 
