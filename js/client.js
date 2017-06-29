@@ -491,7 +491,9 @@ function findHour() {
     if (activeMatrix === "matrix_day_body")
         hour.push(divideDateAndTime("data_mod_calendar"));
     else if (activeMatrix === "matrix_week_body") {
-
+        // teste de multi horas
+        hour.push(divideDateAndTime("data_mod_calendar"));
+        hour.push(divideDateAndTime("data_mod_calendar"));
     } else
         snackBar("Não tem matriz Construida");
     return hour;
@@ -526,6 +528,7 @@ function preencheModalConfirm() {
 
     //time information
     var dateHour = findHour();
+    //dateHour.push(findHour());
     var str = " Reserva de ";
     var startDate = [];
     var endDate = [];
@@ -549,7 +552,7 @@ function preencheModalConfirm() {
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-time";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", strHoras);
+    element.insertAdjacentHTML("beforeend", str + strHoras);
     modalBody.appendChild(element);
 
     //room information
