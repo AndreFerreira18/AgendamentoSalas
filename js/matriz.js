@@ -47,7 +47,7 @@ function changeMatrix() {
         addBtnRooms(filters);
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
-        createMatrixWeek();
+        createMatrixWeek(filters);
     } else if (filho[1] == "week") {
         removeRoomBtn();
         addMatrix("day");
@@ -174,7 +174,7 @@ function createMatrixWeek(filters, nextSemana) {
     var spanL = document.createElement('span');
     var thC = document.createElement('th');
     var spanR = document.createElement('span');
-    var colspan = scheduleWeek.dates.length*2 + 1;
+    var colspan = scheduleWeek.dates.length * 2 + 1;
 
     mh.appendChild(trH);
 
@@ -212,7 +212,7 @@ function createMatrixWeek(filters, nextSemana) {
     var mb = document.getElementById("matrix_week_body");
     for (var i = 0; i < scheduleWeek.hour.length; i++) {
         var tr = document.createElement('tr');
-        if(isEven(i)) mb.appendChild(tr);
+        if (isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
@@ -227,10 +227,10 @@ function createMatrixWeek(filters, nextSemana) {
                 //td.innerHTML =   td.id;
             } else if (disponibilidade === 'Indisponível') {
                 td.classList.add("notAvailable");
-            //    td.innerHTML = scheduleWeek[j][i];
+                //    td.innerHTML = scheduleWeek[j][i];
             } else {
                 td.classList.add("undefined");
-            //    td.innerHTML = scheduleWeek[j][i];
+                //    td.innerHTML = scheduleWeek[j][i];
             }
             //td.innerHTML = scheduleWeek[j][i];
 
@@ -240,18 +240,18 @@ function createMatrixWeek(filters, nextSemana) {
 
 
             var td2 = document.createElement('td');
-            td2.id = 'td-' + j + '-' + (i+1);
-            var disponibilidade = scheduleWeek[j][i+1];
+            td2.id = 'td-' + j + '-' + (i + 1);
+            var disponibilidade = scheduleWeek[j][i + 1];
             if (disponibilidade === 'Disponível') {
                 td2.classList.add("available");
                 td2.addEventListener("click", selecionarGrupoMatrizWeek);
                 //td2.innerHTML =   td2.id;
             } else if (disponibilidade === 'Indisponível') {
                 td2.classList.add("notAvailable");
-            //    td.innerHTML = scheduleWeek[j][i];
+                //    td.innerHTML = scheduleWeek[j][i];
             } else {
                 td2.classList.add("undefined");
-            //    td.innerHTML = scheduleWeek[j][i];
+                //    td.innerHTML = scheduleWeek[j][i];
             }
             //td.innerHTML = scheduleWeek[j][i];
             td2.classList.add("mright");
