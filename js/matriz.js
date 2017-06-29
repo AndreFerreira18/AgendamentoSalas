@@ -329,6 +329,7 @@ function addBtnRooms(filters) {
     ////////////////////////////////////////////
 
     var element = document.getElementById("btn_rooms");
+    element.innerHTML = "";
     for (var i = 1; i <= rooms.salas.length; i++) {
         var btn = document.createElement('button');
         btn.innerHTML = rooms.salas[i - 1];

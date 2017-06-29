@@ -14,6 +14,9 @@ $(window).ready(
 //Date picker
 $('input[name="daterange"]').daterangepicker({
     timePicker: true,
+    "dateLimit": {
+        "days": 7
+    },
     timePicker24Hour: true,
     timePickerIncrement: 30,
     startDate: "03/07/2017",
@@ -445,6 +448,9 @@ function clone() {
     //     ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) + '/' +
     //     (date.getFullYear());
     $('input[name="daterange"]').daterangepicker({
+        "dateLimit": {
+            "days": 7
+        },
         "timePicker": true,
         "timePicker24Hour": true,
         "timePickerIncrement": 30,
@@ -711,4 +717,22 @@ function closeApp() {
 function isEven(n) {
     n = Number(n);
     return n === 0 || !!(n && !(n % 2));
+}
+function sideBarChangeData(){
+    var datahora = divideDateAndTime("data_mod_calendar");
+    var startDay = datahora[0];
+    var endDay = datahora[1];
+    var startHour = datahora[2];
+    var endHour = datahora[3];
+    var filters = applyFilters();
+    var matrix = document.getElementById("matrix");
+    matrix.innerHTML = " ";
+    if (startDay === endDay) {
+        addMatrix('day');
+    } else {
+        addBtnRooms(filters);
+        defineActiveById('btn_rooms-1');
+        addMatrix('week');
+    }
+    refreshMatrix();
 }
