@@ -158,7 +158,6 @@ function _getResources(id) {
     return elementsArray;
 }
 
-
 /**
  * toggleSideBar - This method handles side Bar opening and closing
  *
@@ -280,8 +279,6 @@ function getMultiActiveChilds(fatherId) {
     return id;
 }
 
-// Remove element by Id
-//
 /**
  * removeElement - description
  *
@@ -295,10 +292,6 @@ function removeElement(elementId) {
     }
 }
 
-
-
-//saves data to the Side Bar
-
 /**
  * saveChanges - description
  *
@@ -310,7 +303,6 @@ function saveChanges() {
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
-
 
     updownIniciar();
     var filters = applyFilters();
@@ -324,8 +316,6 @@ function saveChanges() {
     refreshMatrix();
     clone();
 }
-
-
 
 /**
  * createResources - description
@@ -395,15 +385,12 @@ function createResources() {
         }
 
         button.appendChild(spn);
-
         element.insertBefore(iDiv, element.firstChild);
-
         element = document.getElementById(iDiv.id);
         element.insertBefore(label, element.firstChild);
         element.insertBefore(button, element.firstChild);
     }
 }
-
 
 /**
  * createTypesOfMeetings - description
@@ -468,7 +455,6 @@ function clone() {
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
 
-
     for (var i = 0; i < initialData.Recursos.length; i++) {
         var id_button = document.getElementById("btn_rc-" + i);
         id_button.onclick = function() {
@@ -476,7 +462,6 @@ function clone() {
         }
     }
 }
-
 
 /**
  * divideDateAndTime - description
@@ -501,12 +486,15 @@ function divideDateAndTime(idData) {
  * @returns {type}  description
  */
 function findHour() {
-    for (var i = 0; i < selected_hours.length; i++) {
-        var acede_dataHora_selecionada = selected_hours[i];
-        var dataHora_selecionada = acede_dataHora_selecionada.split("-");
-        console.log(dataHora_selecionada);
-        return dataHora_selecionada;
-    }
+    var hour = [];
+    var activeMatrix = document.getElementById("matrix").childNodes[2].id;
+    if (activeMatrix === "matrix_day_body")
+        hour.push(divideDateAndTime("data_mod_calendar"));
+    else if (activeMatrix === "matrix_week_body") {
+
+    } else
+        snackBar("Não tem matriz Construida");
+    return hour;
 }
 
 /**
@@ -536,27 +524,39 @@ function preencheModalConfirm() {
     element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
     modalBody.appendChild(element);
 
-    //time information                                                                                         //confirmar para ter em conta os possiveis conjuntos de horas
-    var dateHour = divideDateAndTime("data_mod_calendar");
-    var startDate = dateHour[0];
-    var endDate = dateHour[1];
-    var tempStartHour = dateHour[2].split(" ");
-    var startHour = tempStartHour[1] == "PM" ? parseInt(tempStartHour[0]) + 12 + ":00" : tempStartHour[0];
-    var tempEndHour = dateHour[3].split(" ");
-    var endHour = tempEndHour[1] == "PM" ? parseInt(tempEndHour[0]) + 12 + ":00" : tempEndHour[0];
+    //time information
+    var dateHour = findHour();
+    var str = " Reserva de ";
+    var startDate = [];
+    var endDate = [];
+    var tempStartHour = [];
+    var startHour = [];
+    var tempEndHour = [];
+    var endHour = [];
+    var strHoras = [];
+    for (var i = 0; i < dateHour.length; i++) {
+        startDate[i] = dateHour[i][0];
+        endDate[i] = dateHour[i][1];
+        tempStartHour[i] = dateHour[i][2].split(" ");
+        startHour[i] = tempStartHour[i][1] == "PM" ? parseInt(tempStartHour[i][0]) + 12 + ":00" : tempStartHour[i][0];
+        tempEndHour[i] = dateHour[i][3].split(" ");
+        endHour[i] = tempEndHour[i][1] == "PM" ? parseInt(tempEndHour[i][0]) + 12 + ":00" : tempEndHour[i][0];
+        strHoras[i] = startDate[i] + " às " + startHour[i] + " até " + endDate[i] + " às " + endHour[i];
+    }
+
     element = document.createElement("p");
     element.id = "datetime_info";
     glyphicon = document.createElement("span");
     glyphicon.className = "glyphicon glyphicon-time";
     element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", " Reserva de " + startDate + " às " + startHour + " até " + endDate + " às " + endHour);
+    element.insertAdjacentHTML("beforeend", strHoras);
     modalBody.appendChild(element);
 
     //room information
     var idActiveFloor = getActive("list-group-item active");
     var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
     var idActiveRoom = getActive("btn-rooms");
-    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id); //document.getElementById("matrix").childNodes[1]);
+    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
     var strActiveRoom;
 
     switch (idActiveFloor) {
@@ -593,8 +593,6 @@ function preencheModalConfirm() {
         var splitIdActiveTd = idActiveTd[0].split("-");
         strActiveRoom = rooms[splitIdActiveTd[1]];
     }
-
-
 
     var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
     element = document.createElement("p");
@@ -673,7 +671,6 @@ function snackBar(msg) {
         3000);
 }
 
-
 /**
  * updateDate - This method updates the DateRangePicker when radio buttons are pressed (Morning, Afternoon, Day)
  *
@@ -707,11 +704,11 @@ function updateDate(e) {
     e.preventDefault();
 }
 
-
 function closeApp() {
     location.reload();
 }
+
 function isEven(n) {
-  n = Number(n);
-  return n === 0 || !!(n && !(n%2));
+    n = Number(n);
+    return n === 0 || !!(n && !(n % 2));
 }
