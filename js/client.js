@@ -267,12 +267,15 @@ function getActiveChild(id) {
     return id;
 }
 
-function getMultiActiveChilds(id) {
+function getMultiActiveChilds(fatherId) {
     var id = [];
-    var elements = document.getElementById(id).childNodes;
+    var elements = document.getElementById(fatherId).childNodes;
     for (var i = 0; i < elements.length; i++) {
-        if (elements[i].classList.contains('active'))
-            id.push(elements[i].id);
+        var childElements = elements[i].childNodes;
+        for (var j = 0; j < childElements.length; j++) {
+            if (childElements[j].classList.contains('active'))
+                id.push(childElements[j].id);
+        }
     }
     return id;
 }
@@ -553,7 +556,7 @@ function preencheModalConfirm() {
     var idActiveFloor = getActive("list-group-item active");
     var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
     var idActiveRoom = getActive("btn-rooms");
-    var idActiveTd = getMultiActiveChilds(""); //document.getElementById("matrix").childNodes[1]);
+    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id); //document.getElementById("matrix").childNodes[1]);
     var strActiveRoom;
 
     switch (idActiveFloor) {
@@ -588,7 +591,7 @@ function preencheModalConfirm() {
         strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
     else {
         var splitIdActiveTd = idActiveTd[0].split("-");
-        rooms[splitIdActiveTd[1]]
+        strActiveRoom = rooms[splitIdActiveTd[1]];
     }
 
 
@@ -615,8 +618,14 @@ function preencheModalConfirm() {
 
     //  selected resorces
     var roomResources;
-    var splitIdActiveRoom = idActiveRoom.split("-");
-    var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
+    if (idActiveRoom) {
+        var splitIdActiveRoom = idActiveRoom.split("-");
+        var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
+    } else {
+        var splitIdActiveRoom = splitIdActiveTd[1];
+        var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
+    }
+
     var strHasResources = [];
     var strDoestResources = [];
     for (var resource in tempResources) {

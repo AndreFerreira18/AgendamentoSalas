@@ -44,7 +44,7 @@ function changeMatrix() {
         addBtnRooms(filters);
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
-        createMatrixWeek();
+        createMatrixWeek(filters);
     } else if (filho[1] == "week") {
         removeRoomBtn();
         addMatrix("day");
