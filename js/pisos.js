@@ -1,4 +1,4 @@
-var andar_nVisiveis = 4;
+var andar_nVisiveis = 6;
 var andar_visiveis = null;
 var min = 0;
 var max = 0;

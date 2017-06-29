@@ -14,6 +14,9 @@ $(window).ready(
 //Date picker
 $('input[name="daterange"]').daterangepicker({
     timePicker: true,
+    "dateLimit": {
+        "days": 7
+    },
     timePicker24Hour: true,
     timePickerIncrement: 30,
     startDate: "03/07/2017",
@@ -26,12 +29,18 @@ $('input[name="daterange"]').daterangepicker({
 });
 
 //if user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
-$('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
-    var radios = document.querySelectorAll('.radioButton')
-    for (var i = 0; i < radios.length; i++) {
-        radios[i].children[0].checked = false;
-    }
-});
+
+_bindApplyBtnEvent();
+
+function _bindApplyBtnEvent() {
+    $('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
+        var radios = document.querySelectorAll('.radioButton')
+        for (var i = 0; i < radios.length; i++) {
+            radios[i].children[0].checked = false;
+        }
+        columnID = '';
+    });
+}
 
 //Sidebar
 $(window).resize(function() {
@@ -445,6 +454,9 @@ function clone() {
     //     ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) + '/' +
     //     (date.getFullYear());
     $('input[name="daterange"]').daterangepicker({
+        "dateLimit": {
+            "days": 7
+        },
         "timePicker": true,
         "timePicker24Hour": true,
         "timePickerIncrement": 30,
@@ -461,6 +473,8 @@ function clone() {
             this.classList.toggle("active");
         }
     }
+    //bind event when Apply is clicked in DateRangePicker
+    _bindApplyBtnEvent();
 }
 
 /**
@@ -552,152 +566,160 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
-    var element;
-    var glyphicon;
+    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
 
-    // meeting type
-    element = document.createElement("h3");
-    element.id = "meeting";
-    var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    element.innerHTML = 'Reuniao ' + reuniao_info;
-    modalBody.appendChild(element);
+    if (idActiveTd.length) {
+        var element;
+        var glyphicon;
 
-    //user information
-    element = document.createElement("p");
-    element.id = "user_info";
-    glyphicon = document.createElement("span");
-    glyphicon.className = "glyphicon glyphicon-user";
-    element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
-    modalBody.appendChild(element);
+        // meeting type
+        element = document.createElement("h3");
+        element.id = "meeting";
+        var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
+        element.innerHTML = 'Reuniao ' + reuniao_info;
+        modalBody.appendChild(element);
 
-    //time information
-    var dateHour = findHour();
-    //dateHour.push(findHour());
-    var str = " Reserva para ";
-    var startDate = [];
-    var tempStartHour = [];
-    var startHour = [];
-    var tempEndHour = [];
-    var endHour = [];
-    var strHoras = [];
-    for (var i = 0; i < dateHour.length; i++) {
-        startDate[i] = dateHour[i][0];
-        tempStartHour[i] = dateHour[i][2].split(" ");
-        startHour[i] = tempStartHour[i][1] == "PM" ? parseInt(tempStartHour[i][0]) + 12 + ":00" : tempStartHour[i][0];
-        tempEndHour[i] = dateHour[i][3].split(" ");
-        endHour[i] = tempEndHour[i][1] == "PM" ? parseInt(tempEndHour[i][0]) + 12 + ":00" : tempEndHour[i][0];
-        strHoras[i] = "dia " + startDate[i] + " das " + startHour[i] + " às " + endHour[i];
-    }
+        //user information
+        element = document.createElement("p");
+        element.id = "user_info";
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-user";
+        element.appendChild(glyphicon);
+        element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
+        modalBody.appendChild(element);
 
-    element = document.createElement("p");
-    element.id = "datetime_info";
-    glyphicon = document.createElement("span");
-    glyphicon.className = "glyphicon glyphicon-time";
-    element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", str + strHoras);
-    modalBody.appendChild(element);
+        //time information
+        var dateHour = findHour();
+        var str = " Reserva de ";
+        var startDate = [];
+        var endDate = [];
+        var tempStartHour = [];
+        var startHour = [];
+        var tempEndHour = [];
+        var endHour = [];
+        var strHoras = [];
+        for (var i = 0; i < dateHour.length; i++) {
+            startDate[i] = dateHour[i][0];
+            endDate[i] = dateHour[i][1];
+            tempStartHour[i] = dateHour[i][2].split(" ");
+            startHour[i] = tempStartHour[i][1] == "PM" ? parseInt(tempStartHour[i][0]) + 12 + ":00" : tempStartHour[i][0];
+            tempEndHour[i] = dateHour[i][3].split(" ");
+            endHour[i] = tempEndHour[i][1] == "PM" ? parseInt(tempEndHour[i][0]) + 12 + ":00" : tempEndHour[i][0];
+            strHoras[i] = startDate[i] + " às " + startHour[i] + " até " + endDate[i] + " às " + endHour[i];
+        }
 
-    //room information
-    var idActiveFloor = getActive("list-group-item active");
-    var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
-    var idActiveRoom = getActive("btn-rooms");
-    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
-    var strActiveRoom;
+        element = document.createElement("p");
+        element.id = "datetime_info";
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-time";
+        element.appendChild(glyphicon);
+        element.insertAdjacentHTML("beforeend", strHoras);
+        modalBody.appendChild(element);
 
-    switch (idActiveFloor) {
-        case "piso-0":
-            var rooms = rooms_0.salas;
-            break;
-        case "piso-1":
-            var rooms = rooms_1.salas;
-            break;
-        case "piso-2":
-            var rooms = rooms_2.salas;
-            break;
-        case "piso-3":
-            var rooms = rooms_3.salas;
-            break;
-        case "piso-4":
-            var rooms = rooms_4.salas;
-            break;
-        case "piso-5":
-            var rooms = rooms_5.salas;
-            break;
-        case "piso-6":
-            var rooms = rooms_6.salas;
-            break;
-        case "piso-7":
-            var rooms = rooms_7.salas;
-            break;
-        default:
-    }
+        //room information
+        var idActiveFloor = getActive("list-group-item active");
+        var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
+        var idActiveRoom = getActive("btn-rooms");
+        var strActiveRoom;
 
-    if (idActiveRoom)
-        strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
-    else {
-        var splitIdActiveTd = idActiveTd[0].split("-");
-        strActiveRoom = rooms[splitIdActiveTd[1]];
-    }
+        switch (idActiveFloor) {
+            case "piso-0":
+                var rooms = rooms_0.salas;
+                break;
+            case "piso-1":
+                var rooms = rooms_1.salas;
+                break;
+            case "piso-2":
+                var rooms = rooms_2.salas;
+                break;
+            case "piso-3":
+                var rooms = rooms_3.salas;
+                break;
+            case "piso-4":
+                var rooms = rooms_4.salas;
+                break;
+            case "piso-5":
+                var rooms = rooms_5.salas;
+                break;
+            case "piso-6":
+                var rooms = rooms_6.salas;
+                break;
+            case "piso-7":
+                var rooms = rooms_7.salas;
+                break;
+            default:
+        }
 
-    var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
-    element = document.createElement("p");
-    element.id = "room_info";
-    glyphicon = document.createElement("span");
-    glyphicon.className = "glyphicon glyphicon-pushpin";
-    element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", strRoom);
-    modalBody.appendChild(element);
+        if (idActiveRoom)
+            strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+        else {
+            var splitIdActiveTd = idActiveTd[0].split("-");
+            strActiveRoom = rooms[splitIdActiveTd[1]];
+        }
 
-    //Number of participants
-    var participants = document.getElementById("data_mod_nparticipantes").value;
-    var strParticipants = ' Com ' + participants + ' participantes previstos';
-    element = document.createElement("p");
-    //element.innerHTML = strParticipants;
-    glyphicon = document.createElement("span");
-    glyphicon.className = "glyphicon glyphicon-flag";
-    element.appendChild(glyphicon);
-    element.insertAdjacentHTML("beforeend", strParticipants);
-    modalBody.appendChild(element);
+        var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
+        element = document.createElement("p");
+        element.id = "room_info";
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-pushpin";
+        element.appendChild(glyphicon);
+        element.insertAdjacentHTML("beforeend", strRoom);
+        modalBody.appendChild(element);
 
-    //  selected resorces
-    var roomResources;
-    if (idActiveRoom) {
-        var splitIdActiveRoom = idActiveRoom.split("-");
-        var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
-    } else {
-        var splitIdActiveRoom = splitIdActiveTd[1];
-        var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
-    }
+        //Number of participants
+        var participants = document.getElementById("data_mod_nparticipantes").value;
+        var strParticipants = ' Com ' + participants + ' participantes previstos';
+        element = document.createElement("p");
+        //element.innerHTML = strParticipants;
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-flag";
+        element.appendChild(glyphicon);
+        element.insertAdjacentHTML("beforeend", strParticipants);
+        modalBody.appendChild(element);
 
-    var strHasResources = [];
-    var strDoestResources = [];
-    for (var resource in tempResources) {
-        if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
-            if (tempResources[resource]) {
-                strHasResources.push(" " + resource);
-            } else {
-                var idActiveResources = getMultiActive("btn-recurso");
-                for (var i = 0; i < idActiveResources.length; i++) {
-                    if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
-                        strDoestResources.push(" " + resource);
+        //  selected resorces
+        var roomResources;
+        if (idActiveRoom) {
+            var splitIdActiveRoom = idActiveRoom.split("-");
+            var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
+        } else {
+            var splitIdActiveRoom = splitIdActiveTd[1];
+            var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
+        }
+
+        var strHasResources = [];
+        var strDoestResources = [];
+        for (var resource in tempResources) {
+            if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
+                if (tempResources[resource]) {
+                    strHasResources.push(" " + resource);
+                } else {
+                    var idActiveResources = getMultiActive("btn-recurso");
+                    for (var i = 0; i < idActiveResources.length; i++) {
+                        if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
+                            strDoestResources.push(" " + resource);
+                    }
                 }
             }
         }
-    }
 
-    element = document.createElement("p");
-    element.id = "room_info";
-    glyphicon = document.createElement("span");
-    glyphicon.className = "glyphicon glyphicon-paperclip";
-    element.appendChild(glyphicon);
-    if (strDoestResources.length)
-        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
-    else
-        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
-    modalBody.appendChild(element);
+        element = document.createElement("p");
+        element.id = "room_info";
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-paperclip";
+        element.appendChild(glyphicon);
+        if (strDoestResources.length)
+            element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
+        else
+            element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
+        modalBody.appendChild(element);
+    } else {
+        element = document.createElement("h1");
+        element.innerHTML = 'Por favor selecione uma hora na tabela.'
+        modalBody.appendChild(element);
+    }
 }
 
 /**
@@ -759,4 +781,96 @@ function closeApp() {
 function isEven(n) {
     n = Number(n);
     return n === 0 || !!(n && !(n % 2));
+}
+
+
+/**
+ * validateForm - This method valides data inserted in forms so that next actions can be done
+ *
+ * @param  {type} current Describes which form is currently being used. Can be «modal» or «sidebar»
+ */
+function validateForm(current) {
+    var isValid = true,
+        meeting = document.getElementById('data_mod_tipo_reuniao').value,
+        data = divideDateAndTime(),
+        participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
+    if (participants <= 0 || participants > 999) {
+        isValid = false;
+        document.getElementById('participants_error').innerHTML = "Insira um número de participantes entre 1 e 999."
+    } else {
+        document.getElementById('participants_error').innerHTML = '';
+    }
+
+    if (isValid) {
+        if (current === 'sidebar') {
+            sideBarChangeData();
+        } else if (current === 'modal') {
+            saveChanges();
+            $('#modal').modal('hide');
+        }
+    }
+}
+
+function sideBarChangeData() {
+    var datahora = divideDateAndTime("data_mod_calendar");
+    var startDay = datahora[0];
+    var endDay = datahora[1];
+    var startHour = datahora[2];
+    var endHour = datahora[3];
+    var filters = applyFilters();
+    var matrix = document.getElementById("matrix");
+    matrix.innerHTML = " ";
+    if (startDay === endDay) {
+        addMatrix('day');
+    } else {
+        addBtnRooms(filters);
+        defineActiveById('btn_rooms-1');
+        addMatrix('week');
+    }
+    refreshMatrix();
+}
+
+/**
+ * orderMAtrixActive -  orders an Array of active class. optimized for matrix
+ *
+ * @param {type} classofactive class that contains the active elements
+ * @param {type} ij            sets which part of the id of the active needs to be orderered
+ *                              in case of matrix, actives are td-i-j. ij=1 sets to only orderer
+ *                              the i. if ij = 2, it will order i and j
+ *
+ * @return {type} returns odered array
+ */
+function orderMAtrixActive(classofactive, ij) {
+    var activeArray = getMultiActiveChilds(classofactive);
+    var orderedArray = [];
+    var oSizeArray = activeArray.length;
+    var uSizeArray = activeArray.length;
+    if (ij === undefined) ij = 2;
+
+
+    var lower = -1;
+    var lowerI = -1;
+    for (var j = 0; j < oSizeArray; j++) {
+        for (var i = 0; i < uSizeArray; i++) {
+            var current = activeArray[i];
+            var currentSplit = current.split('-');
+
+            if (i === 0) {
+                lower = current;
+                lowerI = i;
+            } else {
+                var lowerSplit = lower.split('-');
+                if (parseInt(currentSplit[ij]) < parseInt(lowerSplit[ij])) {
+                    lower = current;
+                    lowerI = i;
+                }
+            }
+        }
+        uSizeArray--;
+        activeArray.splice(lowerI, 1);
+        orderedArray.push(lower);
+    }
+
+    if (ij === 2) orderedArray = orderMAtrixActive(classofactive, 1);
+    return orderedArray;
 }
