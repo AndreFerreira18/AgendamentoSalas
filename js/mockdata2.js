@@ -115,7 +115,7 @@ var resources = {
             "Recursos": {
                 "Projetor": true,
                 "Material_de_Escritorio": true,
-                "Flipchart": true,
+                "Flipchart": false,
                 "Microfone": true,
                 "Laser": true,
                 "N_Pessoas": "30"

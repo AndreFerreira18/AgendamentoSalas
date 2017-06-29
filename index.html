@@ -110,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <!-- Madal para reservar Salas-->
     <div id="modal_confirmar" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -118,22 +119,17 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <div class="modal-title">
                         <h1>
-                          <span class="glyphicon glyphicon-ok"></span> &nbsp;
-                          Pedido de agendamento realizado por:
-                      </h1>
+                <span class="glyphicon glyphicon-ok"></span> &nbsp;
+                Pedido de agendamento realizado por:
+            </h1>
                     </div>
                 </div>
-                <div class="modal-body">
-                    <h3 id="reuniao"> </h3>
-                    <p id="user_info"> <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span> </p>
-                    <p id="datetime_info"> <span class="glyphicon glyphicon-time"> </span> </p>
-                    <p id="sala_info"> <span class="glyphicon glyphicon-pushpin"> </span> </p>
-                    <p id="nparticipantes"><span class="glyphicon glyphicon-flag"> </span> </p>
-                    <p id="recursos_info"><span class="glyphicon glyphicon-paperclip"></span></p>
+                <div class="modal-body" id="modal_body_confirmar">
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-confirmar-modal btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
-                    <button type="button" class="btn-fechar-modal btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn-fechar-modal btn btn-default pull-right" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -230,7 +226,7 @@
 -->
                     <div class="col-md-6">
                         <div class="table-responsive">
-                            <table class="table table-striped matrix" id="matrix">
+                            <table class="table matrix" id="matrix">
                                 <!-- Builds costum Matrix-->
                             </table>
                         </div>

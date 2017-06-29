@@ -232,7 +232,7 @@ function defineActiveById(activeId) {
  * @returns {type}             description
  */
 function getActive(activeClass) {
-    var id;
+    var id = false;
     var elements = document.getElementsByClassName(activeClass);
     for (var i = 0; i < elements.length; i++) {
         if (elements[i].classList.contains('active'))
@@ -309,9 +309,10 @@ function saveChanges() {
  *
  * @returns {type}  description
  */
+var recursos = initialData.Recursos;
+
 function createResources() {
 
-    var recursos = initialData.Recursos;
     var label_recursos = initialData.Recursos;
     var glyph_recursos = [
         "glyphicon glyphicon-facetime-video",
@@ -461,7 +462,7 @@ function clone() {
  * @returns {type}        description
  */
 function divideDateAndTime(idData) {
-    var acedeDataHora = document.getElementById(idData).value;
+    var acedeDataHora = document.getElementById("data_mod_calendar").value;
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
@@ -491,26 +492,98 @@ function findHour() {
  * @returns {type}  description
  */
 function preencheModalConfirm() {
+    var element;
+    var glyphicon;
+    var modalBody = document.getElementById("modal_body_confirmar");
+    modalBody.innerHTML = "";
 
+    // meeting type
+    element = document.createElement("h3");
+    element.id = "meeting";
     var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-    document.getElementById("reuniao").innerHTML = 'Reuniao ' + reuniao_info;
+    element.innerHTML = 'Reuniao ' + reuniao_info;
+    modalBody.appendChild(element);
 
-    // var datestart_info = selected_hours[0];
-    // console.log(datestart_info);
-    // var timestart_info = document.getElementById("datahora[1]").value;
-    // var dateEnd_info = document.getElementById("datahora[4]").value;
-    // var timeEnd_info = document.getElementById("datahora[5]").value;
-    // var str_horas= 'Das ' +  timestart_info + 'até às ' + timeEnd_info + ' no dia ' + datestart_info;
-    // document.getElementById("datetime_info").insertAdjacentHTML( 'beforeend', str_horas );
-    //
-    //     var room_info = document.getElementById("m").value;
-    //     var piso_info = document.getElementById("selected").value;
-    //
-    //     document.getElementById("room_info").innerHTML= '"Localizado na sala " + room_info + "situada no piso" + piso_info';
-    var participantes = document.getElementById("data_mod_nparticipantes").value;
-    var str_participantes = 'Com ' + participantes + ' participantes previstos';
-    document.getElementById("nparticipantes").insertAdjacentHTML('beforeend', str_participantes);
-    //     // var recurso_info =
+    //user information
+    element = document.createElement("p");
+    element.id = "user_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-user";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
+    modalBody.appendChild(element);
+
+    //time information                                                                                         //confirmar para ter em conta os possiveis conjuntos de horas
+    var dateHour = divideDateAndTime("data_mod_calendar");
+    var startDate = dateHour[0];
+    var endDate = dateHour[1];
+    var tempStartHour = dateHour[2].split(" ");
+    var startHour = tempStartHour[1] == "PM" ? parseInt(tempStartHour[0]) + 12 + ":00" : tempStartHour[0];
+    var tempEndHour = dateHour[3].split(" ");
+    var endHour = tempEndHour[1] == "PM" ? parseInt(tempEndHour[0]) + 12 + ":00" : tempEndHour[0];
+    element = document.createElement("p");
+    element.id = "datetime_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-time";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", " Reserva de " + startDate + " às " + startHour + " até " + endDate + " às " + endHour);
+    modalBody.appendChild(element);
+
+    //room information
+    var idActiveFloor = getActive("list-group-item active");
+    var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
+    var idActiveRoom = getActive("btn-rooms") ? getActive("btn-rooms") : "other Rooms"; // rever isto salas da matriz dia
+    var strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
+    var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
+    element = document.createElement("p");
+    element.id = "room_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-pushpin";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", strRoom);
+    modalBody.appendChild(element);
+
+    //Number of participants
+    var participants = document.getElementById("data_mod_nparticipantes").value;
+    var strParticipants = ' Com ' + participants + ' participantes previstos';
+    element = document.createElement("p");
+    //element.innerHTML = strParticipants;
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-flag";
+    element.appendChild(glyphicon);
+    element.insertAdjacentHTML("beforeend", strParticipants);
+    modalBody.appendChild(element);
+
+    //  selected resorces
+    var roomResources;
+    var splitIdActiveRoom = idActiveRoom.split("-");
+    var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1])].Recursos
+    var strHasResources = [];
+    var strDoestResources = [];
+    for (var resource in tempResources) {
+        if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
+            if (tempResources[resource]) {
+                strHasResources.push(resource + " ");
+            } else {
+                var idActiveResources = getMultiActive("btn-recurso");
+                for (var i = 0; i < idActiveResources.length; i++) {
+                    if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
+                        strDoestResources.push(resource + " ");
+                }
+            }
+        }
+    }
+
+    element = document.createElement("p");
+    element.id = "room_info";
+    glyphicon = document.createElement("span");
+    glyphicon.className = "glyphicon glyphicon-paperclip";
+    element.appendChild(glyphicon);
+    if (strDoestResources)
+        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
+    else
+        element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
+    modalBody.appendChild(element);
 }
 
 /**
@@ -569,4 +642,8 @@ function updateDate(e) {
 
 function closeApp() {
     location.reload();
+}
+function isEven(n) {
+  n = Number(n);
+  return n === 0 || !!(n && !(n%2));
 }
