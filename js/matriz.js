@@ -507,6 +507,7 @@ function _bindDraggableForDay() {
                 if (all[i].id === '')
                     all[i].parentNode.removeChild(all[i]);
             }
+            var info = this.id.split('-');
             all = document.querySelectorAll('td.active');
             if (all.length > 0) {
                 first = parseInt(all[0].id.split('-')[2]);
@@ -526,6 +527,7 @@ function _bindDraggableForDay() {
                     }
                 }
             } else {
+                rowID = parseInt(this.id.split('-')[2]);
                 if (columnID === '' || this.id.split('-')[1] === columnID) {
                     isMouseDown = true;
                     columnID = this.id.split('-')[1];
@@ -539,6 +541,13 @@ function _bindDraggableForDay() {
         })
         .mouseover(function() {
             if (isMouseDown && this.id.split('-')[1] === columnID) {
+                var rowID = parseInt(this.id.split('-')[2]);
+                // if (isEven(rowID))
+                //     var id = 'td-' + columnID + '-' + (rowID + 1);
+                // else
+                //     var id = 'td-' + columnID + '-' + (rowID - 1)
+                // if (!document.getElementById(id).classList.contains('active'))
+                //     document.getElementById(id).classList.add('active');
                 $(this).toggleClass("active", isActive);
             }
 
