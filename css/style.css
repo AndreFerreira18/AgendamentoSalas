@@ -436,18 +436,9 @@ input[type="radio"]:checked + label span {
       height: auto;
   }
 
-  @media  (max-width: 500 px) {
-    .img-responsive {
-      content:url("img/help2.png");
-    }
+  .glyphWelcome{
+      font-size: 50px;
   }
-
-  @media (min-width: 501 px) {
-    .img-responsive {
-      content:url("img/help1.png");
-    }
-  }
-
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
