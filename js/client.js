@@ -985,9 +985,6 @@ function insertRow() {
     var retrievedObject = localStorage.getItem('reservationData');
     retrievedObject = JSON.parse(retrievedObject);
     var tbody = document.getElementById("tableStatusBody");
-
-
-
     for (var i = 0; i < Object.keys(retrievedObject).length; i++) {
         var tr = document.createElement("tr");
         tbody.appendChild(tr);
@@ -995,18 +992,24 @@ function insertRow() {
             var td = document.createElement("td");
             td.setAttribute("rowspan", retrievedObject[i].Data.length);
             if (infoReservation === "Data") {
-                for (var j = 1; j < retrievedObject[i][infoReservation].length; j++) {
+                for (var j = 0; j < retrievedObject[i][infoReservation].length; j++) {
                     var dateTd = document.createElement("td");
                     dateTd.innerHTML = retrievedObject[i][infoReservation][j][0];
-                    tr.appendChild(dateTd);
                     var startTimeTd = document.createElement("td");
                     startTimeTd.innerHTML = retrievedObject[i][infoReservation][j][2];
-                    tr.appendChild(startTimeTd);
                     var endTimeTd = document.createElement("td");
                     endTimeTd.innerHTML = retrievedObject[i][infoReservation][j][3];
-                    tr.appendChild(endTimeTd);
-                    var tr1 = document.createElement('tr');
-                    tr.appendChild(tr1);
+                    if (j === 0) {
+                        tr.appendChild(dateTd);
+                        tr.appendChild(startTimeTd);
+                        tr.appendChild(endTimeTd);
+                    } else {
+                        var rowSpanTr = document.createElement("tr");
+                        tbody.appendChild(rowSpanTr);
+                        rowSpanTr.appendChild(dateTd);
+                        rowSpanTr.appendChild(startTimeTd);
+                        rowSpanTr.appendChild(endTimeTd);
+                    }
                 }
             } else
                 td.innerHTML = retrievedObject[i][infoReservation];
