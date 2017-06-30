@@ -606,15 +606,19 @@ function findHour() {
         //removes the middle ones
         for (var k = 0; k < tempArray.length; k++) {
             if (tempArray[k].length > 2) {
-                tempArray.splice(1, tempArray.length - 2);
-            }
+                tempArray[k].splice(1, tempArray.length - 2);
+            } else if (tempArray[k].length === 1)
+                tempArray[k].push(tempArray[k][0]);
+
         }
         //creates the hour array
         for (var i = 0; i < tempArray.length; i++) {
             var auxHour = [];
+            var splitTempArray = tempArray[i][1].split("-");
             auxHour[0] = getDate(tempArray[i][0]);
             auxHour[2] = getHour(tempArray[i][0]);
-            auxHour[3] = getHour(tempArray[i][1]);
+            var endHour = parseInt(splitTempArray[2]) + 2;
+            auxHour[3] = getHour(splitTempArray[0] + "-" + splitTempArray[1] + "-" + endHour);
             hour.push(auxHour);
         }
     } else
