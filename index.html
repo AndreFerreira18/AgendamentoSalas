@@ -17,6 +17,7 @@
 </head>
 
 <body>
+
     <!--
     ooo        ooooo   .oooooo.   oooooooooo.         .o.       ooooo
     `88.       .888'  d8P'  `Y8b  `888'   `Y8b       .888.      `888'
@@ -41,7 +42,17 @@
                         </h2>
                         <h3>
                           <b><span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b>
+                          <a class="btn btn-default help" href="#popup1"> ? </a>
                         </h3>
+
+                        <div id="popup1" class="overlay">
+                            <div class="popup">
+                                <h2> Como efetuar uma Reserva? </h2>
+                                <a class="close" href="#">&times;</a>
+                                <div class="content imgwrapper">
+                                    <img src="img/help1.png" class="img-responsive"> </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-body">
@@ -264,13 +275,14 @@
     <footer class="footer">
         <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <table class="table table-striped" id="tableStatus">
+
                     <thead>
-                        <th>Status</th>
-                        <th>Tipo de Reunião</th>
-                        <th>Sala</th>
-                        <th>Hora de inicio</th>
-                        <th>Hora de fim</th>
+                        <th class="headers">Status</th>
+                        <th class="headers">Tipo de Reunião</th>
+                        <th class="headers">Sala</th>
+                        <th class="headers">Hora de inicio</th>
+                        <th class="headers">Hora de fim</th>
                     </thead>
                     <tbody>
                         <tr>

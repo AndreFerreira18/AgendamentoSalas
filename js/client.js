@@ -2,9 +2,12 @@
 $(window).ready(
     function() {
         $('#modal').modal('show');
+        writeInJSon();
+        insertRow();
         createTypesOfMeetings();
         createPrefFloor();
         createResources();
+
     }
 );
 // var date = new Date();
@@ -948,4 +951,43 @@ function orderMAtrixActive(classofactive, ij) {
 
     if (ij === 2) orderedArray = orderMAtrixActive(classofactive, 1);
     return orderedArray;
+}
+
+function writeInJSon() {
+
+    var testObject = {
+        "Status": "Pendente",
+        "Tipo de Reuniao": "Interna",
+        "Sala": "Sala 1",
+        "Hora de inicio": "2017/09/07 09:00",
+        "Hora de Fim": "2017/09/07 10:00"
+    };
+    // Put the object into storage
+    localStorage.setItem('testObject', JSON.stringify(testObject));
+    // Retrieve the object from storage
+
+}
+
+function insertRow() {
+    var retrievedObject = localStorage.getItem('testObject');
+    retrievedObject = JSON.parse(retrievedObject);
+    var table = document.getElementById("tableStatus");
+    var row = table.insertRow(table.rows.length);
+    var cell = document.getElementsByClassName("headers");
+    var reservationInfo = [];
+    var arrayJson = [];
+    for(var infoReservation in retrievedObject) {
+        if(retrievedObject.hasOwnProperty(infoReservation)) {
+            reservationInfo = retrievedObject[infoReservation];
+            arrayJson.push(reservationInfo);
+        }
+    }
+    for(var i = 0; i < cell.length; i++) {
+        var fieldFooter = row.insertCell(i);
+        var td = document.createElement("td");
+        td.id = "td" + i;
+        fieldFooter.appendChild(td);
+        fieldFooter.innerHTML = arrayJson[i];
+    }
+
 }

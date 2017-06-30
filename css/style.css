@@ -344,7 +344,79 @@ input[type="radio"]:checked + label span {
     text-align: center;
     font-style: italic;
 }
+.help {
+    float:right;
+    border-radius: 35px;
+    background-color: #f99d13;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
 
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index:999 !important;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+ margin: 5%;
+ //padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  width:90%;
+
+  position: relative;
+  transition: all 5s ease-in-out;
+  z-index:999 !important;
+}
+.popup h2 {
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  position: fixed;
+  left: 60px;
+  text-decoration: underline;
+}
+.popup .close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  //max-width: 90%;
+  //max-height: 90%;
+  }
+
+  .img-responsive{
+      max-width: 95%;
+      max-height: 95%;
+      margin: 20px;
+      width: auto;
+      height: auto;
+  }
+
+  .glyphWelcome{
+      font-size: 50px;
+  }
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
