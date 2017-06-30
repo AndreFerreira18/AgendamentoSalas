@@ -592,7 +592,7 @@ function findHour() {
             var activeElement = activeElements[i];
             var activeElementSplit = activeElement.split("-");
             for (var j = 0; j < datesList.length; j++) {
-                if (parseInt(activeElementSplit[1]) === j)
+                if (getDate(activeElement) === datesList[j])
                     if (!i)
                         tempArray[h].push(activeElement);
                     else {
