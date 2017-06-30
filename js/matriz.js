@@ -16,13 +16,13 @@ function getWeek(id_semana) {
     var endHour = datahora[3];
     var week = 0
 
-    if (startDay >= "03/07/2017" && startDay < "10/07/2017") {
+    if(startDay >= "03/07/2017" && startDay < "10/07/2017") {
         week = 1;
-    } else if (startDay >= "10/07/2017" && startDay < "14/07/2017") {
+    } else if(startDay >= "10/07/2017" && startDay < "14/07/2017") {
         week = 2;
-    } else if (startDay >= "17/07/2017" && startDay < "21/07/2017") {
+    } else if(startDay >= "17/07/2017" && startDay < "21/07/2017") {
         week = 3;
-    } else if (startDay < "24/07/2017") {
+    } else if(startDay < "24/07/2017") {
         week = 4;
     }
 
@@ -43,14 +43,14 @@ function changeMatrix() {
     var filho = idFilho.split("_");
     matrizAtiva.innerHTML = " ";
     var filters = applyFilters();
-    if (filho[1] == "day") {
+    if(filho[1] == "day") {
         addMatrix("week");
         addBtnRooms(filters);
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
         createMatrixWeek(filters);
         btn.innerHTML = 'Vista de Dia';
-    } else if (filho[1] == "week") {
+    } else if(filho[1] == "week") {
         removeRoomBtn();
         addMatrix("day");
         createMatrixDay(filters);
@@ -88,15 +88,15 @@ function refreshMatrix(nextSemana) {
     var matrix = document.getElementById("matrix");
     var id_child = matrix.firstElementChild.id;
     var child = id_child.split("_");
-    if (window.innerWidth <= 768 && isSideBarOpen) {
+    if(window.innerWidth <= 768 && isSideBarOpen) {
         toggleSideBar();
     }
     matrix.innerHTML = " ";
     addMatrix(child[1]);
     var filters = applyFilters();
-    if (child[1] == "day")
+    if(child[1] == "day")
         createMatrixDay(filters);
-    else if (child[1] == "week") {
+    else if(child[1] == "week") {
         var activeBtn = getActive("btn-rooms");
         refreshButtons(filters);
         defineActiveById(activeBtn);
@@ -123,45 +123,45 @@ function createMatrixWeek(filters, nextSemana) {
 
 
     var scheduleWeek;
-    switch (id_sala) {
+    switch(id_sala) {
         case "11":
-            if (id_semana == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_11;
-            else if (id_semana == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_11;
-            else if (id_semana == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_11;
-            else if (id_semana == "4")
+            else if(id_semana == "4")
                 scheduleWeek = scheduleWeek_4_sala_11;
             break;
         case "12":
-            if (id_semana == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_12;
-            else if (id_semana == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_12;
-            else if (id_semana == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_12;
-            else if (id_semana == "4")
+            else if(id_semana == "4")
                 scheduleWeek = scheduleWeek_4_sala_12;
             break;
         case "13":
-            if (id_semana == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_13;
-            else if (id_semana == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_13;
-            else if (id_semana == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_13;
-            else if (id_semana == "4")
+            else if(id_semana == "4")
                 scheduleWeek = scheduleWeek_4_sala_13;
             break;
         case "14":
-            if (id_semana == "1")
+            if(id_semana == "1")
                 scheduleWeek = scheduleWeek_1_sala_14;
-            else if (id_semana == "2")
+            else if(id_semana == "2")
                 scheduleWeek = scheduleWeek_2_sala_14;
-            else if (id_semana == "3")
+            else if(id_semana == "3")
                 scheduleWeek = scheduleWeek_3_sala_14;
-            else if (id_semana == "4")
+            else if(id_semana == "4")
                 scheduleWeek = scheduleWeek_4_sala_14;
             break;
         default:
@@ -204,7 +204,7 @@ function createMatrixWeek(filters, nextSemana) {
     mh.appendChild(tr);
     var th1 = document.createElement('th');
     tr.appendChild(th1);
-    for (var i = 0; i < scheduleWeek.dates.length; i++) {
+    for(var i = 0; i < scheduleWeek.dates.length; i++) {
         var th2 = document.createElement('th');
         th2.innerHTML = scheduleWeek.dates[i];
         th2.setAttribute('colspan', '2');
@@ -213,22 +213,22 @@ function createMatrixWeek(filters, nextSemana) {
 
     //Matrix Body
     var mb = document.getElementById("matrix_week_body");
-    for (var i = 0; i < scheduleWeek.hour.length; i++) {
+    for(var i = 0; i < scheduleWeek.hour.length; i++) {
         var tr = document.createElement('tr');
-        if (isEven(i)) mb.appendChild(tr);
+        if(isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
         th.innerHTML = scheduleWeek.hour[i];
-        for (var j = 0; j < scheduleWeek.dates.length; j++) {
+        for(var j = 0; j < scheduleWeek.dates.length; j++) {
             var td = document.createElement('td');
             td.id = 'td-' + j + '-' + i;
             var disponibilidade = scheduleWeek[j][i];
-            if (disponibilidade === 'Disponível') {
+            if(disponibilidade === 'Disponível') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizWeek);
                 //td.innerHTML =   td.id;
-            } else if (disponibilidade === 'Indisponível') {
+            } else if(disponibilidade === 'Indisponível') {
                 td.classList.add("notAvailable");
                 //    td.innerHTML = scheduleWeek[j][i];
             } else {
@@ -245,11 +245,11 @@ function createMatrixWeek(filters, nextSemana) {
             var td2 = document.createElement('td');
             td2.id = 'td-' + j + '-' + (i + 1);
             var disponibilidade = scheduleWeek[j][i + 1];
-            if (disponibilidade === 'Disponível') {
+            if(disponibilidade === 'Disponível') {
                 td2.classList.add("available");
                 td2.addEventListener("click", selecionarGrupoMatrizWeek);
                 //td2.innerHTML =   td2.id;
-            } else if (disponibilidade === 'Indisponível') {
+            } else if(disponibilidade === 'Indisponível') {
                 td2.classList.add("notAvailable");
                 //    td.innerHTML = scheduleWeek[j][i];
             } else {
@@ -301,7 +301,7 @@ function addBtnRooms(filters) {
     //Alterar quando recebermos JSON
     var idAndar = getActive('list-group-item');
     var rooms;
-    switch (idAndar) {
+    switch(idAndar) {
         case "piso-0":
             rooms = rooms_0;
             break;
@@ -333,7 +333,7 @@ function addBtnRooms(filters) {
 
     var element = document.getElementById("btn_rooms");
     element.innerHTML = "";
-    for (var i = 1; i <= rooms.salas.length; i++) {
+    for(var i = 1; i <= rooms.salas.length; i++) {
         var btn = document.createElement('button');
         btn.innerHTML = rooms.salas[i - 1];
         btn.setAttribute("type", "button");
@@ -342,10 +342,10 @@ function addBtnRooms(filters) {
         btn.classList.add('btn');
         btn.classList.add('btn-lg');
         var btn_warning = true;
-        for (var j = 0; j < filters.rooms.length; j++) {
-            if (rooms.salas[i - 1] === filters.rooms[j]) btn_warning = false;
+        for(var j = 0; j < filters.rooms.length; j++) {
+            if(rooms.salas[i - 1] === filters.rooms[j]) btn_warning = false;
         }
-        if (btn_warning)
+        if(btn_warning)
             btn.classList.add('btn-warning');
         else
             btn.classList.add('btn-default');
@@ -388,7 +388,7 @@ function createMatrixDay(filters) {
     var th1 = document.createElement('th');
     // th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
     tr.appendChild(th1);
-    for (var i = 0; i < scheduleDay[selectedFloor].length; i++) {
+    for(var i = 0; i < scheduleDay[selectedFloor].length; i++) {
         var th2 = document.createElement('th');
         th2.innerHTML = scheduleDay[selectedFloor][i].NomeSala;
         th2.setAttribute('colspan', '2');
@@ -397,48 +397,48 @@ function createMatrixDay(filters) {
 
     //Matrix Body
     var mb = document.getElementById("matrix_day_body");
-    for (var i = 0; i < scheduleDay[selectedFloor][0].Horas.length; i++) {
+    for(var i = 0; i < scheduleDay[selectedFloor][0].Horas.length; i++) {
         var tr = document.createElement('tr');
-        if (isEven(i)) mb.appendChild(tr);
+        if(isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
         th.setAttribute("scope", "row");
         tr.appendChild(th);
         th.innerHTML = scheduleDay[selectedFloor][0].Horas[i];
-        for (var j = 0; j < scheduleDay[selectedFloor].length; j++) {
+        for(var j = 0; j < scheduleDay[selectedFloor].length; j++) {
             var td = document.createElement('td');
             var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i];
-            if (disponibilidade == 'Disponível') {
+            if(disponibilidade == 'Disponível') {
                 td.classList.add("available");
                 td.addEventListener("click", selecionarGrupoMatrizDay);
-            } else if (disponibilidade == 'Indisponível')
+            } else if(disponibilidade == 'Indisponível')
                 td.classList.add("notAvailable");
             else
                 td.classList.add("undefined");
 
             var isNearMiss = true;
-            for (var k = 0; k < filters.rooms.length; k++)
-                if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
+            for(var k = 0; k < filters.rooms.length; k++)
+                if(filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
                     isNearMiss = false;
-            if (isNearMiss)
+            if(isNearMiss)
                 td.className = 'nearMiss';
             td.classList.add("mleft");
             td.id = 'td-' + j + '-' + i;
 
             var td2 = document.createElement('td');
             var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i + 1];
-            if (disponibilidade == 'Disponível') {
+            if(disponibilidade == 'Disponível') {
                 td2.classList.add("available");
                 td2.addEventListener("click", selecionarGrupoMatrizDay);
-            } else if (disponibilidade == 'Indisponível')
+            } else if(disponibilidade == 'Indisponível')
                 td2.classList.add("notAvailable");
             else
                 td2.classList.add("undefined");
 
             var isNearMiss = true;
-            for (var k = 0; k < filters.rooms.length; k++)
-                if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
+            for(var k = 0; k < filters.rooms.length; k++)
+                if(filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
                     isNearMiss = false;
-            if (isNearMiss)
+            if(isNearMiss)
                 td2.className = 'nearMiss';
             td2.id = 'td-' + j + '-' + (i + 1);
             td2.classList.add("mright");
@@ -461,32 +461,25 @@ function createMatrixDay(filters) {
  * @param  {type} selection description
  * @returns {type}           description
  */
-function _populateSelectionForDay(selection) {
+function _populateSelectionForDay() {
     var fields = document.querySelectorAll('td');
-    var length = fields.length;
-    for (var i = 0; i < length; i++) {
-        var info = fields[i].id.split("-");
-        if (info[1] !== '0')
-            continue;
-        columnID = info[1];
-        fields[i].classList.remove('active');
-        switch (selection) {
-            case 'manha':
-                if (parseInt(info[2]) + 8 <= 17 && fields[i].classList.contains('available'))
-                    fields[i].classList.add('active');
-                break;
-            case 'tarde':
-                if (parseInt(info[2]) + 8 >= 20 && fields[i].classList.contains('available'))
-                    fields[i].classList.add('active');
-                break;
-            case 'dia':
-                if (fields[i].classList.contains('available') && (info[2] !== '10' && info[2] !== '11'))
-                    fields[i].classList.add('active');
-                break;
 
-        }
+    var datetime = divideDateAndTime();
+
+    var startTime = datetime[2];
+    var startTimeSplit = datetime[2].split(':');
+    var endTime = datetime[3];
+    var startTimeSplit = datetime[2].split(':');
+
+    var startId = (parseInt(startTimeSplit[0]) - 8) * 2;
+    var endId = (parseInt(startTimeSplit[0]) - 8) * 2;
+
+    for(var i = startId; i < endId; i++) {
+        if(fields[i].classList.contains('available'))
+            fields[i].classList.add('active');
     }
 }
+
 
 
 
@@ -503,42 +496,42 @@ function _bindDraggableForDay() {
                 first = '',
                 last = '',
                 rowID;
-            for (var i = 0; i < all.length; i++) {
-                if (all[i].id === '')
+            for(var i = 0; i < all.length; i++) {
+                if(all[i].id === '')
                     all[i].parentNode.removeChild(all[i]);
             }
             all = document.querySelectorAll('td.active');
-            if (all.length > 0) {
+            if(all.length > 0) {
                 first = parseInt(all[0].id.split('-')[2]);
                 last = parseInt(all[all.length - 1].id.split('-')[2]);
                 rowID = parseInt(this.id.split('-')[2]);
-                if ((rowID !== (first - 1) && rowID !== (last + 1)) && (rowID !== first && rowID !== last)) {
+                if((rowID !== (first - 1) && rowID !== (last + 1)) && (rowID !== first && rowID !== last)) {
                     snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
                 } else {
-                    if (columnID === '' || this.id.split('-')[1] === columnID) {
+                    if(columnID === '' || this.id.split('-')[1] === columnID) {
                         isMouseDown = true;
                         columnID = this.id.split('-')[1];
                         $(this).toggleClass("active");
                         isActive = $(this).hasClass("active");
                         return false; // prevent text selection
-                    } else if (this.id.split('-')[1] !== columnID) {
+                    } else if(this.id.split('-')[1] !== columnID) {
                         snackBar("Uma reserva deverá conter apenas uma Sala.");
                     }
                 }
             } else {
-                if (columnID === '' || this.id.split('-')[1] === columnID) {
+                if(columnID === '' || this.id.split('-')[1] === columnID) {
                     isMouseDown = true;
                     columnID = this.id.split('-')[1];
                     $(this).toggleClass("active");
                     isActive = $(this).hasClass("active");
                     return false; // prevent text selection
-                } else if (this.id.split('-')[1] !== columnID) {
+                } else if(this.id.split('-')[1] !== columnID) {
                     snackBar("Uma reserva deverá conter apenas uma Sala.");
                 }
             }
         })
         .mouseover(function() {
-            if (isMouseDown && this.id.split('-')[1] === columnID) {
+            if(isMouseDown && this.id.split('-')[1] === columnID) {
                 $(this).toggleClass("active", isActive);
             }
 
@@ -547,7 +540,7 @@ function _bindDraggableForDay() {
         .mouseup(function() {
             isMouseDown = false;
             var activeElements = document.querySelectorAll('td.active');
-            if (activeElements.length === 0)
+            if(activeElements.length === 0)
                 columnID = '';
         });
 }
@@ -569,7 +562,7 @@ function _bindDraggableForWeek() {
             // return false; // prevent text selection
         })
         .mouseover(function() {
-            if (isMouseDown)
+            if(isMouseDown)
                 $(this).toggleClass("active", isActive);
         });
     $(document)
@@ -585,9 +578,9 @@ function _bindDraggableForWeek() {
 function _setLunchTime() {
     var fields = document.querySelectorAll('td');
     var length = fields.length;
-    for (var i = 0; i < length; i++) {
+    for(var i = 0; i < length; i++) {
         var info = fields[i].id.split("-");
-        if (info[2] === '10' || info[2] === '11') {
+        if(info[2] === '10' || info[2] === '11') {
             fields[i].classList.add('lunch');
         }
     }
@@ -596,10 +589,10 @@ function _setLunchTime() {
 function _setWeekendHighlight() {
     var fields = document.querySelectorAll('td');
     var length = fields.length;
-    for (var i = 0; i < length; i++) {
+    for(var i = 0; i < length; i++) {
         var info = fields[i].id.split("-");
-        if (info[1] === '5' || info[1] === '6') {
-            if (isEven(parseInt(info[2])))
+        if(info[1] === '5' || info[1] === '6') {
+            if(isEven(parseInt(info[2])))
                 fields[i].classList.add('leftWeekend');
             else
                 fields[i].classList.add('rightWeekend');
@@ -618,8 +611,8 @@ function selecionarGrupoMatrizDay(e) {
     try {
         // nearElement(e);
         // defineMultiActiveEvent(e);
-    } catch (err) {
-        switch (err) {
+    } catch(err) {
+        switch(err) {
             case 1:
                 snackBar("Uma reserva deverá conter apenas uma Sala.");
                 break;
@@ -646,8 +639,8 @@ function selecionarGrupoMatrizWeek(e) {
     try {
         // nearElement(e);
         // defineMultiActiveEvent(e);
-    } catch (err) {
-        switch (err) {
+    } catch(err) {
+        switch(err) {
             case 1:
                 defineMulti = modalAcept(e, "Pretende reservar em outro dia?");
                 break;
@@ -664,7 +657,7 @@ function selecionarGrupoMatrizWeek(e) {
                 snackBar("Ups escolha errada na vista de Semana");
         }
     } finally {
-        if (defineMulti)
+        if(defineMulti)
             defineMultiActiveEvent(e);
     }
 }
@@ -691,7 +684,7 @@ function saveModalConfirm(callback) {
  */
 function modalAcept(e, msg) {
     var modal_body = document.getElementById("modal_confirm_body");
-    if (modal_body.textContent.length <= 20) {
+    if(modal_body.textContent.length <= 20) {
         modal_body.innerHTML = msg;
         modal_body.setAttribute('style', 'text-align: center;');
         id_last_salected = e.target.id;
@@ -713,28 +706,28 @@ function nearElement(e) {
         var newElemetSplit = newElemet.id.split('-');
         var activeElements = getMultiActive('available');
 
-        if (newElemet.classList.contains('available') && activeElements.length) {
+        if(newElemet.classList.contains('available') && activeElements.length) {
             var neighborHour = false;
             var neighborDay = true;
             var activeFirstElement = activeElements[0].split('-');
             var activeLastElement = activeElements[activeElements.length - 1].split('-');
-            if (parseInt(newElemetSplit[2]) > parseInt(activeFirstElement[2]) && parseInt(newElemetSplit[2]) < parseInt(activeLastElement[2]) && newElemet.classList.contains('active'))
+            if(parseInt(newElemetSplit[2]) > parseInt(activeFirstElement[2]) && parseInt(newElemetSplit[2]) < parseInt(activeLastElement[2]) && newElemet.classList.contains('active'))
                 throw 4;
-            for (var i = 0; i < activeElements.length; i++) {
+            for(var i = 0; i < activeElements.length; i++) {
                 var activeElementsSplit = activeElements[i].split('-');
-                if (parseInt(activeElementsSplit[1]) != parseInt(newElemetSplit[1]))
+                if(parseInt(activeElementsSplit[1]) != parseInt(newElemetSplit[1]))
                     neighborDay = false;
-                if (parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) + 1 || parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) - 1)
+                if(parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) + 1 || parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) - 1)
                     neighborHour = true;
             }
-            if (!neighborHour && !neighborDay && !newElemet.classList.contains('active'))
+            if(!neighborHour && !neighborDay && !newElemet.classList.contains('active'))
                 throw 3;
-            if (!neighborHour && !newElemet.classList.contains('active'))
+            if(!neighborHour && !newElemet.classList.contains('active'))
                 throw 2;
-            if (!neighborDay && !newElemet.classList.contains('active'))
+            if(!neighborDay && !newElemet.classList.contains('active'))
                 throw 1;
         }
-    } catch (e) {
+    } catch(e) {
         throw e;
     }
 }

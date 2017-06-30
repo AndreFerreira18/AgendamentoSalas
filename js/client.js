@@ -22,7 +22,7 @@ $('input[name="daterange"]').daterangepicker({
     },
     timePicker24Hour: true,
     timePickerIncrement: 30,
-    startDate: "03/07/2017",
+    startDate: "04/07/2017",
     endDate: "04/07/2017",
     // minDate: today,
     locale: {
