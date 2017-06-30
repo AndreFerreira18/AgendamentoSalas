@@ -611,7 +611,7 @@ function findHour() {
         //removes the middle ones
         for (var k = 0; k < tempArray.length; k++) {
             if (tempArray[k].length > 2) {
-                tempArray[k].splice(1, tempArray.length - 2);
+                tempArray[k].splice(1, tempArray[k].length - 2);
             } else if (tempArray[k].length === 1)
                 tempArray[k].push(tempArray[k][0]);
 
