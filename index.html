@@ -252,7 +252,7 @@
                             </table>
                         </div>
                         <button type="button" class="btn-change-matrix btn btn-lg pull-left" onclick="changeMatrix()" id="btn_change_view"></button>
-                        <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="preencheModalConfirm()">Reservar Sala</button>
+                        <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="fillModalConfirm()">Reservar Sala</button>
                     </div>
                 </div>
 
@@ -276,36 +276,16 @@
         <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
             <div class="table-responsive">
                 <table class="table table-striped" id="tableStatus">
-
                     <thead>
                         <th class="headers">Status</th>
                         <th class="headers">Tipo de Reunião</th>
                         <th class="headers">Sala</th>
+                        <th class="headers">Data</th>
                         <th class="headers">Hora de inicio</th>
                         <th class="headers">Hora de fim</th>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td class="pending">Pendente</td>
-                            <td>Formação</td>
-                            <td>Sala 1</td>
-                            <td>2017/08/15 09:00</td>
-                            <td>2017/08/16 18:00</td>
-                        </tr>
-                        <tr>
-                            <td class="approved">Aprovado</td>
-                            <td>Interna</td>
-                            <td>Sala 20</td>
-                            <td>2017/08/15 14:00</td>
-                            <td>2017/08/15 15:00</td>
-                        </tr>
-                        <tr>
-                            <td class="rejected">Rejeitado</td>
-                            <td>Interna</td>
-                            <td>Sala 19</td>
-                            <td>2017/08/15 14:00</td>
-                            <td>2017/08/15 15:00</td>
-                        </tr>
+                    <tbody id="tableStatusBody">
+
                     </tbody>
                 </table>
             </div>
