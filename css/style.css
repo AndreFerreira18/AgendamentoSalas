@@ -277,6 +277,22 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
     text-align: center;
   }
 
+#btnSave {
+    border: solid 1px #000000 !important;
+    background-color: #ffd24d !important;
+    color: #000000 !important;
+    font-weight: 900;
+}
+
+#modal {
+    background-color: #fffae6;
+}
+
+
+#modal h2 {
+    text-align: center;
+}
+
 .modal-footer {
   text-align: center;
 }
@@ -504,17 +520,16 @@ table.matrix {
     user-select: none;
 }
 
-table.matrix tr:hover {
+table.matrix tbody tr:hover {
     color: #31708f;
     background-color: #d9edf7;
 }
 
-table.matrix tr:hover td {
-    background-color: #d9edf7;
+table.matrix tr:hover td, table.matrix tr:hover th {
+    background-color: #ffd699 !important;
 }
-table.matrix td:hover {
-    color: #31708f !important;
-    background-color: rgba(51, 122, 183, 0.49) !important;
+table.matrix tr td:hover {
+    background-color: #e68a00 !important;
 }
 table.matrix td.indisponivel:hover {
     color: #777;
@@ -555,10 +570,7 @@ table.matrix .active {
     color: #fff;
     opacity: 1 !important;
 }
-table.matrix .active:hover {
-    background-color: #337ab7;
-    color: #000;
-}
+
 .undefined{
     color: red;
     background-color: red;
