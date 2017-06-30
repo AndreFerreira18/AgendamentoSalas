@@ -642,7 +642,8 @@ function findHour() {
  *
  * @returns {type}  description
  */
-function preencheModalConfirm() {
+function fillModalConfirm() {
+    var reservationData = [];
     var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
@@ -654,8 +655,8 @@ function preencheModalConfirm() {
         // meeting type
         element = document.createElement("h3");
         element.id = "meeting";
-        var reuniao_info = document.getElementById("data_mod_tipo_reuniao").value;
-        element.innerHTML = 'Reuniao ' + reuniao_info;
+        var meetingInfo = document.getElementById("data_mod_tipo_reuniao").value;
+        element.innerHTML = 'Reuniao ' + meetingInfo;
         modalBody.appendChild(element);
 
         //user information
@@ -671,7 +672,6 @@ function preencheModalConfirm() {
         var dateHour = findHour();
         var str = " Reserva para o ";
         var startDate = [];
-        //var endDate = [];
         var tempStartHour = [];
         var startHour = [];
         var tempEndHour = [];
@@ -679,7 +679,6 @@ function preencheModalConfirm() {
         var strHoras = [];
         for (var i = 0; i < dateHour.length; i++) {
             startDate[i] = dateHour[i][0];
-            //endDate[i] = dateHour[i][1];
             tempStartHour[i] = dateHour[i][2].split(" ");
             startHour[i] = tempStartHour[i][1] == "PM" ? parseInt(tempStartHour[i][0]) + 12 + ":00" : tempStartHour[i][0];
             tempEndHour[i] = dateHour[i][3].split(" ");
@@ -797,6 +796,7 @@ function preencheModalConfirm() {
         element.innerHTML = 'Por favor selecione uma hora na tabela.'
         modalBody.appendChild(element);
     }
+    writeInJSon();
 }
 
 /**
@@ -953,41 +953,64 @@ function orderMAtrixActive(classofactive, ij) {
     return orderedArray;
 }
 
-function writeInJSon() {
+function writeInJSon() { //reservationData) {
 
     var testObject = {
-        "Status": "Pendente",
-        "Tipo de Reuniao": "Interna",
-        "Sala": "Sala 1",
-        "Hora de inicio": "2017/09/07 09:00",
-        "Hora de Fim": "2017/09/07 10:00"
+        "0": {
+            "Status": "Pendente",
+            "Tipo de Reuniao": "Interna",
+            "Sala": "Sala 1",
+            "Data": [
+                ["03/07/2017", , "09:00", "10:00"],
+                ["03/07/2017", , "09:00", "10:00"],
+                ["04/07/2017", , "09:00", "10:00"]
+            ]
+        },
+        "1": {
+            "Status": "Pendente",
+            "Tipo de Reuniao": "Interna",
+            "Sala": "Sala 1",
+            "Data": [
+                ["03/07/2017", , "09:00", "10:00"],
+                ["03/07/2017", , "09:00", "10:00"],
+                ["04/07/2017", , "09:00", "10:00"]
+            ]
+        }
     };
     // Put the object into storage
-    localStorage.setItem('testObject', JSON.stringify(testObject));
-    // Retrieve the object from storage
-
+    localStorage.setItem('reservationData', JSON.stringify(testObject));
 }
 
 function insertRow() {
-    var retrievedObject = localStorage.getItem('testObject');
+    var retrievedObject = localStorage.getItem('reservationData');
     retrievedObject = JSON.parse(retrievedObject);
-    var table = document.getElementById("tableStatus");
-    var row = table.insertRow(table.rows.length);
-    var cell = document.getElementsByClassName("headers");
-    var reservationInfo = [];
-    var arrayJson = [];
-    for(var infoReservation in retrievedObject) {
-        if(retrievedObject.hasOwnProperty(infoReservation)) {
-            reservationInfo = retrievedObject[infoReservation];
-            arrayJson.push(reservationInfo);
+    var tbody = document.getElementById("tableStatusBody");
+
+
+
+    for (var i = 0; i < Object.keys(retrievedObject).length; i++) {
+        var tr = document.createElement("tr");
+        tbody.appendChild(tr);
+        for (var infoReservation in retrievedObject[i]) {
+            var td = document.createElement("td");
+            td.setAttribute("rowspan", retrievedObject[i].Data.length);
+            if (infoReservation === "Data") {
+                for (var j = 1; j < retrievedObject[i][infoReservation].length; j++) {
+                    var dateTd = document.createElement("td");
+                    dateTd.innerHTML = retrievedObject[i][infoReservation][j][0];
+                    tr.appendChild(dateTd);
+                    var startTimeTd = document.createElement("td");
+                    startTimeTd.innerHTML = retrievedObject[i][infoReservation][j][2];
+                    tr.appendChild(startTimeTd);
+                    var endTimeTd = document.createElement("td");
+                    endTimeTd.innerHTML = retrievedObject[i][infoReservation][j][3];
+                    tr.appendChild(endTimeTd);
+                    var tr1 = document.createElement('tr');
+                    tr.appendChild(tr1);
+                }
+            } else
+                td.innerHTML = retrievedObject[i][infoReservation];
+            tr.appendChild(td);
         }
     }
-    for(var i = 0; i < cell.length; i++) {
-        var fieldFooter = row.insertCell(i);
-        var td = document.createElement("td");
-        td.id = "td" + i;
-        fieldFooter.appendChild(td);
-        fieldFooter.innerHTML = arrayJson[i];
-    }
-
 }
