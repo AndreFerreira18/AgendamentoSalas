@@ -2,8 +2,9 @@
 $(window).ready(
     function() {
         $('#modal').modal('show');
+
         writeInJSon();
-        insertRow();
+        //insertRow();
         createTypesOfMeetings();
         createPrefFloor();
         createResources();
@@ -643,7 +644,7 @@ function findHour() {
  * @returns {type}  description
  */
 function fillModalConfirm() {
-    var reservationData = [];
+    var reservationData = {};
     var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
@@ -658,6 +659,7 @@ function fillModalConfirm() {
         var meetingInfo = document.getElementById("data_mod_tipo_reuniao").value;
         element.innerHTML = 'Reuniao ' + meetingInfo;
         modalBody.appendChild(element);
+
 
         //user information
         element = document.createElement("p");
@@ -693,6 +695,7 @@ function fillModalConfirm() {
         element.appendChild(glyphicon);
         element.insertAdjacentHTML("beforeend", str + strHoras);
         modalBody.appendChild(element);
+
 
         //room information
         var idActiveFloor = getActive("list-group-item active");
@@ -743,6 +746,7 @@ function fillModalConfirm() {
         element.appendChild(glyphicon);
         element.insertAdjacentHTML("beforeend", strRoom);
         modalBody.appendChild(element);
+
 
         //Number of participants
         var participants = document.getElementById("data_mod_nparticipantes").value;
@@ -796,7 +800,12 @@ function fillModalConfirm() {
         element.innerHTML = 'Por favor selecione uma hora na tabela.'
         modalBody.appendChild(element);
     }
-    writeInJSon();
+    reservationData.Status = "Pendente";
+    reservationData.Tipo_de_Reuniao = meetingInfo;
+    reservationData.Sala = strActiveRoom;
+    reservationData.Data = dateHour;
+    writeInJSon(reservationData);
+
 }
 
 /**
@@ -953,38 +962,45 @@ function orderMAtrixActive(classofactive, ij) {
     return orderedArray;
 }
 
-function writeInJSon() { //reservationData) {
+function writeInJSon(reservationData) {
 
-    var testObject = {
-        "0": {
-            "Status": "Pendente",
-            "Tipo de Reuniao": "Interna",
-            "Sala": "Sala 1",
-            "Data": [
-                ["03/07/2017", , "09:00", "10:00"],
-                ["03/07/2017", , "09:00", "10:00"],
-                ["04/07/2017", , "09:00", "10:00"]
-            ]
-        },
-        "1": {
-            "Status": "Pendente",
-            "Tipo de Reuniao": "Interna",
-            "Sala": "Sala 1",
-            "Data": [
-                ["03/07/2017", , "09:00", "10:00"],
-                ["03/07/2017", , "09:00", "10:00"],
-                ["04/07/2017", , "09:00", "10:00"]
-            ]
-        }
-    };
+    var retrievedObject = sessionStorage.getItem('reservationData');
+    if (retrievedObject === null) {
+        var retrievedObject = {
+            "0": {
+                "Status": "Aprovado",
+                "Tipo de Reuniao": "Formação",
+                "Sala": "Sala 0.1",
+                "Data": [
+                    ["03/07/2017", , "09:00", "13:00"],
+                    ["03/07/2017", , "14:00", "18:00"],
+                    ["04/07/2017", , "09:00", "13:00"]
+                ]
+            },
+            "1": {
+                "Status": "Rejeitado",
+                "Tipo de Reuniao": "Interna",
+                "Sala": "Sala 0.1",
+                "Data": [
+                    ["04/07/2017", , "09:00", "10:00"]
+                ]
+            }
+        };
+    } else
+        retrievedObject = JSON.parse(retrievedObject);
+    var position = Object.keys(retrievedObject).length;
+    if (reservationData)
+        retrievedObject[position] = reservationData;
     // Put the object into storage
-    localStorage.setItem('reservationData', JSON.stringify(testObject));
+    sessionStorage.setItem('reservationData', JSON.stringify(retrievedObject));
+    insertRow();
 }
 
 function insertRow() {
-    var retrievedObject = localStorage.getItem('reservationData');
+    var retrievedObject = sessionStorage.getItem('reservationData');
     retrievedObject = JSON.parse(retrievedObject);
     var tbody = document.getElementById("tableStatusBody");
+    tbody.innerHTML = "";
     for (var i = 0; i < Object.keys(retrievedObject).length; i++) {
         var tr = document.createElement("tr");
         tbody.appendChild(tr);
