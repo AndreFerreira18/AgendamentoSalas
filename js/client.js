@@ -540,7 +540,12 @@ function orderMAtrixActive(classofactive, ij) {
 
 function getHour(id) {
     var hour = false;
+    var splitId = id.split("-");
     hour = document.getElementById(id).parentNode.firstElementChild.innerHTML;
+    if (!isEven(parseInt(splitId[2]))) {
+        var splitHour = hour.split(":");
+        hour = splitHour[0] + ":30";
+    }
     return hour;
 }
 
@@ -617,7 +622,7 @@ function findHour() {
             var splitTempArray = tempArray[i][1].split("-");
             auxHour[0] = getDate(tempArray[i][0]);
             auxHour[2] = getHour(tempArray[i][0]);
-            var endHour = parseInt(splitTempArray[2]) + 2;
+            var endHour = parseInt(splitTempArray[2]) + 1;
             auxHour[3] = getHour(splitTempArray[0] + "-" + splitTempArray[1] + "-" + endHour);
             hour.push(auxHour);
         }
