@@ -603,15 +603,20 @@ function findHour() {
                     }
             }
         }
+        //removes the middle ones
         for (var k = 0; k < tempArray.length; k++) {
             if (tempArray[k].length > 2) {
                 tempArray.splice(1, tempArray.length - 2);
             }
         }
-
-        //hour[0] = datesList[i];
-
-
+        //creates the hour array
+        for (var i = 0; i < tempArray.length; i++) {
+            var auxHour = [];
+            auxHour[0] = getDate(tempArray[i][0]);
+            auxHour[2] = getHour(tempArray[i][0]);
+            auxHour[3] = getHour(tempArray[i][1]);
+            hour.push(auxHour);
+        }
     } else
         snackBar("Não tem matriz Construida");
     return hour;
