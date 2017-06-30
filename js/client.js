@@ -35,7 +35,7 @@ _bindApplyBtnEvent();
 function _bindApplyBtnEvent() {
     $('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
         var radios = document.querySelectorAll('.radioButton')
-        for(var i = 0; i < radios.length; i++) {
+        for (var i = 0; i < radios.length; i++) {
             radios[i].children[0].checked = false;
         }
         columnID = '';
@@ -46,7 +46,7 @@ function _bindApplyBtnEvent() {
 $(window).resize(function() {
     var path = $(this);
     var contW = path.width();
-    if(contW >= 751) {
+    if (contW >= 751) {
         document.getElementsByClassName("sidebar-toggle")[0].style.left = "300px";
     } else {
         document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
@@ -70,14 +70,14 @@ $(document).ready(function() {
     });
 
     $('.main').click(function(e) {
-        if(isSideBarOpen) {
+        if (isSideBarOpen) {
             e.preventDefault();
             toggleSideBar(e);
         }
     });
 
     $('.container').click(function(e) {
-        if(isSideBarOpen && window.innerWidth >= 768) {
+        if (isSideBarOpen && window.innerWidth >= 768) {
             e.preventDefault();
             toggleSideBar(e);
         }
@@ -93,7 +93,7 @@ function applyFilters() {
     var dateArray = divideDateAndTime('data_mod_calendar');
     //gets number of participants
     var participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
-    if(participants <= 0 || participants > 999) {
+    if (participants <= 0 || participants > 999) {
         snackBar("Por favor insira um número de participantes entre 1 e 999");
         return false;
     }
@@ -116,9 +116,9 @@ function applyFilters() {
     //iterate to see what rooms are available for those filters
     var selectedFloor = this.resources[floor];
     var length = selectedFloor.length;
-    for(var i = 0; i < length; i++) {
+    for (var i = 0; i < length; i++) {
         var currentRoom = selectedFloor[i].NomeSala;
-        if(areResourcesAvailable(participants, myResources, selectedFloor[i].Recursos))
+        if (areResourcesAvailable(participants, myResources, selectedFloor[i].Recursos))
             availables.rooms.push(selectedFloor[i].NomeSala)
     }
     return availables;
@@ -133,15 +133,15 @@ function applyFilters() {
  */
 function areResourcesAvailable(participants, selection, availables) {
     var isAvailable = true;
-    if(participants > parseInt(availables.N_Pessoas)) //if the number of participants is greater than the maximum capability of the room
+    if (participants > parseInt(availables.N_Pessoas)) //if the number of participants is greater than the maximum capability of the room
         isAvailable = false;
     else {
-        for(var i = 0; i < selection.length; i++) { //else chech if the selected resources are available
-            if(selection[i] !== 'Material de Escritório') {
-                if(availables[selection[i]] === false)
+        for (var i = 0; i < selection.length; i++) { //else chech if the selected resources are available
+            if (selection[i] !== 'Material de Escritório') {
+                if (availables[selection[i]] === false)
                     isAvailable = false;
             } else { //fix for 'Material_de_Escritorio' as it is the only string different in data side and in buttons side
-                if(availables['Material_de_Escritorio'] === false)
+                if (availables['Material_de_Escritorio'] === false)
                     isAvailable = false;
             }
         }
@@ -158,8 +158,8 @@ function _getResources(id) {
     var elements = document.getElementById(id);
     var length = elements.children.length;
     var elementsArray = [];
-    for(var i = 0; i < length; i++) {
-        if(elements.children[i].children[0].classList.contains('active')) { //if that resource was selected
+    for (var i = 0; i < length; i++) {
+        if (elements.children[i].children[0].classList.contains('active')) { //if that resource was selected
             var id = parseInt(elements.children[i].id.split("-")[1]); //add to selected resources array
             elementsArray.push(initialData.Recursos[id]);
         }
@@ -175,10 +175,10 @@ function _getResources(id) {
 function toggleSideBar(event) {
     var elem = document.getElementById("sidebar-wrapper");
     left = window.getComputedStyle(elem, null).getPropertyValue("left");
-    if(left == "300px" && isSideBarOpen) {
+    if (left == "300px" && isSideBarOpen) {
         isSideBarOpen = false;
         document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
-    } else if(left == "-300px") {
+    } else if (left == "-300px") {
         isSideBarOpen = true;
         document.getElementsByClassName("sidebar-toggle")[0].style.left = "300px";
     }
@@ -194,8 +194,8 @@ function defineActiveEvent(e) { // define single active
     // remove the old active
     var element = e.target.id ? e.target : e.target.parentNode;
     var elements = document.getElementsByClassName(element.classList[0]);
-    for(var i = 0; i < elements.length; i++) {
-        if(elements[i].classList.contains('active'))
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].classList.contains('active'))
             elements[i].classList.remove('active');
     }
     //add the active to the element
@@ -212,7 +212,7 @@ function defineActiveEvent(e) { // define single active
 function defineMultiActiveEvent(e) {
     var element = e.target.id ? e.target : e.target.parentNode;
     var changeElement = document.getElementById(element.id);
-    if(changeElement.classList.contains('active'))
+    if (changeElement.classList.contains('active'))
         changeElement.classList.remove('active');
     else
         changeElement.classList.add('active');
@@ -227,7 +227,7 @@ function defineMultiActiveEvent(e) {
 function defineActiveById(activeId) {
     //add the active to the element
     var element = document.getElementById(activeId);
-    if(element.classList.contains('active'))
+    if (element.classList.contains('active'))
         element.classList.remove('active');
     else
         element.classList.add('active');
@@ -242,8 +242,8 @@ function defineActiveById(activeId) {
 function getActive(activeClass) {
     var id = false;
     var elements = document.getElementsByClassName(activeClass);
-    for(var i = 0; i < elements.length; i++) {
-        if(elements[i].classList.contains('active'))
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].classList.contains('active'))
             id = elements[i].id;
     }
     return id;
@@ -258,8 +258,8 @@ function getActive(activeClass) {
 function getMultiActive(activeClass) {
     var id = [];
     var elements = document.getElementsByClassName(activeClass);
-    for(var i = 0; i < elements.length; i++) {
-        if(elements[i].classList.contains('active'))
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].classList.contains('active'))
             id.push(elements[i].id);
     }
     return id;
@@ -268,8 +268,8 @@ function getMultiActive(activeClass) {
 function getActiveChild(id) {
     var id = false;
     var elements = document.getElementById(id).childNodes;
-    for(var i = 0; i < elements.length; i++) {
-        if(elements[i].classList.contains('active'))
+    for (var i = 0; i < elements.length; i++) {
+        if (elements[i].classList.contains('active'))
             id = elements[i].id;
     }
     return id;
@@ -278,10 +278,10 @@ function getActiveChild(id) {
 function getMultiActiveChilds(fatherId) {
     var id = [];
     var elements = document.getElementById(fatherId).childNodes;
-    for(var i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
         var childElements = elements[i].childNodes;
-        for(var j = 0; j < childElements.length; j++) {
-            if(childElements[j].classList.contains('active'))
+        for (var j = 0; j < childElements.length; j++) {
+            if (childElements[j].classList.contains('active'))
                 id.push(childElements[j].id);
         }
     }
@@ -295,7 +295,7 @@ function getMultiActiveChilds(fatherId) {
  * @returns {type}           description
  */
 function removeElement(elementId) {
-    if(document.getElementById(elementId)) {
+    if (document.getElementById(elementId)) {
         var element = document.getElementById(elementId);
         element.parentNode.removeChild(element);
     }
@@ -315,7 +315,7 @@ function saveChanges() {
 
     updownIniciar();
     var filters = applyFilters();
-    if(startDay === endDay) {
+    if (startDay === endDay) {
         addMatrix('day');
     } else {
         addBtnRooms(filters);
@@ -346,7 +346,7 @@ function createResources() {
     ];
     document.getElementById("store_btn_recursos").innerHTML = " ";
     var i;
-    for(i = 0; i < recursos.length; i++) {
+    for (i = 0; i < recursos.length; i++) {
         var button = document.createElement("button");
         var label = document.createElement("label");
         var iDiv = document.createElement('div');
@@ -367,7 +367,7 @@ function createResources() {
         spn.setAttribute("z-index", "-1");
         spn.className = 'glyph ';
 
-        switch(i) {
+        switch (i) {
             case 0:
                 spn.className += glyph_recursos[0];
                 break;
@@ -409,7 +409,7 @@ function createResources() {
 function createTypesOfMeetings() {
     var x = initialData.Tipos_de_Reuniao;
     document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
-    for(var i = 0; i < x.length; i++) {
+    for (var i = 0; i < x.length; i++) {
         var opt = document.createElement("option");
         opt.innerHTML = x[i];
         opt.value = x[i];
@@ -426,7 +426,7 @@ function createTypesOfMeetings() {
 function createPrefFloor() {
     var x = initialData.Andares;
     document.getElementById("data_mod_piso_pref").innerHTML = " ";
-    for(var i = 0; i < x.length; i++) {
+    for (var i = 0; i < x.length; i++) {
         var opt = document.createElement("option");
         opt.innerHTML = x[i];
         opt.value = i;
@@ -467,7 +467,7 @@ function clone() {
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
 
-    for(var i = 0; i < initialData.Recursos.length; i++) {
+    for (var i = 0; i < initialData.Recursos.length; i++) {
         var id_button = document.getElementById("btn_rc-" + i);
         id_button.onclick = function() {
             this.classList.toggle("active");
@@ -495,6 +495,78 @@ function divideDateAndTime(idData) {
 }
 
 /**
+ * orderMAtrixActive -  orders an Array of active class. optimized for matrix
+ *
+ * @param {type} classofactive class that contains the active elements
+ * @param {type} ij            sets which part of the id of the active needs to be orderered
+ *                              in case of matrix, actives are td-i-j. ij=1 sets to only orderer
+ *                              the i. if ij = 2, it will order i and j
+ *
+ * @return {type} returns odered array
+ */
+function orderMAtrixActive(classofactive, ij) {
+    var activeArray = getMultiActiveChilds(classofactive);
+    var orderedArray = [];
+    var oSizeArray = activeArray.length;
+    var uSizeArray = activeArray.length;
+    if (ij === undefined) ij = 2;
+
+    var lower = -1;
+    var lowerI = -1;
+    for (var j = 0; j < oSizeArray; j++) {
+        for (var i = 0; i < uSizeArray; i++) {
+            var current = activeArray[i];
+            var currentSplit = current.split('-');
+
+            if (i === 0) {
+                lower = current;
+                lowerI = i;
+            } else {
+                var lowerSplit = lower.split('-');
+                if (parseInt(currentSplit[ij]) < parseInt(lowerSplit[ij])) {
+                    lower = current;
+                    lowerI = i;
+                }
+            }
+        }
+        uSizeArray--;
+        activeArray.splice(lowerI, 1);
+        orderedArray.push(lower);
+    }
+
+    if (ij === 2) orderedArray = orderMAtrixActive(classofactive, 1);
+    return orderedArray;
+}
+
+function getHour(id) {
+    var hour = false;
+    hour = document.getElementById(id).parentNode.firstElementChild.innerHTML;
+    return hour;
+}
+
+function getDate(id) {
+    var date = false;
+    var splitId = id.split("-");
+    date = document.getElementById(id).parentNode.parentNode.parentNode.firstElementChild.children[1].children[parseInt(splitId[1]) + 1].innerHTML;
+    return date;
+}
+
+function getDateList(activeElements) {
+    var dateList = [];
+    var exists = false;
+    for (var i = 0; i < activeElements.length; i++) {
+        for (var j = 0; j <= dateList.length; j++) {
+            if (getDate(activeElements[i]) === dateList[j])
+                exists = true;
+        }
+        if (!exists)
+            dateList.push(getDate(activeElements[i]));
+        exists = false;
+    }
+    return dateList;
+}
+
+/**
  * findHour - description
  *
  * @returns {type}  description
@@ -502,10 +574,53 @@ function divideDateAndTime(idData) {
 function findHour() {
     var hour = [];
     var activeMatrix = document.getElementById("matrix").childNodes[2].id;
-    if(activeMatrix === "matrix_day_body")
+    if (activeMatrix === "matrix_day_body")
         hour.push(divideDateAndTime("data_mod_calendar"));
-    else if(activeMatrix === "matrix_week_body") {
+    else if (activeMatrix === "matrix_week_body") {
+        var activeElements = orderMAtrixActive("matrix_week_body");
+        var datesList = getDateList(activeElements);
+        var tempArray = [
+            []
+        ];
+        var h = 0
+        for (var i = 0; i < activeElements.length; i++) {
+            var activeElement = activeElements[i];
+            var activeElementSplit = activeElement.split("-");
+            for (var j = 0; j < datesList.length; j++) {
+                if (parseInt(activeElementSplit[1]) === j)
+                    if (!i)
+                        tempArray[h].push(activeElement);
+                    else {
+                        var previousActiveElement = activeElements[i - 1];
+                        var previousActiveElementSplit = previousActiveElement.split("-");
+                        if (parseInt(activeElementSplit[2]) - 1 === parseInt(previousActiveElementSplit[2]) && parseInt(activeElementSplit[1]) === parseInt(previousActiveElementSplit[1]))
+                            tempArray[h].push(activeElement);
+                        else {
+                            h++;
+                            tempArray[h] = [];
+                            tempArray[h].push(activeElement);
+                        }
+                    }
+            }
+        }
+        //removes the middle ones
+        for (var k = 0; k < tempArray.length; k++) {
+            if (tempArray[k].length > 2) {
+                tempArray[k].splice(1, tempArray.length - 2);
+            } else if (tempArray[k].length === 1)
+                tempArray[k].push(tempArray[k][0]);
 
+        }
+        //creates the hour array
+        for (var i = 0; i < tempArray.length; i++) {
+            var auxHour = [];
+            var splitTempArray = tempArray[i][1].split("-");
+            auxHour[0] = getDate(tempArray[i][0]);
+            auxHour[2] = getHour(tempArray[i][0]);
+            var endHour = parseInt(splitTempArray[2]) + 2;
+            auxHour[3] = getHour(splitTempArray[0] + "-" + splitTempArray[1] + "-" + endHour);
+            hour.push(auxHour);
+        }
     } else
         snackBar("Não tem matriz Construida");
     return hour;
@@ -521,7 +636,7 @@ function preencheModalConfirm() {
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
 
-    if(idActiveTd.length) {
+    if (idActiveTd.length) {
         var element;
         var glyphicon;
 
@@ -543,22 +658,22 @@ function preencheModalConfirm() {
 
         //time information
         var dateHour = findHour();
-        var str = " Reserva de ";
+        var str = " Reserva para o ";
         var startDate = [];
-        var endDate = [];
+        //var endDate = [];
         var tempStartHour = [];
         var startHour = [];
         var tempEndHour = [];
         var endHour = [];
         var strHoras = [];
-        for(var i = 0; i < dateHour.length; i++) {
+        for (var i = 0; i < dateHour.length; i++) {
             startDate[i] = dateHour[i][0];
-            endDate[i] = dateHour[i][1];
+            //endDate[i] = dateHour[i][1];
             tempStartHour[i] = dateHour[i][2].split(" ");
             startHour[i] = tempStartHour[i][1] == "PM" ? parseInt(tempStartHour[i][0]) + 12 + ":00" : tempStartHour[i][0];
             tempEndHour[i] = dateHour[i][3].split(" ");
             endHour[i] = tempEndHour[i][1] == "PM" ? parseInt(tempEndHour[i][0]) + 12 + ":00" : tempEndHour[i][0];
-            strHoras[i] = startDate[i] + " às " + startHour[i] + " até " + endDate[i] + " às " + endHour[i];
+            strHoras[i] = "dia " + startDate[i] + " das " + startHour[i] + " às " + endHour[i] + " ";
         }
 
         element = document.createElement("p");
@@ -566,7 +681,7 @@ function preencheModalConfirm() {
         glyphicon = document.createElement("span");
         glyphicon.className = "glyphicon glyphicon-time";
         element.appendChild(glyphicon);
-        element.insertAdjacentHTML("beforeend", strHoras);
+        element.insertAdjacentHTML("beforeend", str + strHoras);
         modalBody.appendChild(element);
 
         //room information
@@ -575,7 +690,7 @@ function preencheModalConfirm() {
         var idActiveRoom = getActive("btn-rooms");
         var strActiveRoom;
 
-        switch(idActiveFloor) {
+        switch (idActiveFloor) {
             case "piso-0":
                 var rooms = rooms_0.salas;
                 break;
@@ -603,7 +718,7 @@ function preencheModalConfirm() {
             default:
         }
 
-        if(idActiveRoom)
+        if (idActiveRoom)
             strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
         else {
             var splitIdActiveTd = idActiveTd[0].split("-");
@@ -632,7 +747,7 @@ function preencheModalConfirm() {
 
         //  selected resorces
         var roomResources;
-        if(idActiveRoom) {
+        if (idActiveRoom) {
             var splitIdActiveRoom = idActiveRoom.split("-");
             var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
         } else {
@@ -642,14 +757,14 @@ function preencheModalConfirm() {
 
         var strHasResources = [];
         var strDoestResources = [];
-        for(var resource in tempResources) {
-            if(tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
-                if(tempResources[resource]) {
+        for (var resource in tempResources) {
+            if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
+                if (tempResources[resource]) {
                     strHasResources.push(" " + resource);
                 } else {
                     var idActiveResources = getMultiActive("btn-recurso");
-                    for(var i = 0; i < idActiveResources.length; i++) {
-                        if(resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
+                    for (var i = 0; i < idActiveResources.length; i++) {
+                        if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
                             strDoestResources.push(" " + resource);
                     }
                 }
@@ -661,12 +776,12 @@ function preencheModalConfirm() {
         glyphicon = document.createElement("span");
         glyphicon.className = "glyphicon glyphicon-paperclip";
         element.appendChild(glyphicon);
-        if(strDoestResources.length)
+        if (strDoestResources.length)
             element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
         else
             element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
         modalBody.appendChild(element);
-    }else{
+    } else {
         element = document.createElement("h1");
         element.innerHTML = 'Por favor selecione uma hora na tabela.'
         modalBody.appendChild(element);
@@ -703,7 +818,7 @@ function updateDate(e) {
     var endDate = '';
     var initial = $('#data_mod_calendar').data('daterangepicker').startDate.format('DD-MM-YYYY');
 
-    switch(id) {
+    switch (id) {
         case 'cManha':
             startDate = ' 08:00'
             endDate = ' 13:00'
@@ -745,17 +860,17 @@ function validateForm(current) {
         meeting = document.getElementById('data_mod_tipo_reuniao').value,
         data = divideDateAndTime(),
         participants = document.getElementById('data_mod_nparticipantes').valueAsNumber;
-    if(participants <= 0 || participants > 999) {
+    if (participants <= 0 || participants > 999) {
         isValid = false;
         document.getElementById('participants_error').innerHTML = "Insira um número de participantes entre 1 e 999."
     } else {
         document.getElementById('participants_error').innerHTML = '';
     }
 
-    if(isValid) {
-        if(current === 'sidebar') {
+    if (isValid) {
+        if (current === 'sidebar') {
             sideBarChangeData();
-        } else if(current === 'modal') {
+        } else if (current === 'modal') {
             saveChanges();
             $('#modal').modal('hide');
         }
@@ -771,7 +886,7 @@ function sideBarChangeData() {
     var filters = applyFilters();
     var matrix = document.getElementById("matrix");
     matrix.innerHTML = " ";
-    if(startDay === endDay) {
+    if (startDay === endDay) {
         addMatrix('day');
     } else {
         addBtnRooms(filters);
@@ -779,49 +894,4 @@ function sideBarChangeData() {
         addMatrix('week');
     }
     refreshMatrix();
-}
-
-/**
- * orderMAtrixActive -  orders an Array of active class. optimized for matrix
- *
- * @param {type} classofactive class that contains the active elements
- * @param {type} ij            sets which part of the id of the active needs to be orderered
- *                              in case of matrix, actives are td-i-j. ij=1 sets to only orderer
- *                              the i. if ij = 2, it will order i and j
- *
- * @return {type} returns odered array
- */
-function orderMAtrixActive(classofactive, ij) {
-    var activeArray = getMultiActiveChilds(classofactive);
-    var orderedArray = [];
-    var oSizeArray = activeArray.length;
-    var uSizeArray = activeArray.length;
-    if(ij === undefined) ij = 2;
-
-
-    var lower = -1;
-    var lowerI = -1;
-    for(var j = 0; j < oSizeArray; j++) {
-        for(var i = 0; i < uSizeArray; i++) {
-            var current = activeArray[i];
-            var currentSplit = current.split('-');
-
-            if(i === 0) {
-                lower = current;
-                lowerI = i;
-            } else {
-                var lowerSplit = lower.split('-');
-                if(parseInt(currentSplit[ij]) < parseInt(lowerSplit[ij])) {
-                    lower = current;
-                    lowerI = i;
-                }
-            }
-        }
-        uSizeArray--;
-        activeArray.splice(lowerI, 1);
-        orderedArray.push(lower);
-    }
-
-    if(ij === 2) orderedArray = orderMAtrixActive(classofactive, 1);
-    return orderedArray;
 }
