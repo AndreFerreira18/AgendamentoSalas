@@ -254,6 +254,11 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
     z-index: 2;
 }
 
+.list-group-item:last-child {
+    margin-bottom: -1px;
+    border-radius: unset;
+}
+
 
 
 /*
@@ -314,7 +319,7 @@ input[type="radio"] + label span {
 }
 
 input[type="radio"]:checked + label span{
-     background-color: #337ab7;
+     background-color: #ffd24d;
 }
 
 input[type="radio"] + label span,
@@ -415,6 +420,14 @@ o888o         `Y8bood8P'  o888o  o888o o8o        o888o
     margin-right: 10px;
     }
 
+.btn-recurso:hover {
+    background-color: #FFFFFF;
+}
+
+.btn-recurso:focus {
+    background-color: #FFFFFF;
+}
+
 .label-recurso {
     margin-left: 15px;
     margin-right: 10px;
@@ -476,7 +489,7 @@ o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o o888o  o88888o
 }
 
 .btn-rooms {
-    margin: 5px;
+    margin: 8px;
 }
 
 .btn-rooms.active {
@@ -540,6 +553,7 @@ table.matrix th {
 table.matrix .active {
     background-color: #337ab7 !important;
     color: #fff;
+    opacity: 1 !important;
 }
 table.matrix .active:hover {
     background-color: #337ab7;
@@ -561,7 +575,7 @@ table.matrix .active:hover {
     border-top: 1px solid #949494 !important;
 }
 table.matrix .lunch {
-    background-color: #ff1a1a !important;
+    background-color: #ff1a1a;
     border-right: solid #e6e6e6 1px;
     border-left: solid #e6e6e6 1px;
     border-top: solid 1px #e68a00;
@@ -569,17 +583,19 @@ table.matrix .lunch {
     opacity: 0.2
 }
 
-table.matrix .lunch .active{
+table.matrix .lunch &.active{
     background-color: #337ab7 !important;
     color: #fff;
 }
 
 .leftWeekend {
   background-color: #bfbfbf !important;
+  opacity: 1 !important;
 }
 
 .rightWeekend {
   background-color: #d9d9d9 !important;
+  opacity: 1 !important;
 }
 
 .weekend {
@@ -641,4 +657,15 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
     top: 10px;
     font-size: 35px;
     cursor: pointer;
+}
+
+.btn-change-matrix, .btn-reserva  {
+    margin-top: 15px;
+}
+
+.btn-change-matrix {
+  width: 170px;
+  background-color: #ffd24d !important;
+  border: solid 1px #000000;
+  color: #000000 !important;
 }
