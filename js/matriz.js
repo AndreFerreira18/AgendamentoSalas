@@ -36,6 +36,7 @@ function getWeek(id_semana) {
  * @returns {type}  description
  */
 function changeMatrix() {
+    var btn = document.getElementById('btn_change_view');
     var matrizAtiva = document.getElementById("matrix");
     var matriz = document.getElementById("matrix");
     var idFilho = matriz.firstElementChild.id;
@@ -48,10 +49,12 @@ function changeMatrix() {
         var idPrimeiroElemento = document.getElementById("btn_rooms").firstElementChild.id;
         defineActiveById(idPrimeiroElemento);
         createMatrixWeek(filters);
+        btn.innerHTML = 'Vista de Dia';
     } else if (filho[1] == "week") {
         removeRoomBtn();
         addMatrix("day");
         createMatrixDay(filters);
+        btn.innerHTML = 'Vista da Semana';
     } else
         snackBar("Escolha de matriz errada");
 }
@@ -258,9 +261,8 @@ function createMatrixWeek(filters, nextSemana) {
             tr.appendChild(td2);
         }
     }
-
-    _setLunchTime();
     _setWeekendHighlight();
+    _setLunchTime();
     _bindDraggableForWeek();
 }
 
@@ -501,7 +503,11 @@ function _bindDraggableForDay() {
                 first = '',
                 last = '',
                 rowID;
-
+            for (var i = 0; i < all.length; i++) {
+                if (all[i].id === '')
+                    all[i].parentNode.removeChild(all[i]);
+            }
+            all = document.querySelectorAll('td.active');
             if (all.length > 0) {
                 first = parseInt(all[0].id.split('-')[2]);
                 last = parseInt(all[all.length - 1].id.split('-')[2]);

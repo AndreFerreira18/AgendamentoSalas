@@ -307,6 +307,7 @@ function removeElement(elementId) {
  * @returns {type}  description
  */
 function saveChanges() {
+    var btn = document.getElementById('btn_change_view');
     var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
     var endDay = datahora[1];
@@ -317,10 +318,12 @@ function saveChanges() {
     var filters = applyFilters();
     if (startDay === endDay) {
         addMatrix('day');
+        btn.innerHTML = 'Vista da Semana';
     } else {
         addBtnRooms(filters);
         defineActiveById('btn_rooms-1');
         addMatrix('week');
+        btn.innerHTML = 'Vista de Dia';
     }
     refreshMatrix();
     clone();
@@ -893,10 +896,56 @@ function sideBarChangeData() {
     matrix.innerHTML = " ";
     if (startDay === endDay) {
         addMatrix('day');
+
     } else {
         addBtnRooms(filters);
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
     refreshMatrix();
+}
+
+/**
+ * orderMAtrixActive -  orders an Array of active class. optimized for matrix
+ *
+ * @param {type} classofactive class that contains the active elements
+ * @param {type} ij            sets which part of the id of the active needs to be orderered
+ *                              in case of matrix, actives are td-i-j. ij=1 sets to only orderer
+ *                              the i. if ij = 2, it will order i and j
+ *
+ * @return {type} returns odered array
+ */
+function orderMAtrixActive(classofactive, ij) {
+    var activeArray = getMultiActiveChilds(classofactive);
+    var orderedArray = [];
+    var oSizeArray = activeArray.length;
+    var uSizeArray = activeArray.length;
+    if (ij === undefined) ij = 2;
+
+
+    var lower = -1;
+    var lowerI = -1;
+    for (var j = 0; j < oSizeArray; j++) {
+        for (var i = 0; i < uSizeArray; i++) {
+            var current = activeArray[i];
+            var currentSplit = current.split('-');
+
+            if (i === 0) {
+                lower = current;
+                lowerI = i;
+            } else {
+                var lowerSplit = lower.split('-');
+                if (parseInt(currentSplit[ij]) < parseInt(lowerSplit[ij])) {
+                    lower = current;
+                    lowerI = i;
+                }
+            }
+        }
+        uSizeArray--;
+        activeArray.splice(lowerI, 1);
+        orderedArray.push(lower);
+    }
+
+    if (ij === 2) orderedArray = orderMAtrixActive(classofactive, 1);
+    return orderedArray;
 }
