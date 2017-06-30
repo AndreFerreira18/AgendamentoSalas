@@ -60,12 +60,16 @@
                                 <select class="form-control" id="data_mod_tipo_reuniao">
 
                             </select>
+
                             </div>
+                            <p id="type_error" class="sb_error"></p>
 
                             <div class="form-group">
                                 <label>Seleção de Data e Horas (Inicio e Fim):</label>
                                 <input type="text" class="form-control" name="daterange" value="01/01/2015 12:00 01/01/2015 12:00" id="data_mod_calendar" />
+
                             </div>
+                            <p id="date_error" class="sb_error"></p>
                             <!-- <div class="input-group">
                 <span class="input-group-addon">
                   <input type="text" class="form-control" name="daterange" id="data_mod_calendar" placeholder="Select"/>
@@ -92,9 +96,10 @@
                                 <span class="input-group-addon">
                   <b><span class="glyphicon glyphicon-user"></span> Nº de Participantes:</b>
                                 </span>
-                                <input type="number" class="form-control" value="0" min="0" max="999" id="data_mod_nparticipantes">
-                            </div>
+                                <input type="number" class="form-control" value="1" min="1" max="999" id="data_mod_nparticipantes">
 
+                            </div>
+                            <p id="participants_error" class="sb_error"></p>
                             <div class="form-group">
                                 <div class="piso_pref">
                                     <label>
@@ -112,7 +117,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary" onclick="saveChanges()" data-dismiss="modal"> Guardar</button>
+                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary" onclick="validateForm('modal')"> Guardar</button>
                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
                 </div>
             </div>
@@ -132,30 +137,12 @@
             </h1>
                     </div>
                 </div>
-                <div class="modal-body" id="modal_body">
-                    <h3 id="reuniao"> </h3>
-                    <br>
-                    <p id="user_info"> <span class="glyphicon glyphicon-user"> João Sousa Silva, Departamento de Informática </span> </p>
-                    <div> <br>
-                        <span class="glyphicon glyphicon-time"> &nbsp </span>
-                        <p id="datetime_info" class="modal-inline"> </p>
-                    </div>
-                    <div> <br>
-                        <span class="glyphicon glyphicon-pushpin"> &nbsp </span>
-                        <p id="sala_info" class="modal-inline"> </p>
-                    </div>
-                    <div> <br>
-                        <span class="glyphicon glyphicon-flag"> &nbsp</span>
-                        <p id="nparticipantes" class="modal-inline"> </p>
-                    </div>
-                    <div> <br>
-                        <span class="glyphicon glyphicon-paperclip"> &nbsp</span>
-                        <p id="recursos_info" class="modal-inline"></p>
-                    </div>
+                <div class="modal-body" id="modal_body_confirmar">
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-confirmar-modal btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
-                    <button type="button" class="btn-fechar-modal btn btn-default" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn-fechar-modal btn btn-default pull-right" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
@@ -188,7 +175,10 @@
 
                         </form>
                         <div class="btn_aplicar">
-                            <button type="button" onclick="refreshMatrix()" class="btn-filtos btn btn-primary btn-lg btn-block">Aplicar filtros</button>
+                            <button type="button" onclick="validateForm('sidebar')" class="btn-filtos btn btn-primary btn-lg btn-block">Alterar Dados</button>
+                        </div>
+                        <div id="logo">
+
                         </div>
                     </div>
                 </div>
@@ -252,7 +242,7 @@
 -->
                     <div class="col-md-6">
                         <div class="table-responsive">
-                            <table class="table table-striped matrix" id="matrix">
+                            <table class="table matrix" id="matrix">
                                 <!-- Builds costum Matrix-->
                             </table>
                         </div>
@@ -289,9 +279,9 @@
                         <th class="headers">Hora de inicio</th>
                         <th class="headers">Hora de fim</th>
                     </thead>
-                    <tbody id="listReservations">
-                            <tr>
-                            <td style="color: #e6e600; font-weight: bold">Pendente</td>
+                    <tbody>
+                        <tr>
+                            <td style="color: #ffd24d; font-weight: bold">Pendente</td>
                             <td>Formação</td>
                             <td>Sala 1</td>
                             <td>2017/08/15 09:00</td>
@@ -333,6 +323,7 @@
         </div>
     </div>
     <div id="snackBar"></div>
+    <span id="btn_close" class="glyphicon glyphicon-remove-sign" onclick="closeApp()" style="color:#cc0000"></span>
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
