@@ -221,7 +221,7 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
     padding-top: 7px;
 }
 .updown a{
-    color: #ffd24d;
+    color: #ffffff;
     font-size: 14px;
     font-weight: bold;
     user-select: none;
@@ -361,12 +361,18 @@ input[type="radio"]:checked + label span {
     font-style: italic;
 }
 .help {
-    float:right;
     border-radius: 35px;
-    background-color: #f99d13;
+    background-color: #4d94ff !important;
     font-size: 20px;
     font-weight: bold;
-    color: white;
+    color: #FFFFFF !important;
+    position: absolute;
+    right: 30px;
+}
+
+.help:hover, .help:active, .help:focus {
+  background-color: #4d94ff !important;
+  color: #FFFFFF !important;
 }
 
 .overlay {
@@ -456,6 +462,21 @@ o888o         `Y8bood8P'   `Y8bood8P'      o888o     o888ooooood8 o888o  o888o
   .footer > div:first-child {
     margin: 0 0 0 312px;
   }
+}
+
+.pending {
+  color: #ffd24d;
+  font-weight: bold;
+}
+
+.approved {
+  color: #33cc33;
+  font-weight: bold;
+}
+
+.rejected {
+  color: #cc3300;
+  font-weight: bold;
 }
 
 
@@ -597,10 +618,10 @@ table.matrix tbody tr:hover {
     background-color: #d9edf7;
 }
 
-table.matrix tr:hover td, table.matrix tr:hover th {
+table.matrix tbody tr:hover td, table.matrix tbody tr:hover th {
     background-color: #ffd699 !important;
 }
-table.matrix tr td:hover {
+table.matrix tbody tr td:hover {
     background-color: #e68a00 !important;
 }
 table.matrix td.indisponivel:hover {
