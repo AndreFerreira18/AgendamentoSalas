@@ -331,25 +331,26 @@ input[type="radio"]:checked + label span {
 }
 
 .popup {
-  margin: 70px auto;
-  padding: 20px;
+ margin: 5%;
+ //padding: 20px;
   background: #fff;
-  border-radius: 5px;
-  width:80%;
-  height: 80%;
+  border-radius: 20px;
+  width:90%;
+
   position: relative;
   transition: all 5s ease-in-out;
   z-index:999 !important;
 }
-
 .popup h2 {
-  margin-top: 0;
   color: #333;
   font-family: Tahoma, Arial, sans-serif;
+  position: fixed;
+  left: 60px;
+  text-decoration: underline;
 }
 .popup .close {
   position: absolute;
-  top: 20px;
+  top: 30px;
   right: 30px;
   transition: all 200ms;
   font-size: 30px;
@@ -361,8 +362,20 @@ input[type="radio"]:checked + label span {
   color: #06D85F;
 }
 .popup .content {
-  max-height: 80%;
-  overflow: auto;
+  //max-width: 90%;
+  //max-height: 90%;
+  }
+
+  .img-responsive{
+      max-width: 95%;
+      max-height: 95%;
+      margin: 20px;
+      width: auto;
+      height: auto;
+  }
+
+  .glyphWelcome{
+      font-size: 50px;
   }
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
