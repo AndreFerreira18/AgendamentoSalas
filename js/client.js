@@ -2,9 +2,12 @@
 $(window).ready(
     function() {
         $('#modal').modal('show');
+        writeInJSon();
+        insertRow();
         createTypesOfMeetings();
         createPrefFloor();
         createResources();
+
     }
 );
 // var date = new Date();
@@ -307,6 +310,7 @@ function removeElement(elementId) {
  * @returns {type}  description
  */
 function saveChanges() {
+    var btn = document.getElementById('btn_change_view');
     var datahora = divideDateAndTime("data_mod_calendar");
     var startDay = datahora[0];
     var endDay = datahora[1];
@@ -317,10 +321,12 @@ function saveChanges() {
     var filters = applyFilters();
     if(startDay === endDay) {
         addMatrix('day');
+        btn.innerHTML = 'Vista da Semana';
     } else {
         addBtnRooms(filters);
         defineActiveById('btn_rooms-1');
         addMatrix('week');
+        btn.innerHTML = 'Vista de Dia';
     }
     refreshMatrix();
     clone();
@@ -592,7 +598,7 @@ function findHour() {
             var activeElement = activeElements[i];
             var activeElementSplit = activeElement.split("-");
             for(var j = 0; j < datesList.length; j++) {
-                if(parseInt(activeElementSplit[1]) === j)
+                if(getDate(activeElement) === datesList[j])
                     if(!i)
                         tempArray[h].push(activeElement);
                     else {
@@ -611,7 +617,7 @@ function findHour() {
         //removes the middle ones
         for(var k = 0; k < tempArray.length; k++) {
             if(tempArray[k].length > 2) {
-                tempArray[k].splice(1, tempArray.length - 2);
+                tempArray[k].splice(1, tempArray[k].length - 2);
             } else if(tempArray[k].length === 1)
                 tempArray[k].push(tempArray[k][0]);
 
@@ -893,6 +899,7 @@ function sideBarChangeData() {
     matrix.innerHTML = " ";
     if(startDay === endDay) {
         addMatrix('day');
+
     } else {
         addBtnRooms(filters);
         defineActiveById('btn_rooms-1');
@@ -901,13 +908,56 @@ function sideBarChangeData() {
     refreshMatrix();
 }
 
+function writeInJSon() {
+
+    var testObject = {
+        "Status": "Pendente",
+        "Tipo de Reuniao": "Interna",
+        "Sala": "Sala 1",
+        "Hora de inicio": "2017/09/07 09:00",
+        "Hora de Fim": "2017/09/07 10:00"
+    };
+    // Put the object into storage
+    localStorage.setItem('testObject', JSON.stringify(testObject));
+    // Retrieve the object from storage
+
+}
+
+function insertRow() {
+    var retrievedObject = localStorage.getItem('testObject');
+    retrievedObject = JSON.parse(retrievedObject);
+    var table = document.getElementById("tableStatus");
+    var row = table.insertRow(table.rows.length);
+    var cell = document.getElementsByClassName("headers");
+    var reservationInfo = [];
+    var arrayJson = [];
+    for(var infoReservation in retrievedObject) {
+        if(retrievedObject.hasOwnProperty(infoReservation)) {
+            reservationInfo = retrievedObject[infoReservation];
+            arrayJson.push(reservationInfo);
+        }
+    }
+    for(var i = 0; i < cell.length; i++) {
+        var fieldFooter = row.insertCell(i);
+        var td = document.createElement("td");
+        td.id = "td" + i;
+        fieldFooter.appendChild(td);
+        fieldFooter.innerHTML = arrayJson[i];
+    }
+}
+
+/**
+ * pushToSideBar - based on active elements on day matrix updates sidebar hour
+ *
+ * @return {type} Description
+ */
 function pushToSideBar() {
     var firstLastActive = getMultiActiveChilds("matrix_day_body");
     var startHour;
     var endHour;
     var initial = $('#data_mod_calendar').data('daterangepicker').startDate.format('DD-MM-YYYY');
 
-    if(firstLastActive.length){
+    if(firstLastActive.length) {
         for(var k = 0; k < firstLastActive.length; k++) {
             if(firstLastActive.length > 2)
                 firstLastActive.splice(1, firstLastActive.length - 2);
@@ -917,7 +967,7 @@ function pushToSideBar() {
         var split = firstLastActive[firstLastActive.length - 1].split("-");
         var next = parseInt(split[2]) + 1;
         endHour = getHour(split[0] + '-' + split[1] + '-' + next);
-    }else{
+    } else {
         startHour = '00:00';
         endHour = '00:00';
     }

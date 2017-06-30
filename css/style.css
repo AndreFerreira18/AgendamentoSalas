@@ -254,6 +254,11 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
     z-index: 2;
 }
 
+.list-group-item:last-child {
+    margin-bottom: -1px;
+    border-radius: unset;
+}
+
 
 
 /*
@@ -271,6 +276,22 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
 .modal-title>h1 {
     text-align: center;
   }
+
+#btnSave {
+    border: solid 1px #000000 !important;
+    background-color: #ffd24d !important;
+    color: #000000 !important;
+    font-weight: 900;
+}
+
+#modal {
+    background-color: #fffae6;
+}
+
+
+#modal h2 {
+    text-align: center;
+}
 
 .modal-footer {
   text-align: center;
@@ -314,7 +335,7 @@ input[type="radio"] + label span {
 }
 
 input[type="radio"]:checked + label span{
-     background-color: #337ab7;
+     background-color: #ffd24d;
 }
 
 input[type="radio"] + label span,
@@ -339,7 +360,79 @@ input[type="radio"]:checked + label span {
     text-align: center;
     font-style: italic;
 }
+.help {
+    float:right;
+    border-radius: 35px;
+    background-color: #f99d13;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
 
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  z-index:999 !important;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+ margin: 5%;
+ //padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  width:90%;
+
+  position: relative;
+  transition: all 5s ease-in-out;
+  z-index:999 !important;
+}
+.popup h2 {
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+  position: fixed;
+  left: 60px;
+  text-decoration: underline;
+}
+.popup .close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  //max-width: 90%;
+  //max-height: 90%;
+  }
+
+  .img-responsive{
+      max-width: 95%;
+      max-height: 95%;
+      margin: 20px;
+      width: auto;
+      height: auto;
+  }
+
+  .glyphWelcome{
+      font-size: 50px;
+  }
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
@@ -415,6 +508,14 @@ o888o         `Y8bood8P'  o888o  o888o o8o        o888o
     margin-right: 10px;
     }
 
+.btn-recurso:hover {
+    background-color: #FFFFFF;
+}
+
+.btn-recurso:focus {
+    background-color: #FFFFFF;
+}
+
 .label-recurso {
     margin-left: 15px;
     margin-right: 10px;
@@ -476,7 +577,7 @@ o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o o888o  o88888o
 }
 
 .btn-rooms {
-    margin: 5px;
+    margin: 8px;
 }
 
 .btn-rooms.active {
@@ -491,17 +592,16 @@ table.matrix {
     user-select: none;
 }
 
-table.matrix tr:hover {
+table.matrix tbody tr:hover {
     color: #31708f;
     background-color: #d9edf7;
 }
 
-table.matrix tr:hover td {
-    background-color: #d9edf7;
+table.matrix tr:hover td, table.matrix tr:hover th {
+    background-color: #ffd699 !important;
 }
-table.matrix td:hover {
-    color: #31708f !important;
-    background-color: rgba(51, 122, 183, 0.49) !important;
+table.matrix tr td:hover {
+    background-color: #e68a00 !important;
 }
 table.matrix td.indisponivel:hover {
     color: #777;
@@ -538,13 +638,11 @@ table.matrix th {
 }
 
 table.matrix .active {
-    background-color: #337ab7 !important;
+    background-color: #ffd24d !important;
     color: #fff;
+    opacity: 1 !important;
 }
-table.matrix .active:hover {
-    background-color: #337ab7;
-    color: #000;
-}
+
 .undefined{
     color: red;
     background-color: red;
@@ -561,15 +659,14 @@ table.matrix .active:hover {
     border-top: 1px solid #949494 !important;
 }
 table.matrix .lunch {
-    background-color: #ff1a1a !important;
+    background-color: #fffae6;
     border-right: solid #e6e6e6 1px;
     border-left: solid #e6e6e6 1px;
     border-top: solid 1px #e68a00;
     border-bottom: solid 1px #e68a00;
-    opacity: 0.2
 }
 
-table.matrix .lunch .active{
+table.matrix .lunch &.active{
     background-color: #337ab7 !important;
     color: #fff;
 }
@@ -641,4 +738,15 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
     top: 10px;
     font-size: 35px;
     cursor: pointer;
+}
+
+.btn-change-matrix, .btn-reserva  {
+    margin-top: 15px;
+}
+
+.btn-change-matrix {
+  width: 170px;
+  background-color: #ffd24d !important;
+  border: solid 1px #000000;
+  color: #000000 !important;
 }
