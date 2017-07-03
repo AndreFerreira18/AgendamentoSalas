@@ -23,7 +23,7 @@ $('input[name="daterange"]').daterangepicker({
     },
     timePicker24Hour: true,
     timePickerIncrement: 30,
-    startDate: "03/07/2017",
+    startDate: "04/07/2017",
     endDate: "04/07/2017",
     // minDate: today,
     locale: {
@@ -995,8 +995,8 @@ function insertRow() {
  *
  * @return {type} Description
  */
-function pushToSideBar() {
-    var firstLastActive = getMultiActiveChilds("matrix_day_body");
+function pushToSideBar(activematrix) {
+    var firstLastActive = getMultiActiveChilds(activematrix);
     var startHour;
     var endHour;
     var initial = $('#data_mod_calendar').data('daterangepicker').startDate.format('DD-MM-YYYY');
