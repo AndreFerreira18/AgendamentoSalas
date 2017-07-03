@@ -777,6 +777,26 @@ function fillModalConfirm() {
         else
             element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
         modalBody.appendChild(element);
+
+
+        // adds text area to coment
+        var div = document.createElement("div");
+        element = document.createElement("textarea");
+        element.id = "comment";
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-comment";
+        div.appendChild(glyphicon);
+        var label = document.createElement("label");
+        label.setAttribute("for", element.id);
+        label.innerHTML = " Comentarios:"
+        div.appendChild(label);
+        element.className = "form-control";
+        element.innerHTML = "Escreva um comentário que ache necessário a reserva."
+        div.appendChild(element);
+        modalBody.appendChild(div);
+
+
+        // creates temp data
         reservationData.Status = "Pendente";
         reservationData.Tipo_de_Reuniao = meetingInfo;
         reservationData.Sala = strActiveRoom;
