@@ -147,7 +147,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-confirmar-modal btn btn-success pull-left" data-dismiss="modal">Confirmar</button>
+                    <button type="button" class="btn-confirmar-modal btn btn-success pull-left" onclick="writeInJSon()" data-dismiss="modal">Confirmar</button>
                     <button type="button" class="btn-fechar-modal btn btn-default pull-right" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
@@ -251,8 +251,14 @@
                                 <!-- Builds costum Matrix-->
                             </table>
                         </div>
+
                         <button type="button" class="btn-change-matrix btn btn-lg pull-left" onclick="changeMatrix()" id="btn_change_view"></button>
+                        <div class="Limpar-Selecao" onclick="cleanSelection()">
+                            <div class="Icon-Limpar-Selecao"><span class="glyphicon glyphicon-remove"></span></div>
+                            <p>Limpar Seleção</p>
+                        </div>
                         <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="fillModalConfirm()">Reservar Sala</button>
+
                     </div>
                 </div>
 
