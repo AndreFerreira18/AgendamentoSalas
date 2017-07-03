@@ -532,6 +532,7 @@ function _bindDraggableForDay() {
                     columnID = this.id.split('-')[1];
                     $(this).toggleClass("active");
                     isActive = $(this).hasClass("active");
+                    pushToSideBar("matrix_day_body");
                     return false; // prevent text selection
                 } else if(this.id.split('-')[1] !== columnID) {
                     snackBar("Uma reserva deverá conter apenas uma Sala.");
