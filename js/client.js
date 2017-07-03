@@ -615,7 +615,7 @@ function fillModalConfirm() {
         element = document.createElement("h3");
         element.id = "meeting";
         var meetingInfo = document.getElementById("data_mod_tipo_reuniao").value;
-        element.innerHTML = 'Reuniao ' + meetingInfo;
+        element.innerHTML = 'Reunião ' + meetingInfo;
         modalBody.appendChild(element);
 
 
