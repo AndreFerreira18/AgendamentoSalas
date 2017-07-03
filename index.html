@@ -27,7 +27,7 @@
      8    Y     888  `88b    d88'  888     d88'  .8'     `888.   888       o
     o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
 -->
-    <!-- Madal inicial-->
+    <!-- Modal inicial-->
     <div id="modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,11 +76,7 @@
 
                             </div>
                             <p id="date_error" class="sb_error"></p>
-                            <!-- <div class="input-group">
-                <span class="input-group-addon">
-                  <input type="text" class="form-control" name="daterange" id="data_mod_calendar" placeholder="Select"/>
-                </span>
-              </div> -->
+
                             <div class="form_group" id="day_period">
                                 <div class="radioButton" id="cManha" onclick="updateDate(event)">
                                     <input type="radio" id="manha" name="period" />
@@ -129,7 +125,7 @@
         </div>
     </div>
 
-    <!-- Madal para reservar Salas-->
+    <!-- Modal para reservar Salas-->
     <div id="modal_confirmar" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -146,7 +142,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn-confirmar-modal btn btn-success" onclick="writeInJSon()" data-dismiss="modal">Confirmar</button>
+                    <button type="button" id="btn_modal_confirmar" class="btn-confirmar-modal btn btn-success" onclick="writeInJSon('tempReservationData')" data-dismiss="modal">Confirmar</button>
                 </div>
             </div>
         </div>
@@ -306,7 +302,6 @@
                 </div>
                 <div class="modal-footer" style="with : auto;">
                     <button type="button" id="modal_confirm_save" class="btn-guardar-modal btn btn-primary" onclick="saveModalConfirm(defineActiveById)" data-dismiss="modal"> Sim </button>
-                    <button type="button" id="modal_confirm_cancel" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>
