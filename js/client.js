@@ -27,7 +27,7 @@ $('input[name="daterange"]').daterangepicker({
     endDate: "04/07/2017",
     // minDate: today,
     locale: {
-        format: 'DD/MM/YYYY h:mm A'
+        format: 'DD/MM/YYYY H:mm'
     }
 
 });
@@ -469,7 +469,7 @@ function clone() {
         "timePickerIncrement": 30,
         // minDate: today,
         "locale": {
-            format: 'DD/MM/YYYY h:mm A'
+            format: 'DD/MM/YYYY H:mm'
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
