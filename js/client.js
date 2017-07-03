@@ -27,7 +27,7 @@ $('input[name="daterange"]').daterangepicker({
     endDate: "04/07/2017",
     // minDate: today,
     locale: {
-        format: 'DD/MM/YYYY h:mm A'
+        format: 'DD/MM/YYYY H:mm'
     }
 
 });
@@ -469,7 +469,7 @@ function clone() {
         "timePickerIncrement": 30,
         // minDate: today,
         "locale": {
-            format: 'DD/MM/YYYY h:mm A'
+            format: 'DD/MM/YYYY H:mm'
         }
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
@@ -495,9 +495,9 @@ function divideDateAndTime(idData) {
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
-    datahora[1] = arrayDataHora[4]; // Data de fim
-    datahora[2] = arrayDataHora[1] + ' ' + arrayDataHora[2]; // Hora de inicio
-    datahora[3] = arrayDataHora[5] + ' ' + arrayDataHora[6]; //Hora de fim
+    datahora[1] = arrayDataHora[3]; // Data de fim
+    datahora[2] = arrayDataHora[1]; // Hora de inicio
+    datahora[3] = arrayDataHora[4]; //Hora de fim
     return datahora;
 }
 

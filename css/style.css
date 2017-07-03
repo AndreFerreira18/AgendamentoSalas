@@ -33,6 +33,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
     position: fixed;
     height: 100%;
     z-index: 1;
+    overflow: auto;
 }
 
 .sidebar-nav {
@@ -103,7 +104,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
   margin-bottom: 0;
   z-index: 10;
   background-color: lightgrey;
-  position: fixed;
+  position: absolute;
   right: 50px;
   top: 2px;
 }
@@ -161,10 +162,10 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
   margin-right: auto;
 }
 
-.btn-filtos {
-    background-color: #ffd24d !important;
-    border: solid 1px #000000;
-    color: #000000 !important;
+.custom-btn, .btn-rooms.active, .list-group-item.active, .list-group-item:hover {
+  background-color: #ffd24d !important;
+  border: solid 1px #000000;
+  color: #000000 !important;
 }
 
 
@@ -240,18 +241,8 @@ o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
   border: solid 1px #000000;
 }
 
-.list-group-item.active {
+.list-group-item.active, .list-group-item:hover {
   z-index: 2;
-  border: solid 1px #000000 !important;
-  background-color: #ffd24d !important;
-  color: #000000 !important;
-}
-
-.list-group-item:hover {
-    background-color: #ffd24d;
-    border: solid 1px #000000 !important;
-    color: #000000 ;
-    z-index: 2;
 }
 
 .list-group-item:last-child {
@@ -278,9 +269,6 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
   }
 
 #btnSave {
-    border: solid 1px #000000 !important;
-    background-color: #ffd24d !important;
-    color: #000000 !important;
     font-weight: 900;
 }
 
@@ -601,12 +589,6 @@ o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o o888o  o88888o
     margin: 8px;
 }
 
-.btn-rooms.active {
-  background-color: #ffd24d!important;
-  color: #000000;
-  border: solid 1px #000000;
-}
-
 table.matrix {
     text-align: center;
     border: 1px solid #fff;
@@ -663,6 +645,7 @@ table.matrix .active {
     color: #fff;
     opacity: 1 !important;
 }
+
 
 .undefined{
     color: red;
@@ -754,7 +737,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 
 
 #btn_close {
-    position: fixed;
+    position: absolute;
     right: 26px;
     top: 10px;
     font-size: 35px;
@@ -767,12 +750,24 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 
 .btn-change-matrix {
   width: 170px;
-  background-color: #ffd24d !important;
-  border: solid 1px #000000;
-  color: #000000 !important;
 }
 
-.Limpar-Selecao{
-  display: inline-grid;
+.btn-limpar-selecao {
   cursor: pointer;
+margin-top: 15px;
+text-align: center;
+background-color: #FFFFFF;
+}
+
+.ic-limpar-selecao {
+    display: inline;
+}
+
+.btn-limpar-selecao p {
+    display: inline;
+    margin: 0;
+}
+
+.matrix-btn {
+  text-align: center;
 }

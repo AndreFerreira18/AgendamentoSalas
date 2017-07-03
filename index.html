@@ -123,7 +123,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary" onclick="validateForm('modal')"> Guardar</button>
+                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary custom-btn" onclick="validateForm('modal')"> Guardar</button>
                     <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button> -->
                 </div>
             </div>
@@ -181,7 +181,7 @@
 
                         </form>
                         <div class="btn_aplicar">
-                            <button type="button" onclick="validateForm('sidebar')" class="btn-filtos btn btn-primary btn-lg btn-block">Alterar Dados</button>
+                            <button type="button" onclick="validateForm('sidebar')" class="btn btn-primary btn-lg btn-block custom-btn">Alterar Dados</button>
                         </div>
                         <div id="logo">
                         </div>
@@ -251,14 +251,14 @@
                                 <!-- Builds costum Matrix-->
                             </table>
                         </div>
-
-                        <button type="button" class="btn-change-matrix btn btn-lg pull-left" onclick="changeMatrix()" id="btn_change_view"></button>
-                        <div class="Limpar-Selecao" onclick="cleanSelection()">
-                            <div class="Icon-Limpar-Selecao"><span class="glyphicon glyphicon-remove"></span></div>
-                            <p>Limpar Seleção</p>
+                        <div class="matrix-btn">
+                            <button type="button" class="btn-change-matrix btn btn-lg pull-left custom-btn" onclick="changeMatrix()" id="btn_change_view"></button>
+                            <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="fillModalConfirm()">Reservar Sala</button>
+                            <button type="button" class="btn-limpar-selecao btn btn-lg" onclick="cleanSelection()">
+                                <div class="ic-limpar-selecao"><span class="glyphicon glyphicon-remove"></span></div>
+                                <p>Limpar Seleção</p>
+                            </button>
                         </div>
-                        <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="fillModalConfirm()">Reservar Sala</button>
-
                     </div>
                 </div>
 
