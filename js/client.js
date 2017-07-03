@@ -1031,6 +1031,8 @@ function cleanSelection() {
         defineActiveById(activeElements[i]);
     }
 
+    columnID = '';
+
     $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + ' 00:00');
-    $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' 00:00');    
+    $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' 00:00');
 }
