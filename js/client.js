@@ -1025,8 +1025,12 @@ function pushToSideBar(activematrix) {
 }
 
 function cleanSelection() {
+    var initial = $('#data_mod_calendar').data('daterangepicker').startDate.format('DD-MM-YYYY');
     var activeElements = getMultiActive("available");
     for (var i = 0; i < activeElements.length; i++) {
         defineActiveById(activeElements[i]);
     }
+
+    $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + ' 00:00');
+    $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' 00:00');    
 }
