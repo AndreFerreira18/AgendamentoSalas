@@ -33,6 +33,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
     position: fixed;
     height: 100%;
     z-index: 1;
+    overflow: auto;
 }
 
 .sidebar-nav {
@@ -103,7 +104,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
   margin-bottom: 0;
   z-index: 10;
   background-color: lightgrey;
-  position: fixed;
+  position: absolute;
   right: 50px;
   top: 2px;
 }
@@ -754,7 +755,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 
 
 #btn_close {
-    position: fixed;
+    position: absolute;
     right: 26px;
     top: 10px;
     font-size: 35px;
