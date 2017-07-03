@@ -752,7 +752,22 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
   width: 170px;
 }
 
-.Limpar-Selecao{
-  display: inline-grid;
+.btn-limpar-selecao {
   cursor: pointer;
+margin-top: 15px;
+text-align: center;
+background-color: #FFFFFF;
+}
+
+.ic-limpar-selecao {
+    display: inline;
+}
+
+.btn-limpar-selecao p {
+    display: inline;
+    margin: 0;
+}
+
+.matrix-btn {
+  text-align: center;
 }
