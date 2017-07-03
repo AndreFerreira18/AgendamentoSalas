@@ -599,8 +599,10 @@ function findHour() {
  *
  * @returns {type}  description
  */
+var reservationData = {};
+
 function fillModalConfirm() {
-    var reservationData = {};
+
     var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
@@ -751,17 +753,17 @@ function fillModalConfirm() {
         else
             element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
         modalBody.appendChild(element);
+        reservationData.Status = "Pendente";
+        reservationData.Tipo_de_Reuniao = meetingInfo;
+        reservationData.Sala = strActiveRoom;
+        reservationData.Data = dateHour;
+        sessionStorage.setItem('tempReservationData', JSON.stringify(reservationData));
+
     } else {
         element = document.createElement("h1");
         element.innerHTML = 'Por favor selecione uma hora na tabela.'
         modalBody.appendChild(element);
     }
-    reservationData.Status = "Pendente";
-    reservationData.Tipo_de_Reuniao = meetingInfo;
-    reservationData.Sala = strActiveRoom;
-    reservationData.Data = dateHour;
-    writeInJSon(reservationData);
-
 }
 
 /**
@@ -918,8 +920,9 @@ function orderMAtrixActive(classofactive, ij) {
     return orderedArray;
 }
 
-function writeInJSon(reservationData) {
-
+function writeInJSon() {
+    var tempObject = sessionStorage.getItem('tempReservationData');
+    tempObject = JSON.parse(tempObject);
     var retrievedObject = sessionStorage.getItem('reservationData');
     if (retrievedObject === null) {
         var retrievedObject = {
@@ -945,11 +948,12 @@ function writeInJSon(reservationData) {
     } else
         retrievedObject = JSON.parse(retrievedObject);
     var position = Object.keys(retrievedObject).length;
-    if (reservationData)
-        retrievedObject[position] = reservationData;
+    if (tempObject)
+        retrievedObject[position] = tempObject;
     // Put the object into storage
     sessionStorage.setItem('reservationData', JSON.stringify(retrievedObject));
     insertRow();
+    cleanSelection();
 }
 
 function insertRow() {
@@ -1018,4 +1022,11 @@ function pushToSideBar(activematrix) {
 
     $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + ' ' + startHour);
     $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' ' + endHour);
+}
+
+function cleanSelection() {
+    var activeElements = getMultiActive("available");
+    for (var i = 0; i < activeElements.length; i++) {
+        defineActiveById(activeElements[i]);
+    }
 }

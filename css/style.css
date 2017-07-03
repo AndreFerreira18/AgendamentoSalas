@@ -761,7 +761,7 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
     cursor: pointer;
 }
 
-.btn-change-matrix, .btn-reserva  {
+.btn-change-matrix, .btn-reserva, .Limpar-Selecao  {
     margin-top: 15px;
 }
 
@@ -770,4 +770,9 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
   background-color: #ffd24d !important;
   border: solid 1px #000000;
   color: #000000 !important;
+}
+
+.Limpar-Selecao{
+  display: inline-grid;
+  cursor: pointer;
 }
