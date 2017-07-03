@@ -542,7 +542,9 @@ function _bindDraggableForDay() {
             var activeElements = document.querySelectorAll('td.active');
             if(activeElements.length === 0)
                 columnID = '';
+            pushToSideBar();
         });
+
 }
 
 
