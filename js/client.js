@@ -624,16 +624,18 @@ function fillModalConfirm() {
         var glyphicon;
 
 
+        // add on click to button confirm of modal confirm
         var btnConfirm = document.getElementById("btn_modal_confirmar");
         btnConfirm.onclick = function() {
             writeInJSon('tempReservationData')
         };
 
+
         // meeting type
         element = document.createElement("h3");
         element.id = "meeting";
         var meetingInfo = document.getElementById("data_mod_tipo_reuniao").value;
-        element.innerHTML = 'Reunião ' + meetingInfo;
+        element.innerHTML = 'Reunião ' + meetingInfo + ".";
         modalBody.appendChild(element);
 
 
@@ -643,7 +645,7 @@ function fillModalConfirm() {
         glyphicon = document.createElement("span");
         glyphicon.className = "glyphicon glyphicon-user";
         element.appendChild(glyphicon);
-        element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
+        element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática.");
         modalBody.appendChild(element);
 
 
@@ -664,13 +666,12 @@ function fillModalConfirm() {
             endHour[i] = tempEndHour[i][1] == "PM" ? parseInt(tempEndHour[i][0]) + 12 + ":00" : tempEndHour[i][0];
             strHoras[i] = "dia " + startDate[i] + " das " + startHour[i] + " às " + endHour[i] + " ";
         }
-
         element = document.createElement("p");
         element.id = "datetime_info";
         glyphicon = document.createElement("span");
         glyphicon.className = "glyphicon glyphicon-time";
         element.appendChild(glyphicon);
-        element.insertAdjacentHTML("beforeend", str + strHoras);
+        element.insertAdjacentHTML("beforeend", str + strHoras + ".");
         modalBody.appendChild(element);
 
 
@@ -679,7 +680,6 @@ function fillModalConfirm() {
         var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
         var idActiveRoom = getActive("btn-rooms");
         var strActiveRoom;
-
         switch (idActiveFloor) {
             case "piso-0":
                 var rooms = rooms_0.salas;
@@ -707,15 +707,13 @@ function fillModalConfirm() {
                 break;
             default:
         }
-
         if (idActiveRoom)
             strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
         else {
             var splitIdActiveTd = idActiveTd[0].split("-");
             strActiveRoom = rooms[splitIdActiveTd[1]];
         }
-
-        var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor;
+        var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor + ".";
         element = document.createElement("p");
         element.id = "room_info";
         glyphicon = document.createElement("span");
@@ -725,21 +723,7 @@ function fillModalConfirm() {
         modalBody.appendChild(element);
 
 
-
-        //Number of participants
-        var participants = document.getElementById("data_mod_nparticipantes").value;
-        var strParticipants = ' Com ' + participants + ' participantes previstos';
-        element = document.createElement("p");
-        //element.innerHTML = strParticipants;
-        glyphicon = document.createElement("span");
-        glyphicon.className = "glyphicon glyphicon-flag";
-        element.appendChild(glyphicon);
-        element.insertAdjacentHTML("beforeend", strParticipants);
-        modalBody.appendChild(element);
-
-
-        //  selected resorces
-        var roomResources;
+        //  get data from JSON of resources
         if (idActiveRoom) {
             var splitIdActiveRoom = idActiveRoom.split("-");
             var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
@@ -748,6 +732,36 @@ function fillModalConfirm() {
             var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
         }
 
+
+        //Number of participants
+        var participants = document.getElementById("data_mod_nparticipantes").value;
+        element = document.createElement("p");
+        glyphicon = document.createElement("span");
+        glyphicon.className = "glyphicon glyphicon-flag";
+        element.appendChild(glyphicon);
+
+        if (parseInt(tempResources.N_Pessoas) >= participants) {
+            var strParticipants = ' Com ' + participants + ' participantes previstos.';
+            element.insertAdjacentHTML("beforeend", strParticipants);
+        } else {
+            var strParticipants = ' Lotação da sala ' + tempResources.N_Pessoas + '.';
+            element.insertAdjacentHTML("beforeend", strParticipants);
+            var strParticipants = ' Pretende aumentar a lotação da sala em mais ' + (parseInt(participants) - parseInt(tempResources.N_Pessoas)) + ' lugares.'
+            modalBody.appendChild(element);
+            element = document.createElement("p");
+            glyphicon = document.createElement("span");
+            glyphicon.className = "glyphicon glyphicon-plus";
+            element.appendChild(glyphicon);
+            element.insertAdjacentHTML("beforeend", strParticipants);
+            var checkBox = document.createElement("input");
+            checkBox.type = "checkbox";
+            element.appendChild(checkBox);
+        }
+
+        modalBody.appendChild(element);
+
+
+        //Avaliable resources in room
         var strHasResources = [];
         var strDoestResources = [];
         for (var resource in tempResources) {
@@ -773,9 +787,9 @@ function fillModalConfirm() {
         glyphicon.className = "glyphicon glyphicon-paperclip";
         element.appendChild(glyphicon);
         if (strDoestResources.length)
-            element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
+            element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources + ".");
         else
-            element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources);
+            element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + ".");
         modalBody.appendChild(element);
 
 
