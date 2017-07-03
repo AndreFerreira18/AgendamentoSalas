@@ -549,6 +549,7 @@ function _bindDraggableForDay() {
                 // if (!document.getElementById(id).classList.contains('active'))
                 //     document.getElementById(id).classList.add('active');
                 $(this).toggleClass("active", isActive);
+                pushToSideBar("matrix_day_body");
             }
 
         });
