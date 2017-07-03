@@ -788,10 +788,11 @@ function fillModalConfirm() {
         div.appendChild(glyphicon);
         var label = document.createElement("label");
         label.setAttribute("for", element.id);
-        label.innerHTML = " Comentarios:"
+        label.setAttribute("style", "margin-left: 3px;");
+        label.innerHTML = "Observações:";
         div.appendChild(label);
         element.className = "form-control";
-        element.innerHTML = "Escreva um comentário que ache necessário a reserva."
+        element.innerHTML = "Escreva um comentário que ache necessário a reserva.";
         div.appendChild(element);
         modalBody.appendChild(div);
 
