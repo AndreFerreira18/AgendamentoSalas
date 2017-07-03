@@ -763,6 +763,12 @@ background-color: #FFFFFF;
     display: inline;
 }
 
+.ic-limpar-selecao span {
+  color: #e60000;
+}
+
+
+
 .btn-limpar-selecao p {
     display: inline;
     margin: 0;
