@@ -610,10 +610,10 @@ function findHour() {
  *
  * @returns {type}  description
  */
-var reservationData = {};
+
 
 function fillModalConfirm() {
-
+    var reservationData = {};
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
     var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
