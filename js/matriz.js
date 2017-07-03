@@ -213,7 +213,7 @@ function createMatrixWeek(filters, nextSemana) {
 
     //Matrix Body
     var mb = document.getElementById("matrix_week_body");
-    for(var i = 0; i < scheduleWeek.hour.length; i++) {
+    for(var i = 0; i < scheduleWeek.hour.length-1; i++) {
         var tr = document.createElement('tr');
         if(isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
@@ -397,7 +397,7 @@ function createMatrixDay(filters) {
 
     //Matrix Body
     var mb = document.getElementById("matrix_day_body");
-    for(var i = 0; i < scheduleDay[selectedFloor][0].Horas.length; i++) {
+    for(var i = 0; i < scheduleDay[selectedFloor][0].Horas.length-1; i++) {
         var tr = document.createElement('tr');
         if(isEven(i)) mb.appendChild(tr);
         var th = document.createElement('th');
