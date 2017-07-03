@@ -742,12 +742,15 @@ function fillModalConfirm() {
         for (var resource in tempResources) {
             if (tempResources.hasOwnProperty(resource) && resource != "N_Pessoas") {
                 if (tempResources[resource]) {
+                    resource = resource.split("_").join(" ");
                     strHasResources.push(" " + resource);
                 } else {
                     var idActiveResources = getMultiActive("btn-recurso");
                     for (var i = 0; i < idActiveResources.length; i++) {
-                        if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML)
+                        if (resource === document.getElementById(idActiveResources[i]).parentNode.childNodes[1].innerHTML) {
+                            resource = resource.split("_").join(" ");;
                             strDoestResources.push(" " + resource);
+                        }
                     }
                 }
             }
@@ -758,6 +761,7 @@ function fillModalConfirm() {
         glyphicon = document.createElement("span");
         glyphicon.className = "glyphicon glyphicon-paperclip";
         element.appendChild(glyphicon);
+
         if (strDoestResources.length)
             element.insertAdjacentHTML("beforeend", " A sala reservada Dispõe de: " + strHasResources + " cuidado que a sala não dispõe de: " + strDoestResources);
         else
