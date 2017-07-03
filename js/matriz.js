@@ -185,18 +185,22 @@ function createMatrixWeek(filters, nextSemana) {
     thC.setAttribute("colspan", colspan);
     thC.innerHTML = "Vista da Semana - " + document.getElementById(filters.floor).innerText + ' - ' + document.getElementById(getActive('btn-rooms')).innerText;
     // Adiciona Setas
-    spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
-    spanL.setAttribute("style", "cursor:pointer;");
-    spanL.addEventListener("click", function() {
-        refreshMatrix(id_semana - 1);
-    });
-    thC.appendChild(spanL);
-    spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
-    spanR.setAttribute("style", "cursor:pointer;");
-    spanR.addEventListener("click", function() {
-        refreshMatrix(id_semana + 1);
-    });
-    thC.appendChild(spanR);
+    if (id_semana != "1") {
+        spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
+        spanL.setAttribute("style", "cursor:pointer;");
+        spanL.addEventListener("click", function() {
+            refreshMatrix(id_semana - 1);
+        });
+        thC.appendChild(spanL);
+    }
+    if (id_semana != "4") {
+        spanR.className = ("glyph glyphicon glyphicon-arrow-right pull-right");
+        spanR.setAttribute("style", "cursor:pointer;");
+        spanR.addEventListener("click", function() {
+            refreshMatrix(id_semana + 1);
+        });
+        thC.appendChild(spanR);
+    }
     trH.appendChild(thC);
 
     // Horas
