@@ -744,10 +744,15 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
     cursor: pointer;
 }
 
-.btn-change-matrix, .btn-reserva  {
+.btn-change-matrix, .btn-reserva, .Limpar-Selecao  {
     margin-top: 15px;
 }
 
 .btn-change-matrix {
   width: 170px;
+}
+
+.Limpar-Selecao{
+  display: inline-grid;
+  cursor: pointer;
 }
