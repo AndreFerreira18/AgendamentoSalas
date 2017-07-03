@@ -603,13 +603,20 @@ var reservationData = {};
 
 function fillModalConfirm() {
 
-    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
     var modalBody = document.getElementById("modal_body_confirmar");
     modalBody.innerHTML = "";
+    var idActiveTd = getMultiActiveChilds(document.getElementById("matrix").childNodes[2].id);
+    sessionStorage.removeItem('tempReservationData');
 
     if (idActiveTd.length) {
         var element;
         var glyphicon;
+
+
+        var btnConfirm = document.getElementById("btn_modal_confirmar");
+        btnConfirm.onclick = function() {
+            writeInJSon('tempReservationData')
+        };
 
         // meeting type
         element = document.createElement("h3");
@@ -627,6 +634,7 @@ function fillModalConfirm() {
         element.appendChild(glyphicon);
         element.insertAdjacentHTML("beforeend", " João Sousa Silva, Departamento de Informática");
         modalBody.appendChild(element);
+
 
         //time information
         var dateHour = findHour();
@@ -706,6 +714,7 @@ function fillModalConfirm() {
         modalBody.appendChild(element);
 
 
+
         //Number of participants
         var participants = document.getElementById("data_mod_nparticipantes").value;
         var strParticipants = ' Com ' + participants + ' participantes previstos';
@@ -716,6 +725,7 @@ function fillModalConfirm() {
         element.appendChild(glyphicon);
         element.insertAdjacentHTML("beforeend", strParticipants);
         modalBody.appendChild(element);
+
 
         //  selected resorces
         var roomResources;
@@ -762,6 +772,8 @@ function fillModalConfirm() {
     } else {
         element = document.createElement("h1");
         element.innerHTML = 'Por favor selecione uma hora na tabela.'
+        var btnConfirm = document.getElementById("btn_modal_confirmar");
+        btnConfirm.removeAttribute("onclick");
         modalBody.appendChild(element);
     }
 }
@@ -920,9 +932,7 @@ function orderMAtrixActive(classofactive, ij) {
     return orderedArray;
 }
 
-function writeInJSon() {
-    var tempObject = sessionStorage.getItem('tempReservationData');
-    tempObject = JSON.parse(tempObject);
+function writeInJSon(tempReservationData) {
     var retrievedObject = sessionStorage.getItem('reservationData');
     if (retrievedObject === null) {
         var retrievedObject = {
@@ -947,9 +957,14 @@ function writeInJSon() {
         };
     } else
         retrievedObject = JSON.parse(retrievedObject);
-    var position = Object.keys(retrievedObject).length;
-    if (tempObject)
+    if (tempReservationData) {
+        var tempObject = sessionStorage.getItem(tempReservationData);
+        tempObject = JSON.parse(tempObject);
+        var position = Object.keys(retrievedObject).length;
         retrievedObject[position] = tempObject;
+    }
+
+
     // Put the object into storage
     sessionStorage.setItem('reservationData', JSON.stringify(retrievedObject));
     insertRow();
@@ -1032,5 +1047,5 @@ function cleanSelection() {
     }
 
     $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + ' 00:00');
-    $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' 00:00');    
+    $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' 00:00');
 }
