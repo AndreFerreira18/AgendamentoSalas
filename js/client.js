@@ -495,9 +495,9 @@ function divideDateAndTime(idData) {
     var arrayDataHora = acedeDataHora.split(" ");
     var datahora = [];
     datahora[0] = arrayDataHora[0]; // Data de Inicio
-    datahora[1] = arrayDataHora[4]; // Data de fim
-    datahora[2] = arrayDataHora[1] + ' ' + arrayDataHora[2]; // Hora de inicio
-    datahora[3] = arrayDataHora[5] + ' ' + arrayDataHora[6]; //Hora de fim
+    datahora[1] = arrayDataHora[3]; // Data de fim
+    datahora[2] = arrayDataHora[1]; // Hora de inicio
+    datahora[3] = arrayDataHora[4]; //Hora de fim
     return datahora;
 }
 
