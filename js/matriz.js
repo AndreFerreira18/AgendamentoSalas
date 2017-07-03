@@ -449,39 +449,44 @@ function createMatrixDay(filters) {
             tr.appendChild(td2);
         }
     }
-    _populateSelectionForDay(filters.selection);
+    populateSelectionForDay();
     _bindDraggableForDay();
     _setLunchTime();
 }
 
 
 /**
- * _populateSelection - description
+ * populateSelection - description
  *
  * @param  {type} selection description
  * @returns {type}           description
  */
-function _populateSelectionForDay() {
-    var fields = document.querySelectorAll('td');
-
+function populateSelectionForDay() {
     var datetime = divideDateAndTime();
 
     var startTime = datetime[2];
-    var startTimeSplit = datetime[2].split(':');
+    var startTimeSplit = startTime.split(' ');
     var endTime = datetime[3];
-    var startTimeSplit = datetime[2].split(':');
+    var endTimeSplit = endTime.split(' ');
+
+    startTimeSplit = startTimeSplit[0].split(':');
+    endTimeSplit = endTimeSplit[0].split(':');
 
     var startId = (parseInt(startTimeSplit[0]) - 8) * 2;
-    var endId = (parseInt(startTimeSplit[0]) - 8) * 2;
+    if(parseInt(startTimeSplit[1]) > 0)
+        startId++;
+    var endId = (parseInt(endTimeSplit[0]) - 8) * 2;
+    if(parseInt(endTimeSplit[1]) > 0)
+        endId++;
+
 
     for(var i = startId; i < endId; i++) {
-        if(fields[i].classList.contains('available'))
-            fields[i].classList.add('active');
+        var elemnt = document.getElementById('td-0-'+i);
+
+        if(elemnt.classList.contains('available'))
+            defineActiveById('td-0-'+i);
     }
 }
-
-
-
 
 /**
  * _bindDraggableForDay - This method binds mouse events for draggable selection in Day Matrix
@@ -514,6 +519,7 @@ function _bindDraggableForDay() {
                         columnID = this.id.split('-')[1];
                         $(this).toggleClass("active");
                         isActive = $(this).hasClass("active");
+                        pushToSideBar("matrix_day_body");
                         return false; // prevent text selection
                     } else if(this.id.split('-')[1] !== columnID) {
                         snackBar("Uma reserva deverá conter apenas uma Sala.");
@@ -551,7 +557,6 @@ function _bindDraggableForDay() {
             var activeElements = document.querySelectorAll('td.active');
             if(activeElements.length === 0)
                 columnID = '';
-            pushToSideBar("matrix_day_body");
         });
 
 }
