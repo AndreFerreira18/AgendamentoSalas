@@ -49,111 +49,109 @@
                             <div class="popup">
                                 <h2> Como efetuar uma Reserva? </h2>
                                 <a class="close" href="#">&times;</a>
-                                <div class="content">
-                                    <img src="img/help1.png" class="img-responsive"> </div>
+                                <div class="content helpimg2">
+                                    <img src="img/help2.png" class="img-responsive"/>
+                                </div>
+                                    <div class="content helpimg1">
+                                <img src="img/help1.png" class="img-responsive"/>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <form class="form-group" id="form_modal">
-                        <div id="modal_div">
-
-                            <div class="form-group">
-                                <label>
-                                <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
-                            </label>
-                                <select class="form-control" id="data_mod_tipo_reuniao">
-
-                            </select>
-
-                            </div>
-                            <p id="type_error" class="sb_error"></p>
-
-                            <div class="form-group">
-                                <label>Seleção de Data e Horas (Inicio e Fim):</label>
-                                <input type="text" class="form-control" name="daterange" value="01/01/2015 12:00 01/01/2015 12:00" id="data_mod_calendar" />
-
-                            </div>
-                            <p id="date_error" class="sb_error"></p>
-
-                            <div class="form_group" id="day_period">
-                                <div class="radioButton" id="cManha" onclick="updateDate(event)">
-                                    <input type="radio" id="manha" name="period" />
-                                    <label for="manhã"><span></span>Manhã</label>
-                                </div>
-
-                                <div class="radioButton" id="cTarde" onclick="updateDate(event)">
-                                    <input type="radio" id="tarde" name="period" />
-                                    <label for="tarde"><span></span>Tarde</label>
-                                </div>
-
-                                <div class="radioButton" id="cDia" onclick="updateDate(event)">
-                                    <input type="radio" id="dia" name="period" />
-                                    <label for="dia"><span></span>Dia</label>
-                                </div>
-                            </div>
-
-                            <div class="input-group" id="participants_container">
-                                <span class="input-group-addon">
-                  <b><span class="glyphicon glyphicon-user"></span> Nº de Participantes:</b>
-                                </span>
-                                <input type="number" class="form-control" value="1" min="1" max="999" id="data_mod_nparticipantes">
-
-                            </div>
-                            <p id="participants_error" class="sb_error"></p>
-                            <div class="form-group">
-                                <div class="piso_pref">
+                    <div class="modal-body">
+                        <form class="form-group" id="form_modal">
+                            <div id="modal_div">
+                                <div class="form-group">
                                     <label>
-                        <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
-                    </label>
-                                    <select class="form-control" id="data_mod_piso_pref">
-                    </select>
+                                        <span class="glyphicon glyphicon-briefcase"> </span> &nbsp; Tipo de reunião:
+                                    </label>
+                                    <select class="form-control" id="data_mod_tipo_reuniao">
+                                    </select>
+                                </div>
+                                <p id="type_error" class="sb_error"></p>
+
+                                <div class="form-group">
+                                    <label>Seleção de Data e Horas (Inicio e Fim):</label>
+                                    <input type="text" class="form-control" name="daterange" value="01/01/2015 12:00 01/01/2015 12:00" id="data_mod_calendar" />
+
+                                </div>
+                                <p id="date_error" class="sb_error"></p>
+
+                                <div class="form_group" id="day_period">
+                                    <div class="radioButton" id="cManha" onclick="updateDate(event)">
+                                        <input type="radio" id="manha" name="period" />
+                                        <label for="manhã"><span></span>Manhã</label>
+                                    </div>
+                                    <div class="radioButton" id="cTarde" onclick="updateDate(event)">
+                                        <input type="radio" id="tarde" name="period" />
+                                        <label for="tarde"><span></span>Tarde</label>
+                                    </div>
+                                    <div class="radioButton" id="cDia" onclick="updateDate(event)">
+                                        <input type="radio" id="dia" name="period" />
+                                        <label for="dia"><span></span>Dia</label>
+                                    </div>
+                                </div>
+
+                                <div class="input-group" id="participants_container">
+                                    <span class="input-group-addon">
+                                        <b><span class="glyphicon glyphicon-user"></span> Nº de Participantes:</b>
+                                    </span>
+                                    <input type="number" class="form-control" value="1" min="1" max="999" id="data_mod_nparticipantes">
+                                </div>
+                                <p id="participants_error" class="sb_error"></p>
+                                <div class="form-group">
+                                    <div class="piso_pref">
+                                        <label>
+                                            <span class="glyphicon glyphicon-home"></span> &nbsp; Piso Preferencial:
+                                        </label>
+                                        <select class="form-control" id="data_mod_piso_pref">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <div id="store_btn_recursos"></div>
                                 </div>
                             </div>
-
-                            <div class="input-group">
-                                <div id="store_btn_recursos"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary custom-btn" onclick="validateForm('modal')"> Guardar</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btnSave" class="btn-guardar-modal btn btn-primary custom-btn" onclick="validateForm('modal')"> Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Modal para reservar Salas-->
-    <div id="modal_confirmar" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <div class="modal-title">
-                        <h1>
+        <!-- Modal para reservar Salas-->
+        <div id="modal_confirmar" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class="modal-title">
+                            <h1>
                 <span class="glyphicon glyphicon-ok"></span> &nbsp;
                 Pedido de agendamento realizado por:
             </h1>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-body" id="modal_body_confirmar">
+                    <div class="modal-body" id="modal_body_confirmar">
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="btn_modal_confirmar" class="btn-confirmar-modal btn btn-success" onclick="writeInJSon('tempReservationData')" data-dismiss="modal">Confirmar</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="btn_modal_confirmar" class="btn-confirmar-modal btn btn-success" onclick="writeInJSon('tempReservationData')" data-dismiss="modal">Confirmar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--
+        <!--
     MODAL    8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
 
-    <div class="container-fluid">
-        <div class="row">
-            <!--
+        <div class="container-fluid">
+            <div class="row">
+                <!--
     .oooooo..o ooooo oooooooooo.   oooooooooooo oooooooooo.        .o.       ooooooooo.
     d8P'    `Y8 `888' `888'   `Y8b  `888'     `8 `888'   `Y8b      .888.      `888   `Y88.
     Y88bo.       888   888      888  888          888     888     .8"888.      888   .d88'
@@ -162,33 +160,33 @@
     oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  `88b.
     8""88888P'  o888o o888bood8P'   o888ooooood8 o888bood8P'  o88o     o8888o o888o  o888o
 -->
-            <nav class="navbar navbar-default" role="navigation">
-                <div class="container">
-                    <a id="menu-toggle" href="#" class="navbar-toggle">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="container">
+                        <a id="menu-toggle" href="#" class="navbar-toggle">
                       <span class="sr-only">Toggle navigation</span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </a>
-                    <div id="sidebar-wrapper" class="sidebar-toggle">
-                        <form class="form-group" data-target="#modal_header" id="form_sb">
+                        <div id="sidebar-wrapper" class="sidebar-toggle">
+                            <form class="form-group" data-target="#modal_header" id="form_sb">
 
-                        </form>
-                        <div class="btn_aplicar">
-                            <button type="button" onclick="validateForm('sidebar')" class="btn btn-primary btn-lg btn-block custom-btn">Alterar Dados</button>
-                        </div>
-                        <div id="logo">
+                            </form>
+                            <div class="btn_aplicar">
+                                <button type="button" onclick="validateForm('sidebar')" class="btn btn-primary btn-lg btn-block custom-btn">Alterar Dados</button>
+                            </div>
+                            <div id="logo">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </nav>
-            <!--
+                </nav>
+                <!--
     SIDEBAR   8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
-            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <!--
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <!--
     ooooooooo.   ooooo  .oooooo..o   .oooooo.    .oooooo..o
     `888   `Y88. `888' d8P'    `Y8  d8P'  `Y8b  d8P'    `Y8
      888   .d88'  888  Y88bo.      888      888 Y88bo.
@@ -197,40 +195,40 @@
      888          888  oo     .d8P `88b    d88' oo     .d8P
     o888o        o888o 8""88888P'   `Y8bood8P'  8""88888P'
 -->
-                    <div class="col-md-4">
-                        <div class="list-group text-center updown">
-                            <div class="triangle-container">
-                                <div class="triangle">
-                                    <div class="updown_up">
-                                        <a id="btn_up" class="btn_up">SUBIR</a>
+                        <div class="col-md-4">
+                            <div class="list-group text-center updown">
+                                <div class="triangle-container">
+                                    <div class="triangle">
+                                        <div class="updown_up">
+                                            <a id="btn_up" class="btn_up">SUBIR</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="SeletorPisos">
-                                <div id="selecionaPisos" onclick="refreshMatrix()">
-                                    <!-- Builds floor Selector-->
+                                <div class="SeletorPisos">
+                                    <div id="selecionaPisos" onclick="refreshMatrix()">
+                                        <!-- Builds floor Selector-->
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="rectangle">
-                                <div class="updown_down">
-                                    <a id="btn_down" class="btn_down">DESCER</a>
-                                </div>
+                                <div class="rectangle">
+                                    <div class="updown_down">
+                                        <a id="btn_down" class="btn_down">DESCER</a>
+                                    </div>
 
-                            </div>
-                            <!--
+                                </div>
+                                <!--
           Selector Sala     8888888 8888888 8888888 8888888 8888888 8888888 8888888
         -->
-                            <div class="row" id="btn_rooms" onclick="refreshMatrix()">
+                                <div class="row" id="btn_rooms" onclick="refreshMatrix()">
+
+                                </div>
 
                             </div>
-
                         </div>
-                    </div>
-                    <div class="col-md-1"></div>
-                    <!--
+                        <div class="col-md-1"></div>
+                        <!--
     PISOS     8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
-                    <!--
+                        <!--
     ooo        ooooo       .o.       ooooooooooooo ooooooooo.   ooooo  oooooooooooo
     `88.       .888'      .888.      8'   888   `8 `888   `Y88. `888' d'""""""d888'
      888b     d'888      .8"888.          888       888   .d88'  888        .888P
@@ -239,31 +237,31 @@
      8    Y     888   .8'     `888.       888       888  `88b.   888    d888'    .P
     o8o        o888o o88o     o8888o     o888o     o888o  o888o o888o .8888888888P
 -->
-                    <div class="col-md-6">
-                        <div class="table-responsive">
-                            <table class="table matrix" id="matrix">
-                                <!-- Builds costum Matrix-->
-                            </table>
-                        </div>
-                        <div class="matrix-btn">
-                            <button type="button" class="btn-change-matrix btn btn-lg pull-left custom-btn" onclick="changeMatrix()" id="btn_change_view"></button>
-                            <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="fillModalConfirm()">Reservar Sala</button>
-                            <button type="button" class="btn-limpar-selecao btn btn-lg" onclick="cleanSelection()">
+                        <div class="col-md-6">
+                            <div class="table-responsive">
+                                <table class="table matrix" id="matrix">
+                                    <!-- Builds costum Matrix-->
+                                </table>
+                            </div>
+                            <div class="matrix-btn">
+                                <button type="button" class="btn-change-matrix btn btn-lg pull-left custom-btn" onclick="changeMatrix()" id="btn_change_view"></button>
+                                <button type="button" class="btn-reserva btn btn-lg btn-success pull-right" data-toggle="modal" data-target="#modal_confirmar" onclick="fillModalConfirm()">Reservar Sala</button>
+                                <button type="button" class="btn-limpar-selecao btn btn-lg" onclick="cleanSelection()">
                                 <div class="ic-limpar-selecao"><span class="glyphicon glyphicon-remove"></span></div>
                                 <p>Limpar Seleção</p>
                             </button>
+                            </div>
                         </div>
                     </div>
+
+
                 </div>
-
-
             </div>
         </div>
-    </div>
-    <!--
+        <!--
     MATRIZ     8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
-    <!--
+        <!--
     oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
     `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
      888         888      888 888      888      888       888          888   .d88'
@@ -272,26 +270,26 @@
      888         `88b    d88' `88b    d88'      888       888       o  888  `88b.
     o888o         `Y8bood8P'   `Y8bood8P'      o888o     o888ooooood8 o888o  o888o
 -->
-    <footer class="footer">
-        <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
-            <div class="table-responsive">
-                <table class="table table-striped" id="tableStatus">
-                    <thead>
-                        <th class="headers">Status</th>
-                        <th class="headers">Tipo de Reunião</th>
-                        <th class="headers">Sala</th>
-                        <th class="headers">Data</th>
-                        <th class="headers">Hora de inicio</th>
-                        <th class="headers">Hora de fim</th>
-                    </thead>
-                    <tbody id="tableStatusBody">
+        <footer class="footer">
+            <div class="col-sm-offset-3 col-md-offset-3 col-sm-9 col-md-9">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="tableStatus">
+                        <thead>
+                            <th class="headers">Status</th>
+                            <th class="headers">Tipo de Reunião</th>
+                            <th class="headers">Sala</th>
+                            <th class="headers">Data</th>
+                            <th class="headers">Hora de inicio</th>
+                            <th class="headers">Hora de fim</th>
+                        </thead>
+                        <tbody id="tableStatusBody">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-    </footer>
-    <!--
+        </footer>
+        <!--
     FOOTER    8888888 8888888 8888888 8888888 8888888 8888888 8888888
 -->
     <!--<div id="modal_confirm" class="modal fade" style="with : auto;" role="dialog" data-keyboard="false" data-backdrop="static">
@@ -299,9 +297,10 @@
             <div class="modal-content">
                 <div id="modal_confirm_body" class="modal-body" style="with : auto;">
 
-                </div>
-                <div class="modal-footer" style="with : auto;">
-                    <button type="button" id="modal_confirm_save" class="btn-guardar-modal btn btn-primary" onclick="saveModalConfirm(defineActiveById)" data-dismiss="modal"> Sim </button>
+                    </div>
+                    <div class="modal-footer" style="with : auto;">
+                        <button type="button" id="modal_confirm_save" class="btn-guardar-modal btn btn-primary" onclick="saveModalConfirm(defineActiveById)" data-dismiss="modal"> Sim </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -310,22 +309,22 @@
     <span id="btn_close" class="glyphicon glyphicon-remove-sign" onclick="closeApp()" style="color:#cc0000"></span>
     <!-- Bootstrap core JavaScript
 ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
-    </script>
-    <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-    <script type="text/javascript" src="js/moment.min.js"></script>
-    <script type="text/javascript" src="js/daterangepicker.js"></script>
-    <script src="js/mockdata.js"></script>
-    <script src="js/mockdata2.js"></script>
-    <script src="js/mockdata3.js"></script>
-    <script src="js/client.js"></script>
-    <script src="js/pisos.js"></script>
-    <script src="js/matriz.js"></script>
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+        </script>
+        <script src="js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="js/ie10-viewport-bug-workaround.js"></script>
+        <script type="text/javascript" src="js/moment.min.js"></script>
+        <script type="text/javascript" src="js/daterangepicker.js"></script>
+        <script src="js/mockdata.js"></script>
+        <script src="js/mockdata2.js"></script>
+        <script src="js/mockdata3.js"></script>
+        <script src="js/client.js"></script>
+        <script src="js/pisos.js"></script>
+        <script src="js/matriz.js"></script>
 
 </body>
 
