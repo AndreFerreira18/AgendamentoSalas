@@ -431,6 +431,7 @@ input[type="radio"]:checked + label span {
   #initial-popup{
     text-align: center;
   }
+
   #initial-popup-help{
       background-color: white;
       position: relative;
@@ -440,8 +441,18 @@ input[type="radio"]:checked + label span {
       border-radius: 15px;
       text-align: center;
   }
-  #form_initial_help{
 
+  #form_initial_help{
+    text-align: center;
+  }
+
+  #img_help{
+    display: -webkit-inline-box;
+  }
+
+  .btn-initial-popup{
+    text-align: center;
+    display: -webkit-inline-box;
   }
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.

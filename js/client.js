@@ -2,13 +2,11 @@
 $(window).ready(
     function() {
         $('#modal').modal('show');
-
+        showInitialHelp()
         writeInJSon();
-        //insertRow();
         createTypesOfMeetings();
         createPrefFloor();
         createResources();
-
     }
 );
 // var date = new Date();
@@ -32,10 +30,27 @@ $('input[name="daterange"]').daterangepicker({
 
 });
 
-//if user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
+
+function showInitialHelp() {
+    var choice = sessionStorage.getItem('choice');
+    if (choice === null) {
+        $('#btn_initial_popup')[0].click();
+    }
+    return choice;
+}
+
+function saveChoice() {
+    var checkboxPopup = document.getElementById("checkbox_popup").checked;
+    if (checkboxPopup) {
+        var choice = true;
+        sessionStorage.setItem('choice', JSON.stringify(choice));
+    }
+    $('#btn_close_initial')[0].click();
+}
 
 _bindApplyBtnEvent();
 
+//if user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
 function _bindApplyBtnEvent() {
     $('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
         var radios = document.querySelectorAll('.radioButton')

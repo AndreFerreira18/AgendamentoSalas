@@ -45,7 +45,8 @@
                         </h1>
                         <h3>
                           <b><span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b>
-                          <a class="btn btn-default help" href="#initial-popup"> ? </a>
+                          <a id="btn_help" class="btn btn-default help" href="#popup1"> ? </a>
+                          <a id="btn_initial_popup" style="display:none;" href="#initial-popup"></a>
                         </h3>
 
                         <div id="popup1" class="overlay">
@@ -61,17 +62,18 @@
                         <div id="initial-popup" class="overlay">
                             <div id="initial-popup-help">
                                 <h2 style="display: inline-block;"> Como efetuar uma Reserva? </h2>
-                                <a style="display: inline-block;" class="close" href="#">&times;</a>
+                                <a id="btn_close_initial" style="display: inline-block;" class="close" href="#">&times;</a>
                                 <div class="content">
-                                    <img src="img/Intial steps.png" class="img-responsive">
+                                    <img id="img_help" src="img/Intial steps.png" class="img-responsive">
                                 </div>
                                 <form class="form-group" id="form_initial_help">
                                     <input type="checkbox" id="checkbox_popup">
                                     <label for="checkbox_popup">Selecione para não voltar a mostrar.</label>
+                                    <br>
+                                    <button type="button" class="btn-initial-popup btn btn-lg btn-success" onclick="saveChoice()">Guardar opção</button>
                                 </form>
                             </div>
                         </div>
-
 
                     </div>
                 </div>
