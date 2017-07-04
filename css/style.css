@@ -398,6 +398,7 @@ input[type="radio"]:checked + label span {
   background: #fff;
   border-radius: 20px;
   width:90%;
+  height: 80%;
 
   position: relative;
   transition: all 5s ease-in-out;
@@ -422,23 +423,36 @@ input[type="radio"]:checked + label span {
 }
 .popup .close:hover {
   color: #06D85F;
-}
-.popup .content {
-  //max-width: 90%;
-  //max-height: 90%;
   }
 
-  .img-responsive{
-      max-width: 95%;
-      max-height: 95%;
-      margin: 20px;
-      width: auto;
-      height: auto;
+
+
+  @media (min-width: 404 px) {
+      .popup .content {
+          background-image: url('../img/help1.png');
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: auto;
+          width: 500px;
+          height: 600px;
+          padding:20px;
+      }
   }
 
-  .glyphWelcome{
-      font-size: 50px;
+  @media (max-width: 405 px) {
+      .popup .content {
+          background-image: url('../img/help2.png');
+          background-repeat: no-repeat;
+          background-size: cover;
+          margin: auto;
+          width: 500px;
+          height: 600px;
+          padding:20px;
+      }
   }
+
+
+
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
