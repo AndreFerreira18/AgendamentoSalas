@@ -28,6 +28,9 @@
     o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
 -->
     <!-- Modal inicial-->
+
+
+
     <div id="modal" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -42,7 +45,7 @@
                         </h1>
                         <h3>
                           <b><span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b>
-                          <a class="btn btn-default help" href="#popup1"> ? </a>
+                          <a class="btn btn-default help" href="#initial-popup"> ? </a>
                         </h3>
 
                         <div id="popup1" class="overlay">
@@ -50,9 +53,26 @@
                                 <h2> Como efetuar uma Reserva? </h2>
                                 <a class="close" href="#">&times;</a>
                                 <div class="content">
-                                    <img src="img/help1.png" class="img-responsive"> </div>
+                                    <img src="img/help1.png" class="img-responsive">
+                                </div>
                             </div>
                         </div>
+
+                        <div id="initial-popup" class="overlay">
+                            <div id="initial-popup-help">
+                                <h2> Como efetuar uma Reserva? </h2>
+                                <a class="close" href="#">&times;</a>
+                                <div class="content">
+                                    <img src="img/Intial steps.png" class="img-responsive">
+                                </div>
+                                <form class="form-group" id="form_initial_help">
+                                    <input type="checkbox" id="checkbox_popup">
+                                    <label for="checkbox_popup">Selecione para não voltar a mostrar.</label>
+                                </form>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
                 <div class="modal-body">
