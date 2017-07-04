@@ -668,10 +668,12 @@ table.matrix .active {
     border-top: 1px solid #949494 !important;
 }
 
+.notAvailable:before{
+  content: " ---- ";
+}
+
 .notAvailable, .notAvailable:hover {
-    color: #777;
-    background-color: #cc3300 !important;
-    border: solid 1px #cc3300 !important;
+    color: #cc3300;
     cursor: not-allowed;
     user-select: none;
 }
@@ -818,4 +820,16 @@ oo     .d8P  8       `888   .8'     `888.  `88b    ooo   888  `88b.   888    .88
 
 .matrix-btn {
     text-align: center;
+}
+
+@media (max-width: 366px){
+  .matrix-btn button {
+    float: none !important;
+  }
+}
+
+@media (min-width: 367px){
+  .matrix-btn button {
+    float: unset;
+  }
 }

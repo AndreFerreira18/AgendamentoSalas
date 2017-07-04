@@ -18,11 +18,11 @@ function getWeek(id_semana) {
 
     if (startDay >= "03/07/2017" && startDay < "10/07/2017") {
         week = 1;
-    } else if (startDay >= "10/07/2017" && startDay < "14/07/2017") {
+    } else if (startDay >= "10/07/2017" && startDay < "17/07/2017") {
         week = 2;
-    } else if (startDay >= "17/07/2017" && startDay < "21/07/2017") {
+    } else if (startDay >= "17/07/2017" && startDay < "24/07/2017") {
         week = 3;
-    } else if (startDay < "24/07/2017") {
+    } else if (startDay >= "24/07/2017") {
         week = 4;
     }
 
@@ -482,7 +482,7 @@ function populateSelectionForDay() {
     var endId = (parseInt(endTimeSplit[0]) - 8) * 2;
     if (parseInt(endTimeSplit[1]) > 0)
         endId++;
-    // columnID = '0';
+    columnID = '0';
     for (var i = startId; i < endId; i++) {
         var elemnt = document.getElementById('td-0-' + i);
         if (elemnt.classList.contains('available'))
@@ -530,7 +530,7 @@ function _bindDraggableForDay() {
                         // rowID === (first - 2) || rowID === (last + 2) ||
                         (rowID === first) || (rowID === last)) {
                         if (this.classList.contains('notAvailable'))
-                            snackBar("Sala indisponível!");
+                            snackBar("Sala indisponível.");
                         else {
                             if (columnID === '' || this.id.split('-')[1] === columnID) { //if it can set that cell to active or desactive
                                 isMouseDown = true;
@@ -550,7 +550,7 @@ function _bindDraggableForDay() {
                 // }
             } else { //first time writting
                 if (this.classList.contains('notAvailable'))
-                    snackBar("Sala indisponível!");
+                    snackBar("Sala indisponível.");
                 else {
                     if (columnID === '' || this.id.split('-')[1] === columnID) {
                         isMouseDown = true;
@@ -567,7 +567,7 @@ function _bindDraggableForDay() {
         })
         .mouseover(function() {
             if (isMouseDown && this.classList.contains('notAvailable'))
-                snackBar("Sala indisponível!");
+                snackBar("Sala indisponível.");
             else {
                 if (isMouseDown && this.id.split('-')[1] === columnID) {
                     $(this).toggleClass("active", isActive);
@@ -610,7 +610,6 @@ function _bindDraggableForDay() {
                     pushToSideBar("matrix_day_body");
                 }
             }
-
         });
     $(document)
         .mouseup(function() {
@@ -633,7 +632,7 @@ function _bindDraggableForWeek() {
     $("#matrix td")
         .mousedown(function(e) {
             if (this.classList.contains('notAvailable'))
-                snackBar("Sala indisponível!");
+                snackBar("Sala indisponível.");
             else {
                 isMouseDown = true;
                 columnID = this.id.split('-')[1];
@@ -644,7 +643,7 @@ function _bindDraggableForWeek() {
         })
         .mouseover(function() {
             if (isMouseDown && this.classList.contains('notAvailable'))
-                snackBar("Sala indisponível!");
+                snackBar("Sala indisponível.");
             else {
                 if (isMouseDown)
                     $(this).toggleClass("active", isActive);
