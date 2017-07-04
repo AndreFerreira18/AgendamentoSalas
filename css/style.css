@@ -427,20 +427,6 @@ input[type="radio"]:checked + label span {
   .glyphWelcome{
       font-size: 50px;
   }
-
-  #initial-popup{
-  text-align: center;
-  background-color: : #FFFFFF;
-  }
-  #initial-popup-help{
-    position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%);
-    height: 50px;
-  }
-  #form_initial_help{
-
-  }
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
