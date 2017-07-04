@@ -429,14 +429,16 @@ input[type="radio"]:checked + label span {
   }
 
   #initial-popup{
-  text-align: center;
-  background-color: : #FFFFFF;
+    text-align: center;
   }
   #initial-popup-help{
-    position: relative;
-    width: 100vw;
-    left: calc(-50vw + 50%);
-    height: 50px;
+      background-color: white;
+      position: relative;
+      width: 100vw;
+      left: calc(-50vw + 50%);
+      height: auto;
+      border-radius: 15px;
+      text-align: center;
   }
   #form_initial_help{
 
