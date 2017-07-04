@@ -482,7 +482,7 @@ function populateSelectionForDay() {
     var endId = (parseInt(endTimeSplit[0]) - 8) * 2;
     if (parseInt(endTimeSplit[1]) > 0)
         endId++;
-    columnID = '0';
+    // columnID = '0';
     for (var i = startId; i < endId; i++) {
         var elemnt = document.getElementById('td-0-' + i);
         if (elemnt.classList.contains('available'))
@@ -529,15 +529,19 @@ function _bindDraggableForDay() {
                     if (rowID === (first - 1) || rowID === (last + 1) ||
                         // rowID === (first - 2) || rowID === (last + 2) ||
                         (rowID === first) || (rowID === last)) {
-                        if (columnID === '' || this.id.split('-')[1] === columnID) { //if it can set that cell to active or desactive
-                            isMouseDown = true;
-                            columnID = this.id.split('-')[1];
-                            $(this).toggleClass("active");
-                            isActive = $(this).hasClass("active");
-                            pushToSideBar("matrix_day_body");
-                            return false; // prevent text selection
-                        } else { //if other room was clicked
-                            snackBar("Uma reserva deverá conter apenas uma Sala.");
+                        if (this.classList.contains('notAvailable'))
+                            snackBar("Sala indisponível!");
+                        else {
+                            if (columnID === '' || this.id.split('-')[1] === columnID) { //if it can set that cell to active or desactive
+                                isMouseDown = true;
+                                columnID = this.id.split('-')[1];
+                                $(this).toggleClass("active");
+                                isActive = $(this).hasClass("active");
+                                pushToSideBar("matrix_day_body");
+                                return false; // prevent text selection
+                            } else { //if other room was clicked
+                                snackBar("Uma reserva deverá conter apenas uma Sala.");
+                            }
                         }
                     } else { //if a wrong cell was clicked
                         snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
@@ -545,58 +549,66 @@ function _bindDraggableForDay() {
                 }
                 // }
             } else { //first time writting
-                if (columnID === '' || this.id.split('-')[1] === columnID) {
-                    isMouseDown = true;
-                    columnID = this.id.split('-')[1];
-                    $(this).toggleClass("active");
-                    isActive = $(this).hasClass("active");
-                    pushToSideBar("matrix_day_body");
-                    return false; // prevent text selection
-                } else if (this.id.split('-')[1] !== columnID) {
-                    snackBar("Uma reserva deverá conter apenas uma Sala.");
+                if (this.classList.contains('notAvailable'))
+                    snackBar("Sala indisponível!");
+                else {
+                    if (columnID === '' || this.id.split('-')[1] === columnID) {
+                        isMouseDown = true;
+                        columnID = this.id.split('-')[1];
+                        $(this).toggleClass("active");
+                        isActive = $(this).hasClass("active");
+                        pushToSideBar("matrix_day_body");
+                        return false; // prevent text selection
+                    } else if (this.id.split('-')[1] !== columnID) {
+                        snackBar("Uma reserva deverá conter apenas uma Sala.");
+                    }
                 }
             }
         })
         .mouseover(function() {
-            if (isMouseDown && this.id.split('-')[1] === columnID) {
-                $(this).toggleClass("active", isActive);
-                var rowID = parseInt(this.id.split('-')[2]),
-                    elementToCheck,
-                    elementToSet;
-                if (isEven(rowID)) {
-                    if (rowID >= 2) {
+            if (isMouseDown && this.classList.contains('notAvailable'))
+                snackBar("Sala indisponível!");
+            else {
+                if (isMouseDown && this.id.split('-')[1] === columnID) {
+                    $(this).toggleClass("active", isActive);
+                    var rowID = parseInt(this.id.split('-')[2]),
+                        elementToCheck,
+                        elementToSet;
+                    if (isEven(rowID)) {
+                        if (rowID >= 2) {
+                            elementToCheck = document.getElementById('td-' + columnID + '-' + (rowID - 2));
+                            elementToSet = document.getElementById('td-' + columnID + '-' + (rowID - 1));
+                            if (elementToCheck && elementToCheck.classList.contains('active')) {
+                                elementToSet.classList.add('active');
+                            }
+                        }
+                        var id = 'td-' + columnID + '-' + (rowID + 1);
+                    } else {
                         elementToCheck = document.getElementById('td-' + columnID + '-' + (rowID - 2));
-                        elementToSet = document.getElementById('td-' + columnID + '-' + (rowID - 1));
+                        elementToSet = document.getElementById('td-' + columnID + '-' + (rowID - 3));
                         if (elementToCheck && elementToCheck.classList.contains('active')) {
                             elementToSet.classList.add('active');
                         }
+                        var id = 'td-' + columnID + '-' + (rowID - 1);
                     }
-                    var id = 'td-' + columnID + '-' + (rowID + 1);
-                } else {
-                    elementToCheck = document.getElementById('td-' + columnID + '-' + (rowID - 2));
-                    elementToSet = document.getElementById('td-' + columnID + '-' + (rowID - 3));
-                    if (elementToCheck && elementToCheck.classList.contains('active')) {
-                        elementToSet.classList.add('active');
-                    }
-                    var id = 'td-' + columnID + '-' + (rowID - 1);
-                }
 
-                if (this.classList.contains('active')) {
-                    if (!document.getElementById(id).classList.contains('active'))
-                        document.getElementById(id).classList.add('active');
-                } else {
-                    if (isEven(rowID)) {
-                        document.getElementById('td-' + columnID + '-' + (rowID - 1)).classList.remove('active');
+                    if (this.classList.contains('active')) {
+                        if (!document.getElementById(id).classList.contains('active'))
+                            document.getElementById(id).classList.add('active');
                     } else {
-                        document.getElementById('td-' + columnID + '-' + (rowID + 1)).classList.remove('active');
+                        if (isEven(rowID)) {
+                            document.getElementById('td-' + columnID + '-' + (rowID - 1)).classList.remove('active');
+                        } else {
+                            document.getElementById('td-' + columnID + '-' + (rowID + 1)).classList.remove('active');
+                        }
+                        if (document.getElementById(id).classList.contains('active'))
+                            document.getElementById(id).classList.remove('active');
                     }
-                    if (document.getElementById(id).classList.contains('active'))
-                        document.getElementById(id).classList.remove('active');
+
+
+
+                    pushToSideBar("matrix_day_body");
                 }
-
-
-
-                pushToSideBar("matrix_day_body");
             }
 
         });
@@ -620,15 +632,23 @@ function _bindDraggableForWeek() {
         isActive;
     $("#matrix td")
         .mousedown(function(e) {
-            isMouseDown = true;
-            columnID = this.id.split('-')[1];
-            $(this).toggleClass("active");
-            isActive = $(this).hasClass("active");
-            // return false; // prevent text selection
+            if (this.classList.contains('notAvailable'))
+                snackBar("Sala indisponível!");
+            else {
+                isMouseDown = true;
+                columnID = this.id.split('-')[1];
+                $(this).toggleClass("active");
+                isActive = $(this).hasClass("active");
+                // return false; // prevent text selection
+            }
         })
         .mouseover(function() {
-            if (isMouseDown)
-                $(this).toggleClass("active", isActive);
+            if (isMouseDown && this.classList.contains('notAvailable'))
+                snackBar("Sala indisponível!");
+            else {
+                if (isMouseDown)
+                    $(this).toggleClass("active", isActive);
+            }
         });
     $(document)
         .mouseup(function() {

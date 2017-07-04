@@ -637,12 +637,7 @@ table.matrix th {
     user-select: none;
 }
 
-.notAvailable, .notAvailable:hover {
-    color: #777;
-    background-color: #eee;
-    cursor: not-allowed;
-    user-select: none;
-}
+
 
 .nearMiss {
     color: #8a6d3b;
@@ -671,6 +666,14 @@ table.matrix .active {
     border-bottom: 1px solid #949494 !important;
     border-right: 1px solid #949494 !important;
     border-top: 1px solid #949494 !important;
+}
+
+.notAvailable, .notAvailable:hover {
+    color: #777;
+    background-color: #cc3300 !important;
+    border: solid 1px #cc3300 !important;
+    cursor: not-allowed;
+    user-select: none;
 }
 
 table.matrix .lunch {
