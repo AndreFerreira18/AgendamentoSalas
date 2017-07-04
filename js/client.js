@@ -746,7 +746,7 @@ function fillModalConfirm() {
         } else {
             var strParticipants = ' Lotação da sala ' + tempResources.N_Pessoas + '.';
             element.insertAdjacentHTML("beforeend", strParticipants);
-            var strParticipants = ' Pretende aumentar a lotação da sala em mais ' + (parseInt(participants) - parseInt(tempResources.N_Pessoas)) + ' lugares.'
+            var strParticipants = ' Pretende aumentar a lotação da sala em mais ' + (parseInt(participants) - parseInt(tempResources.N_Pessoas)) + ' lugares: '
             modalBody.appendChild(element);
             element = document.createElement("p");
             glyphicon = document.createElement("span");
@@ -933,6 +933,7 @@ function sideBarChangeData() {
         defineActiveById('btn_rooms-1');
         addMatrix('week');
     }
+
     refreshMatrix();
 }
 
@@ -1050,6 +1051,21 @@ function insertRow() {
                         rowSpanTr.appendChild(endTimeTd);
                     }
                 }
+            } else if (infoReservation === 'Status') {
+                var classe = '';
+                switch (retrievedObject[i][infoReservation]) {
+                    case 'Aprovado':
+                        classe = 'approved';
+                        break;
+                    case 'Rejeitado':
+                        classe = 'rejected';
+                        break;
+                    case 'Pendente':
+                        classe = 'pending';
+                        break;
+                }
+                td.classList.add(classe);
+                td.innerHTML = retrievedObject[i][infoReservation];
             } else
                 td.innerHTML = retrievedObject[i][infoReservation];
             tr.appendChild(td);
@@ -1095,7 +1111,10 @@ function cleanSelection() {
     }
 
     columnID = '';
-
+    var radios = document.querySelectorAll('.radioButton')
+    for (var i = 0; i < radios.length; i++) {
+        radios[i].children[0].checked = false;
+    }
     $('#data_mod_calendar').data('daterangepicker').setStartDate(initial + ' 00:00');
     $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' 00:00');
 }

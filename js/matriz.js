@@ -14,7 +14,7 @@ function getWeek(id_semana) {
     var endDay = datahora[1];
     var startHour = datahora[2];
     var endHour = datahora[3];
-    var week = 0
+    var week = 0;
 
     if (startDay >= "03/07/2017" && startDay < "10/07/2017") {
         week = 1;
@@ -482,11 +482,9 @@ function populateSelectionForDay() {
     var endId = (parseInt(endTimeSplit[0]) - 8) * 2;
     if (parseInt(endTimeSplit[1]) > 0)
         endId++;
-
-
+    columnID = '0';
     for (var i = startId; i < endId; i++) {
         var elemnt = document.getElementById('td-0-' + i);
-
         if (elemnt.classList.contains('available'))
             defineActiveById('td-0-' + i);
     }
@@ -501,6 +499,12 @@ function _bindDraggableForDay() {
         isActive;
     $("#matrix td")
         .mousedown(function(e) {
+            //clear radio buttons
+            var radios = document.querySelectorAll('.radioButton')
+            for (var i = 0; i < radios.length; i++) {
+                radios[i].children[0].checked = false;
+            }
+            //clear active elements from date range picker
             var all = document.querySelectorAll('td.active'),
                 first = '',
                 last = '',
@@ -511,6 +515,7 @@ function _bindDraggableForDay() {
             }
             var info = this.id.split('-');
             all = document.querySelectorAll('td.active');
+            //if there are some elements already active
             if (all.length > 0) {
                 first = parseInt(all[0].id.split('-')[2]);
                 last = parseInt(all[all.length - 1].id.split('-')[2]);
@@ -518,28 +523,28 @@ function _bindDraggableForDay() {
                 // if ((rowID !== (first - 1) && rowID !== (last + 1)) && (rowID !== first && rowID !== last) && columnID !== info[2]) {
                 //     snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
                 // } else {
-                if (this.id.split('-')[1] !== columnID)
+                if (this.id.split('-')[1] !== columnID) //safety checks
                     snackBar("Uma reserva deverá conter apenas uma Sala.");
-                else {
+                else { //more safety checks
                     if (rowID === (first - 1) || rowID === (last + 1) ||
                         // rowID === (first - 2) || rowID === (last + 2) ||
                         (rowID === first) || (rowID === last)) {
-                        if (columnID === '' || this.id.split('-')[1] === columnID) {
+                        if (columnID === '' || this.id.split('-')[1] === columnID) { //if it can set that cell to active or desactive
                             isMouseDown = true;
                             columnID = this.id.split('-')[1];
                             $(this).toggleClass("active");
                             isActive = $(this).hasClass("active");
                             pushToSideBar("matrix_day_body");
                             return false; // prevent text selection
-                        } else {
+                        } else { //if other room was clicked
                             snackBar("Uma reserva deverá conter apenas uma Sala.");
                         }
-                    } else {
+                    } else { //if a wrong cell was clicked
                         snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
                     }
                 }
                 // }
-            } else {
+            } else { //first time writting
                 if (columnID === '' || this.id.split('-')[1] === columnID) {
                     isMouseDown = true;
                     columnID = this.id.split('-')[1];
