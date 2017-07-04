@@ -806,7 +806,7 @@ function fillModalConfirm() {
         label.innerHTML = "Observações:";
         div.appendChild(label);
         element.className = "form-control";
-        element.innerHTML = "Escreva um comentário que ache necessário a reserva.";
+        element.setAttribute("placeholder", "Escreva um comentário que ache necessário a reserva.");
         div.appendChild(element);
         modalBody.appendChild(div);
 
