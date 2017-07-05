@@ -437,6 +437,10 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     }
 }
 
+#modal_body_confirmar h1{
+  text-align: center;
+}
+
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
