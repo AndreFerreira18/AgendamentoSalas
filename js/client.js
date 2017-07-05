@@ -936,6 +936,7 @@ function sideBarChangeData() {
     if (startDay === endDay) {
         addMatrix('day');
         btn.innerHTML = 'Vista da Semana';
+        removeRoomBtn();
     } else {
         addBtnRooms(filters);
         defineActiveById('btn_rooms-1');

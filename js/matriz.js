@@ -278,7 +278,8 @@ function createMatrixWeek(filters, nextSemana) {
  */
 function removeRoomBtn() {
     var divBotoes = document.getElementById("btn_rooms");
-    divBotoes.innerHTML = "";
+    if (divBotoes)
+        divBotoes.innerHTML = "";
 }
 
 /**
