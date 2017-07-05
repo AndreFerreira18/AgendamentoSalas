@@ -438,7 +438,7 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 .img-responsive {
     max-width: 95%;
     max-height: 95%;
-    margin: 20px;
+    margin: 20px 0;
     width: auto;
     height: auto;
 }
@@ -477,6 +477,41 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
   #modal_body_confirmar h1{
     text-align: center;
   }
+
+  #popup1 .popup h2 {
+    text-align: right;
+    margin-left: -20px;
+    margin-top: 55px;
+    font-size: 20px;
+    max-width: 130px;
+  }
+
+  #popup1 .popup .content {
+    padding-top: 100px;
+  }
+
+  @media (min-width: 400px) {
+    max-width: 270px;
+  }
+
+  @media (min-width: 480px){
+    #popup1 .popup h2 {
+    font-size: 25px;
+    max-width: unset;
+    }
+  }
+
+  @media (min-width: 600px){
+    #popup1 .popup h2 {
+    font-size: 30px;
+    margin-left: 8%;
+    text-align: center;
+  }
+
+  .img-responsive {
+    margin: 20px;
+  }
+}
 
 
 /*
