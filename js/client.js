@@ -737,7 +737,7 @@ function fillModalConfirm() {
             var splitIdActiveTd = idActiveTd[0].split("-");
             strActiveRoom = rooms[splitIdActiveTd[1]];
         }
-        var strRoom = ' Reserva para a ' + strActiveRoom + ' do andar ' + strActiveFloor + ".";
+        var strRoom = ' Reserva para a ' + strActiveRoom + ' do ' + strActiveFloor + ".";
         element = document.createElement("p");
         element.id = "room_info";
         glyphicon = document.createElement("span");

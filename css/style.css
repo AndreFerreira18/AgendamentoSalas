@@ -421,8 +421,8 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
 
 .popup .close {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 10px;
+    right: 15px;
     transition: all 200ms;
     font-size: 30px;
     font-weight: bold;
@@ -479,20 +479,22 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
   }
 
   #popup1 .popup h2 {
-    text-align: right;
+    text-align: center;
     margin-left: -20px;
-    margin-top: 55px;
+    margin-top: 35px;
     font-size: 20px;
-    max-width: 130px;
+    max-width: 210px;
   }
 
   #popup1 .popup .content {
-    padding-top: 100px;
+    padding-top: 70px;
   }
 
   @media (min-width: 400px) {
+      #popup1 .popup h2 {
     max-width: 270px;
   }
+}
 
   @media (min-width: 480px){
     #popup1 .popup h2 {
