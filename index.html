@@ -42,7 +42,8 @@
                         </h1>
                         <h3>
                           <b><span class="glyphicon glyphicon-ok"></span> &nbsp;Preencha os seguintes campos:</b>
-                          <a class="btn btn-default help" href="#popup1"> ? </a>
+                          <a id="btn_help" class="btn btn-default help" href="#popup1"> ? </a>
+                          <a id="btn_initial_popup" style="display:none;" href="#initial-popup"></a>
                         </h3>
 
                         <div id="popup1" class="overlay">
@@ -52,11 +53,25 @@
                                 <div class="content helpimg2">
                                     <img src="img/help2.png" class="img-responsive" />
                                 </div>
-                                <div class="content helpimg1">
-                                    <img src="img/help1.png" class="img-responsive" />
-                                </div>
                             </div>
                         </div>
+
+                        <div id="initial-popup" class="overlay">
+                            <div id="initial-popup-help">
+                                <h2 style="display: inline-block;"> Como efetuar uma Reserva? </h2>
+                                <a id="btn_close_initial" style="display: inline-block;" class="close" href="#">&times;</a>
+                                <div class="content">
+                                    <img id="img_help" src="img/Intial steps.png" class="img-responsive">
+                                </div>
+                                <form class="form-group" id="form_initial_help">
+                                    <input type="checkbox" id="checkbox_popup">
+                                    <label for="checkbox_popup">Selecione para não voltar a mostrar.</label>
+                                    <br>
+                                    <button type="button" class="btn-initial-popup btn btn-lg btn-success" onclick="saveChoice()">Guardar opção</button>
+                                </form>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-body" id="initialModalBody">
                         <form class="form-group" id="form_modal">

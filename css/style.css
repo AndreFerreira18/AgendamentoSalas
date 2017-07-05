@@ -415,32 +415,36 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
     font-size: 50px;
 }
 
-.helpimg1{
-    display: block;
-}
-.helpimg2{
-    display: none;
-    height: 452px;
-    padding-top: 70px;
-    max-width: 92%;
-}
-@media only screen and (max-width: 540px) {
-    .helpimg1{
-        display: none;
-    }
-    .helpimg2{
-        display: block;
-    }
-    .popup {
-        //max-width: 480px;
-        height: 480px;
-    }
-}
+  #initial-popup{
+    text-align: center;
+  }
 
-#modal_body_confirmar h1{
-  text-align: center;
-}
+  #initial-popup-help{
+      background-color: white;
+      position: relative;
+      width: 100vw;
+      left: calc(-50vw + 50%);
+      height: auto;
+      border-radius: 15px;
+      text-align: center;
+  }
 
+  #form_initial_help{
+    text-align: center;
+  }
+
+  #img_help{
+    display: -webkit-inline-box;
+  }
+
+  .btn-initial-popup{
+    text-align: center;
+    display: -webkit-inline-box;
+  }
+
+  #modal_body_confirmar h1{
+    text-align: center;
+  }
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
