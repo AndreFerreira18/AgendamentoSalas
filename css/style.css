@@ -126,7 +126,7 @@ oo     .d8P  888   888     d88'  888       o  888    .88P  .8'     `888.   888  
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 150px;
+    max-width: 110px;
 }
 
 @media (min-width: 380px) {
@@ -255,6 +255,38 @@ o8o        o888o  `Y8bood8P'  o888bood8P'   o88o     o8888o o888ooooood8
 
 .modal-title>h1 {
     text-align: center;
+}
+
+
+  @media (min-width: 200px) {
+    .modal-title h3 p {
+    width: auto;
+    max-width: 180px;
+    display: inline-block;
+    margin: 0;
+    font-size: 20px;
+    }
+}
+
+
+@media (min-width: 420px) {
+    .modal-title h3 p {
+    max-width: 260px;
+    font-size: 22px;
+    }
+}
+
+@media (min-width: 521px) {
+    .modal-title h3 p {
+    max-width: 350px;
+    }
+}
+
+@media (min-width: 600px) {
+    .modal-title h3 p {
+    max-width: 400px;
+    font-size: 25px
+    }
 }
 
 #btnSave {
@@ -445,6 +477,8 @@ input[type="radio"]+label span, input[type="radio"]:checked+label span {
   #modal_body_confirmar h1{
     text-align: center;
   }
+
+
 /*
 oooooooooooo   .oooooo.     .oooooo.   ooooooooooooo oooooooooooo ooooooooo.
 `888'     `8  d8P'  `Y8b   d8P'  `Y8b  8'   888   `8 `888'     `8 `888   `Y88.
