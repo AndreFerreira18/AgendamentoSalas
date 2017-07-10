@@ -1,4 +1,14 @@
-// Show Modal
+//Global vars
+var isSideBarOpen = false; //variable to control side bar opening.
+
+/**
+ * referece to mockdata
+ */
+var dadosIniciais = initialData;
+var recursos = resources;
+/**
+ * inializes the page
+ */
 $(window).ready(
     function() {
         $('#modal').modal('show');
@@ -7,6 +17,7 @@ $(window).ready(
         createTypesOfMeetings();
         createPrefFloor();
         createResources();
+        _bindApplyBtnEvent();
 
         //JS way to prevent more than 3 chars in Input field.
         var myInput = document.getElementById('data_mod_nparticipantes');
@@ -15,9 +26,53 @@ $(window).ready(
                 this.value = this.value.slice(0, this.maxLength);
             }
         }
+        $('.dropdown').on('show.bs.dropdown', function(e) {
+            $(this).find('.dropdown-menu').first().stop(true, true).slideDown(300);
+        });
+        $('.dropdown').on('hide.bs.dropdown', function(e) {
+            $(this).find('.dropdown-menu').first().stop(true, true).slideUp(300);
+        });
 
+        //toggle side bar (for desktop and mobile layouts)
+        $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            toggleSideBar();
+        });
+
+        $('.main').click(function(e) {
+            if (isSideBarOpen) {
+                e.preventDefault();
+                toggleSideBar(e);
+            }
+        });
+
+        $('.container').click(function(e) {
+            if (isSideBarOpen && window.innerWidth >= 768) {
+                e.preventDefault();
+                toggleSideBar(e);
+            }
+        });
     }
 );
+
+
+/**
+ * Sidebar show or hide
+ */
+$(window).resize(function() {
+    var path = $(this);
+    var contW = path.width();
+    if (contW >= 751) {
+        document.getElementsByClassName("sidebar-toggle")[0].style.left = "300px";
+    } else {
+        document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
+    }
+});
+
+
+/**
+ * initalizes daterangepicker
+ */
 $('input[name="daterange"]').daterangepicker({
     timePicker: true,
     "dateLimit": {
@@ -35,6 +90,10 @@ $('input[name="daterange"]').daterangepicker({
 });
 
 
+/**
+ * Gets the choise of show or not the initial help display
+ * @return {array} returns the data in sessionStorage if exists | returns null
+ */
 function showInitialHelp() {
     var choice = sessionStorage.getItem('choice');
     if (choice === null) {
@@ -43,6 +102,10 @@ function showInitialHelp() {
     return choice;
 }
 
+
+/**
+ * Saves the choise "do not show anymore the initial tutorial"
+ */
 function saveChoice() {
     var checkboxPopup = document.getElementById("checkbox_popup").checked;
     if (checkboxPopup) {
@@ -52,9 +115,10 @@ function saveChoice() {
     $('#btn_close_initial')[0].click();
 }
 
-_bindApplyBtnEvent();
 
-//if user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
+/**
+ * If user changes calendar (press Apply in DateRangePicker), remove radio buttons selections
+ */
 function _bindApplyBtnEvent() {
     $('#data_mod_calendar').on('apply.daterangepicker', function(ev, picker) {
         var radios = document.querySelectorAll('.radioButton')
@@ -65,47 +129,6 @@ function _bindApplyBtnEvent() {
     });
 }
 
-//Sidebar
-$(window).resize(function() {
-    var path = $(this);
-    var contW = path.width();
-    if (contW >= 751) {
-        document.getElementsByClassName("sidebar-toggle")[0].style.left = "300px";
-    } else {
-        document.getElementsByClassName("sidebar-toggle")[0].style.left = "-300px";
-    }
-});
-//variable to control side bar opening.
-var isSideBarOpen = false;
-
-$(document).ready(function() {
-    $('.dropdown').on('show.bs.dropdown', function(e) {
-        $(this).find('.dropdown-menu').first().stop(true, true).slideDown(300);
-    });
-    $('.dropdown').on('hide.bs.dropdown', function(e) {
-        $(this).find('.dropdown-menu').first().stop(true, true).slideUp(300);
-    });
-
-    //toggle side bar (for desktop and mobile layouts)
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        toggleSideBar();
-    });
-
-    $('.main').click(function(e) {
-        if (isSideBarOpen) {
-            e.preventDefault();
-            toggleSideBar(e);
-        }
-    });
-
-    $('.container').click(function(e) {
-        if (isSideBarOpen && window.innerWidth >= 768) {
-            e.preventDefault();
-            toggleSideBar(e);
-        }
-    });
-});
 
 /**
  *  This method reads the fields inserted on the sidebar and passes them to the matrix constructor.
@@ -146,13 +169,15 @@ function applyFilters() {
     }
     return availables;
 }
+
+
 /**
  *  This method receives an array with the selected resources and the availability of the room (in terms of resources) and
  *  confirms if the room has the given resources availables for the reservation
- *  @param {Number} participants - An Integer with the number of participants of the request
- *  @param {Array} selection - An Array of the selected resources
- *  @param {Array} availables - An Array with resources information for a given room
- *  @returns {Boolean} True if the room has available resources for the request | False if the room has not
+ *  @param {Number} participants   An Integer with the number of participants of the request
+ *  @param {Array} selection       An Array of the selected resources
+ *  @param {Array} availables      An Array with resources information for a given room
+ *  @returns {Boolean}             True if the room has available resources for the request | False if the room has not
  */
 function areResourcesAvailable(participants, selection, availables) {
     var isAvailable = true;
@@ -172,10 +197,11 @@ function areResourcesAvailable(participants, selection, availables) {
     }
 }
 
+
 /**
  *  Private method that gets all resources that were selected by the user and returns them in an array
- *  @param {String} id - Receives the id of the buttons container
- *  @returns {Array} An array that contains the name of the resources selected by the user.
+ *  @param {String} id  Receives the id of the buttons container
+ *  @returns {Array}    An array that contains the name of the resources selected by the user.
  */
 function _getResources(id) {
     var elements = document.getElementById(id);
@@ -184,15 +210,15 @@ function _getResources(id) {
     for (var i = 0; i < length; i++) {
         if (elements.children[i].children[0].classList.contains('active')) { //if that resource was selected
             var id = parseInt(elements.children[i].id.split("-")[1]); //add to selected resources array
-            elementsArray.push(initialData.Recursos[id]);
+            elementsArray.push(dadosIniciais.Recursos[id]);
         }
     }
     return elementsArray;
 }
 
+
 /**
- * toggleSideBar - This method handles side Bar opening and closing
- *
+ * This method handles side Bar opening and closing
  * @param  {type} event The event that was triggered
  */
 function toggleSideBar(event) {
@@ -207,11 +233,10 @@ function toggleSideBar(event) {
     }
 }
 
+
 /**
- * defineActiveEvent - description
- *
- * @param  {type} e description
- * @returns {type}   description
+ * define single active based on the mouse pointer
+ * @param  {object} e The event that was triggered
  */
 function defineActiveEvent(e) { // define single active
     // remove the old active
@@ -226,11 +251,11 @@ function defineActiveEvent(e) { // define single active
     changeElement.classList.add('active');
 }
 
+
 /**
- * defineMultiActiveEvent - description
+ *  define multi active based on the mouse pointer
  *
- * @param  {type} e description
- * @returns {type}   description
+ * @param  {object} e The event that was triggered
  */
 function defineMultiActiveEvent(e) {
     var element = e.target.id ? e.target : e.target.parentNode;
@@ -241,11 +266,10 @@ function defineMultiActiveEvent(e) {
         changeElement.classList.add('active');
 }
 
+
 /**
- * defineActiveById - description
- *
- * @param  {type} activeId description
- * @returns {type}          description
+ * define multi active based on the activeId
+ * @param  {string} activeId description
  */
 function defineActiveById(activeId) {
     //add the active to the element
@@ -256,11 +280,12 @@ function defineActiveById(activeId) {
         element.classList.add('active');
 }
 
+
 /**
- * getActive - description
+ * returns a single active id from a class
  *
- * @param  {type} activeClass description
- * @returns {type}             description
+ * @param  {string} activeClass the class we whant to discover the seleccted
+ * @returns {string}            the id of the selected item | false if there is none selected
  */
 function getActive(activeClass) {
     var id = false;
@@ -272,11 +297,12 @@ function getActive(activeClass) {
     return id;
 }
 
+
 /**
- * getMultiActive - description
+ * returns a set of active id's from a class
  *
- * @param  {type} activeClass description
- * @returns {type}             description
+ * @param  {string} activeClass the class we whant to discover the seleccted
+ * @returns {array}             arrays of id's of the selected item | empty if there is none selected
  */
 function getMultiActive(activeClass) {
     var id = [];
@@ -288,9 +314,16 @@ function getMultiActive(activeClass) {
     return id;
 }
 
-function getActiveChild(id) {
+
+/**
+ * returns a single active id from the children element's
+ *
+ * @param  {type} fatherId id of the father
+ * @return {type}          the id of the selected item | false if there is none selected
+ */
+function getActiveChild(fatherId) {
     var id = false;
-    var elements = document.getElementById(id).childNodes;
+    var elements = document.getElementById(fatherId).childNodes;
     for (var i = 0; i < elements.length; i++) {
         if (elements[i].classList.contains('active'))
             id = elements[i].id;
@@ -298,6 +331,13 @@ function getActiveChild(id) {
     return id;
 }
 
+
+/**
+ * returns a set of active id's from the children element's
+ *
+ * @param  {type} fatherId id of the father
+ * @return {type}          the id of the selected item | false if there is none selected
+ */
 function getMultiActiveChilds(fatherId) {
     var id = [];
     var elements = document.getElementById(fatherId).childNodes;
@@ -311,23 +351,9 @@ function getMultiActiveChilds(fatherId) {
     return id;
 }
 
-/**
- * removeElement - description
- *
- * @param  {type} elementId description
- * @returns {type}           description
- */
-function removeElement(elementId) {
-    if (document.getElementById(elementId)) {
-        var element = document.getElementById(elementId);
-        element.parentNode.removeChild(element);
-    }
-}
 
 /**
- * saveChanges - description
- *
- * @returns {type}  description
+ * Save Changes from the initial modal to the main page
  */
 function saveChanges() {
     var btn = document.getElementById('btn_change_view');
@@ -352,16 +378,13 @@ function saveChanges() {
     clone();
 }
 
-/**
- * createResources - description
- *
- * @returns {type}  description
- */
-var recursos = initialData.Recursos;
 
+/**
+ * Create buttons of resources based on mock data
+ */
 function createResources() {
 
-    var label_recursos = initialData.Recursos;
+    var label_recursos = dadosIniciais.Recursos;
     var glyph_recursos = [
         "glyphicon glyphicon-facetime-video",
         "glyphicon glyphicon-pencil",
@@ -372,7 +395,7 @@ function createResources() {
     ];
     document.getElementById("store_btn_recursos").innerHTML = " ";
     var i;
-    for (i = 0; i < recursos.length; i++) {
+    for (i = 0; i < dadosIniciais.Recursos.length; i++) {
         var button = document.createElement("button");
         var label = document.createElement("label");
         var iDiv = document.createElement('div');
@@ -427,13 +450,12 @@ function createResources() {
     }
 }
 
+
 /**
- * createTypesOfMeetings - description
- *
- * @returns {type}  description
+ * Create meeting types based on mock data
  */
 function createTypesOfMeetings() {
-    var x = initialData.Tipos_de_Reuniao;
+    var x = dadosIniciais.Tipos_de_Reuniao;
     document.getElementById("data_mod_tipo_reuniao").innerHTML = " ";
     for (var i = 0; i < x.length; i++) {
         var opt = document.createElement("option");
@@ -444,13 +466,12 @@ function createTypesOfMeetings() {
     }
 }
 
+
 /**
- * createPrefFloor - description
- *
- * @returns {type}  description
+ * Creates selectable floors based on mock data
  */
 function createPrefFloor() {
-    var x = initialData.Andares;
+    var x = dadosIniciais.Andares;
     document.getElementById("data_mod_piso_pref").innerHTML = " ";
     for (var i = 0; i < x.length; i++) {
         var opt = document.createElement("option");
@@ -461,10 +482,9 @@ function createPrefFloor() {
     }
 }
 
+
 /**
- * clone - description
- *
- * @returns {type}  description
+ * clones selected data from modal to sidebar
  */
 function clone() {
     var tmp_reuniao = document.getElementById("data_mod_tipo_reuniao").value;
@@ -490,7 +510,7 @@ function clone() {
     });
     document.getElementById("data_mod_tipo_reuniao").value = tmp_reuniao;
 
-    for (var i = 0; i < initialData.Recursos.length; i++) {
+    for (var i = 0; i < dadosIniciais.Recursos.length; i++) {
         var id_button = document.getElementById("btn_rc-" + i);
         id_button.onclick = function() {
             this.classList.toggle("active");
@@ -508,11 +528,11 @@ function clone() {
     }
 }
 
+
 /**
- * divideDateAndTime - description
- *
- * @param  {type} idData description
- * @returns {type}        description
+ * Gets Date from DateRangePicker and returns it as a array
+ * @param  {string} idData id of DateRangePicker
+ * @returns {array}      date array
  */
 function divideDateAndTime(idData) {
     var acedeDataHora = document.getElementById("data_mod_calendar").value;
@@ -525,6 +545,13 @@ function divideDateAndTime(idData) {
     return datahora;
 }
 
+
+/**
+ * Returns the time of the elemente td based on the id
+ *
+ * @param  {string} id id of the td
+ * @return {string}    time if exits | false if does not exist
+ */
 function getHour(id) {
     var hour = false;
     var splitId = id.split("-");
@@ -547,6 +574,13 @@ function getHour(id) {
     return hour;
 }
 
+
+/**
+ * Returns the date of the elemente td based on the id
+ *
+ * @param  {string} id id of the td
+ * @return {string}    date if exits | false if does not exist
+ */
 function getDate(id) {
     var date = false;
     var splitId = id.split("-");
@@ -554,6 +588,13 @@ function getDate(id) {
     return date;
 }
 
+
+/**
+ * gets the date list of the active elements
+ *
+ * @param  {array} activeElements array of active elemnts
+ * @return {array}                array of dates if exits | false if does not exist
+ */
 function getDateList(activeElements) {
     var dateList = [];
     var exists = false;
@@ -569,10 +610,10 @@ function getDateList(activeElements) {
     return dateList;
 }
 
+
 /**
- * findHour - description
- *
- * @returns {type}  description
+ * returns the initial and end dat of a reservation
+ * @returns {array}  description
  */
 function findHour() {
     var hour = [];
@@ -629,13 +670,10 @@ function findHour() {
     return hour;
 }
 
+
 /**
- * preencheModalConfirm - description
- *
- * @returns {type}  description
+ * fills the modal of confirmation with the correct data
  */
-
-
 function fillModalConfirm() {
     var reservationData = {};
     var modalBody = document.getElementById("modal_body_confirmar");
@@ -704,6 +742,8 @@ function fillModalConfirm() {
         var strActiveFloor = document.getElementById(idActiveFloor).innerHTML;
         var idActiveRoom = getActive("btn-rooms");
         var strActiveRoom;
+        ////////////////////////////////////////////
+        //Alterar quando recebermos JSON
         switch (idActiveFloor) {
             case "piso-0":
                 var rooms = rooms_0.salas;
@@ -731,6 +771,8 @@ function fillModalConfirm() {
                 break;
             default:
         }
+        //Alterar quando recebermos JSON
+        ////////////////////////////////////////////
         if (idActiveRoom)
             strActiveRoom = document.getElementById(idActiveRoom).innerHTML;
         else {
@@ -750,10 +792,10 @@ function fillModalConfirm() {
         //  get data from JSON of resources
         if (idActiveRoom) {
             var splitIdActiveRoom = idActiveRoom.split("-");
-            var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
+            var tempResources = recursos[idActiveFloor][parseInt(splitIdActiveRoom[1]) - 1].Recursos;
         } else {
             var splitIdActiveRoom = splitIdActiveTd[1];
-            var tempResources = resources[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
+            var tempResources = recursos[idActiveFloor][parseInt(splitIdActiveRoom)].Recursos;
         }
 
 
@@ -851,11 +893,11 @@ function fillModalConfirm() {
     }
 }
 
+
 /**
- * snackBar - description
+ * adds mensage to the snackBar
  *
- * @param  {type} msg description
- * @returns {type}     description
+ * @param  {string} msg sting with the mesnage to show
  */
 function snackBar(msg) {
     var snack = document.getElementById("snackBar")
@@ -870,9 +912,9 @@ function snackBar(msg) {
         3000);
 }
 
+
 /**
- * updateDate - This method updates the DateRangePicker when radio buttons are pressed (Morning, Afternoon, Day)
- *
+ * This method updates the DateRangePicker when radio buttons are pressed (Morning, Afternoon, Day)
  * @param  {type} e The event object from the triggered event
  */
 function updateDate(e) {
@@ -903,10 +945,21 @@ function updateDate(e) {
     e.preventDefault();
 }
 
+
+/**
+ * Reloads Page
+ */
 function closeApp() {
     location.reload();
 }
 
+
+/**
+ * return the mod of the division by 2
+ *
+ * @param  {number} n quocient
+ * @return {number}   description
+ */
 function isEven(n) {
     n = Number(n);
     return n === 0 || !!(n && !(n % 2));
@@ -914,8 +967,7 @@ function isEven(n) {
 
 
 /**
- * validateForm - This method valides data inserted in forms so that next actions can be done
- *
+ * This method valides data inserted in forms so that next actions can be done
  * @param  {type} current Describes which form is currently being used. Can be «modal» or «sidebar»
  */
 function validateForm(current) {
@@ -940,6 +992,10 @@ function validateForm(current) {
     }
 }
 
+
+/**
+ * Changes data from apply filters
+ */
 function sideBarChangeData() {
     var btn = document.getElementById('btn_change_view');
     var datahora = divideDateAndTime("data_mod_calendar");
@@ -960,18 +1016,17 @@ function sideBarChangeData() {
         addMatrix('week');
         btn.innerHTML = 'Vista de Dia';
     }
-
     refreshMatrix();
 }
 
+
 /**
- * orderMAtrixActive -  orders an Array of active class. optimized for matrix
+ * Orders an Array of active class. optimized for matrix
  *
  * @param {type} classofactive class that contains the active elements
  * @param {type} ij            sets which part of the id of the active needs to be orderered
  *                              in case of matrix, actives are td-i-j. ij=1 sets to only orderer
  *                              the i. if ij = 2, it will order i and j
- *
  * @return {type} returns odered array
  */
 function orderMAtrixActive(classofactive, ij) {
@@ -980,7 +1035,6 @@ function orderMAtrixActive(classofactive, ij) {
     var oSizeArray = activeArray.length;
     var uSizeArray = activeArray.length;
     if (ij === undefined) ij = 2;
-
 
     var lower = -1;
     var lowerI = -1;
@@ -1009,6 +1063,11 @@ function orderMAtrixActive(classofactive, ij) {
     return orderedArray;
 }
 
+
+/**
+ *  Stores a set of reservation to the session storage
+ * @param  {type} tempReservationData data to be stored in the sessionStorage
+ */
 function writeInJSon(tempReservationData) {
     var retrievedObject = sessionStorage.getItem('reservationData');
     if (retrievedObject === null) {
@@ -1047,6 +1106,10 @@ function writeInJSon(tempReservationData) {
     cleanSelection();
 }
 
+
+/**
+ * fills with data the fotter table
+ */
 function insertRow() {
     var retrievedObject = sessionStorage.getItem('reservationData');
     retrievedObject = JSON.parse(retrievedObject);
@@ -1100,10 +1163,9 @@ function insertRow() {
     }
 }
 
+
 /**
- * pushToSideBar - based on active elements on day matrix updates sidebar hour
- *
- * @return {type} Description
+ * based on active elements on day matrix updates sidebar hour
  */
 function pushToSideBar(activematrix) {
     var firstLastActive = getMultiActiveChilds(activematrix);
@@ -1130,6 +1192,11 @@ function pushToSideBar(activematrix) {
     $('#data_mod_calendar').data('daterangepicker').setEndDate(initial + ' ' + endHour);
 }
 
+
+
+/**
+ * Clean selected data and updates daterangepicker
+ */
 function cleanSelection() {
     var initial = $('#data_mod_calendar').data('daterangepicker').startDate.format('DD-MM-YYYY');
     var activeElements = getMultiActive("available");

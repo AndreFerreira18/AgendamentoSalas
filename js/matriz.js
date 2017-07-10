@@ -2,10 +2,15 @@
 var columnID = '';
 
 /**
- * getWeek - description
- *
- * @param  {type} id_semana description
- * @returns {type}           description
+ * referece to mockdata
+ */
+var horarioDia = scheduleDay;
+
+/**
+ * Aux Function that returns the selected week
+ *if there is the param returns the param
+ * @param  {number} id_semana number of the week
+ * @returns {number} id_semana if there is the id_semana |  week if there is no id_semana
  */
 function getWeek(id_semana) {
     // alterar para pedido de dados a db
@@ -31,9 +36,7 @@ function getWeek(id_semana) {
 
 
 /**
- * changeMatrix - description
- *
- * @returns {type}  description
+ * Switches active matrix
  */
 function changeMatrix() {
     var btn = document.getElementById('btn_change_view');
@@ -61,12 +64,9 @@ function changeMatrix() {
 
 
 /**
- * addMatrix - description
- *
- * @param  {type} matrixType description
- * @returns {type}            description
+ * adds a matrix to the body based on the input
+ * @param  {string} matrixType part of the id type of matrix to be added
  */
-
 function addMatrix(matrixType) {
     var matrix = document.getElementById("matrix");
     var mh = document.createElement('thead');
@@ -79,10 +79,9 @@ function addMatrix(matrixType) {
 
 
 /**
- * refreshMatrix - description
- *
- * @param  {type} nextSemana description
- * @returns {type}            description
+ * Refresh matrix data
+ * Cleans the previous matirx and creates a new one based on the active matrix
+ * @param  {type} nextSemana to change te selected week based on the arrows
  */
 function refreshMatrix(nextSemana) {
     var matrix = document.getElementById("matrix");
@@ -108,10 +107,9 @@ function refreshMatrix(nextSemana) {
 
 
 /**
- * createMatrixWeek - description
- *
- * @param  {type} nextSemana description
- * @returns {type}            description
+ * Adds data to the matrix week based on the filters
+ * @param {array} filters filter to be aplied to the data on the table
+ * @param  {type} nextSemana change of week from the arrows
  */
 function createMatrixWeek(filters, nextSemana) {
     ////////////////////////////////////////////
@@ -170,21 +168,19 @@ function createMatrixWeek(filters, nextSemana) {
     //Alterar quando recebermos JSON
     ////////////////////////////////////////////
 
-    //Matrix Head
-    // titulo
+    //title
     var mh = document.getElementById("matrix_week_head");
     var trH = document.createElement('tr');
     var spanL = document.createElement('span');
     var thC = document.createElement('th');
     var spanR = document.createElement('span');
     var colspan = scheduleWeek.dates.length * 2 + 1;
-
     mh.appendChild(trH);
-
     thC.setAttribute("style", "text-align:center;");
     thC.setAttribute("colspan", colspan);
     thC.innerHTML = "Vista da Semana - " + document.getElementById(filters.floor).innerText + ' - ' + document.getElementById(getActive('btn-rooms')).innerText;
-    // Adiciona Setas
+
+    // adds arrows
     if (id_semana != "1") {
         spanL.className = ("glyph glyphicon glyphicon-arrow-left pull-left");
         spanL.setAttribute("style", "cursor:pointer;");
@@ -203,7 +199,7 @@ function createMatrixWeek(filters, nextSemana) {
     }
     trH.appendChild(thC);
 
-    // Horas
+    // time on the first collumn
     var tr = document.createElement('tr');
     mh.appendChild(tr);
     var th1 = document.createElement('th');
@@ -215,7 +211,7 @@ function createMatrixWeek(filters, nextSemana) {
         tr.appendChild(th2);
     }
 
-    //Matrix Body
+    //data in the table
     var mb = document.getElementById("matrix_week_body");
     for (var i = 0; i < scheduleWeek.hour.length - 1; i++) {
         var tr = document.createElement('tr');
@@ -225,46 +221,36 @@ function createMatrixWeek(filters, nextSemana) {
         tr.appendChild(th);
         th.innerHTML = scheduleWeek.hour[i];
         for (var j = 0; j < scheduleWeek.dates.length; j++) {
+            // first half hour
             var td = document.createElement('td');
             td.id = 'td-' + j + '-' + i;
             var disponibilidade = scheduleWeek[j][i];
             if (disponibilidade === 'Disponível') {
                 td.classList.add("available");
-                td.addEventListener("click", selecionarGrupoMatrizWeek);
-                //td.innerHTML =   td.id;
             } else if (disponibilidade === 'Indisponível') {
                 td.classList.add("notAvailable");
-                //    td.innerHTML = scheduleWeek[j][i];
             } else {
                 td.classList.add("undefined");
-                //    td.innerHTML = scheduleWeek[j][i];
             }
-            //td.innerHTML = scheduleWeek[j][i];
-
             td.classList.add("mleft");
             tr.appendChild(td);
-
-
-
+            // second half hour
             var td2 = document.createElement('td');
             td2.id = 'td-' + j + '-' + (i + 1);
             var disponibilidade = scheduleWeek[j][i + 1];
             if (disponibilidade === 'Disponível') {
                 td2.classList.add("available");
-                td2.addEventListener("click", selecionarGrupoMatrizWeek);
-                //td2.innerHTML =   td2.id;
+
             } else if (disponibilidade === 'Indisponível') {
                 td2.classList.add("notAvailable");
-                //    td.innerHTML = scheduleWeek[j][i];
             } else {
                 td2.classList.add("undefined");
-                //    td.innerHTML = scheduleWeek[j][i];
             }
-            //td.innerHTML = scheduleWeek[j][i];
             td2.classList.add("mright");
             tr.appendChild(td2);
         }
     }
+    // adds draggable
     _setWeekendHighlight();
     _setLunchTime();
     _bindDraggableForWeek();
@@ -272,9 +258,101 @@ function createMatrixWeek(filters, nextSemana) {
 
 
 /**
- * removeRoomBtn - description
- *
- * @returns {type}  description
+ * Adds data to the matrix day based on the filters
+ * @param {array} filters filter to be aplied to the data on the table
+ */
+function createMatrixDay(filters) {
+    ////////////////////////////////////////////
+    //Alterar quando recebermos JSON
+    var idSelectedFloor = getActive('list-group-item');
+    var tempSelectedFloor = idSelectedFloor.split("-");
+    var selectedFloor = parseInt(tempSelectedFloor[1]);
+    //Alterar quando recebermos JSON
+    ////////////////////////////////////////////
+
+    //title
+    var mh = document.getElementById("matrix_day_head");
+    var tr = document.createElement('tr');
+    var trH = document.createElement('tr');
+    var thC = document.createElement('th');
+    var colspan = horarioDia[selectedFloor].length * 2 + 1;
+    mh.appendChild(trH);
+    trH.appendChild(thC);
+    thC.setAttribute("style", "text-align:center;height: 43px;");
+    thC.setAttribute("colspan", colspan);
+    thC.innerHTML = "Vista por Dia - " + filters.date[0] + ' - ' + document.getElementById(filters.floor).innerText;
+    mh.appendChild(tr);
+
+    //rooms name
+    var th1 = document.createElement('th');
+    tr.appendChild(th1);
+    for (var i = 0; i < horarioDia[selectedFloor].length; i++) {
+        var th2 = document.createElement('th');
+        th2.innerHTML = horarioDia[selectedFloor][i].NomeSala;
+        th2.setAttribute('colspan', '2');
+        tr.appendChild(th2);
+    }
+
+    //data in the table
+    var mb = document.getElementById("matrix_day_body");
+    for (var i = 0; i < horarioDia[selectedFloor][0].Horas.length - 1; i++) {
+        var tr = document.createElement('tr');
+        if (isEven(i)) mb.appendChild(tr);
+        var th = document.createElement('th');
+        th.setAttribute("scope", "row");
+        tr.appendChild(th);
+        th.innerHTML = horarioDia[selectedFloor][0].Horas[i];
+        for (var j = 0; j < horarioDia[selectedFloor].length; j++) {
+            // first half hour
+            var td = document.createElement('td');
+            var disponibilidade = horarioDia[selectedFloor][j].Disponibilidade[i];
+            if (disponibilidade == 'Disponível') {
+                td.classList.add("available");
+            } else if (disponibilidade == 'Indisponível')
+                td.classList.add("notAvailable");
+            else
+                td.classList.add("undefined");
+            var isNearMiss = true;
+            for (var k = 0; k < filters.rooms.length; k++)
+                if (filters.rooms[k] === horarioDia[selectedFloor][j].NomeSala)
+                    isNearMiss = false;
+            if (isNearMiss)
+                td.className = 'nearMiss';
+            td.classList.add("mleft");
+            td.id = 'td-' + j + '-' + i;
+
+            // second half hour
+            var td2 = document.createElement('td');
+            var disponibilidade = horarioDia[selectedFloor][j].Disponibilidade[i + 1];
+            if (disponibilidade == 'Disponível') {
+                td2.classList.add("available");
+            } else if (disponibilidade == 'Indisponível')
+                td2.classList.add("notAvailable");
+            else
+                td2.classList.add("undefined");
+
+            // apllies filters
+            var isNearMiss = true;
+            for (var k = 0; k < filters.rooms.length; k++)
+                if (filters.rooms[k] === horarioDia[selectedFloor][j].NomeSala)
+                    isNearMiss = false;
+            if (isNearMiss)
+                td2.className = 'nearMiss';
+            td2.id = 'td-' + j + '-' + (i + 1);
+            td2.classList.add("mright");
+            tr.appendChild(td);
+            tr.appendChild(td2);
+        }
+    }
+    // adds draggable
+    populateSelectionForDay();
+    _bindDraggableForDay();
+    _setLunchTime();
+}
+
+
+/**
+ * Removes room Bottons
  */
 function removeRoomBtn() {
     var divBotoes = document.getElementById("btn_rooms");
@@ -282,10 +360,9 @@ function removeRoomBtn() {
         divBotoes.innerHTML = "";
 }
 
+
 /**
- * refreshButtons - description
- *
- * @returns {type}  description
+ * Refresh active buttons
  */
 function refreshButtons(filters) {
     var divButton = document.getElementById("btn_rooms");
@@ -295,11 +372,9 @@ function refreshButtons(filters) {
     addBtnRooms(filters);
 }
 
-// Adiciona Botões Salas
+
 /**
- * addBtnRooms - description
- *
- * @returns {type}  description
+ * Adds rooms buttons
  */
 function addBtnRooms(filters) {
     ////////////////////////////////////////////
@@ -359,112 +434,9 @@ function addBtnRooms(filters) {
     }
 }
 
-//matrix Day
-//
-/**
- * createMatrixDay - description
- *
- * @returns {type}  description
- */
-function createMatrixDay(filters) {
-    ////////////////////////////////////////////
-    //Alterar quando recebermos JSON
-    var idSelectedFloor = getActive('list-group-item');
-    var tempSelectedFloor = idSelectedFloor.split("-");
-    var selectedFloor = parseInt(tempSelectedFloor[1]);
-    //Alterar quando recebermos JSON
-    ////////////////////////////////////////////
-
-    //Matrix Head
-    var mh = document.getElementById("matrix_day_head");
-    var tr = document.createElement('tr');
-    var trH = document.createElement('tr');
-    var thC = document.createElement('th');
-    var colspan = scheduleDay[selectedFloor].length * 2 + 1;
-
-    mh.appendChild(trH);
-    trH.appendChild(thC);
-
-    thC.setAttribute("style", "text-align:center;height: 43px;");
-    thC.setAttribute("colspan", colspan);
-    thC.innerHTML = "Vista por Dia - " + filters.date[0] + ' - ' + document.getElementById(filters.floor).innerText;
-
-    mh.appendChild(tr);
-    var th1 = document.createElement('th');
-    // th1.innerHTML = '[' + floors.Andares[selectedFloor] + ']';
-    tr.appendChild(th1);
-    for (var i = 0; i < scheduleDay[selectedFloor].length; i++) {
-        var th2 = document.createElement('th');
-        th2.innerHTML = scheduleDay[selectedFloor][i].NomeSala;
-        th2.setAttribute('colspan', '2');
-        tr.appendChild(th2);
-    }
-
-    //Matrix Body
-    var mb = document.getElementById("matrix_day_body");
-    for (var i = 0; i < scheduleDay[selectedFloor][0].Horas.length - 1; i++) {
-        var tr = document.createElement('tr');
-        if (isEven(i)) mb.appendChild(tr);
-        var th = document.createElement('th');
-        th.setAttribute("scope", "row");
-        tr.appendChild(th);
-        th.innerHTML = scheduleDay[selectedFloor][0].Horas[i];
-        for (var j = 0; j < scheduleDay[selectedFloor].length; j++) {
-            var td = document.createElement('td');
-            var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i];
-            if (disponibilidade == 'Disponível') {
-                td.classList.add("available");
-                td.addEventListener("click", selecionarGrupoMatrizDay);
-            } else if (disponibilidade == 'Indisponível')
-                td.classList.add("notAvailable");
-            else
-                td.classList.add("undefined");
-
-            var isNearMiss = true;
-            for (var k = 0; k < filters.rooms.length; k++)
-                if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
-                    isNearMiss = false;
-            if (isNearMiss)
-                td.className = 'nearMiss';
-            td.classList.add("mleft");
-            td.id = 'td-' + j + '-' + i;
-
-            var td2 = document.createElement('td');
-            var disponibilidade = scheduleDay[selectedFloor][j].Disponibilidade[i + 1];
-            if (disponibilidade == 'Disponível') {
-                td2.classList.add("available");
-                td2.addEventListener("click", selecionarGrupoMatrizDay);
-            } else if (disponibilidade == 'Indisponível')
-                td2.classList.add("notAvailable");
-            else
-                td2.classList.add("undefined");
-
-            var isNearMiss = true;
-            for (var k = 0; k < filters.rooms.length; k++)
-                if (filters.rooms[k] === scheduleDay[selectedFloor][j].NomeSala)
-                    isNearMiss = false;
-            if (isNearMiss)
-                td2.className = 'nearMiss';
-            td2.id = 'td-' + j + '-' + (i + 1);
-            td2.classList.add("mright");
-
-
-
-            tr.appendChild(td);
-            tr.appendChild(td2);
-        }
-    }
-    populateSelectionForDay();
-    _bindDraggableForDay();
-    _setLunchTime();
-}
-
 
 /**
- * populateSelection - description
- *
- * @param  {type} selection description
- * @returns {type}           description
+ * defines active elements whe active matrix is day
  */
 function populateSelectionForDay() {
     var datetime = divideDateAndTime();
@@ -491,9 +463,9 @@ function populateSelectionForDay() {
     }
 }
 
+
 /**
- * _bindDraggableForDay - This method binds mouse events for draggable selection in Day Matrix
- *
+ *  This method binds mouse events for draggable selection in Day Matrix
  */
 function _bindDraggableForDay() {
     var isMouseDown = false,
@@ -521,9 +493,6 @@ function _bindDraggableForDay() {
                 first = parseInt(all[0].id.split('-')[2]);
                 last = parseInt(all[all.length - 1].id.split('-')[2]);
                 rowID = parseInt(this.id.split('-')[2]);
-                // if ((rowID !== (first - 1) && rowID !== (last + 1)) && (rowID !== first && rowID !== last) && columnID !== info[2]) {
-                //     snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
-                // } else {
                 if (this.id.split('-')[1] !== columnID) //safety checks
                     snackBar("Uma reserva deverá conter apenas uma Sala.");
                 else { //more safety checks
@@ -548,7 +517,6 @@ function _bindDraggableForDay() {
                         snackBar("Uma reserva deverá conter um conjunto de horas consecutivas.");
                     }
                 }
-                // }
             } else { //first time writting
                 if (this.classList.contains('notAvailable'))
                     snackBar("Sala indisponível.");
@@ -592,7 +560,6 @@ function _bindDraggableForDay() {
                         }
                         var id = 'td-' + columnID + '-' + (rowID - 1);
                     }
-
                     if (this.classList.contains('active')) {
                         if (!document.getElementById(id).classList.contains('active'))
                             document.getElementById(id).classList.add('active');
@@ -605,9 +572,6 @@ function _bindDraggableForDay() {
                         if (document.getElementById(id).classList.contains('active'))
                             document.getElementById(id).classList.remove('active');
                     }
-
-
-
                     pushToSideBar("matrix_day_body");
                 }
             }
@@ -619,13 +583,11 @@ function _bindDraggableForDay() {
             if (activeElements.length === 0)
                 columnID = '';
         });
-
 }
 
 
 /**
- * _bindDraggableForDay - This method binds mouse events for draggable selection in Day Matrix
- *
+ * This method binds mouse events for draggable selection in week Matrix
  */
 function _bindDraggableForWeek() {
     var isMouseDown = false,
@@ -656,9 +618,9 @@ function _bindDraggableForWeek() {
         });
 }
 
+
 /**
- * _setLunchTime - This method sets the Matrix from 13:00h to 14:00h for Lunch Time.
- *
+ *  This method sets the Matrix from 13:00h to 14:00h for Lunch Time.
  */
 function _setLunchTime() {
     var fields = document.querySelectorAll('td');
@@ -671,7 +633,12 @@ function _setLunchTime() {
     }
 }
 
+
+/**
+ *  This method sets the Matrix weeknd day.
+ */
 function _setWeekendHighlight() {
+
     var fields = document.querySelectorAll('td');
     var length = fields.length;
     for (var i = 0; i < length; i++) {
@@ -690,129 +657,4 @@ function _setWeekendHighlight() {
     saturday.classList.add('weekend');
     var sunday = tr.children[length - 1];
     sunday.classList.add('weekend');
-}
-
-function selecionarGrupoMatrizDay(e) {
-    try {
-        // nearElement(e);
-        // defineMultiActiveEvent(e);
-    } catch (err) {
-        switch (err) {
-            case 1:
-                snackBar("Uma reserva deverá conter apenas uma Sala.");
-                break;
-            case 2:
-                snackBar("Uma reserva deverá conter um conjunto de horas continuas");
-                break;
-            case 4:
-                snackBar("Uma reserva deverá conter um conjunto de horas continuas");
-                break;
-            default:
-                snackBar("Ups escolha errada na vista de dia");
-        }
-    }
-}
-
-/**
- * selecionarGrupoMatrizWeek - description
- *
- * @param  {type} e description
- * @returns {type}   description
- */
-function selecionarGrupoMatrizWeek(e) {
-    var defineMulti = false;
-    try {
-        // nearElement(e);
-        // defineMultiActiveEvent(e);
-    } catch (err) {
-        switch (err) {
-            case 1:
-                defineMulti = modalAcept(e, "Pretende reservar em outro dia?");
-                break;
-            case 2:
-                defineMulti = modalAcept(e, "Pretende reservar em outra hora?");
-                break;
-            case 3:
-                defineMulti = modalAcept(e, "Pretende reservar em varios dias e em varias horas?");
-                break;
-            case 4:
-                defineMulti = true;
-                break;
-            default:
-                snackBar("Ups escolha errada na vista de Semana");
-        }
-    } finally {
-        if (defineMulti)
-            defineMultiActiveEvent(e);
-    }
-}
-
-var id_last_salected;
-
-/**
- * saveModalConfirm - description
- *
- * @param  {type} callback description
- * @returns {type}          description
- */
-function saveModalConfirm(callback) {
-    callback(id_last_salected);
-}
-
-
-/**
- * modalAcept - description
- *
- * @param  {type} e   description
- * @param  {type} msg description
- * @returns {type}     description
- */
-function modalAcept(e, msg) {
-    var modal_body = document.getElementById("modal_confirm_body");
-    if (modal_body.textContent.length <= 20) {
-        modal_body.innerHTML = msg;
-        modal_body.setAttribute('style', 'text-align: center;');
-        id_last_salected = e.target.id;
-        $('#modal_confirm').modal('show');
-        return false;
-    } else
-        return true;
-}
-
-/**
- * nearElement - description
- *
- * @param  {type} e description
- * @returns {type}   description
- */
-function nearElement(e) {
-    try {
-        var newElemet = e.target;
-        var newElemetSplit = newElemet.id.split('-');
-        var activeElements = getMultiActive('available');
-
-        if (newElemet.classList.contains('available') && activeElements.length) {
-            var neighborHour = false;
-            var neighborDay = true;
-            var activeFirstElement = activeElements[0].split('-');
-            var activeLastElement = activeElements[activeElements.length - 1].split('-');
-            if (parseInt(newElemetSplit[2]) > parseInt(activeFirstElement[2]) && parseInt(newElemetSplit[2]) < parseInt(activeLastElement[2]) && newElemet.classList.contains('active'))
-                throw 4;
-            for (var i = 0; i < activeElements.length; i++) {
-                var activeElementsSplit = activeElements[i].split('-');
-                if (parseInt(activeElementsSplit[1]) != parseInt(newElemetSplit[1]))
-                    neighborDay = false;
-                if (parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) + 1 || parseInt(activeElementsSplit[2]) === parseInt(newElemetSplit[2]) - 1)
-                    neighborHour = true;
-            }
-            if (!neighborHour && !neighborDay && !newElemet.classList.contains('active'))
-                throw 3;
-            if (!neighborHour && !newElemet.classList.contains('active'))
-                throw 2;
-            if (!neighborDay && !newElemet.classList.contains('active'))
-                throw 1;
-        }
-    } catch (e) {
-        throw e;
-    }
 }
